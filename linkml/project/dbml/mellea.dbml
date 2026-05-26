@@ -1,0 +1,317 @@
+// DBML generated from LinkML schema
+
+Project {
+  name: 'mellea'
+}
+
+Table NamedElement {
+id varchar [not null, primary key]
+name varchar [not null]
+description varchar
+module_path varchar
+source_file varchar
+package_kind varchar
+element_kind varchar
+coverage_scope varchar
+tags varchar
+}
+
+Table RepositoryCatalog {
+id varchar [not null, primary key]
+name varchar [not null]
+description varchar
+module_path varchar
+source_file varchar
+package_kind varchar
+element_kind varchar
+coverage_scope varchar
+tags varchar
+repository_root varchar
+analyzed_on date
+includes_path varchar
+excludes_path varchar
+declares_element varchar
+}
+
+Table PythonPackage {
+id varchar [not null, primary key]
+name varchar [not null]
+description varchar
+module_path varchar
+source_file varchar
+package_kind varchar
+element_kind varchar
+coverage_scope varchar
+tags varchar
+package_name varchar
+depends_on_package varchar
+declares_element varchar
+}
+
+Table ModelElement {
+id varchar [not null, primary key]
+name varchar [not null]
+description varchar
+module_path varchar
+source_file varchar
+package_kind varchar
+element_kind varchar
+coverage_scope varchar
+tags varchar
+}
+
+Table BackendSpec {
+id varchar [not null, primary key]
+name varchar [not null]
+description varchar
+module_path varchar
+source_file varchar
+package_kind varchar
+element_kind varchar
+coverage_scope varchar
+tags varchar
+backend_family varchar
+model_identifier varchar
+default_formatter varchar
+model_options_key varchar
+supports_streaming boolean
+supports_tool_calls boolean
+supports_multimodal boolean
+}
+
+Table FormatterSpec {
+id varchar [not null, primary key]
+name varchar [not null]
+description varchar
+module_path varchar
+source_file varchar
+package_kind varchar
+element_kind varchar
+coverage_scope varchar
+tags varchar
+}
+
+Table ContextSpec {
+id varchar [not null, primary key]
+name varchar [not null]
+description varchar
+module_path varchar
+source_file varchar
+package_kind varchar
+element_kind varchar
+coverage_scope varchar
+tags varchar
+context_linearity varchar
+stores_component_history boolean
+accepts_message_attachments boolean
+}
+
+Table SessionSpec {
+id varchar [not null, primary key]
+name varchar [not null]
+description varchar
+module_path varchar
+source_file varchar
+package_kind varchar
+element_kind varchar
+coverage_scope varchar
+tags varchar
+uses_backend varchar
+uses_context varchar
+exposed_method varchar
+}
+
+Table ComponentSpec {
+id varchar [not null, primary key]
+name varchar [not null]
+description varchar
+module_path varchar
+source_file varchar
+package_kind varchar
+element_kind varchar
+coverage_scope varchar
+tags varchar
+component_category varchar
+input_modality varchar
+parsed_output_type varchar
+}
+
+Table RequirementSpec {
+id varchar [not null, primary key]
+name varchar [not null]
+description varchar
+module_path varchar
+source_file varchar
+package_kind varchar
+element_kind varchar
+coverage_scope varchar
+tags varchar
+validation_style varchar
+may_trigger_repair boolean
+}
+
+Table SamplingStrategySpec {
+id varchar [not null, primary key]
+name varchar [not null]
+description varchar
+module_path varchar
+source_file varchar
+package_kind varchar
+element_kind varchar
+coverage_scope varchar
+tags varchar
+selection_policy varchar
+loop_budget_hint int
+may_trigger_repair boolean
+}
+
+Table PluginSpec {
+id varchar [not null, primary key]
+name varchar [not null]
+description varchar
+module_path varchar
+source_file varchar
+package_kind varchar
+element_kind varchar
+coverage_scope varchar
+tags varchar
+plugin_mode varchar
+hook_type varchar
+payload_model varchar
+plugin_priority int
+}
+
+Table HookPayloadSpec {
+id varchar [not null, primary key]
+name varchar [not null]
+description varchar
+module_path varchar
+source_file varchar
+package_kind varchar
+element_kind varchar
+coverage_scope varchar
+tags varchar
+hook_type varchar
+lifecycle_role varchar
+}
+
+Table TelemetryMetricSpec {
+id varchar [not null, primary key]
+name varchar [not null]
+description varchar
+module_path varchar
+source_file varchar
+package_kind varchar
+element_kind varchar
+coverage_scope varchar
+tags varchar
+metric_name varchar
+}
+
+Table CliCommandSpec {
+id varchar [not null, primary key]
+name varchar [not null]
+description varchar
+module_path varchar
+source_file varchar
+package_kind varchar
+element_kind varchar
+coverage_scope varchar
+tags varchar
+command_group varchar
+command_path varchar
+command_purpose varchar
+input_model varchar
+output_model varchar
+}
+
+Table ApiModelSpec {
+id varchar [not null, primary key]
+name varchar [not null]
+description varchar
+module_path varchar
+source_file varchar
+package_kind varchar
+element_kind varchar
+coverage_scope varchar
+tags varchar
+request_or_response varchar
+openai_object_type varchar
+has_field varchar
+}
+
+Table ApiFieldSpec {
+id varchar [not null, primary key]
+name varchar [not null]
+description varchar
+module_path varchar
+source_file varchar
+package_kind varchar
+element_kind varchar
+coverage_scope varchar
+tags varchar
+field_name varchar
+field_type varchar
+required_field boolean
+allows_null boolean
+}
+
+Table MethodSpec {
+id varchar [not null, primary key]
+name varchar [not null]
+description varchar
+module_path varchar
+source_file varchar
+package_kind varchar
+element_kind varchar
+coverage_scope varchar
+tags varchar
+method_name varchar
+method_signature varchar
+lifecycle_role varchar
+}
+
+Table ModelIdentifierSpec {
+id varchar [not null, primary key]
+name varchar [not null]
+description varchar
+module_path varchar
+source_file varchar
+package_kind varchar
+element_kind varchar
+coverage_scope varchar
+tags varchar
+hf_model_name varchar
+ollama_name varchar
+watsonx_name varchar
+openai_name varchar
+bedrock_name varchar
+provider_name varchar
+}
+
+Table IntrinsicAdapterSpec {
+id varchar [not null, primary key]
+name varchar [not null]
+description varchar
+module_path varchar
+source_file varchar
+package_kind varchar
+element_kind varchar
+coverage_scope varchar
+tags varchar
+repo_id varchar
+adapter_type varchar
+}
+
+Ref: RepositoryCatalog.declares_element > ModelElement.id
+Ref: PythonPackage.depends_on_package > PythonPackage.id
+Ref: PythonPackage.declares_element > ModelElement.id
+Ref: BackendSpec.model_identifier > ModelIdentifierSpec.id
+Ref: BackendSpec.default_formatter > FormatterSpec.id
+Ref: SessionSpec.uses_backend > BackendSpec.id
+Ref: SessionSpec.uses_context > ContextSpec.id
+Ref: SessionSpec.exposed_method > MethodSpec.id
+Ref: PluginSpec.payload_model > HookPayloadSpec.id
+Ref: CliCommandSpec.input_model > ApiModelSpec.id
+Ref: CliCommandSpec.output_model > ApiModelSpec.id
+Ref: ApiModelSpec.has_field > ApiFieldSpec.id

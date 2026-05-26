@@ -1,0 +1,1886 @@
+@prefix OIO: <http://www.geneontology.org/formats/oboInOwl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix linkml: <https://w3id.org/linkml/> .
+@prefix pav: <http://purl.org/pav/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://w3id.org/lmodel/mellea/mellea> a linkml:SchemaDefinition ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source "https://github.com/lmodel/mellea"^^xsd:anyURI ;
+    dcterms:title "mellea" ;
+    pav:version "2026-05-26" ;
+    rdfs:seeAlso "https://github.com/lmodel/mellea"^^xsd:anyURI,
+        "https://lmodel.github.io/mellea"^^xsd:anyURI ;
+    sh:declare [ sh:namespace "https://w3id.org/lmodel/mcp/"^^xsd:anyURI ;
+            sh:prefix "mcp" ],
+        [ sh:namespace "https://spdx.org/rdf/3.0.1/terms/"^^xsd:anyURI ;
+            sh:prefix "spdx" ],
+        [ sh:namespace "https://w3id.org/lmodel/mellea/"^^xsd:anyURI ;
+            sh:prefix "mellea" ],
+        [ sh:namespace "https://w3id.org/lmodel/common-domain-model/"^^xsd:anyURI ;
+            sh:prefix "common_domain_model" ],
+        [ sh:namespace "http://purl.org/dc/terms/"^^xsd:anyURI ;
+            sh:prefix "dcterms" ],
+        [ sh:namespace "https://ibm.github.io/ai-atlas-nexus/ontology/"^^xsd:anyURI ;
+            sh:prefix "nexus" ],
+        [ sh:namespace "https://w3id.org/lmodel/attack/"^^xsd:anyURI ;
+            sh:prefix "attack" ],
+        [ sh:namespace "http://schema.org/"^^xsd:anyURI ;
+            sh:prefix "schema" ],
+        [ sh:namespace "https://w3id.org/lmodel/iso27001/"^^xsd:anyURI ;
+            sh:prefix "iso27001" ],
+        [ sh:namespace "https://w3id.org/linkml/"^^xsd:anyURI ;
+            sh:prefix "linkml" ] ;
+    linkml:annotations [ skos:example "2026-05-26" ;
+            linkml:tag "generated_on"^^xsd:anyURI ],
+        [ skos:example "core-library-and-cli" ;
+            linkml:tag "coverage_target"^^xsd:anyURI ],
+        [ skos:example """cli: total=86 (CLASS=42 DATACLASS=5 ENUM=4 PYDANTIC_MODEL=20 TYPED_DICT=15)
+mellea/backends: total=28 (CLASS=22 DATACLASS=2 ENUM=1 MIXIN=1 PYDANTIC_MODEL=2)
+mellea/core: total=27 (CLASS=20 DATACLASS=5 ENUM=1 PROTOCOL=1)
+mellea/formatters: total=57 (CLASS=39 ENUM=1 MIXIN=1 PYDANTIC_MODEL=16)
+mellea/helpers: total=6 (CLASS=2 ENUM=1 PYDANTIC_MODEL=1 TYPED_DICT=2)
+mellea/plugins: total=32 (CLASS=28 DATACLASS=2 ENUM=2)
+mellea/stdlib: total=69 (CLASS=50 DATACLASS=10 ENUM=1 PROTOCOL=2 PYDANTIC_MODEL=4 TYPED_DICT=2)
+mellea/telemetry: total=11 (CLASS=11)
+enum_total: 11""" ;
+            linkml:tag "coverage_inventory"^^xsd:anyURI ],
+        [ skos:example "linkml/scripts/schema_to_linkml.py" ;
+            linkml:tag "generated_by"^^xsd:anyURI ],
+        [ skos:example "mellea+cli (linkml/ excluded)" ;
+            linkml:tag "analyzed_scope"^^xsd:anyURI ] ;
+    linkml:classes <https://w3id.org/lmodel/mellea/ApiFieldSpec>,
+        <https://w3id.org/lmodel/mellea/ApiModelSpec>,
+        <https://w3id.org/lmodel/mellea/BackendSpec>,
+        <https://w3id.org/lmodel/mellea/CliCommandSpec>,
+        <https://w3id.org/lmodel/mellea/ComponentSpec>,
+        <https://w3id.org/lmodel/mellea/ContextSpec>,
+        <https://w3id.org/lmodel/mellea/FormatterSpec>,
+        <https://w3id.org/lmodel/mellea/HookPayloadSpec>,
+        <https://w3id.org/lmodel/mellea/IntrinsicAdapterSpec>,
+        <https://w3id.org/lmodel/mellea/MethodSpec>,
+        <https://w3id.org/lmodel/mellea/ModelElement>,
+        <https://w3id.org/lmodel/mellea/ModelIdentifierSpec>,
+        <https://w3id.org/lmodel/mellea/NamedElement>,
+        <https://w3id.org/lmodel/mellea/PluginSpec>,
+        <https://w3id.org/lmodel/mellea/PythonPackage>,
+        <https://w3id.org/lmodel/mellea/RepositoryCatalog>,
+        <https://w3id.org/lmodel/mellea/RequirementSpec>,
+        <https://w3id.org/lmodel/mellea/SamplingStrategySpec>,
+        <https://w3id.org/lmodel/mellea/SessionSpec>,
+        <https://w3id.org/lmodel/mellea/TelemetryMetricSpec> ;
+    linkml:default_prefix "mellea" ;
+    linkml:default_range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:description "LinkML schema describing the Mellea codebase architecture and public data models. Generated from Python sources by linkml/scripts/schema_to_linkml.py." ;
+    linkml:enums <https://w3id.org/lmodel/mellea/AdapterTypeEnum>,
+        <https://w3id.org/lmodel/mellea/BackendFamilyEnum>,
+        <https://w3id.org/lmodel/mellea/ComponentCategoryEnum>,
+        <https://w3id.org/lmodel/mellea/ContextLinearityEnum>,
+        <https://w3id.org/lmodel/mellea/CoverageScopeEnum>,
+        <https://w3id.org/lmodel/mellea/ElementKindEnum>,
+        <https://w3id.org/lmodel/mellea/HookTypeEnum>,
+        <https://w3id.org/lmodel/mellea/PackageKindEnum>,
+        <https://w3id.org/lmodel/mellea/PluginModeEnum>,
+        <https://w3id.org/lmodel/mellea/RequestResponseEnum> ;
+    linkml:generation_date "2026-05-26T15:01:35"^^xsd:dateTime ;
+    linkml:id "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:imports "linkml:types"^^xsd:anyURI ;
+    linkml:metamodel_version "1.11.0" ;
+    linkml:slots <https://w3id.org/lmodel/mellea/accepts_message_attachments>,
+        <https://w3id.org/lmodel/mellea/adapter_type>,
+        <https://w3id.org/lmodel/mellea/allows_null>,
+        <https://w3id.org/lmodel/mellea/analyzed_on>,
+        <https://w3id.org/lmodel/mellea/backend_family>,
+        <https://w3id.org/lmodel/mellea/bedrock_name>,
+        <https://w3id.org/lmodel/mellea/command_group>,
+        <https://w3id.org/lmodel/mellea/command_path>,
+        <https://w3id.org/lmodel/mellea/command_purpose>,
+        <https://w3id.org/lmodel/mellea/component_category>,
+        <https://w3id.org/lmodel/mellea/context_linearity>,
+        <https://w3id.org/lmodel/mellea/coverage_scope>,
+        <https://w3id.org/lmodel/mellea/declares_element>,
+        <https://w3id.org/lmodel/mellea/default_formatter>,
+        <https://w3id.org/lmodel/mellea/depends_on_package>,
+        <https://w3id.org/lmodel/mellea/description>,
+        <https://w3id.org/lmodel/mellea/element_kind>,
+        <https://w3id.org/lmodel/mellea/excludes_path>,
+        <https://w3id.org/lmodel/mellea/exposed_method>,
+        <https://w3id.org/lmodel/mellea/field_name>,
+        <https://w3id.org/lmodel/mellea/field_type>,
+        <https://w3id.org/lmodel/mellea/has_field>,
+        <https://w3id.org/lmodel/mellea/hf_model_name>,
+        <https://w3id.org/lmodel/mellea/hook_type>,
+        <https://w3id.org/lmodel/mellea/id>,
+        <https://w3id.org/lmodel/mellea/includes_path>,
+        <https://w3id.org/lmodel/mellea/input_modality>,
+        <https://w3id.org/lmodel/mellea/input_model>,
+        <https://w3id.org/lmodel/mellea/lifecycle_role>,
+        <https://w3id.org/lmodel/mellea/loop_budget_hint>,
+        <https://w3id.org/lmodel/mellea/may_trigger_repair>,
+        <https://w3id.org/lmodel/mellea/method_name>,
+        <https://w3id.org/lmodel/mellea/method_signature>,
+        <https://w3id.org/lmodel/mellea/metric_name>,
+        <https://w3id.org/lmodel/mellea/model_identifier>,
+        <https://w3id.org/lmodel/mellea/model_options_key>,
+        <https://w3id.org/lmodel/mellea/module_path>,
+        <https://w3id.org/lmodel/mellea/name>,
+        <https://w3id.org/lmodel/mellea/ollama_name>,
+        <https://w3id.org/lmodel/mellea/openai_name>,
+        <https://w3id.org/lmodel/mellea/openai_object_type>,
+        <https://w3id.org/lmodel/mellea/output_model>,
+        <https://w3id.org/lmodel/mellea/package_kind>,
+        <https://w3id.org/lmodel/mellea/package_name>,
+        <https://w3id.org/lmodel/mellea/parsed_output_type>,
+        <https://w3id.org/lmodel/mellea/payload_model>,
+        <https://w3id.org/lmodel/mellea/plugin_mode>,
+        <https://w3id.org/lmodel/mellea/plugin_priority>,
+        <https://w3id.org/lmodel/mellea/provider_name>,
+        <https://w3id.org/lmodel/mellea/repo_id>,
+        <https://w3id.org/lmodel/mellea/repository_root>,
+        <https://w3id.org/lmodel/mellea/request_or_response>,
+        <https://w3id.org/lmodel/mellea/required_field>,
+        <https://w3id.org/lmodel/mellea/selection_policy>,
+        <https://w3id.org/lmodel/mellea/source_file>,
+        <https://w3id.org/lmodel/mellea/stores_component_history>,
+        <https://w3id.org/lmodel/mellea/supports_multimodal>,
+        <https://w3id.org/lmodel/mellea/supports_streaming>,
+        <https://w3id.org/lmodel/mellea/supports_tool_calls>,
+        <https://w3id.org/lmodel/mellea/tags>,
+        <https://w3id.org/lmodel/mellea/uses_backend>,
+        <https://w3id.org/lmodel/mellea/uses_component_type>,
+        <https://w3id.org/lmodel/mellea/uses_context>,
+        <https://w3id.org/lmodel/mellea/validation_style>,
+        <https://w3id.org/lmodel/mellea/watsonx_name> ;
+    linkml:source_file "mellea.yaml" ;
+    linkml:source_file_date "2026-05-26T14:24:23"^^xsd:dateTime ;
+    linkml:source_file_size 25242 ;
+    linkml:subsets <https://w3id.org/lmodel/mellea/core_runtime>,
+        <https://w3id.org/lmodel/mellea/interface_surface>,
+        <https://w3id.org/lmodel/mellea/observability> ;
+    linkml:types <https://w3id.org/lmodel/mellea/PythonDottedPath>,
+        <https://w3id.org/lmodel/mellea/RepositoryRelativePath>,
+        <https://w3id.org/lmodel/mellea/boolean>,
+        <https://w3id.org/lmodel/mellea/curie>,
+        <https://w3id.org/lmodel/mellea/date>,
+        <https://w3id.org/lmodel/mellea/date_or_datetime>,
+        <https://w3id.org/lmodel/mellea/datetime>,
+        <https://w3id.org/lmodel/mellea/decimal>,
+        <https://w3id.org/lmodel/mellea/double>,
+        <https://w3id.org/lmodel/mellea/float>,
+        <https://w3id.org/lmodel/mellea/integer>,
+        <https://w3id.org/lmodel/mellea/jsonpath>,
+        <https://w3id.org/lmodel/mellea/jsonpointer>,
+        <https://w3id.org/lmodel/mellea/ncname>,
+        <https://w3id.org/lmodel/mellea/nodeidentifier>,
+        <https://w3id.org/lmodel/mellea/objectidentifier>,
+        <https://w3id.org/lmodel/mellea/sparqlpath>,
+        <https://w3id.org/lmodel/mellea/string>,
+        <https://w3id.org/lmodel/mellea/time>,
+        <https://w3id.org/lmodel/mellea/uri>,
+        <https://w3id.org/lmodel/mellea/uriorcurie> .
+
+<https://w3id.org/lmodel/mellea/ALORA> linkml:annotations [ skos:example "alora" ;
+            linkml:tag "python_value"^^xsd:anyURI ] ;
+    linkml:description "alora" .
+
+<https://w3id.org/lmodel/mellea/API> linkml:description "api" .
+
+<https://w3id.org/lmodel/mellea/AUDIT> skos:relatedMatch "attack:DetectionStrategy"^^xsd:anyURI,
+        "iso27001:InternalAudit"^^xsd:anyURI,
+        "nexus:RiskControl"^^xsd:anyURI ;
+    linkml:annotations [ skos:example "audit" ;
+            linkml:tag "python_value"^^xsd:anyURI ] ;
+    linkml:description "audit" .
+
+<https://w3id.org/lmodel/mellea/BACKENDS> linkml:description "backends" .
+
+<https://w3id.org/lmodel/mellea/BEDROCK> skos:relatedMatch "nexus:AiProvider"^^xsd:anyURI ;
+    linkml:annotations [ skos:example "mellea/backends/bedrock.py" ;
+            linkml:tag "source_file"^^xsd:anyURI ] ;
+    linkml:description "Backend family backed by mellea/backends/bedrock.py." .
+
+<https://w3id.org/lmodel/mellea/BOTH> linkml:description "Model used in both directions (rare)." .
+
+<https://w3id.org/lmodel/mellea/CLASS> linkml:description "class" .
+
+<https://w3id.org/lmodel/mellea/COMPONENT_POST_ERROR> linkml:annotations [ skos:example "component_post_error" ;
+            linkml:tag "python_value"^^xsd:anyURI ] ;
+    linkml:description "component post error" .
+
+<https://w3id.org/lmodel/mellea/COMPONENT_POST_SUCCESS> linkml:annotations [ skos:example "component_post_success" ;
+            linkml:tag "python_value"^^xsd:anyURI ] ;
+    linkml:description "component post success" .
+
+<https://w3id.org/lmodel/mellea/COMPONENT_PRE_EXECUTE> linkml:annotations [ skos:example "component_pre_execute" ;
+            linkml:tag "python_value"^^xsd:anyURI ] ;
+    linkml:description "component pre execute" .
+
+<https://w3id.org/lmodel/mellea/CONCURRENT> linkml:annotations [ skos:example "concurrent" ;
+            linkml:tag "python_value"^^xsd:anyURI ] ;
+    linkml:description "concurrent" .
+
+<https://w3id.org/lmodel/mellea/CORE> linkml:description "core" .
+
+<https://w3id.org/lmodel/mellea/DATACLASS> linkml:description "dataclass" .
+
+<https://w3id.org/lmodel/mellea/DOCS_EXAMPLES> linkml:description "docs examples" .
+
+<https://w3id.org/lmodel/mellea/DOCUMENT> skos:closeMatch "mcp:Resource"^^xsd:anyURI ;
+    skos:relatedMatch "mcp:EmbeddedResource"^^xsd:anyURI,
+        "nexus:Dataset"^^xsd:anyURI ;
+    linkml:description "document" .
+
+<https://w3id.org/lmodel/mellea/DUMMY> linkml:annotations [ skos:example "mellea/backends/dummy.py" ;
+            linkml:tag "source_file"^^xsd:anyURI ] ;
+    linkml:description "Backend family backed by mellea/backends/dummy.py." .
+
+<https://w3id.org/lmodel/mellea/ENUM> linkml:description "enum" .
+
+<https://w3id.org/lmodel/mellea/EXAMPLE> linkml:description "example" .
+
+<https://w3id.org/lmodel/mellea/FIRE_AND_FORGET> linkml:annotations [ skos:example "fire_and_forget" ;
+            linkml:tag "python_value"^^xsd:anyURI ] ;
+    linkml:description "fire and forget" .
+
+<https://w3id.org/lmodel/mellea/FORMATTERS> linkml:description "formatters" .
+
+<https://w3id.org/lmodel/mellea/FUNCTION> linkml:description "function" .
+
+<https://w3id.org/lmodel/mellea/GENERATION_ERROR> linkml:annotations [ skos:example "generation_error" ;
+            linkml:tag "python_value"^^xsd:anyURI ] ;
+    linkml:description "generation error" .
+
+<https://w3id.org/lmodel/mellea/GENERATION_POST_CALL> skos:relatedMatch "nexus:EvaluationResultRecord"^^xsd:anyURI ;
+    linkml:annotations [ skos:example "generation_post_call" ;
+            linkml:tag "python_value"^^xsd:anyURI ] ;
+    linkml:description "generation post call" .
+
+<https://w3id.org/lmodel/mellea/GENERATION_PRE_CALL> linkml:annotations [ skos:example "generation_pre_call" ;
+            linkml:tag "python_value"^^xsd:anyURI ] ;
+    linkml:description "generation pre call" .
+
+<https://w3id.org/lmodel/mellea/GENSTUB> linkml:description "genstub" .
+
+<https://w3id.org/lmodel/mellea/HELPERS> linkml:description "helpers" .
+
+<https://w3id.org/lmodel/mellea/HUGGINGFACE> skos:relatedMatch "nexus:AiProvider"^^xsd:anyURI ;
+    linkml:annotations [ skos:example "mellea/backends/huggingface.py" ;
+            linkml:tag "source_file"^^xsd:anyURI ] ;
+    linkml:description "Backend family backed by mellea/backends/huggingface.py." .
+
+<https://w3id.org/lmodel/mellea/INSTRUCTION> skos:closeMatch "mcp:Prompt"^^xsd:anyURI ;
+    skos:relatedMatch "nexus:Input"^^xsd:anyURI ;
+    linkml:description "instruction" .
+
+<https://w3id.org/lmodel/mellea/INTRINSIC> skos:closeMatch "nexus:LLMIntrinsic"^^xsd:anyURI ;
+    linkml:description "intrinsic" .
+
+<https://w3id.org/lmodel/mellea/LINEAR> linkml:description "Sequential, ordered history." .
+
+<https://w3id.org/lmodel/mellea/LITELLM> skos:relatedMatch "nexus:AiProvider"^^xsd:anyURI ;
+    linkml:annotations [ skos:example "mellea/backends/litellm.py" ;
+            linkml:tag "source_file"^^xsd:anyURI ] ;
+    linkml:description "Backend family backed by mellea/backends/litellm.py." .
+
+<https://w3id.org/lmodel/mellea/LORA> linkml:annotations [ skos:example "lora" ;
+            linkml:tag "python_value"^^xsd:anyURI ] ;
+    linkml:description "lora" .
+
+<https://w3id.org/lmodel/mellea/MESSAGE> skos:closeMatch "mcp:PromptMessage"^^xsd:anyURI,
+        "mcp:SamplingMessage"^^xsd:anyURI ;
+    linkml:description "message" .
+
+<https://w3id.org/lmodel/mellea/MIXIN> linkml:description "mixin" .
+
+<https://w3id.org/lmodel/mellea/MOBJECT> linkml:description "mobject" .
+
+<https://w3id.org/lmodel/mellea/NON_LINEAR> linkml:description "Tree- or graph-shaped history." .
+
+<https://w3id.org/lmodel/mellea/OLLAMA> skos:relatedMatch "nexus:AiProvider"^^xsd:anyURI ;
+    linkml:annotations [ skos:example "mellea/backends/ollama.py" ;
+            linkml:tag "source_file"^^xsd:anyURI ] ;
+    linkml:description "Backend family backed by mellea/backends/ollama.py." .
+
+<https://w3id.org/lmodel/mellea/OPENAI> skos:relatedMatch "nexus:AiProvider"^^xsd:anyURI ;
+    linkml:annotations [ skos:example "mellea/backends/openai.py" ;
+            linkml:tag "source_file"^^xsd:anyURI ] ;
+    linkml:description "Backend family backed by mellea/backends/openai.py." .
+
+<https://w3id.org/lmodel/mellea/PLUGINS> linkml:description "plugins" .
+
+<https://w3id.org/lmodel/mellea/PROTOCOL> linkml:description "protocol" .
+
+<https://w3id.org/lmodel/mellea/PYDANTIC_MODEL> linkml:description "pydantic model" .
+
+<https://w3id.org/lmodel/mellea/QUERY> linkml:description "query" .
+
+<https://w3id.org/lmodel/mellea/REQUEST> linkml:description "Inbound request payload." .
+
+<https://w3id.org/lmodel/mellea/REQUIREMENT> skos:relatedMatch "nexus:Requirement"^^xsd:anyURI ;
+    linkml:description "requirement" .
+
+<https://w3id.org/lmodel/mellea/RESPONSE> linkml:description "Outbound response payload." .
+
+<https://w3id.org/lmodel/mellea/SAMPLING_ITERATION> linkml:annotations [ skos:example "sampling_iteration" ;
+            linkml:tag "python_value"^^xsd:anyURI ] ;
+    linkml:description "sampling iteration" .
+
+<https://w3id.org/lmodel/mellea/SAMPLING_LOOP_END> linkml:annotations [ skos:example "sampling_loop_end" ;
+            linkml:tag "python_value"^^xsd:anyURI ] ;
+    linkml:description "sampling loop end" .
+
+<https://w3id.org/lmodel/mellea/SAMPLING_LOOP_START> linkml:annotations [ skos:example "sampling_loop_start" ;
+            linkml:tag "python_value"^^xsd:anyURI ] ;
+    linkml:description "sampling loop start" .
+
+<https://w3id.org/lmodel/mellea/SAMPLING_REPAIR> linkml:annotations [ skos:example "sampling_repair" ;
+            linkml:tag "python_value"^^xsd:anyURI ] ;
+    linkml:description "sampling repair" .
+
+<https://w3id.org/lmodel/mellea/SEQUENTIAL> linkml:annotations [ skos:example "sequential" ;
+            linkml:tag "python_value"^^xsd:anyURI ] ;
+    linkml:description "sequential" .
+
+<https://w3id.org/lmodel/mellea/SESSION_CLEANUP> linkml:annotations [ skos:example "session_cleanup" ;
+            linkml:tag "python_value"^^xsd:anyURI ] ;
+    linkml:description "session cleanup" .
+
+<https://w3id.org/lmodel/mellea/SESSION_POST_INIT> linkml:annotations [ skos:example "session_post_init" ;
+            linkml:tag "python_value"^^xsd:anyURI ] ;
+    linkml:description "session post init" .
+
+<https://w3id.org/lmodel/mellea/SESSION_PRE_INIT> linkml:annotations [ skos:example "session_pre_init" ;
+            linkml:tag "python_value"^^xsd:anyURI ] ;
+    linkml:description "session pre init" .
+
+<https://w3id.org/lmodel/mellea/SESSION_RESET> linkml:annotations [ skos:example "session_reset" ;
+            linkml:tag "python_value"^^xsd:anyURI ] ;
+    linkml:description "session reset" .
+
+<https://w3id.org/lmodel/mellea/SOURCE> linkml:description "source" .
+
+<https://w3id.org/lmodel/mellea/STDLIB> linkml:description "stdlib" .
+
+<https://w3id.org/lmodel/mellea/STREAM_EVENT> linkml:description "stream event" .
+
+<https://w3id.org/lmodel/mellea/TELEMETRY> linkml:description "telemetry" .
+
+<https://w3id.org/lmodel/mellea/TOOL_MESSAGE> skos:closeMatch "mcp:ToolResultContent"^^xsd:anyURI,
+        "mcp:ToolUseContent"^^xsd:anyURI ;
+    linkml:description "tool message" .
+
+<https://w3id.org/lmodel/mellea/TOOL_POST_INVOKE> linkml:annotations [ skos:example "tool_post_invoke" ;
+            linkml:tag "python_value"^^xsd:anyURI ] ;
+    linkml:description "tool post invoke" .
+
+<https://w3id.org/lmodel/mellea/TOOL_PRE_INVOKE> linkml:annotations [ skos:example "tool_pre_invoke" ;
+            linkml:tag "python_value"^^xsd:anyURI ] ;
+    linkml:description "tool pre invoke" .
+
+<https://w3id.org/lmodel/mellea/TYPED_DICT> linkml:description "typed dict" .
+
+<https://w3id.org/lmodel/mellea/VALIDATION_POST_CHECK> skos:relatedMatch "iso27001:AuditFinding"^^xsd:anyURI,
+        "nexus:AiEval"^^xsd:anyURI ;
+    linkml:annotations [ skos:example "validation_post_check" ;
+            linkml:tag "python_value"^^xsd:anyURI ] ;
+    linkml:description "validation post check" .
+
+<https://w3id.org/lmodel/mellea/VALIDATION_PRE_CHECK> linkml:annotations [ skos:example "validation_pre_check" ;
+            linkml:tag "python_value"^^xsd:anyURI ] ;
+    linkml:description "validation pre check" .
+
+<https://w3id.org/lmodel/mellea/WATSONX> skos:relatedMatch "nexus:AiProvider"^^xsd:anyURI ;
+    linkml:annotations [ skos:example "mellea/backends/watsonx.py" ;
+            linkml:tag "source_file"^^xsd:anyURI ] ;
+    linkml:description "Backend family backed by mellea/backends/watsonx.py." .
+
+<https://w3id.org/lmodel/mellea/curie> a linkml:TypeDefinition ;
+    dcterms:conformsTo "https://www.w3.org/TR/curie/" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"curie\"." ;
+    skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+    skos:note "in RDF serializations this MUST be expanded to a URI",
+        "in non-RDF serializations MAY be serialized as the compact representation" ;
+    linkml:base "Curie" ;
+    linkml:definition_uri "https://w3id.org/linkml/Curie"^^xsd:anyURI ;
+    linkml:description "a compact URI" ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/date_or_datetime> a linkml:TypeDefinition ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date_or_datetime\"." ;
+    skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+    linkml:base "str" ;
+    linkml:definition_uri "https://w3id.org/linkml/DateOrDatetime"^^xsd:anyURI ;
+    linkml:description "Either a date or a datetime" ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri "https://w3id.org/linkml/DateOrDatetime"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/datetime> a linkml:TypeDefinition ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"datetime\"." ;
+    skos:exactMatch "schema:DateTime"^^xsd:anyURI ;
+    skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+    linkml:base "XSDDateTime" ;
+    linkml:definition_uri "https://w3id.org/linkml/Datetime"^^xsd:anyURI ;
+    linkml:description "The combination of a date and time" ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri "http://www.w3.org/2001/XMLSchema#dateTime"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/decimal> a linkml:TypeDefinition ;
+    skos:broadMatch "schema:Number"^^xsd:anyURI ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"decimal\"." ;
+    skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+    linkml:base "Decimal" ;
+    linkml:definition_uri "https://w3id.org/linkml/Decimal"^^xsd:anyURI ;
+    linkml:description "A real number with arbitrary precision that conforms to the xsd:decimal specification" ;
+    linkml:imported_from "linkml:types" ;
+    linkml:uri "http://www.w3.org/2001/XMLSchema#decimal"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/double> a linkml:TypeDefinition ;
+    skos:closeMatch "schema:Float"^^xsd:anyURI ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"double\"." ;
+    skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+    linkml:base "float" ;
+    linkml:definition_uri "https://w3id.org/linkml/Double"^^xsd:anyURI ;
+    linkml:description "A real number that conforms to the xsd:double specification" ;
+    linkml:imported_from "linkml:types" ;
+    linkml:uri "http://www.w3.org/2001/XMLSchema#double"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/float> a linkml:TypeDefinition ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"float\"." ;
+    skos:exactMatch "schema:Float"^^xsd:anyURI ;
+    skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+    linkml:base "float" ;
+    linkml:definition_uri "https://w3id.org/linkml/Float"^^xsd:anyURI ;
+    linkml:description "A real number that conforms to the xsd:float specification" ;
+    linkml:imported_from "linkml:types" ;
+    linkml:uri "http://www.w3.org/2001/XMLSchema#float"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/jsonpath> a linkml:TypeDefinition ;
+    dcterms:conformsTo "https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpath\"." ;
+    skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+    linkml:base "str" ;
+    linkml:definition_uri "https://w3id.org/linkml/Jsonpath"^^xsd:anyURI ;
+    linkml:description "A string encoding a JSON Path. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded in tree form." ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/jsonpointer> a linkml:TypeDefinition ;
+    dcterms:conformsTo "https://datatracker.ietf.org/doc/html/rfc6901" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpointer\"." ;
+    skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+    linkml:base "str" ;
+    linkml:definition_uri "https://w3id.org/linkml/Jsonpointer"^^xsd:anyURI ;
+    linkml:description "A string encoding a JSON Pointer. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to a valid object within the current instance document when encoded in tree form." ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/ncname> a linkml:TypeDefinition ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"ncname\"." ;
+    skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+    linkml:base "NCName" ;
+    linkml:definition_uri "https://w3id.org/linkml/Ncname"^^xsd:anyURI ;
+    linkml:description "Prefix part of CURIE" ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/nodeidentifier> a linkml:TypeDefinition ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"nodeidentifier\"." ;
+    skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+    linkml:base "NodeIdentifier" ;
+    linkml:definition_uri "https://w3id.org/linkml/Nodeidentifier"^^xsd:anyURI ;
+    linkml:description "A URI, CURIE or BNODE that represents a node in a model." ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri "http://www.w3.org/ns/shex#nonLiteral"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/objectidentifier> a linkml:TypeDefinition ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"objectidentifier\"." ;
+    skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+    skos:note "Used for inheritance and type checking" ;
+    linkml:base "ElementIdentifier" ;
+    linkml:definition_uri "https://w3id.org/linkml/Objectidentifier"^^xsd:anyURI ;
+    linkml:description "A URI or CURIE that represents an object in the model." ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri "http://www.w3.org/ns/shex#iri"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/sparqlpath> a linkml:TypeDefinition ;
+    dcterms:conformsTo "https://www.w3.org/TR/sparql11-query/#propertypaths" ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"sparqlpath\"." ;
+    skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+    linkml:base "str" ;
+    linkml:definition_uri "https://w3id.org/linkml/Sparqlpath"^^xsd:anyURI ;
+    linkml:description "A string encoding a SPARQL Property Path. The value of the string MUST conform to SPARQL syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded as RDF." ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/time> a linkml:TypeDefinition ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"time\".",
+        "URI is dateTime because OWL reasoners do not work with straight date or time" ;
+    skos:exactMatch "schema:Time"^^xsd:anyURI ;
+    skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+    linkml:base "XSDTime" ;
+    linkml:definition_uri "https://w3id.org/linkml/Time"^^xsd:anyURI ;
+    linkml:description "A time object represents a (local) time of day, independent of any particular day" ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri "http://www.w3.org/2001/XMLSchema#time"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/uri> a linkml:TypeDefinition ;
+    dcterms:conformsTo "https://www.ietf.org/rfc/rfc3987.txt" ;
+    skos:closeMatch "schema:URL"^^xsd:anyURI ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uri\"." ;
+    skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+    skos:note "in RDF serializations a slot with range of uri is treated as a literal or type xsd:anyURI unless it is an identifier or a reference to an identifier, in which case it is translated directly to a node" ;
+    linkml:base "URI" ;
+    linkml:definition_uri "https://w3id.org/linkml/Uri"^^xsd:anyURI ;
+    linkml:description "a complete URI" ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri "http://www.w3.org/2001/XMLSchema#anyURI"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/uses_component_type> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/uses_component_type"^^xsd:anyURI ;
+    linkml:description "Slot describing the uses component type." ;
+    linkml:inlined true ;
+    linkml:inlined_as_list true ;
+    linkml:multivalued true ;
+    linkml:range <https://w3id.org/lmodel/mellea/ComponentSpec> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/uses_component_type"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/AdapterTypeEnum> skos:exactMatch "nexus:AdapterType"^^xsd:anyURI ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:annotations [ skos:example "mellea/backends/adapters/catalog.py::AdapterType" ;
+            linkml:tag "derived_from"^^xsd:anyURI ] ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/AdapterTypeEnum"^^xsd:anyURI ;
+    linkml:description "Adapter implementation type (derived from AdapterType)." ;
+    linkml:permissible_values <https://w3id.org/lmodel/mellea/ALORA>,
+        <https://w3id.org/lmodel/mellea/LORA> .
+
+<https://w3id.org/lmodel/mellea/BackendFamilyEnum> skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    skos:relatedMatch "attack:Infrastructure"^^xsd:anyURI,
+        "spdx:Agent"^^xsd:anyURI ;
+    linkml:annotations [ skos:example "mellea/backends/*.py" ;
+            linkml:tag "derived_from"^^xsd:anyURI ] ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/BackendFamilyEnum"^^xsd:anyURI ;
+    linkml:description "Backend families discovered under mellea/backends/." ;
+    linkml:permissible_values <https://w3id.org/lmodel/mellea/BEDROCK>,
+        <https://w3id.org/lmodel/mellea/DUMMY>,
+        <https://w3id.org/lmodel/mellea/HUGGINGFACE>,
+        <https://w3id.org/lmodel/mellea/LITELLM>,
+        <https://w3id.org/lmodel/mellea/OLLAMA>,
+        <https://w3id.org/lmodel/mellea/OPENAI>,
+        <https://w3id.org/lmodel/mellea/WATSONX> .
+
+<https://w3id.org/lmodel/mellea/CLI> linkml:description "cli" .
+
+<https://w3id.org/lmodel/mellea/ComponentCategoryEnum> skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/ComponentCategoryEnum"^^xsd:anyURI ;
+    linkml:description "High-level category of a Mellea stdlib component." ;
+    linkml:permissible_values <https://w3id.org/lmodel/mellea/DOCUMENT>,
+        <https://w3id.org/lmodel/mellea/GENSTUB>,
+        <https://w3id.org/lmodel/mellea/INSTRUCTION>,
+        <https://w3id.org/lmodel/mellea/INTRINSIC>,
+        <https://w3id.org/lmodel/mellea/MESSAGE>,
+        <https://w3id.org/lmodel/mellea/MOBJECT>,
+        <https://w3id.org/lmodel/mellea/QUERY>,
+        <https://w3id.org/lmodel/mellea/REQUIREMENT>,
+        <https://w3id.org/lmodel/mellea/STREAM_EVENT>,
+        <https://w3id.org/lmodel/mellea/TOOL_MESSAGE>,
+        <https://w3id.org/lmodel/mellea/TRANSFORM> .
+
+<https://w3id.org/lmodel/mellea/ContextLinearityEnum> skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/ContextLinearityEnum"^^xsd:anyURI ;
+    linkml:description "Whether a Mellea context preserves linear ordering or not." ;
+    linkml:permissible_values <https://w3id.org/lmodel/mellea/LINEAR>,
+        <https://w3id.org/lmodel/mellea/NON_LINEAR> .
+
+<https://w3id.org/lmodel/mellea/CoverageScopeEnum> skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/CoverageScopeEnum"^^xsd:anyURI ;
+    linkml:description "Where in the project an element surfaces (source, API, CLI, ...)." ;
+    linkml:permissible_values <https://w3id.org/lmodel/mellea/API>,
+        <https://w3id.org/lmodel/mellea/CLI>,
+        <https://w3id.org/lmodel/mellea/EXAMPLE>,
+        <https://w3id.org/lmodel/mellea/SOURCE>,
+        <https://w3id.org/lmodel/mellea/TEST> .
+
+<https://w3id.org/lmodel/mellea/ElementKindEnum> skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/ElementKindEnum"^^xsd:anyURI ;
+    linkml:description "Kind of Python declaration captured by a ModelElement entry." ;
+    linkml:permissible_values <https://w3id.org/lmodel/mellea/CLASS>,
+        <https://w3id.org/lmodel/mellea/DATACLASS>,
+        <https://w3id.org/lmodel/mellea/ENUM>,
+        <https://w3id.org/lmodel/mellea/FUNCTION>,
+        <https://w3id.org/lmodel/mellea/MIXIN>,
+        <https://w3id.org/lmodel/mellea/PROTOCOL>,
+        <https://w3id.org/lmodel/mellea/PYDANTIC_MODEL>,
+        <https://w3id.org/lmodel/mellea/TYPED_DICT> .
+
+<https://w3id.org/lmodel/mellea/FormatterSpec> a linkml:ClassDefinition ;
+    OIO:inSubset <https://w3id.org/lmodel/mellea/core_runtime> ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    skos:relatedMatch "mcp:ContentBlock"^^xsd:anyURI,
+        "nexus:Modality"^^xsd:anyURI ;
+    linkml:class_uri "https://w3id.org/lmodel/mellea/FormatterSpec"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/FormatterSpec"^^xsd:anyURI ;
+    linkml:description "Specification of an output formatter for a backend." ;
+    linkml:is_a <https://w3id.org/lmodel/mellea/ModelElement> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://w3id.org/lmodel/mellea/coverage_scope>,
+        <https://w3id.org/lmodel/mellea/description>,
+        <https://w3id.org/lmodel/mellea/element_kind>,
+        <https://w3id.org/lmodel/mellea/id>,
+        <https://w3id.org/lmodel/mellea/module_path>,
+        <https://w3id.org/lmodel/mellea/name>,
+        <https://w3id.org/lmodel/mellea/package_kind>,
+        <https://w3id.org/lmodel/mellea/source_file>,
+        <https://w3id.org/lmodel/mellea/tags> .
+
+<https://w3id.org/lmodel/mellea/HookTypeEnum> skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    skos:relatedMatch "attack:KillChainPhase"^^xsd:anyURI,
+        "mcp:TaskStatusEnum"^^xsd:anyURI ;
+    linkml:annotations [ skos:example "mellea/plugins/types.py::HookType" ;
+            linkml:tag "derived_from"^^xsd:anyURI ] ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/HookTypeEnum"^^xsd:anyURI ;
+    linkml:description "Lifecycle hook stages (derived from HookType)." ;
+    linkml:permissible_values <https://w3id.org/lmodel/mellea/COMPONENT_POST_ERROR>,
+        <https://w3id.org/lmodel/mellea/COMPONENT_POST_SUCCESS>,
+        <https://w3id.org/lmodel/mellea/COMPONENT_PRE_EXECUTE>,
+        <https://w3id.org/lmodel/mellea/GENERATION_ERROR>,
+        <https://w3id.org/lmodel/mellea/GENERATION_POST_CALL>,
+        <https://w3id.org/lmodel/mellea/GENERATION_PRE_CALL>,
+        <https://w3id.org/lmodel/mellea/SAMPLING_ITERATION>,
+        <https://w3id.org/lmodel/mellea/SAMPLING_LOOP_END>,
+        <https://w3id.org/lmodel/mellea/SAMPLING_LOOP_START>,
+        <https://w3id.org/lmodel/mellea/SAMPLING_REPAIR>,
+        <https://w3id.org/lmodel/mellea/SESSION_CLEANUP>,
+        <https://w3id.org/lmodel/mellea/SESSION_POST_INIT>,
+        <https://w3id.org/lmodel/mellea/SESSION_PRE_INIT>,
+        <https://w3id.org/lmodel/mellea/SESSION_RESET>,
+        <https://w3id.org/lmodel/mellea/TOOL_POST_INVOKE>,
+        <https://w3id.org/lmodel/mellea/TOOL_PRE_INVOKE>,
+        <https://w3id.org/lmodel/mellea/VALIDATION_POST_CHECK>,
+        <https://w3id.org/lmodel/mellea/VALIDATION_PRE_CHECK> .
+
+<https://w3id.org/lmodel/mellea/PackageKindEnum> skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/PackageKindEnum"^^xsd:anyURI ;
+    linkml:description "Logical package buckets used to classify Mellea source modules." ;
+    linkml:permissible_values <https://w3id.org/lmodel/mellea/BACKENDS>,
+        <https://w3id.org/lmodel/mellea/CLI>,
+        <https://w3id.org/lmodel/mellea/CORE>,
+        <https://w3id.org/lmodel/mellea/DOCS_EXAMPLES>,
+        <https://w3id.org/lmodel/mellea/FORMATTERS>,
+        <https://w3id.org/lmodel/mellea/HELPERS>,
+        <https://w3id.org/lmodel/mellea/PLUGINS>,
+        <https://w3id.org/lmodel/mellea/STDLIB>,
+        <https://w3id.org/lmodel/mellea/TELEMETRY>,
+        <https://w3id.org/lmodel/mellea/TEST> .
+
+<https://w3id.org/lmodel/mellea/PluginModeEnum> skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:annotations [ skos:example "mellea/plugins/types.py::PluginMode" ;
+            linkml:tag "derived_from"^^xsd:anyURI ] ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/PluginModeEnum"^^xsd:anyURI ;
+    linkml:description "Execution mode of a Mellea plugin (derived from PluginMode)." ;
+    linkml:permissible_values <https://w3id.org/lmodel/mellea/AUDIT>,
+        <https://w3id.org/lmodel/mellea/CONCURRENT>,
+        <https://w3id.org/lmodel/mellea/FIRE_AND_FORGET>,
+        <https://w3id.org/lmodel/mellea/SEQUENTIAL>,
+        <https://w3id.org/lmodel/mellea/TRANSFORM> .
+
+<https://w3id.org/lmodel/mellea/PythonDottedPath> a linkml:TypeDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:base "str" ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/PythonDottedPath"^^xsd:anyURI ;
+    linkml:description "Python import-style dotted path." ;
+    linkml:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ;
+    linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/RequestResponseEnum> skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/RequestResponseEnum"^^xsd:anyURI ;
+    linkml:description "Direction of a wire model (HTTP request, response, or both)." ;
+    linkml:permissible_values <https://w3id.org/lmodel/mellea/BOTH>,
+        <https://w3id.org/lmodel/mellea/REQUEST>,
+        <https://w3id.org/lmodel/mellea/RESPONSE> .
+
+<https://w3id.org/lmodel/mellea/TEST> linkml:description "test" .
+
+<https://w3id.org/lmodel/mellea/TRANSFORM> linkml:annotations [ skos:example "transform" ;
+            linkml:tag "python_value"^^xsd:anyURI ] ;
+    linkml:description "transform" .
+
+<https://w3id.org/lmodel/mellea/accepts_message_attachments> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/accepts_message_attachments"^^xsd:anyURI ;
+    linkml:description "Slot describing the accepts message attachments." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/ContextSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/ContextSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/boolean> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/accepts_message_attachments"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/adapter_type> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/adapter_type"^^xsd:anyURI ;
+    linkml:description "Slot describing the adapter type." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/IntrinsicAdapterSpec> ;
+    linkml:multivalued true ;
+    linkml:owner <https://w3id.org/lmodel/mellea/IntrinsicAdapterSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/AdapterTypeEnum> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/adapter_type"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/allows_null> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/allows_null"^^xsd:anyURI ;
+    linkml:description "Slot describing the allows null." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/ApiFieldSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/ApiFieldSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/boolean> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/allows_null"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/analyzed_on> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/analyzed_on"^^xsd:anyURI ;
+    linkml:description "Slot describing the analyzed on." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/RepositoryCatalog> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/RepositoryCatalog> ;
+    linkml:range <https://w3id.org/lmodel/mellea/date> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/analyzed_on"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/backend_family> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/backend_family"^^xsd:anyURI ;
+    linkml:description "Slot describing the backend family." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/BackendSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/BackendSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/BackendFamilyEnum> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/backend_family"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/bedrock_name> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/bedrock_name"^^xsd:anyURI ;
+    linkml:description "Slot describing the bedrock name." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/ModelIdentifierSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/ModelIdentifierSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/bedrock_name"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/command_group> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/command_group"^^xsd:anyURI ;
+    linkml:description "Slot describing the command group." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/CliCommandSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/CliCommandSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/command_group"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/command_path> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/command_path"^^xsd:anyURI ;
+    linkml:description "Slot describing the command path." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/CliCommandSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/CliCommandSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/command_path"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/command_purpose> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/command_purpose"^^xsd:anyURI ;
+    linkml:description "Slot describing the command purpose." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/CliCommandSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/CliCommandSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/command_purpose"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/component_category> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/component_category"^^xsd:anyURI ;
+    linkml:description "Slot describing the component category." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/ComponentSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/ComponentSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/ComponentCategoryEnum> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/component_category"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/context_linearity> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/context_linearity"^^xsd:anyURI ;
+    linkml:description "Slot describing the context linearity." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/ContextSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/ContextSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/ContextLinearityEnum> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/context_linearity"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/date> a linkml:TypeDefinition ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date\".",
+        "URI is dateTime because OWL reasoners don't work with straight date or time" ;
+    skos:exactMatch "schema:Date"^^xsd:anyURI ;
+    skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+    linkml:base "XSDDate" ;
+    linkml:definition_uri "https://w3id.org/linkml/Date"^^xsd:anyURI ;
+    linkml:description "a date (year, month and day) in an idealized calendar" ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri "http://www.w3.org/2001/XMLSchema#date"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/default_formatter> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/default_formatter"^^xsd:anyURI ;
+    linkml:description "Slot describing the default formatter." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/BackendSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/BackendSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/FormatterSpec> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/default_formatter"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/depends_on_package> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/depends_on_package"^^xsd:anyURI ;
+    linkml:description "Slot describing the depends on package." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/PythonPackage> ;
+    linkml:inlined true ;
+    linkml:inlined_as_list true ;
+    linkml:multivalued true ;
+    linkml:owner <https://w3id.org/lmodel/mellea/PythonPackage> ;
+    linkml:range <https://w3id.org/lmodel/mellea/PythonPackage> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/depends_on_package"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/excludes_path> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/excludes_path"^^xsd:anyURI ;
+    linkml:description "Slot describing the excludes path." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/RepositoryCatalog> ;
+    linkml:multivalued true ;
+    linkml:owner <https://w3id.org/lmodel/mellea/RepositoryCatalog> ;
+    linkml:range <https://w3id.org/lmodel/mellea/RepositoryRelativePath> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/excludes_path"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/exposed_method> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/exposed_method"^^xsd:anyURI ;
+    linkml:description "Slot describing the exposed method." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/SessionSpec> ;
+    linkml:inlined true ;
+    linkml:inlined_as_list true ;
+    linkml:multivalued true ;
+    linkml:owner <https://w3id.org/lmodel/mellea/SessionSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/MethodSpec> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/exposed_method"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/field_name> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/field_name"^^xsd:anyURI ;
+    linkml:description "Slot describing the field name." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/ApiFieldSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/ApiFieldSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/field_name"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/field_type> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/field_type"^^xsd:anyURI ;
+    linkml:description "Slot describing the field type." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/ApiFieldSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/ApiFieldSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/field_type"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/has_field> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/has_field"^^xsd:anyURI ;
+    linkml:description "Slot describing the has field." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/ApiModelSpec> ;
+    linkml:inlined true ;
+    linkml:inlined_as_list true ;
+    linkml:multivalued true ;
+    linkml:owner <https://w3id.org/lmodel/mellea/ApiModelSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/ApiFieldSpec> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/has_field"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/hf_model_name> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/hf_model_name"^^xsd:anyURI ;
+    linkml:description "Slot describing the hf model name." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/ModelIdentifierSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/ModelIdentifierSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/hf_model_name"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/includes_path> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/includes_path"^^xsd:anyURI ;
+    linkml:description "Slot describing the includes path." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/RepositoryCatalog> ;
+    linkml:multivalued true ;
+    linkml:owner <https://w3id.org/lmodel/mellea/RepositoryCatalog> ;
+    linkml:range <https://w3id.org/lmodel/mellea/RepositoryRelativePath> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/includes_path"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/input_modality> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/input_modality"^^xsd:anyURI ;
+    linkml:description "Slot describing the input modality." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/ComponentSpec> ;
+    linkml:multivalued true ;
+    linkml:owner <https://w3id.org/lmodel/mellea/ComponentSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/input_modality"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/input_model> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/input_model"^^xsd:anyURI ;
+    linkml:description "Slot describing the input model." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/CliCommandSpec> ;
+    linkml:inlined true ;
+    linkml:inlined_as_list true ;
+    linkml:multivalued true ;
+    linkml:owner <https://w3id.org/lmodel/mellea/CliCommandSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/ApiModelSpec> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/input_model"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/loop_budget_hint> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/loop_budget_hint"^^xsd:anyURI ;
+    linkml:description "Slot describing the loop budget hint." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/SamplingStrategySpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/SamplingStrategySpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/integer> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/loop_budget_hint"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/method_name> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/method_name"^^xsd:anyURI ;
+    linkml:description "Slot describing the method name." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/MethodSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/MethodSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/method_name"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/method_signature> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/method_signature"^^xsd:anyURI ;
+    linkml:description "Slot describing the method signature." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/MethodSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/MethodSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/method_signature"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/metric_name> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/metric_name"^^xsd:anyURI ;
+    linkml:description "Slot describing the metric name." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/TelemetryMetricSpec> ;
+    linkml:multivalued true ;
+    linkml:owner <https://w3id.org/lmodel/mellea/TelemetryMetricSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/metric_name"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/model_identifier> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/model_identifier"^^xsd:anyURI ;
+    linkml:description "Slot describing the model identifier." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/BackendSpec> ;
+    linkml:inlined true ;
+    linkml:inlined_as_list true ;
+    linkml:multivalued true ;
+    linkml:owner <https://w3id.org/lmodel/mellea/BackendSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/ModelIdentifierSpec> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/model_identifier"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/model_options_key> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/model_options_key"^^xsd:anyURI ;
+    linkml:description "Slot describing the model options key." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/BackendSpec> ;
+    linkml:multivalued true ;
+    linkml:owner <https://w3id.org/lmodel/mellea/BackendSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/model_options_key"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/ollama_name> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/ollama_name"^^xsd:anyURI ;
+    linkml:description "Slot describing the ollama name." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/ModelIdentifierSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/ModelIdentifierSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/ollama_name"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/openai_name> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/openai_name"^^xsd:anyURI ;
+    linkml:description "Slot describing the openai name." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/ModelIdentifierSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/ModelIdentifierSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/openai_name"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/openai_object_type> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/openai_object_type"^^xsd:anyURI ;
+    linkml:description "Slot describing the openai object type." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/ApiModelSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/ApiModelSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/openai_object_type"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/output_model> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/output_model"^^xsd:anyURI ;
+    linkml:description "Slot describing the output model." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/CliCommandSpec> ;
+    linkml:inlined true ;
+    linkml:inlined_as_list true ;
+    linkml:multivalued true ;
+    linkml:owner <https://w3id.org/lmodel/mellea/CliCommandSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/ApiModelSpec> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/output_model"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/package_name> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/package_name"^^xsd:anyURI ;
+    linkml:description "Slot describing the package name." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/PythonPackage> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/PythonPackage> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/package_name"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/parsed_output_type> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/parsed_output_type"^^xsd:anyURI ;
+    linkml:description "Slot describing the parsed output type." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/ComponentSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/ComponentSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/parsed_output_type"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/payload_model> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/payload_model"^^xsd:anyURI ;
+    linkml:description "Slot describing the payload model." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/PluginSpec> ;
+    linkml:inlined true ;
+    linkml:inlined_as_list true ;
+    linkml:multivalued true ;
+    linkml:owner <https://w3id.org/lmodel/mellea/PluginSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/HookPayloadSpec> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/payload_model"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/plugin_mode> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/plugin_mode"^^xsd:anyURI ;
+    linkml:description "Slot describing the plugin mode." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/PluginSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/PluginSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/PluginModeEnum> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/plugin_mode"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/plugin_priority> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/plugin_priority"^^xsd:anyURI ;
+    linkml:description "Slot describing the plugin priority." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/PluginSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/PluginSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/integer> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/plugin_priority"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/provider_name> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/provider_name"^^xsd:anyURI ;
+    linkml:description "Slot describing the provider name." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/ModelIdentifierSpec> ;
+    linkml:multivalued true ;
+    linkml:owner <https://w3id.org/lmodel/mellea/ModelIdentifierSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/provider_name"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/repo_id> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/repo_id"^^xsd:anyURI ;
+    linkml:description "Slot describing the repo id." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/IntrinsicAdapterSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/IntrinsicAdapterSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/repo_id"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/repository_root> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/repository_root"^^xsd:anyURI ;
+    linkml:description "Slot describing the repository root." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/RepositoryCatalog> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/RepositoryCatalog> ;
+    linkml:range <https://w3id.org/lmodel/mellea/RepositoryRelativePath> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/repository_root"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/request_or_response> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/request_or_response"^^xsd:anyURI ;
+    linkml:description "Slot describing the request or response." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/ApiModelSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/ApiModelSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/RequestResponseEnum> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/request_or_response"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/required_field> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/required_field"^^xsd:anyURI ;
+    linkml:description "Slot describing the required field." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/ApiFieldSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/ApiFieldSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/boolean> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/required_field"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/selection_policy> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/selection_policy"^^xsd:anyURI ;
+    linkml:description "Slot describing the selection policy." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/SamplingStrategySpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/SamplingStrategySpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/selection_policy"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/stores_component_history> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/stores_component_history"^^xsd:anyURI ;
+    linkml:description "Slot describing the stores component history." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/ContextSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/ContextSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/boolean> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/stores_component_history"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/supports_multimodal> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/supports_multimodal"^^xsd:anyURI ;
+    linkml:description "Slot describing the supports multimodal." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/BackendSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/BackendSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/boolean> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/supports_multimodal"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/supports_streaming> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/supports_streaming"^^xsd:anyURI ;
+    linkml:description "Slot describing the supports streaming." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/BackendSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/BackendSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/boolean> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/supports_streaming"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/supports_tool_calls> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/supports_tool_calls"^^xsd:anyURI ;
+    linkml:description "Slot describing the supports tool calls." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/BackendSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/BackendSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/boolean> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/supports_tool_calls"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/uriorcurie> a linkml:TypeDefinition ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uriorcurie\"." ;
+    skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+    linkml:base "URIorCURIE" ;
+    linkml:definition_uri "https://w3id.org/linkml/Uriorcurie"^^xsd:anyURI ;
+    linkml:description "a URI or a CURIE" ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "str" ;
+    linkml:uri "http://www.w3.org/2001/XMLSchema#anyURI"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/uses_backend> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/uses_backend"^^xsd:anyURI ;
+    linkml:description "Slot describing the uses backend." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/SessionSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/SessionSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/BackendSpec> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/uses_backend"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/uses_context> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/uses_context"^^xsd:anyURI ;
+    linkml:description "Slot describing the uses context." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/SessionSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/SessionSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/ContextSpec> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/uses_context"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/validation_style> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/validation_style"^^xsd:anyURI ;
+    linkml:description "Slot describing the validation style." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/RequirementSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/RequirementSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/validation_style"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/watsonx_name> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/watsonx_name"^^xsd:anyURI ;
+    linkml:description "Slot describing the watsonx name." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/ModelIdentifierSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/ModelIdentifierSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/watsonx_name"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/TelemetryMetricSpec> a linkml:ClassDefinition ;
+    OIO:inSubset <https://w3id.org/lmodel/mellea/observability> ;
+    skos:closeMatch "iso27001:MonitoringItem"^^xsd:anyURI,
+        "nexus:MetricConfig"^^xsd:anyURI ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    skos:relatedMatch "attack:DataSource"^^xsd:anyURI,
+        "iso27001:MonitoringProgram"^^xsd:anyURI,
+        "nexus:AiEval"^^xsd:anyURI,
+        "spdx:AIPackage"^^xsd:anyURI ;
+    linkml:class_uri "https://w3id.org/lmodel/mellea/TelemetryMetricSpec"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/TelemetryMetricSpec"^^xsd:anyURI ;
+    linkml:description "Specification of a telemetry metric emitted by Mellea." ;
+    linkml:is_a <https://w3id.org/lmodel/mellea/ModelElement> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://w3id.org/lmodel/mellea/coverage_scope>,
+        <https://w3id.org/lmodel/mellea/description>,
+        <https://w3id.org/lmodel/mellea/element_kind>,
+        <https://w3id.org/lmodel/mellea/id>,
+        <https://w3id.org/lmodel/mellea/metric_name>,
+        <https://w3id.org/lmodel/mellea/module_path>,
+        <https://w3id.org/lmodel/mellea/name>,
+        <https://w3id.org/lmodel/mellea/package_kind>,
+        <https://w3id.org/lmodel/mellea/source_file>,
+        <https://w3id.org/lmodel/mellea/tags> .
+
+<https://w3id.org/lmodel/mellea/declares_element> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/declares_element"^^xsd:anyURI ;
+    linkml:description "Slot describing the declares element." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/PythonPackage>,
+        <https://w3id.org/lmodel/mellea/RepositoryCatalog> ;
+    linkml:inlined true ;
+    linkml:inlined_as_list true ;
+    linkml:multivalued true ;
+    linkml:owner <https://w3id.org/lmodel/mellea/PythonPackage> ;
+    linkml:range <https://w3id.org/lmodel/mellea/ModelElement> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/declares_element"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/hook_type> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/hook_type"^^xsd:anyURI ;
+    linkml:description "Slot describing the hook type." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/HookPayloadSpec>,
+        <https://w3id.org/lmodel/mellea/PluginSpec> ;
+    linkml:multivalued true ;
+    linkml:owner <https://w3id.org/lmodel/mellea/HookPayloadSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/HookTypeEnum> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/hook_type"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/integer> a linkml:TypeDefinition ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"integer\"." ;
+    skos:exactMatch "schema:Integer"^^xsd:anyURI ;
+    skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+    linkml:base "int" ;
+    linkml:definition_uri "https://w3id.org/linkml/Integer"^^xsd:anyURI ;
+    linkml:description "An integer" ;
+    linkml:imported_from "linkml:types" ;
+    linkml:uri "http://www.w3.org/2001/XMLSchema#integer"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/lifecycle_role> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/lifecycle_role"^^xsd:anyURI ;
+    linkml:description "Slot describing the lifecycle role." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/HookPayloadSpec>,
+        <https://w3id.org/lmodel/mellea/MethodSpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/MethodSpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/lifecycle_role"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/may_trigger_repair> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/may_trigger_repair"^^xsd:anyURI ;
+    linkml:description "Slot describing the may trigger repair." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/RequirementSpec>,
+        <https://w3id.org/lmodel/mellea/SamplingStrategySpec> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/SamplingStrategySpec> ;
+    linkml:range <https://w3id.org/lmodel/mellea/boolean> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/may_trigger_repair"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/RequirementSpec> a linkml:ClassDefinition ;
+    OIO:inSubset <https://w3id.org/lmodel/mellea/core_runtime> ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    skos:relatedMatch "iso27001:InformationSecurityObjective"^^xsd:anyURI,
+        "iso27001:SecurityControl"^^xsd:anyURI,
+        "nexus:Requirement"^^xsd:anyURI,
+        "nexus:Rule"^^xsd:anyURI ;
+    linkml:class_uri "https://w3id.org/lmodel/mellea/RequirementSpec"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/RequirementSpec"^^xsd:anyURI ;
+    linkml:description "Specification of a requirement validator." ;
+    linkml:is_a <https://w3id.org/lmodel/mellea/ModelElement> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://w3id.org/lmodel/mellea/coverage_scope>,
+        <https://w3id.org/lmodel/mellea/description>,
+        <https://w3id.org/lmodel/mellea/element_kind>,
+        <https://w3id.org/lmodel/mellea/id>,
+        <https://w3id.org/lmodel/mellea/may_trigger_repair>,
+        <https://w3id.org/lmodel/mellea/module_path>,
+        <https://w3id.org/lmodel/mellea/name>,
+        <https://w3id.org/lmodel/mellea/package_kind>,
+        <https://w3id.org/lmodel/mellea/source_file>,
+        <https://w3id.org/lmodel/mellea/tags>,
+        <https://w3id.org/lmodel/mellea/validation_style> .
+
+<https://w3id.org/lmodel/mellea/observability> a linkml:SubsetDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/Observability"^^xsd:anyURI ;
+    linkml:description "Telemetry, plugin hooks, and instrumentation." .
+
+<https://w3id.org/lmodel/mellea/HookPayloadSpec> a linkml:ClassDefinition ;
+    OIO:inSubset <https://w3id.org/lmodel/mellea/observability> ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    skos:relatedMatch "attack:DataComponent"^^xsd:anyURI,
+        "iso27001:InformationSecurityEvent"^^xsd:anyURI,
+        "mcp:MetaObject"^^xsd:anyURI,
+        "nexus:Fact"^^xsd:anyURI,
+        "spdx:Annotation"^^xsd:anyURI ;
+    linkml:class_uri "https://w3id.org/lmodel/mellea/HookPayloadSpec"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/HookPayloadSpec"^^xsd:anyURI ;
+    linkml:description "Specification of a hook payload model." ;
+    linkml:is_a <https://w3id.org/lmodel/mellea/ModelElement> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://w3id.org/lmodel/mellea/coverage_scope>,
+        <https://w3id.org/lmodel/mellea/description>,
+        <https://w3id.org/lmodel/mellea/element_kind>,
+        <https://w3id.org/lmodel/mellea/hook_type>,
+        <https://w3id.org/lmodel/mellea/id>,
+        <https://w3id.org/lmodel/mellea/lifecycle_role>,
+        <https://w3id.org/lmodel/mellea/module_path>,
+        <https://w3id.org/lmodel/mellea/name>,
+        <https://w3id.org/lmodel/mellea/package_kind>,
+        <https://w3id.org/lmodel/mellea/source_file>,
+        <https://w3id.org/lmodel/mellea/tags> .
+
+<https://w3id.org/lmodel/mellea/IntrinsicAdapterSpec> a linkml:ClassDefinition ;
+    OIO:inSubset <https://w3id.org/lmodel/mellea/interface_surface> ;
+    skos:closeMatch "nexus:Adapter"^^xsd:anyURI,
+        "nexus:LLMIntrinsic"^^xsd:anyURI,
+        "spdx:AIPackage"^^xsd:anyURI ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    skos:relatedMatch "spdx:Relationship"^^xsd:anyURI ;
+    linkml:class_uri "https://w3id.org/lmodel/mellea/IntrinsicAdapterSpec"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/IntrinsicAdapterSpec"^^xsd:anyURI ;
+    linkml:description "Specification of an intrinsic adapter (LoRA / aLoRA)." ;
+    linkml:is_a <https://w3id.org/lmodel/mellea/NamedElement> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://w3id.org/lmodel/mellea/adapter_type>,
+        <https://w3id.org/lmodel/mellea/coverage_scope>,
+        <https://w3id.org/lmodel/mellea/description>,
+        <https://w3id.org/lmodel/mellea/element_kind>,
+        <https://w3id.org/lmodel/mellea/id>,
+        <https://w3id.org/lmodel/mellea/module_path>,
+        <https://w3id.org/lmodel/mellea/name>,
+        <https://w3id.org/lmodel/mellea/package_kind>,
+        <https://w3id.org/lmodel/mellea/repo_id>,
+        <https://w3id.org/lmodel/mellea/source_file>,
+        <https://w3id.org/lmodel/mellea/tags> .
+
+<https://w3id.org/lmodel/mellea/RepositoryRelativePath> a linkml:TypeDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:base "str" ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/RepositoryRelativePath"^^xsd:anyURI ;
+    linkml:description "Relative path from repository root." ;
+    linkml:pattern "^[^\\0]+$" ;
+    linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/SamplingStrategySpec> a linkml:ClassDefinition ;
+    OIO:inSubset <https://w3id.org/lmodel/mellea/core_runtime> ;
+    skos:closeMatch "mcp:SamplingCapability"^^xsd:anyURI ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    skos:relatedMatch "mcp:ModelPreferences"^^xsd:anyURI,
+        "nexus:Action"^^xsd:anyURI ;
+    linkml:class_uri "https://w3id.org/lmodel/mellea/SamplingStrategySpec"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/SamplingStrategySpec"^^xsd:anyURI ;
+    linkml:description "Specification of a sampling-loop strategy." ;
+    linkml:is_a <https://w3id.org/lmodel/mellea/ModelElement> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://w3id.org/lmodel/mellea/coverage_scope>,
+        <https://w3id.org/lmodel/mellea/description>,
+        <https://w3id.org/lmodel/mellea/element_kind>,
+        <https://w3id.org/lmodel/mellea/id>,
+        <https://w3id.org/lmodel/mellea/loop_budget_hint>,
+        <https://w3id.org/lmodel/mellea/may_trigger_repair>,
+        <https://w3id.org/lmodel/mellea/module_path>,
+        <https://w3id.org/lmodel/mellea/name>,
+        <https://w3id.org/lmodel/mellea/package_kind>,
+        <https://w3id.org/lmodel/mellea/selection_policy>,
+        <https://w3id.org/lmodel/mellea/source_file>,
+        <https://w3id.org/lmodel/mellea/tags> .
+
+<https://w3id.org/lmodel/mellea/SessionSpec> a linkml:ClassDefinition ;
+    OIO:inSubset <https://w3id.org/lmodel/mellea/core_runtime> ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    skos:relatedMatch "iso27001:RiskAssessmentProcess"^^xsd:anyURI,
+        "mcp:Task"^^xsd:anyURI,
+        "nexus:AiTask"^^xsd:anyURI ;
+    linkml:class_uri "https://w3id.org/lmodel/mellea/SessionSpec"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/SessionSpec"^^xsd:anyURI ;
+    linkml:description "Specification of a Mellea session." ;
+    linkml:is_a <https://w3id.org/lmodel/mellea/ModelElement> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://w3id.org/lmodel/mellea/coverage_scope>,
+        <https://w3id.org/lmodel/mellea/description>,
+        <https://w3id.org/lmodel/mellea/element_kind>,
+        <https://w3id.org/lmodel/mellea/exposed_method>,
+        <https://w3id.org/lmodel/mellea/id>,
+        <https://w3id.org/lmodel/mellea/module_path>,
+        <https://w3id.org/lmodel/mellea/name>,
+        <https://w3id.org/lmodel/mellea/package_kind>,
+        <https://w3id.org/lmodel/mellea/source_file>,
+        <https://w3id.org/lmodel/mellea/tags>,
+        <https://w3id.org/lmodel/mellea/uses_backend>,
+        <https://w3id.org/lmodel/mellea/uses_context> .
+
+<https://w3id.org/lmodel/mellea/ComponentSpec> a linkml:ClassDefinition ;
+    OIO:inSubset <https://w3id.org/lmodel/mellea/core_runtime> ;
+    skos:closeMatch "mcp:Tool"^^xsd:anyURI,
+        "nexus:AIComponent"^^xsd:anyURI ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:class_uri "https://w3id.org/lmodel/mellea/ComponentSpec"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/ComponentSpec"^^xsd:anyURI ;
+    linkml:description "Specification of a Mellea stdlib component type." ;
+    linkml:is_a <https://w3id.org/lmodel/mellea/ModelElement> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://w3id.org/lmodel/mellea/component_category>,
+        <https://w3id.org/lmodel/mellea/coverage_scope>,
+        <https://w3id.org/lmodel/mellea/description>,
+        <https://w3id.org/lmodel/mellea/element_kind>,
+        <https://w3id.org/lmodel/mellea/id>,
+        <https://w3id.org/lmodel/mellea/input_modality>,
+        <https://w3id.org/lmodel/mellea/module_path>,
+        <https://w3id.org/lmodel/mellea/name>,
+        <https://w3id.org/lmodel/mellea/package_kind>,
+        <https://w3id.org/lmodel/mellea/parsed_output_type>,
+        <https://w3id.org/lmodel/mellea/source_file>,
+        <https://w3id.org/lmodel/mellea/tags> .
+
+<https://w3id.org/lmodel/mellea/ContextSpec> a linkml:ClassDefinition ;
+    OIO:inSubset <https://w3id.org/lmodel/mellea/core_runtime> ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    skos:relatedMatch "nexus:AiLifecyclePhase"^^xsd:anyURI ;
+    linkml:class_uri "https://w3id.org/lmodel/mellea/ContextSpec"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/ContextSpec"^^xsd:anyURI ;
+    linkml:description "Specification of a context implementation." ;
+    linkml:is_a <https://w3id.org/lmodel/mellea/ModelElement> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://w3id.org/lmodel/mellea/accepts_message_attachments>,
+        <https://w3id.org/lmodel/mellea/context_linearity>,
+        <https://w3id.org/lmodel/mellea/coverage_scope>,
+        <https://w3id.org/lmodel/mellea/description>,
+        <https://w3id.org/lmodel/mellea/element_kind>,
+        <https://w3id.org/lmodel/mellea/id>,
+        <https://w3id.org/lmodel/mellea/module_path>,
+        <https://w3id.org/lmodel/mellea/name>,
+        <https://w3id.org/lmodel/mellea/package_kind>,
+        <https://w3id.org/lmodel/mellea/source_file>,
+        <https://w3id.org/lmodel/mellea/stores_component_history>,
+        <https://w3id.org/lmodel/mellea/tags> .
+
+<https://w3id.org/lmodel/mellea/MethodSpec> a linkml:ClassDefinition ;
+    OIO:inSubset <https://w3id.org/lmodel/mellea/core_runtime> ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:class_uri "https://w3id.org/lmodel/mellea/MethodSpec"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/MethodSpec"^^xsd:anyURI ;
+    linkml:description "Specification of a method exposed by a runtime class." ;
+    linkml:is_a <https://w3id.org/lmodel/mellea/NamedElement> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://w3id.org/lmodel/mellea/coverage_scope>,
+        <https://w3id.org/lmodel/mellea/description>,
+        <https://w3id.org/lmodel/mellea/element_kind>,
+        <https://w3id.org/lmodel/mellea/id>,
+        <https://w3id.org/lmodel/mellea/lifecycle_role>,
+        <https://w3id.org/lmodel/mellea/method_name>,
+        <https://w3id.org/lmodel/mellea/method_signature>,
+        <https://w3id.org/lmodel/mellea/module_path>,
+        <https://w3id.org/lmodel/mellea/name>,
+        <https://w3id.org/lmodel/mellea/package_kind>,
+        <https://w3id.org/lmodel/mellea/source_file>,
+        <https://w3id.org/lmodel/mellea/tags> .
+
+<https://w3id.org/lmodel/mellea/PluginSpec> a linkml:ClassDefinition ;
+    OIO:inSubset <https://w3id.org/lmodel/mellea/observability> ;
+    skos:closeMatch "spdx:Extension"^^xsd:anyURI ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    skos:relatedMatch "attack:Analytic"^^xsd:anyURI,
+        "iso27001:OperationalProcedure"^^xsd:anyURI,
+        "mcp:ExtensionAppCapability"^^xsd:anyURI,
+        "nexus:AIComponent"^^xsd:anyURI ;
+    linkml:class_uri "https://w3id.org/lmodel/mellea/PluginSpec"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/PluginSpec"^^xsd:anyURI ;
+    linkml:description "Specification of a Mellea plugin and the hooks it registers." ;
+    linkml:is_a <https://w3id.org/lmodel/mellea/ModelElement> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://w3id.org/lmodel/mellea/coverage_scope>,
+        <https://w3id.org/lmodel/mellea/description>,
+        <https://w3id.org/lmodel/mellea/element_kind>,
+        <https://w3id.org/lmodel/mellea/hook_type>,
+        <https://w3id.org/lmodel/mellea/id>,
+        <https://w3id.org/lmodel/mellea/module_path>,
+        <https://w3id.org/lmodel/mellea/name>,
+        <https://w3id.org/lmodel/mellea/package_kind>,
+        <https://w3id.org/lmodel/mellea/payload_model>,
+        <https://w3id.org/lmodel/mellea/plugin_mode>,
+        <https://w3id.org/lmodel/mellea/plugin_priority>,
+        <https://w3id.org/lmodel/mellea/source_file>,
+        <https://w3id.org/lmodel/mellea/tags> .
+
+<https://w3id.org/lmodel/mellea/PythonPackage> a linkml:ClassDefinition ;
+    skos:closeMatch "spdx:Package"^^xsd:anyURI ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    skos:narrowMatch "nexus:Entity"^^xsd:anyURI ;
+    skos:relatedMatch "common_domain_model:Position"^^xsd:anyURI ;
+    linkml:class_uri "https://w3id.org/lmodel/mellea/PythonPackage"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/PythonPackage"^^xsd:anyURI ;
+    linkml:description "A logical Python package (directory) inside the repository." ;
+    linkml:is_a <https://w3id.org/lmodel/mellea/NamedElement> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://w3id.org/lmodel/mellea/coverage_scope>,
+        <https://w3id.org/lmodel/mellea/declares_element>,
+        <https://w3id.org/lmodel/mellea/depends_on_package>,
+        <https://w3id.org/lmodel/mellea/description>,
+        <https://w3id.org/lmodel/mellea/element_kind>,
+        <https://w3id.org/lmodel/mellea/id>,
+        <https://w3id.org/lmodel/mellea/module_path>,
+        <https://w3id.org/lmodel/mellea/name>,
+        <https://w3id.org/lmodel/mellea/package_kind>,
+        <https://w3id.org/lmodel/mellea/package_name>,
+        <https://w3id.org/lmodel/mellea/source_file>,
+        <https://w3id.org/lmodel/mellea/tags> .
+
+<https://w3id.org/lmodel/mellea/interface_surface> a linkml:SubsetDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/InterfaceSurface"^^xsd:anyURI ;
+    linkml:description "API or CLI-facing interfaces and wire models." .
+
+<https://w3id.org/lmodel/mellea/ApiModelSpec> a linkml:ClassDefinition ;
+    OIO:inSubset <https://w3id.org/lmodel/mellea/interface_surface> ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    skos:relatedMatch "mcp:JSONRPCRequest"^^xsd:anyURI,
+        "mcp:JSONRPCResponse"^^xsd:anyURI,
+        "nexus:Input"^^xsd:anyURI ;
+    linkml:class_uri "https://w3id.org/lmodel/mellea/ApiModelSpec"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/ApiModelSpec"^^xsd:anyURI ;
+    linkml:description "Specification of an HTTP API wire model." ;
+    linkml:is_a <https://w3id.org/lmodel/mellea/ModelElement> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://w3id.org/lmodel/mellea/coverage_scope>,
+        <https://w3id.org/lmodel/mellea/description>,
+        <https://w3id.org/lmodel/mellea/element_kind>,
+        <https://w3id.org/lmodel/mellea/has_field>,
+        <https://w3id.org/lmodel/mellea/id>,
+        <https://w3id.org/lmodel/mellea/module_path>,
+        <https://w3id.org/lmodel/mellea/name>,
+        <https://w3id.org/lmodel/mellea/openai_object_type>,
+        <https://w3id.org/lmodel/mellea/package_kind>,
+        <https://w3id.org/lmodel/mellea/request_or_response>,
+        <https://w3id.org/lmodel/mellea/source_file>,
+        <https://w3id.org/lmodel/mellea/tags> .
+
+<https://w3id.org/lmodel/mellea/boolean> a linkml:TypeDefinition ;
+    skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"boolean\"." ;
+    skos:exactMatch "schema:Boolean"^^xsd:anyURI ;
+    skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+    linkml:base "Bool" ;
+    linkml:definition_uri "https://w3id.org/linkml/Boolean"^^xsd:anyURI ;
+    linkml:description "A binary (true or false) value" ;
+    linkml:imported_from "linkml:types" ;
+    linkml:repr "bool" ;
+    linkml:uri "http://www.w3.org/2001/XMLSchema#boolean"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/core_runtime> a linkml:SubsetDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/CoreRuntime"^^xsd:anyURI ;
+    linkml:description "Core runtime abstractions and execution flow." .
+
+<https://w3id.org/lmodel/mellea/ApiFieldSpec> a linkml:ClassDefinition ;
+    OIO:inSubset <https://w3id.org/lmodel/mellea/interface_surface> ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    skos:relatedMatch "spdx:DictionaryEntry"^^xsd:anyURI ;
+    linkml:class_uri "https://w3id.org/lmodel/mellea/ApiFieldSpec"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/ApiFieldSpec"^^xsd:anyURI ;
+    linkml:description "Specification of a single field in an API model." ;
+    linkml:is_a <https://w3id.org/lmodel/mellea/NamedElement> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://w3id.org/lmodel/mellea/allows_null>,
+        <https://w3id.org/lmodel/mellea/coverage_scope>,
+        <https://w3id.org/lmodel/mellea/description>,
+        <https://w3id.org/lmodel/mellea/element_kind>,
+        <https://w3id.org/lmodel/mellea/field_name>,
+        <https://w3id.org/lmodel/mellea/field_type>,
+        <https://w3id.org/lmodel/mellea/id>,
+        <https://w3id.org/lmodel/mellea/module_path>,
+        <https://w3id.org/lmodel/mellea/name>,
+        <https://w3id.org/lmodel/mellea/package_kind>,
+        <https://w3id.org/lmodel/mellea/required_field>,
+        <https://w3id.org/lmodel/mellea/source_file>,
+        <https://w3id.org/lmodel/mellea/tags> .
+
+<https://w3id.org/lmodel/mellea/RepositoryCatalog> a linkml:ClassDefinition ;
+    OIO:inSubset <https://w3id.org/lmodel/mellea/interface_surface> ;
+    skos:closeMatch "spdx:Sbom"^^xsd:anyURI ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    skos:relatedMatch "attack:AttackBundle"^^xsd:anyURI,
+        "common_domain_model:Portfolio"^^xsd:anyURI,
+        "common_domain_model:PortfolioState"^^xsd:anyURI,
+        "iso27001:DocumentedInformation"^^xsd:anyURI,
+        "nexus:Container"^^xsd:anyURI,
+        "spdx:SpdxDocument"^^xsd:anyURI ;
+    linkml:class_uri "https://w3id.org/lmodel/mellea/RepositoryCatalog"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/RepositoryCatalog"^^xsd:anyURI ;
+    linkml:description "Top-level catalog rooting the analysed repository snapshot." ;
+    linkml:is_a <https://w3id.org/lmodel/mellea/NamedElement> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://w3id.org/lmodel/mellea/analyzed_on>,
+        <https://w3id.org/lmodel/mellea/coverage_scope>,
+        <https://w3id.org/lmodel/mellea/declares_element>,
+        <https://w3id.org/lmodel/mellea/description>,
+        <https://w3id.org/lmodel/mellea/element_kind>,
+        <https://w3id.org/lmodel/mellea/excludes_path>,
+        <https://w3id.org/lmodel/mellea/id>,
+        <https://w3id.org/lmodel/mellea/includes_path>,
+        <https://w3id.org/lmodel/mellea/module_path>,
+        <https://w3id.org/lmodel/mellea/name>,
+        <https://w3id.org/lmodel/mellea/package_kind>,
+        <https://w3id.org/lmodel/mellea/repository_root>,
+        <https://w3id.org/lmodel/mellea/source_file>,
+        <https://w3id.org/lmodel/mellea/tags> ;
+    linkml:tree_root true .
+
+<https://w3id.org/lmodel/mellea/CliCommandSpec> a linkml:ClassDefinition ;
+    OIO:inSubset <https://w3id.org/lmodel/mellea/interface_surface> ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    skos:relatedMatch "attack:Tool"^^xsd:anyURI,
+        "iso27001:OperationalProcedure"^^xsd:anyURI,
+        "spdx:Tool"^^xsd:anyURI ;
+    linkml:class_uri "https://w3id.org/lmodel/mellea/CliCommandSpec"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/CliCommandSpec"^^xsd:anyURI ;
+    linkml:description "Specification of a CLI command exposed under `m`." ;
+    linkml:is_a <https://w3id.org/lmodel/mellea/ModelElement> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://w3id.org/lmodel/mellea/command_group>,
+        <https://w3id.org/lmodel/mellea/command_path>,
+        <https://w3id.org/lmodel/mellea/command_purpose>,
+        <https://w3id.org/lmodel/mellea/coverage_scope>,
+        <https://w3id.org/lmodel/mellea/description>,
+        <https://w3id.org/lmodel/mellea/element_kind>,
+        <https://w3id.org/lmodel/mellea/id>,
+        <https://w3id.org/lmodel/mellea/input_model>,
+        <https://w3id.org/lmodel/mellea/module_path>,
+        <https://w3id.org/lmodel/mellea/name>,
+        <https://w3id.org/lmodel/mellea/output_model>,
+        <https://w3id.org/lmodel/mellea/package_kind>,
+        <https://w3id.org/lmodel/mellea/source_file>,
+        <https://w3id.org/lmodel/mellea/tags> .
+
+<https://w3id.org/lmodel/mellea/ModelElement> a linkml:ClassDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    skos:relatedMatch "common_domain_model:ContractBase"^^xsd:anyURI,
+        "spdx:Element"^^xsd:anyURI ;
+    linkml:abstract true ;
+    linkml:class_uri "https://w3id.org/lmodel/mellea/ModelElement"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/ModelElement"^^xsd:anyURI ;
+    linkml:description "Abstract base for concrete architectural elements." ;
+    linkml:is_a <https://w3id.org/lmodel/mellea/NamedElement> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://w3id.org/lmodel/mellea/coverage_scope>,
+        <https://w3id.org/lmodel/mellea/description>,
+        <https://w3id.org/lmodel/mellea/element_kind>,
+        <https://w3id.org/lmodel/mellea/id>,
+        <https://w3id.org/lmodel/mellea/module_path>,
+        <https://w3id.org/lmodel/mellea/name>,
+        <https://w3id.org/lmodel/mellea/package_kind>,
+        <https://w3id.org/lmodel/mellea/source_file>,
+        <https://w3id.org/lmodel/mellea/tags> .
+
+<https://w3id.org/lmodel/mellea/ModelIdentifierSpec> a linkml:ClassDefinition ;
+    OIO:inSubset <https://w3id.org/lmodel/mellea/interface_surface> ;
+    skos:closeMatch "nexus:AiModel"^^xsd:anyURI,
+        "nexus:LargeLanguageModel"^^xsd:anyURI,
+        "spdx:AIPackage"^^xsd:anyURI ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    skos:relatedMatch "common_domain_model:positionIdentifier"^^xsd:anyURI,
+        "mcp:ModelHint"^^xsd:anyURI,
+        "nexus:ModelInfo"^^xsd:anyURI ;
+    linkml:class_uri "https://w3id.org/lmodel/mellea/ModelIdentifierSpec"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/ModelIdentifierSpec"^^xsd:anyURI ;
+    linkml:description "Cross-provider identifier table for a single model." ;
+    linkml:is_a <https://w3id.org/lmodel/mellea/NamedElement> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://w3id.org/lmodel/mellea/bedrock_name>,
+        <https://w3id.org/lmodel/mellea/coverage_scope>,
+        <https://w3id.org/lmodel/mellea/description>,
+        <https://w3id.org/lmodel/mellea/element_kind>,
+        <https://w3id.org/lmodel/mellea/hf_model_name>,
+        <https://w3id.org/lmodel/mellea/id>,
+        <https://w3id.org/lmodel/mellea/module_path>,
+        <https://w3id.org/lmodel/mellea/name>,
+        <https://w3id.org/lmodel/mellea/ollama_name>,
+        <https://w3id.org/lmodel/mellea/openai_name>,
+        <https://w3id.org/lmodel/mellea/package_kind>,
+        <https://w3id.org/lmodel/mellea/provider_name>,
+        <https://w3id.org/lmodel/mellea/source_file>,
+        <https://w3id.org/lmodel/mellea/tags>,
+        <https://w3id.org/lmodel/mellea/watsonx_name> .
+
+<https://w3id.org/lmodel/mellea/BackendSpec> a linkml:ClassDefinition ;
+    OIO:inSubset <https://w3id.org/lmodel/mellea/core_runtime>,
+        <https://w3id.org/lmodel/mellea/interface_surface> ;
+    skos:closeMatch "nexus:AiProvider"^^xsd:anyURI ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    skos:relatedMatch "mcp:Implementation"^^xsd:anyURI,
+        "nexus:AiSystem"^^xsd:anyURI ;
+    linkml:class_uri "https://w3id.org/lmodel/mellea/BackendSpec"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/BackendSpec"^^xsd:anyURI ;
+    linkml:description "Specification of a Mellea backend implementation." ;
+    linkml:is_a <https://w3id.org/lmodel/mellea/ModelElement> ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://w3id.org/lmodel/mellea/backend_family>,
+        <https://w3id.org/lmodel/mellea/coverage_scope>,
+        <https://w3id.org/lmodel/mellea/default_formatter>,
+        <https://w3id.org/lmodel/mellea/description>,
+        <https://w3id.org/lmodel/mellea/element_kind>,
+        <https://w3id.org/lmodel/mellea/id>,
+        <https://w3id.org/lmodel/mellea/model_identifier>,
+        <https://w3id.org/lmodel/mellea/model_options_key>,
+        <https://w3id.org/lmodel/mellea/module_path>,
+        <https://w3id.org/lmodel/mellea/name>,
+        <https://w3id.org/lmodel/mellea/package_kind>,
+        <https://w3id.org/lmodel/mellea/source_file>,
+        <https://w3id.org/lmodel/mellea/supports_multimodal>,
+        <https://w3id.org/lmodel/mellea/supports_streaming>,
+        <https://w3id.org/lmodel/mellea/supports_tool_calls>,
+        <https://w3id.org/lmodel/mellea/tags> .
+
+<https://w3id.org/lmodel/mellea/coverage_scope> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/coverage_scope"^^xsd:anyURI ;
+    linkml:description "Where this element surfaces (source/API/CLI/example/test)." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/NamedElement> ;
+    linkml:multivalued true ;
+    linkml:owner <https://w3id.org/lmodel/mellea/NamedElement> ;
+    linkml:range <https://w3id.org/lmodel/mellea/CoverageScopeEnum> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/coverage_scope"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/description> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    skos:mappingRelation "http://schema.org/description"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/description"^^xsd:anyURI ;
+    linkml:description "Narrative description of the element." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/NamedElement> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/NamedElement> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:slot_uri "http://schema.org/description"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/element_kind> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/element_kind"^^xsd:anyURI ;
+    linkml:description "Kind of Python declaration." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/NamedElement> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/NamedElement> ;
+    linkml:range <https://w3id.org/lmodel/mellea/ElementKindEnum> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/element_kind"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/id> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    skos:mappingRelation "http://schema.org/identifier"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/id"^^xsd:anyURI ;
+    linkml:description "Stable identifier for a schema element." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/NamedElement> ;
+    linkml:identifier true ;
+    linkml:owner <https://w3id.org/lmodel/mellea/NamedElement> ;
+    linkml:range <https://w3id.org/lmodel/mellea/uriorcurie> ;
+    linkml:required true ;
+    linkml:slot_uri "http://schema.org/identifier"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/module_path> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/module_path"^^xsd:anyURI ;
+    linkml:description "Python module path where this element is defined." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/NamedElement> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/NamedElement> ;
+    linkml:range <https://w3id.org/lmodel/mellea/PythonDottedPath> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/module_path"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/name> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    skos:mappingRelation "http://schema.org/name"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/name"^^xsd:anyURI ;
+    linkml:description "Human-readable name." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/NamedElement> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/NamedElement> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:required true ;
+    linkml:slot_uri "http://schema.org/name"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/package_kind> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/package_kind"^^xsd:anyURI ;
+    linkml:description "Package bucket." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/NamedElement> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/NamedElement> ;
+    linkml:range <https://w3id.org/lmodel/mellea/PackageKindEnum> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/package_kind"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/source_file> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/source_file"^^xsd:anyURI ;
+    linkml:description "Source file relative to repository root." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/NamedElement> ;
+    linkml:owner <https://w3id.org/lmodel/mellea/NamedElement> ;
+    linkml:range <https://w3id.org/lmodel/mellea/RepositoryRelativePath> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/source_file"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/tags> a linkml:SlotDefinition ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/tags"^^xsd:anyURI ;
+    linkml:description "Free-form classification tags." ;
+    linkml:domain_of <https://w3id.org/lmodel/mellea/NamedElement> ;
+    linkml:multivalued true ;
+    linkml:owner <https://w3id.org/lmodel/mellea/NamedElement> ;
+    linkml:range <https://w3id.org/lmodel/mellea/string> ;
+    linkml:slot_uri "https://w3id.org/lmodel/mellea/tags"^^xsd:anyURI .
+
+<https://w3id.org/lmodel/mellea/NamedElement> a linkml:ClassDefinition ;
+    skos:closeMatch "iso27001:NamedEntity"^^xsd:anyURI,
+        "nexus:Entity"^^xsd:anyURI,
+        "spdx:Element"^^xsd:anyURI ;
+    skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    skos:relatedMatch "attack:StixEntity"^^xsd:anyURI,
+        "common_domain_model:InventoryRecord"^^xsd:anyURI,
+        "mcp:HasName"^^xsd:anyURI ;
+    linkml:abstract true ;
+    linkml:class_uri "https://w3id.org/lmodel/mellea/NamedElement"^^xsd:anyURI ;
+    linkml:definition_uri "https://w3id.org/lmodel/mellea/NamedElement"^^xsd:anyURI ;
+    linkml:description "Abstract base for any named, identifiable schema element." ;
+    linkml:slot_usage [ ] ;
+    linkml:slots <https://w3id.org/lmodel/mellea/coverage_scope>,
+        <https://w3id.org/lmodel/mellea/description>,
+        <https://w3id.org/lmodel/mellea/element_kind>,
+        <https://w3id.org/lmodel/mellea/id>,
+        <https://w3id.org/lmodel/mellea/module_path>,
+        <https://w3id.org/lmodel/mellea/name>,
+        <https://w3id.org/lmodel/mellea/package_kind>,
+        <https://w3id.org/lmodel/mellea/source_file>,
+        <https://w3id.org/lmodel/mellea/tags> .
+
+<https://w3id.org/lmodel/mellea/string> a linkml:TypeDefinition ;
+    skos:editorialNote "In RDF serializations, a slot with range of string is treated as a literal or type xsd:string. If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"string\"." ;
+    skos:exactMatch "schema:Text"^^xsd:anyURI ;
+    skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+    linkml:base "str" ;
+    linkml:definition_uri "https://w3id.org/linkml/String"^^xsd:anyURI ;
+    linkml:description "A character string" ;
+    linkml:imported_from "linkml:types" ;
+    linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+

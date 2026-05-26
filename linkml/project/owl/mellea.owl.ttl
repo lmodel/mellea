@@ -1,0 +1,1730 @@
+@prefix attack: <https://w3id.org/lmodel/attack/> .
+@prefix common_domain_model: <https://w3id.org/lmodel/common-domain-model/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix iso27001: <https://w3id.org/lmodel/iso27001/> .
+@prefix linkml: <https://w3id.org/linkml/> .
+@prefix mcp: <https://w3id.org/lmodel/mcp/> .
+@prefix mellea: <https://w3id.org/lmodel/mellea/> .
+@prefix nexus: <https://ibm.github.io/ai-atlas-nexus/ontology/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix pav: <http://purl.org/pav/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix spdx: <https://spdx.org/rdf/3.0.1/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://w3id.org/lmodel/mellea.owl.ttl> a owl:Ontology ;
+    rdfs:label "mellea" ;
+    dcterms:license "Apache-2.0" ;
+    dcterms:source <https://github.com/lmodel/mellea> ;
+    dcterms:title "mellea" ;
+    pav:version "2026-05-26" ;
+    rdfs:seeAlso <https://github.com/lmodel/mellea>,
+        <https://lmodel.github.io/mellea> ;
+    skos:definition "LinkML schema describing the Mellea codebase architecture and public data models. Generated from Python sources by linkml/scripts/schema_to_linkml.py." ;
+    mellea:analyzed_scope "mellea+cli (linkml/ excluded)" ;
+    mellea:coverage_inventory """cli: total=86 (CLASS=42 DATACLASS=5 ENUM=4 PYDANTIC_MODEL=20 TYPED_DICT=15)
+mellea/backends: total=28 (CLASS=22 DATACLASS=2 ENUM=1 MIXIN=1 PYDANTIC_MODEL=2)
+mellea/core: total=27 (CLASS=20 DATACLASS=5 ENUM=1 PROTOCOL=1)
+mellea/formatters: total=57 (CLASS=39 ENUM=1 MIXIN=1 PYDANTIC_MODEL=16)
+mellea/helpers: total=6 (CLASS=2 ENUM=1 PYDANTIC_MODEL=1 TYPED_DICT=2)
+mellea/plugins: total=32 (CLASS=28 DATACLASS=2 ENUM=2)
+mellea/stdlib: total=69 (CLASS=50 DATACLASS=10 ENUM=1 PROTOCOL=2 PYDANTIC_MODEL=4 TYPED_DICT=2)
+mellea/telemetry: total=11 (CLASS=11)
+enum_total: 11""" ;
+    mellea:coverage_target "core-library-and-cli" ;
+    mellea:generated_by "linkml/scripts/schema_to_linkml.py" ;
+    mellea:generated_on "2026-05-26" .
+
+mellea:uses_component_type a owl:ObjectProperty ;
+    rdfs:label "uses_component_type" ;
+    rdfs:range mellea:ComponentSpec ;
+    skos:definition "Slot describing the uses component type." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:CliCommandSpec a owl:Class ;
+    rdfs:label "CliCommandSpec" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom mellea:ApiModelSpec ;
+            owl:onProperty mellea:input_model ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:command_purpose ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:command_group ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:command_group ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:command_path ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:ApiModelSpec ;
+            owl:onProperty mellea:output_model ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:output_model ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:input_model ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:command_purpose ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:command_path ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:command_group ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:command_purpose ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:command_path ],
+        mellea:ModelElement ;
+    skos:definition "Specification of a CLI command exposed under `m`." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    skos:relatedMatch spdx:Tool,
+        attack:Tool,
+        iso27001:OperationalProcedure .
+
+mellea:IntrinsicAdapterSpec a owl:Class ;
+    rdfs:label "IntrinsicAdapterSpec" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:repo_id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:adapter_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:repo_id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:repo_id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:AdapterTypeEnum ;
+            owl:onProperty mellea:adapter_type ],
+        mellea:NamedElement ;
+    skos:closeMatch nexus:Adapter,
+        nexus:LLMIntrinsic,
+        spdx:AIPackage ;
+    skos:definition "Specification of an intrinsic adapter (LoRA / aLoRA)." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    skos:relatedMatch spdx:Relationship .
+
+mellea:PluginSpec a owl:Class ;
+    rdfs:label "PluginSpec" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom mellea:PluginModeEnum ;
+            owl:onProperty mellea:plugin_mode ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:hook_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:integer ;
+            owl:onProperty mellea:plugin_priority ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:plugin_mode ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:plugin_priority ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:HookTypeEnum ;
+            owl:onProperty mellea:hook_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:plugin_priority ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:plugin_mode ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:HookPayloadSpec ;
+            owl:onProperty mellea:payload_model ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:payload_model ],
+        mellea:ModelElement ;
+    skos:closeMatch spdx:Extension ;
+    skos:definition "Specification of a Mellea plugin and the hooks it registers." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    skos:relatedMatch nexus:AIComponent,
+        attack:Analytic,
+        iso27001:OperationalProcedure,
+        mcp:ExtensionAppCapability .
+
+mellea:RepositoryCatalog a owl:Class ;
+    rdfs:label "RepositoryCatalog" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:date ;
+            owl:onProperty mellea:analyzed_on ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:repository_root ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:declares_element ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:includes_path ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:excludes_path ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:includes_path ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:analyzed_on ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:repository_root ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:analyzed_on ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:ModelElement ;
+            owl:onProperty mellea:declares_element ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:repository_root ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:excludes_path ],
+        mellea:NamedElement ;
+    skos:closeMatch spdx:Sbom ;
+    skos:definition "Top-level catalog rooting the analysed repository snapshot." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    skos:relatedMatch nexus:Container,
+        spdx:SpdxDocument,
+        attack:AttackBundle,
+        common_domain_model:Portfolio,
+        common_domain_model:PortfolioState,
+        iso27001:DocumentedInformation .
+
+mellea:RequirementSpec a owl:Class ;
+    rdfs:label "RequirementSpec" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
+            owl:onProperty mellea:may_trigger_repair ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:validation_style ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:may_trigger_repair ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:validation_style ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:validation_style ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:may_trigger_repair ],
+        mellea:ModelElement ;
+    skos:definition "Specification of a requirement validator." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    skos:relatedMatch nexus:Requirement,
+        nexus:Rule,
+        iso27001:InformationSecurityObjective,
+        iso27001:SecurityControl .
+
+mellea:SamplingStrategySpec a owl:Class ;
+    rdfs:label "SamplingStrategySpec" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:may_trigger_repair ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:loop_budget_hint ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
+            owl:onProperty mellea:may_trigger_repair ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:selection_policy ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:selection_policy ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:may_trigger_repair ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:integer ;
+            owl:onProperty mellea:loop_budget_hint ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:selection_policy ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:loop_budget_hint ],
+        mellea:ModelElement ;
+    skos:closeMatch mcp:SamplingCapability ;
+    skos:definition "Specification of a sampling-loop strategy." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    skos:relatedMatch nexus:Action,
+        mcp:ModelPreferences .
+
+mellea:SessionSpec a owl:Class ;
+    rdfs:label "SessionSpec" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom mellea:ContextSpec ;
+            owl:onProperty mellea:uses_context ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:uses_backend ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:uses_context ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:uses_context ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:uses_backend ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:MethodSpec ;
+            owl:onProperty mellea:exposed_method ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:exposed_method ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:BackendSpec ;
+            owl:onProperty mellea:uses_backend ],
+        mellea:ModelElement ;
+    skos:definition "Specification of a Mellea session." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    skos:relatedMatch nexus:AiTask,
+        iso27001:RiskAssessmentProcess,
+        mcp:Task .
+
+mellea:TelemetryMetricSpec a owl:Class ;
+    rdfs:label "TelemetryMetricSpec" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:metric_name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:metric_name ],
+        mellea:ModelElement ;
+    skos:closeMatch nexus:MetricConfig,
+        iso27001:MonitoringItem ;
+    skos:definition "Specification of a telemetry metric emitted by Mellea." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    skos:relatedMatch nexus:AiEval,
+        spdx:AIPackage,
+        attack:DataSource,
+        iso27001:MonitoringProgram .
+
+<https://w3id.org/lmodel/mellea/AdapterTypeEnum#ALORA> a owl:Class ;
+    rdfs:label "ALORA" ;
+    rdfs:subClassOf mellea:AdapterTypeEnum ;
+    skos:definition "alora" ;
+    mellea:python_value "alora" .
+
+<https://w3id.org/lmodel/mellea/AdapterTypeEnum#LORA> a owl:Class ;
+    rdfs:label "LORA" ;
+    rdfs:subClassOf mellea:AdapterTypeEnum ;
+    skos:definition "lora" ;
+    mellea:python_value "lora" .
+
+<https://w3id.org/lmodel/mellea/BackendFamilyEnum#BEDROCK> a owl:Class ;
+    rdfs:label "BEDROCK" ;
+    rdfs:subClassOf mellea:BackendFamilyEnum ;
+    skos:definition "Backend family backed by mellea/backends/bedrock.py." ;
+    skos:relatedMatch nexus:AiProvider ;
+    mellea:source_file "mellea/backends/bedrock.py" .
+
+<https://w3id.org/lmodel/mellea/BackendFamilyEnum#DUMMY> a owl:Class ;
+    rdfs:label "DUMMY" ;
+    rdfs:subClassOf mellea:BackendFamilyEnum ;
+    skos:definition "Backend family backed by mellea/backends/dummy.py." ;
+    mellea:source_file "mellea/backends/dummy.py" .
+
+<https://w3id.org/lmodel/mellea/BackendFamilyEnum#HUGGINGFACE> a owl:Class ;
+    rdfs:label "HUGGINGFACE" ;
+    rdfs:subClassOf mellea:BackendFamilyEnum ;
+    skos:definition "Backend family backed by mellea/backends/huggingface.py." ;
+    skos:relatedMatch nexus:AiProvider ;
+    mellea:source_file "mellea/backends/huggingface.py" .
+
+<https://w3id.org/lmodel/mellea/BackendFamilyEnum#LITELLM> a owl:Class ;
+    rdfs:label "LITELLM" ;
+    rdfs:subClassOf mellea:BackendFamilyEnum ;
+    skos:definition "Backend family backed by mellea/backends/litellm.py." ;
+    skos:relatedMatch nexus:AiProvider ;
+    mellea:source_file "mellea/backends/litellm.py" .
+
+<https://w3id.org/lmodel/mellea/BackendFamilyEnum#OLLAMA> a owl:Class ;
+    rdfs:label "OLLAMA" ;
+    rdfs:subClassOf mellea:BackendFamilyEnum ;
+    skos:definition "Backend family backed by mellea/backends/ollama.py." ;
+    skos:relatedMatch nexus:AiProvider ;
+    mellea:source_file "mellea/backends/ollama.py" .
+
+<https://w3id.org/lmodel/mellea/BackendFamilyEnum#OPENAI> a owl:Class ;
+    rdfs:label "OPENAI" ;
+    rdfs:subClassOf mellea:BackendFamilyEnum ;
+    skos:definition "Backend family backed by mellea/backends/openai.py." ;
+    skos:relatedMatch nexus:AiProvider ;
+    mellea:source_file "mellea/backends/openai.py" .
+
+<https://w3id.org/lmodel/mellea/BackendFamilyEnum#WATSONX> a owl:Class ;
+    rdfs:label "WATSONX" ;
+    rdfs:subClassOf mellea:BackendFamilyEnum ;
+    skos:definition "Backend family backed by mellea/backends/watsonx.py." ;
+    skos:relatedMatch nexus:AiProvider ;
+    mellea:source_file "mellea/backends/watsonx.py" .
+
+<https://w3id.org/lmodel/mellea/ComponentCategoryEnum#DOCUMENT> a owl:Class ;
+    rdfs:label "DOCUMENT" ;
+    rdfs:subClassOf mellea:ComponentCategoryEnum ;
+    skos:closeMatch mcp:Resource ;
+    skos:definition "document" ;
+    skos:relatedMatch nexus:Dataset,
+        mcp:EmbeddedResource .
+
+<https://w3id.org/lmodel/mellea/ComponentCategoryEnum#GENSTUB> a owl:Class ;
+    rdfs:label "GENSTUB" ;
+    rdfs:subClassOf mellea:ComponentCategoryEnum ;
+    skos:definition "genstub" .
+
+<https://w3id.org/lmodel/mellea/ComponentCategoryEnum#INSTRUCTION> a owl:Class ;
+    rdfs:label "INSTRUCTION" ;
+    rdfs:subClassOf mellea:ComponentCategoryEnum ;
+    skos:closeMatch mcp:Prompt ;
+    skos:definition "instruction" ;
+    skos:relatedMatch nexus:Input .
+
+<https://w3id.org/lmodel/mellea/ComponentCategoryEnum#INTRINSIC> a owl:Class ;
+    rdfs:label "INTRINSIC" ;
+    rdfs:subClassOf mellea:ComponentCategoryEnum ;
+    skos:closeMatch nexus:LLMIntrinsic ;
+    skos:definition "intrinsic" .
+
+<https://w3id.org/lmodel/mellea/ComponentCategoryEnum#MESSAGE> a owl:Class ;
+    rdfs:label "MESSAGE" ;
+    rdfs:subClassOf mellea:ComponentCategoryEnum ;
+    skos:closeMatch mcp:PromptMessage,
+        mcp:SamplingMessage ;
+    skos:definition "message" .
+
+<https://w3id.org/lmodel/mellea/ComponentCategoryEnum#MOBJECT> a owl:Class ;
+    rdfs:label "MOBJECT" ;
+    rdfs:subClassOf mellea:ComponentCategoryEnum ;
+    skos:definition "mobject" .
+
+<https://w3id.org/lmodel/mellea/ComponentCategoryEnum#QUERY> a owl:Class ;
+    rdfs:label "QUERY" ;
+    rdfs:subClassOf mellea:ComponentCategoryEnum ;
+    skos:definition "query" .
+
+<https://w3id.org/lmodel/mellea/ComponentCategoryEnum#REQUIREMENT> a owl:Class ;
+    rdfs:label "REQUIREMENT" ;
+    rdfs:subClassOf mellea:ComponentCategoryEnum ;
+    skos:definition "requirement" ;
+    skos:relatedMatch nexus:Requirement .
+
+<https://w3id.org/lmodel/mellea/ComponentCategoryEnum#STREAM_EVENT> a owl:Class ;
+    rdfs:label "STREAM_EVENT" ;
+    rdfs:subClassOf mellea:ComponentCategoryEnum ;
+    skos:definition "stream event" .
+
+<https://w3id.org/lmodel/mellea/ComponentCategoryEnum#TOOL_MESSAGE> a owl:Class ;
+    rdfs:label "TOOL_MESSAGE" ;
+    rdfs:subClassOf mellea:ComponentCategoryEnum ;
+    skos:closeMatch mcp:ToolResultContent,
+        mcp:ToolUseContent ;
+    skos:definition "tool message" .
+
+<https://w3id.org/lmodel/mellea/ComponentCategoryEnum#TRANSFORM> a owl:Class ;
+    rdfs:label "TRANSFORM" ;
+    rdfs:subClassOf mellea:ComponentCategoryEnum ;
+    skos:definition "transform" .
+
+mellea:ComponentSpec a owl:Class ;
+    rdfs:label "ComponentSpec" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom mellea:ComponentCategoryEnum ;
+            owl:onProperty mellea:component_category ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:parsed_output_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:input_modality ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:input_modality ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:parsed_output_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:component_category ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:parsed_output_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:component_category ],
+        mellea:ModelElement ;
+    skos:closeMatch nexus:AIComponent,
+        mcp:Tool ;
+    skos:definition "Specification of a Mellea stdlib component type." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+<https://w3id.org/lmodel/mellea/ContextLinearityEnum#LINEAR> a owl:Class ;
+    rdfs:label "LINEAR" ;
+    rdfs:subClassOf mellea:ContextLinearityEnum ;
+    skos:definition "Sequential, ordered history." .
+
+<https://w3id.org/lmodel/mellea/ContextLinearityEnum#NON_LINEAR> a owl:Class ;
+    rdfs:label "NON_LINEAR" ;
+    rdfs:subClassOf mellea:ContextLinearityEnum ;
+    skos:definition "Tree- or graph-shaped history." .
+
+<https://w3id.org/lmodel/mellea/CoverageScopeEnum#API> a owl:Class ;
+    rdfs:label "API" ;
+    rdfs:subClassOf mellea:CoverageScopeEnum ;
+    skos:definition "api" .
+
+<https://w3id.org/lmodel/mellea/CoverageScopeEnum#CLI> a owl:Class ;
+    rdfs:label "CLI" ;
+    rdfs:subClassOf mellea:CoverageScopeEnum ;
+    skos:definition "cli" .
+
+<https://w3id.org/lmodel/mellea/CoverageScopeEnum#EXAMPLE> a owl:Class ;
+    rdfs:label "EXAMPLE" ;
+    rdfs:subClassOf mellea:CoverageScopeEnum ;
+    skos:definition "example" .
+
+<https://w3id.org/lmodel/mellea/CoverageScopeEnum#SOURCE> a owl:Class ;
+    rdfs:label "SOURCE" ;
+    rdfs:subClassOf mellea:CoverageScopeEnum ;
+    skos:definition "source" .
+
+<https://w3id.org/lmodel/mellea/CoverageScopeEnum#TEST> a owl:Class ;
+    rdfs:label "TEST" ;
+    rdfs:subClassOf mellea:CoverageScopeEnum ;
+    skos:definition "test" .
+
+<https://w3id.org/lmodel/mellea/ElementKindEnum#CLASS> a owl:Class ;
+    rdfs:label "CLASS" ;
+    rdfs:subClassOf mellea:ElementKindEnum ;
+    skos:definition "class" .
+
+<https://w3id.org/lmodel/mellea/ElementKindEnum#DATACLASS> a owl:Class ;
+    rdfs:label "DATACLASS" ;
+    rdfs:subClassOf mellea:ElementKindEnum ;
+    skos:definition "dataclass" .
+
+<https://w3id.org/lmodel/mellea/ElementKindEnum#ENUM> a owl:Class ;
+    rdfs:label "ENUM" ;
+    rdfs:subClassOf mellea:ElementKindEnum ;
+    skos:definition "enum" .
+
+<https://w3id.org/lmodel/mellea/ElementKindEnum#FUNCTION> a owl:Class ;
+    rdfs:label "FUNCTION" ;
+    rdfs:subClassOf mellea:ElementKindEnum ;
+    skos:definition "function" .
+
+<https://w3id.org/lmodel/mellea/ElementKindEnum#MIXIN> a owl:Class ;
+    rdfs:label "MIXIN" ;
+    rdfs:subClassOf mellea:ElementKindEnum ;
+    skos:definition "mixin" .
+
+<https://w3id.org/lmodel/mellea/ElementKindEnum#PROTOCOL> a owl:Class ;
+    rdfs:label "PROTOCOL" ;
+    rdfs:subClassOf mellea:ElementKindEnum ;
+    skos:definition "protocol" .
+
+<https://w3id.org/lmodel/mellea/ElementKindEnum#PYDANTIC_MODEL> a owl:Class ;
+    rdfs:label "PYDANTIC_MODEL" ;
+    rdfs:subClassOf mellea:ElementKindEnum ;
+    skos:definition "pydantic model" .
+
+<https://w3id.org/lmodel/mellea/ElementKindEnum#TYPED_DICT> a owl:Class ;
+    rdfs:label "TYPED_DICT" ;
+    rdfs:subClassOf mellea:ElementKindEnum ;
+    skos:definition "typed dict" .
+
+<https://w3id.org/lmodel/mellea/HookTypeEnum#COMPONENT_POST_ERROR> a owl:Class ;
+    rdfs:label "COMPONENT_POST_ERROR" ;
+    rdfs:subClassOf mellea:HookTypeEnum ;
+    skos:definition "component post error" ;
+    mellea:python_value "component_post_error" .
+
+<https://w3id.org/lmodel/mellea/HookTypeEnum#COMPONENT_POST_SUCCESS> a owl:Class ;
+    rdfs:label "COMPONENT_POST_SUCCESS" ;
+    rdfs:subClassOf mellea:HookTypeEnum ;
+    skos:definition "component post success" ;
+    mellea:python_value "component_post_success" .
+
+<https://w3id.org/lmodel/mellea/HookTypeEnum#COMPONENT_PRE_EXECUTE> a owl:Class ;
+    rdfs:label "COMPONENT_PRE_EXECUTE" ;
+    rdfs:subClassOf mellea:HookTypeEnum ;
+    skos:definition "component pre execute" ;
+    mellea:python_value "component_pre_execute" .
+
+<https://w3id.org/lmodel/mellea/HookTypeEnum#GENERATION_ERROR> a owl:Class ;
+    rdfs:label "GENERATION_ERROR" ;
+    rdfs:subClassOf mellea:HookTypeEnum ;
+    skos:definition "generation error" ;
+    mellea:python_value "generation_error" .
+
+<https://w3id.org/lmodel/mellea/HookTypeEnum#GENERATION_POST_CALL> a owl:Class ;
+    rdfs:label "GENERATION_POST_CALL" ;
+    rdfs:subClassOf mellea:HookTypeEnum ;
+    skos:definition "generation post call" ;
+    skos:relatedMatch nexus:EvaluationResultRecord ;
+    mellea:python_value "generation_post_call" .
+
+<https://w3id.org/lmodel/mellea/HookTypeEnum#GENERATION_PRE_CALL> a owl:Class ;
+    rdfs:label "GENERATION_PRE_CALL" ;
+    rdfs:subClassOf mellea:HookTypeEnum ;
+    skos:definition "generation pre call" ;
+    mellea:python_value "generation_pre_call" .
+
+<https://w3id.org/lmodel/mellea/HookTypeEnum#SAMPLING_ITERATION> a owl:Class ;
+    rdfs:label "SAMPLING_ITERATION" ;
+    rdfs:subClassOf mellea:HookTypeEnum ;
+    skos:definition "sampling iteration" ;
+    mellea:python_value "sampling_iteration" .
+
+<https://w3id.org/lmodel/mellea/HookTypeEnum#SAMPLING_LOOP_END> a owl:Class ;
+    rdfs:label "SAMPLING_LOOP_END" ;
+    rdfs:subClassOf mellea:HookTypeEnum ;
+    skos:definition "sampling loop end" ;
+    mellea:python_value "sampling_loop_end" .
+
+<https://w3id.org/lmodel/mellea/HookTypeEnum#SAMPLING_LOOP_START> a owl:Class ;
+    rdfs:label "SAMPLING_LOOP_START" ;
+    rdfs:subClassOf mellea:HookTypeEnum ;
+    skos:definition "sampling loop start" ;
+    mellea:python_value "sampling_loop_start" .
+
+<https://w3id.org/lmodel/mellea/HookTypeEnum#SAMPLING_REPAIR> a owl:Class ;
+    rdfs:label "SAMPLING_REPAIR" ;
+    rdfs:subClassOf mellea:HookTypeEnum ;
+    skos:definition "sampling repair" ;
+    mellea:python_value "sampling_repair" .
+
+<https://w3id.org/lmodel/mellea/HookTypeEnum#SESSION_CLEANUP> a owl:Class ;
+    rdfs:label "SESSION_CLEANUP" ;
+    rdfs:subClassOf mellea:HookTypeEnum ;
+    skos:definition "session cleanup" ;
+    mellea:python_value "session_cleanup" .
+
+<https://w3id.org/lmodel/mellea/HookTypeEnum#SESSION_POST_INIT> a owl:Class ;
+    rdfs:label "SESSION_POST_INIT" ;
+    rdfs:subClassOf mellea:HookTypeEnum ;
+    skos:definition "session post init" ;
+    mellea:python_value "session_post_init" .
+
+<https://w3id.org/lmodel/mellea/HookTypeEnum#SESSION_PRE_INIT> a owl:Class ;
+    rdfs:label "SESSION_PRE_INIT" ;
+    rdfs:subClassOf mellea:HookTypeEnum ;
+    skos:definition "session pre init" ;
+    mellea:python_value "session_pre_init" .
+
+<https://w3id.org/lmodel/mellea/HookTypeEnum#SESSION_RESET> a owl:Class ;
+    rdfs:label "SESSION_RESET" ;
+    rdfs:subClassOf mellea:HookTypeEnum ;
+    skos:definition "session reset" ;
+    mellea:python_value "session_reset" .
+
+<https://w3id.org/lmodel/mellea/HookTypeEnum#TOOL_POST_INVOKE> a owl:Class ;
+    rdfs:label "TOOL_POST_INVOKE" ;
+    rdfs:subClassOf mellea:HookTypeEnum ;
+    skos:definition "tool post invoke" ;
+    mellea:python_value "tool_post_invoke" .
+
+<https://w3id.org/lmodel/mellea/HookTypeEnum#TOOL_PRE_INVOKE> a owl:Class ;
+    rdfs:label "TOOL_PRE_INVOKE" ;
+    rdfs:subClassOf mellea:HookTypeEnum ;
+    skos:definition "tool pre invoke" ;
+    mellea:python_value "tool_pre_invoke" .
+
+<https://w3id.org/lmodel/mellea/HookTypeEnum#VALIDATION_POST_CHECK> a owl:Class ;
+    rdfs:label "VALIDATION_POST_CHECK" ;
+    rdfs:subClassOf mellea:HookTypeEnum ;
+    skos:definition "validation post check" ;
+    skos:relatedMatch nexus:AiEval,
+        iso27001:AuditFinding ;
+    mellea:python_value "validation_post_check" .
+
+<https://w3id.org/lmodel/mellea/HookTypeEnum#VALIDATION_PRE_CHECK> a owl:Class ;
+    rdfs:label "VALIDATION_PRE_CHECK" ;
+    rdfs:subClassOf mellea:HookTypeEnum ;
+    skos:definition "validation pre check" ;
+    mellea:python_value "validation_pre_check" .
+
+<https://w3id.org/lmodel/mellea/PackageKindEnum#BACKENDS> a owl:Class ;
+    rdfs:label "BACKENDS" ;
+    rdfs:subClassOf mellea:PackageKindEnum ;
+    skos:definition "backends" .
+
+<https://w3id.org/lmodel/mellea/PackageKindEnum#CLI> a owl:Class ;
+    rdfs:label "CLI" ;
+    rdfs:subClassOf mellea:PackageKindEnum ;
+    skos:definition "cli" .
+
+<https://w3id.org/lmodel/mellea/PackageKindEnum#CORE> a owl:Class ;
+    rdfs:label "CORE" ;
+    rdfs:subClassOf mellea:PackageKindEnum ;
+    skos:definition "core" .
+
+<https://w3id.org/lmodel/mellea/PackageKindEnum#DOCS_EXAMPLES> a owl:Class ;
+    rdfs:label "DOCS_EXAMPLES" ;
+    rdfs:subClassOf mellea:PackageKindEnum ;
+    skos:definition "docs examples" .
+
+<https://w3id.org/lmodel/mellea/PackageKindEnum#FORMATTERS> a owl:Class ;
+    rdfs:label "FORMATTERS" ;
+    rdfs:subClassOf mellea:PackageKindEnum ;
+    skos:definition "formatters" .
+
+<https://w3id.org/lmodel/mellea/PackageKindEnum#HELPERS> a owl:Class ;
+    rdfs:label "HELPERS" ;
+    rdfs:subClassOf mellea:PackageKindEnum ;
+    skos:definition "helpers" .
+
+<https://w3id.org/lmodel/mellea/PackageKindEnum#PLUGINS> a owl:Class ;
+    rdfs:label "PLUGINS" ;
+    rdfs:subClassOf mellea:PackageKindEnum ;
+    skos:definition "plugins" .
+
+<https://w3id.org/lmodel/mellea/PackageKindEnum#STDLIB> a owl:Class ;
+    rdfs:label "STDLIB" ;
+    rdfs:subClassOf mellea:PackageKindEnum ;
+    skos:definition "stdlib" .
+
+<https://w3id.org/lmodel/mellea/PackageKindEnum#TELEMETRY> a owl:Class ;
+    rdfs:label "TELEMETRY" ;
+    rdfs:subClassOf mellea:PackageKindEnum ;
+    skos:definition "telemetry" .
+
+<https://w3id.org/lmodel/mellea/PackageKindEnum#TEST> a owl:Class ;
+    rdfs:label "TEST" ;
+    rdfs:subClassOf mellea:PackageKindEnum ;
+    skos:definition "test" .
+
+<https://w3id.org/lmodel/mellea/PluginModeEnum#AUDIT> a owl:Class ;
+    rdfs:label "AUDIT" ;
+    rdfs:subClassOf mellea:PluginModeEnum ;
+    skos:definition "audit" ;
+    skos:relatedMatch nexus:RiskControl,
+        attack:DetectionStrategy,
+        iso27001:InternalAudit ;
+    mellea:python_value "audit" .
+
+<https://w3id.org/lmodel/mellea/PluginModeEnum#CONCURRENT> a owl:Class ;
+    rdfs:label "CONCURRENT" ;
+    rdfs:subClassOf mellea:PluginModeEnum ;
+    skos:definition "concurrent" ;
+    mellea:python_value "concurrent" .
+
+<https://w3id.org/lmodel/mellea/PluginModeEnum#FIRE_AND_FORGET> a owl:Class ;
+    rdfs:label "FIRE_AND_FORGET" ;
+    rdfs:subClassOf mellea:PluginModeEnum ;
+    skos:definition "fire and forget" ;
+    mellea:python_value "fire_and_forget" .
+
+<https://w3id.org/lmodel/mellea/PluginModeEnum#SEQUENTIAL> a owl:Class ;
+    rdfs:label "SEQUENTIAL" ;
+    rdfs:subClassOf mellea:PluginModeEnum ;
+    skos:definition "sequential" ;
+    mellea:python_value "sequential" .
+
+<https://w3id.org/lmodel/mellea/PluginModeEnum#TRANSFORM> a owl:Class ;
+    rdfs:label "TRANSFORM" ;
+    rdfs:subClassOf mellea:PluginModeEnum ;
+    skos:definition "transform" ;
+    mellea:python_value "transform" .
+
+<https://w3id.org/lmodel/mellea/RequestResponseEnum#BOTH> a owl:Class ;
+    rdfs:label "BOTH" ;
+    rdfs:subClassOf mellea:RequestResponseEnum ;
+    skos:definition "Model used in both directions (rare)." .
+
+<https://w3id.org/lmodel/mellea/RequestResponseEnum#REQUEST> a owl:Class ;
+    rdfs:label "REQUEST" ;
+    rdfs:subClassOf mellea:RequestResponseEnum ;
+    skos:definition "Inbound request payload." .
+
+<https://w3id.org/lmodel/mellea/RequestResponseEnum#RESPONSE> a owl:Class ;
+    rdfs:label "RESPONSE" ;
+    rdfs:subClassOf mellea:RequestResponseEnum ;
+    skos:definition "Outbound response payload." .
+
+mellea:adapter_type a owl:ObjectProperty ;
+    rdfs:label "adapter_type" ;
+    rdfs:range mellea:AdapterTypeEnum ;
+    skos:definition "Slot describing the adapter type." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:coverage_scope a owl:ObjectProperty ;
+    rdfs:label "coverage_scope" ;
+    rdfs:range mellea:CoverageScopeEnum ;
+    skos:definition "Where this element surfaces (source/API/CLI/example/test)." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:depends_on_package a owl:ObjectProperty ;
+    rdfs:label "depends_on_package" ;
+    rdfs:range mellea:PythonPackage ;
+    skos:definition "Slot describing the depends on package." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:excludes_path a owl:DatatypeProperty ;
+    rdfs:label "excludes_path" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the excludes path." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:exposed_method a owl:ObjectProperty ;
+    rdfs:label "exposed_method" ;
+    rdfs:range mellea:MethodSpec ;
+    skos:definition "Slot describing the exposed method." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:has_field a owl:ObjectProperty ;
+    rdfs:label "has_field" ;
+    rdfs:range mellea:ApiFieldSpec ;
+    skos:definition "Slot describing the has field." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:includes_path a owl:DatatypeProperty ;
+    rdfs:label "includes_path" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the includes path." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:input_modality a owl:DatatypeProperty ;
+    rdfs:label "input_modality" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the input modality." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:input_model a owl:ObjectProperty ;
+    rdfs:label "input_model" ;
+    rdfs:range mellea:ApiModelSpec ;
+    skos:definition "Slot describing the input model." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:metric_name a owl:DatatypeProperty ;
+    rdfs:label "metric_name" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the metric name." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:model_identifier a owl:ObjectProperty ;
+    rdfs:label "model_identifier" ;
+    rdfs:range mellea:ModelIdentifierSpec ;
+    skos:definition "Slot describing the model identifier." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:model_options_key a owl:DatatypeProperty ;
+    rdfs:label "model_options_key" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the model options key." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:output_model a owl:ObjectProperty ;
+    rdfs:label "output_model" ;
+    rdfs:range mellea:ApiModelSpec ;
+    skos:definition "Slot describing the output model." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:payload_model a owl:ObjectProperty ;
+    rdfs:label "payload_model" ;
+    rdfs:range mellea:HookPayloadSpec ;
+    skos:definition "Slot describing the payload model." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:provider_name a owl:DatatypeProperty ;
+    rdfs:label "provider_name" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the provider name." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:tags a owl:DatatypeProperty ;
+    rdfs:label "tags" ;
+    rdfs:range xsd:string ;
+    skos:definition "Free-form classification tags." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:ApiFieldSpec a owl:Class ;
+    rdfs:label "ApiFieldSpec" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:field_name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:field_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:allows_null ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:required_field ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:field_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:field_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:required_field ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:field_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:allows_null ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
+            owl:onProperty mellea:required_field ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
+            owl:onProperty mellea:allows_null ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:field_type ],
+        mellea:NamedElement ;
+    skos:definition "Specification of a single field in an API model." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    skos:relatedMatch spdx:DictionaryEntry .
+
+mellea:BackendSpec a owl:Class ;
+    rdfs:label "BackendSpec" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:backend_family ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:supports_tool_calls ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:supports_multimodal ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:model_options_key ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:default_formatter ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:model_identifier ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
+            owl:onProperty mellea:supports_multimodal ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
+            owl:onProperty mellea:supports_tool_calls ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:supports_multimodal ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:FormatterSpec ;
+            owl:onProperty mellea:default_formatter ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:default_formatter ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:BackendFamilyEnum ;
+            owl:onProperty mellea:backend_family ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:supports_streaming ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:ModelIdentifierSpec ;
+            owl:onProperty mellea:model_identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:supports_streaming ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:supports_tool_calls ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:backend_family ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:model_options_key ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
+            owl:onProperty mellea:supports_streaming ],
+        mellea:ModelElement ;
+    skos:closeMatch nexus:AiProvider ;
+    skos:definition "Specification of a Mellea backend implementation." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    skos:relatedMatch nexus:AiSystem,
+        mcp:Implementation .
+
+mellea:ContextSpec a owl:Class ;
+    rdfs:label "ContextSpec" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
+            owl:onProperty mellea:stores_component_history ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:accepts_message_attachments ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:context_linearity ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:stores_component_history ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:context_linearity ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
+            owl:onProperty mellea:accepts_message_attachments ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:ContextLinearityEnum ;
+            owl:onProperty mellea:context_linearity ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:accepts_message_attachments ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:stores_component_history ],
+        mellea:ModelElement ;
+    skos:definition "Specification of a context implementation." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    skos:relatedMatch nexus:AiLifecyclePhase .
+
+mellea:FormatterSpec a owl:Class ;
+    rdfs:label "FormatterSpec" ;
+    rdfs:subClassOf mellea:ModelElement ;
+    skos:definition "Specification of an output formatter for a backend." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    skos:relatedMatch nexus:Modality,
+        mcp:ContentBlock .
+
+mellea:HookPayloadSpec a owl:Class ;
+    rdfs:label "HookPayloadSpec" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:lifecycle_role ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:hook_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:lifecycle_role ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:HookTypeEnum ;
+            owl:onProperty mellea:hook_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:lifecycle_role ],
+        mellea:ModelElement ;
+    skos:definition "Specification of a hook payload model." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    skos:relatedMatch nexus:Fact,
+        spdx:Annotation,
+        attack:DataComponent,
+        iso27001:InformationSecurityEvent,
+        mcp:MetaObject .
+
+mellea:MethodSpec a owl:Class ;
+    rdfs:label "MethodSpec" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:method_signature ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:method_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:lifecycle_role ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:method_name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:method_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:method_signature ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:lifecycle_role ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:method_signature ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:lifecycle_role ],
+        mellea:NamedElement ;
+    skos:definition "Specification of a method exposed by a runtime class." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:ModelIdentifierSpec a owl:Class ;
+    rdfs:label "ModelIdentifierSpec" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:openai_name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:hf_model_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:bedrock_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:hf_model_name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:provider_name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:hf_model_name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:bedrock_name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:ollama_name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:provider_name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:ollama_name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:bedrock_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:watsonx_name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:openai_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:ollama_name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:watsonx_name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:watsonx_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:openai_name ],
+        mellea:NamedElement ;
+    skos:closeMatch nexus:AiModel,
+        nexus:LargeLanguageModel,
+        spdx:AIPackage ;
+    skos:definition "Cross-provider identifier table for a single model." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    skos:relatedMatch nexus:ModelInfo,
+        common_domain_model:positionIdentifier,
+        mcp:ModelHint .
+
+mellea:PythonPackage a owl:Class ;
+    rdfs:label "PythonPackage" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:package_name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:PythonPackage ;
+            owl:onProperty mellea:depends_on_package ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:ModelElement ;
+            owl:onProperty mellea:declares_element ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:package_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:package_name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:declares_element ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:depends_on_package ],
+        mellea:NamedElement ;
+    skos:closeMatch spdx:Package ;
+    skos:definition "A logical Python package (directory) inside the repository." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    skos:narrowMatch nexus:Entity ;
+    skos:relatedMatch common_domain_model:Position .
+
+mellea:accepts_message_attachments a owl:DatatypeProperty ;
+    rdfs:label "accepts_message_attachments" ;
+    rdfs:range xsd:boolean ;
+    skos:definition "Slot describing the accepts message attachments." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:allows_null a owl:DatatypeProperty ;
+    rdfs:label "allows_null" ;
+    rdfs:range xsd:boolean ;
+    skos:definition "Slot describing the allows null." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:analyzed_on a owl:DatatypeProperty ;
+    rdfs:label "analyzed_on" ;
+    rdfs:range xsd:date ;
+    skos:definition "Slot describing the analyzed on." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:backend_family a owl:ObjectProperty ;
+    rdfs:label "backend_family" ;
+    rdfs:range mellea:BackendFamilyEnum ;
+    skos:definition "Slot describing the backend family." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:bedrock_name a owl:DatatypeProperty ;
+    rdfs:label "bedrock_name" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the bedrock name." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:command_group a owl:DatatypeProperty ;
+    rdfs:label "command_group" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the command group." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:command_path a owl:DatatypeProperty ;
+    rdfs:label "command_path" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the command path." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:command_purpose a owl:DatatypeProperty ;
+    rdfs:label "command_purpose" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the command purpose." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:component_category a owl:ObjectProperty ;
+    rdfs:label "component_category" ;
+    rdfs:range mellea:ComponentCategoryEnum ;
+    skos:definition "Slot describing the component category." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:context_linearity a owl:ObjectProperty ;
+    rdfs:label "context_linearity" ;
+    rdfs:range mellea:ContextLinearityEnum ;
+    skos:definition "Slot describing the context linearity." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:default_formatter a owl:ObjectProperty ;
+    rdfs:label "default_formatter" ;
+    rdfs:range mellea:FormatterSpec ;
+    skos:definition "Slot describing the default formatter." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:description a owl:DatatypeProperty ;
+    rdfs:label "description" ;
+    rdfs:range xsd:string ;
+    skos:definition "Narrative description of the element." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:element_kind a owl:ObjectProperty ;
+    rdfs:label "element_kind" ;
+    rdfs:range mellea:ElementKindEnum ;
+    skos:definition "Kind of Python declaration." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:field_name a owl:DatatypeProperty ;
+    rdfs:label "field_name" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the field name." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:field_type a owl:DatatypeProperty ;
+    rdfs:label "field_type" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the field type." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:hf_model_name a owl:DatatypeProperty ;
+    rdfs:label "hf_model_name" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the hf model name." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:id a owl:DatatypeProperty ;
+    rdfs:label "id" ;
+    rdfs:range xsd:anyURI ;
+    skos:definition "Stable identifier for a schema element." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:loop_budget_hint a owl:DatatypeProperty ;
+    rdfs:label "loop_budget_hint" ;
+    rdfs:range xsd:integer ;
+    skos:definition "Slot describing the loop budget hint." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:method_name a owl:DatatypeProperty ;
+    rdfs:label "method_name" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the method name." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:method_signature a owl:DatatypeProperty ;
+    rdfs:label "method_signature" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the method signature." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:module_path a owl:DatatypeProperty ;
+    rdfs:label "module_path" ;
+    rdfs:range xsd:string ;
+    skos:definition "Python module path where this element is defined." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:name a owl:DatatypeProperty ;
+    rdfs:label "name" ;
+    rdfs:range xsd:string ;
+    skos:definition "Human-readable name." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:ollama_name a owl:DatatypeProperty ;
+    rdfs:label "ollama_name" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the ollama name." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:openai_name a owl:DatatypeProperty ;
+    rdfs:label "openai_name" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the openai name." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:openai_object_type a owl:DatatypeProperty ;
+    rdfs:label "openai_object_type" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the openai object type." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:package_kind a owl:ObjectProperty ;
+    rdfs:label "package_kind" ;
+    rdfs:range mellea:PackageKindEnum ;
+    skos:definition "Package bucket." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:package_name a owl:DatatypeProperty ;
+    rdfs:label "package_name" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the package name." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:parsed_output_type a owl:DatatypeProperty ;
+    rdfs:label "parsed_output_type" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the parsed output type." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:plugin_mode a owl:ObjectProperty ;
+    rdfs:label "plugin_mode" ;
+    rdfs:range mellea:PluginModeEnum ;
+    skos:definition "Slot describing the plugin mode." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:plugin_priority a owl:DatatypeProperty ;
+    rdfs:label "plugin_priority" ;
+    rdfs:range xsd:integer ;
+    skos:definition "Slot describing the plugin priority." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:repo_id a owl:DatatypeProperty ;
+    rdfs:label "repo_id" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the repo id." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:repository_root a owl:DatatypeProperty ;
+    rdfs:label "repository_root" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the repository root." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:request_or_response a owl:ObjectProperty ;
+    rdfs:label "request_or_response" ;
+    rdfs:range mellea:RequestResponseEnum ;
+    skos:definition "Slot describing the request or response." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:required_field a owl:DatatypeProperty ;
+    rdfs:label "required_field" ;
+    rdfs:range xsd:boolean ;
+    skos:definition "Slot describing the required field." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:selection_policy a owl:DatatypeProperty ;
+    rdfs:label "selection_policy" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the selection policy." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:source_file a owl:DatatypeProperty ;
+    rdfs:label "source_file" ;
+    rdfs:range xsd:string ;
+    skos:definition "Source file relative to repository root." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:stores_component_history a owl:DatatypeProperty ;
+    rdfs:label "stores_component_history" ;
+    rdfs:range xsd:boolean ;
+    skos:definition "Slot describing the stores component history." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:supports_multimodal a owl:DatatypeProperty ;
+    rdfs:label "supports_multimodal" ;
+    rdfs:range xsd:boolean ;
+    skos:definition "Slot describing the supports multimodal." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:supports_streaming a owl:DatatypeProperty ;
+    rdfs:label "supports_streaming" ;
+    rdfs:range xsd:boolean ;
+    skos:definition "Slot describing the supports streaming." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:supports_tool_calls a owl:DatatypeProperty ;
+    rdfs:label "supports_tool_calls" ;
+    rdfs:range xsd:boolean ;
+    skos:definition "Slot describing the supports tool calls." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:uses_backend a owl:ObjectProperty ;
+    rdfs:label "uses_backend" ;
+    rdfs:range mellea:BackendSpec ;
+    skos:definition "Slot describing the uses backend." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:uses_context a owl:ObjectProperty ;
+    rdfs:label "uses_context" ;
+    rdfs:range mellea:ContextSpec ;
+    skos:definition "Slot describing the uses context." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:validation_style a owl:DatatypeProperty ;
+    rdfs:label "validation_style" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the validation style." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:watsonx_name a owl:DatatypeProperty ;
+    rdfs:label "watsonx_name" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the watsonx name." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:AdapterTypeEnum a owl:Class ;
+    rdfs:label "AdapterTypeEnum" ;
+    owl:unionOf ( <https://w3id.org/lmodel/mellea/AdapterTypeEnum#LORA> <https://w3id.org/lmodel/mellea/AdapterTypeEnum#ALORA> ) ;
+    skos:definition "Adapter implementation type (derived from AdapterType)." ;
+    skos:exactMatch nexus:AdapterType ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    linkml:permissible_values <https://w3id.org/lmodel/mellea/AdapterTypeEnum#ALORA>,
+        <https://w3id.org/lmodel/mellea/AdapterTypeEnum#LORA> ;
+    mellea:derived_from "mellea/backends/adapters/catalog.py::AdapterType" .
+
+mellea:ContextLinearityEnum a owl:Class ;
+    rdfs:label "ContextLinearityEnum" ;
+    owl:unionOf ( <https://w3id.org/lmodel/mellea/ContextLinearityEnum#LINEAR> <https://w3id.org/lmodel/mellea/ContextLinearityEnum#NON_LINEAR> ) ;
+    skos:definition "Whether a Mellea context preserves linear ordering or not." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    linkml:permissible_values <https://w3id.org/lmodel/mellea/ContextLinearityEnum#LINEAR>,
+        <https://w3id.org/lmodel/mellea/ContextLinearityEnum#NON_LINEAR> .
+
+mellea:declares_element a owl:ObjectProperty ;
+    rdfs:label "declares_element" ;
+    rdfs:range mellea:ModelElement ;
+    skos:definition "Slot describing the declares element." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:hook_type a owl:ObjectProperty ;
+    rdfs:label "hook_type" ;
+    rdfs:range mellea:HookTypeEnum ;
+    skos:definition "Slot describing the hook type." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:ApiModelSpec a owl:Class ;
+    rdfs:label "ApiModelSpec" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:has_field ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:openai_object_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:request_or_response ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:RequestResponseEnum ;
+            owl:onProperty mellea:request_or_response ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:ApiFieldSpec ;
+            owl:onProperty mellea:has_field ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:openai_object_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:openai_object_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:request_or_response ],
+        mellea:ModelElement ;
+    skos:definition "Specification of an HTTP API wire model." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    skos:relatedMatch nexus:Input,
+        mcp:JSONRPCRequest,
+        mcp:JSONRPCResponse .
+
+mellea:RequestResponseEnum a owl:Class ;
+    rdfs:label "RequestResponseEnum" ;
+    owl:unionOf ( <https://w3id.org/lmodel/mellea/RequestResponseEnum#REQUEST> <https://w3id.org/lmodel/mellea/RequestResponseEnum#RESPONSE> <https://w3id.org/lmodel/mellea/RequestResponseEnum#BOTH> ) ;
+    skos:definition "Direction of a wire model (HTTP request, response, or both)." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    linkml:permissible_values <https://w3id.org/lmodel/mellea/RequestResponseEnum#BOTH>,
+        <https://w3id.org/lmodel/mellea/RequestResponseEnum#REQUEST>,
+        <https://w3id.org/lmodel/mellea/RequestResponseEnum#RESPONSE> .
+
+mellea:lifecycle_role a owl:DatatypeProperty ;
+    rdfs:label "lifecycle_role" ;
+    rdfs:range xsd:string ;
+    skos:definition "Slot describing the lifecycle role." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:may_trigger_repair a owl:DatatypeProperty ;
+    rdfs:label "may_trigger_repair" ;
+    rdfs:range xsd:boolean ;
+    skos:definition "Slot describing the may trigger repair." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> .
+
+mellea:CoverageScopeEnum a owl:Class ;
+    rdfs:label "CoverageScopeEnum" ;
+    owl:unionOf ( <https://w3id.org/lmodel/mellea/CoverageScopeEnum#SOURCE> <https://w3id.org/lmodel/mellea/CoverageScopeEnum#API> <https://w3id.org/lmodel/mellea/CoverageScopeEnum#CLI> <https://w3id.org/lmodel/mellea/CoverageScopeEnum#EXAMPLE> <https://w3id.org/lmodel/mellea/CoverageScopeEnum#TEST> ) ;
+    skos:definition "Where in the project an element surfaces (source, API, CLI, ...)." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    linkml:permissible_values <https://w3id.org/lmodel/mellea/CoverageScopeEnum#API>,
+        <https://w3id.org/lmodel/mellea/CoverageScopeEnum#CLI>,
+        <https://w3id.org/lmodel/mellea/CoverageScopeEnum#EXAMPLE>,
+        <https://w3id.org/lmodel/mellea/CoverageScopeEnum#SOURCE>,
+        <https://w3id.org/lmodel/mellea/CoverageScopeEnum#TEST> .
+
+mellea:NamedElement a owl:Class ;
+    rdfs:label "NamedElement" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:source_file ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:module_path ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:anyURI ;
+            owl:onProperty mellea:id ],
+        [ owl:unionOf ( mellea:ApiFieldSpec mellea:IntrinsicAdapterSpec mellea:MethodSpec mellea:ModelElement mellea:ModelIdentifierSpec mellea:PythonPackage mellea:RepositoryCatalog ) ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:package_kind ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:tags ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:package_kind ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:tags ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:ElementKindEnum ;
+            owl:onProperty mellea:element_kind ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:source_file ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty mellea:name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:PackageKindEnum ;
+            owl:onProperty mellea:package_kind ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:element_kind ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:element_kind ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:module_path ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:module_path ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:coverage_scope ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty mellea:id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:source_file ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:CoverageScopeEnum ;
+            owl:onProperty mellea:coverage_scope ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:description ] ;
+    skos:closeMatch nexus:Entity,
+        spdx:Element,
+        iso27001:NamedEntity ;
+    skos:definition "Abstract base for any named, identifiable schema element." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    skos:relatedMatch attack:StixEntity,
+        common_domain_model:InventoryRecord,
+        mcp:HasName .
+
+mellea:PluginModeEnum a owl:Class ;
+    rdfs:label "PluginModeEnum" ;
+    owl:unionOf ( <https://w3id.org/lmodel/mellea/PluginModeEnum#SEQUENTIAL> <https://w3id.org/lmodel/mellea/PluginModeEnum#TRANSFORM> <https://w3id.org/lmodel/mellea/PluginModeEnum#CONCURRENT> <https://w3id.org/lmodel/mellea/PluginModeEnum#AUDIT> <https://w3id.org/lmodel/mellea/PluginModeEnum#FIRE_AND_FORGET> ) ;
+    skos:definition "Execution mode of a Mellea plugin (derived from PluginMode)." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    linkml:permissible_values <https://w3id.org/lmodel/mellea/PluginModeEnum#AUDIT>,
+        <https://w3id.org/lmodel/mellea/PluginModeEnum#CONCURRENT>,
+        <https://w3id.org/lmodel/mellea/PluginModeEnum#FIRE_AND_FORGET>,
+        <https://w3id.org/lmodel/mellea/PluginModeEnum#SEQUENTIAL>,
+        <https://w3id.org/lmodel/mellea/PluginModeEnum#TRANSFORM> ;
+    mellea:derived_from "mellea/plugins/types.py::PluginMode" .
+
+mellea:BackendFamilyEnum a owl:Class ;
+    rdfs:label "BackendFamilyEnum" ;
+    owl:unionOf ( <https://w3id.org/lmodel/mellea/BackendFamilyEnum#BEDROCK> <https://w3id.org/lmodel/mellea/BackendFamilyEnum#DUMMY> <https://w3id.org/lmodel/mellea/BackendFamilyEnum#HUGGINGFACE> <https://w3id.org/lmodel/mellea/BackendFamilyEnum#LITELLM> <https://w3id.org/lmodel/mellea/BackendFamilyEnum#OLLAMA> <https://w3id.org/lmodel/mellea/BackendFamilyEnum#OPENAI> <https://w3id.org/lmodel/mellea/BackendFamilyEnum#WATSONX> ) ;
+    skos:definition "Backend families discovered under mellea/backends/." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    skos:relatedMatch spdx:Agent,
+        attack:Infrastructure ;
+    linkml:permissible_values <https://w3id.org/lmodel/mellea/BackendFamilyEnum#BEDROCK>,
+        <https://w3id.org/lmodel/mellea/BackendFamilyEnum#DUMMY>,
+        <https://w3id.org/lmodel/mellea/BackendFamilyEnum#HUGGINGFACE>,
+        <https://w3id.org/lmodel/mellea/BackendFamilyEnum#LITELLM>,
+        <https://w3id.org/lmodel/mellea/BackendFamilyEnum#OLLAMA>,
+        <https://w3id.org/lmodel/mellea/BackendFamilyEnum#OPENAI>,
+        <https://w3id.org/lmodel/mellea/BackendFamilyEnum#WATSONX> ;
+    mellea:derived_from "mellea/backends/*.py" .
+
+mellea:ElementKindEnum a owl:Class ;
+    rdfs:label "ElementKindEnum" ;
+    owl:unionOf ( <https://w3id.org/lmodel/mellea/ElementKindEnum#CLASS> <https://w3id.org/lmodel/mellea/ElementKindEnum#ENUM> <https://w3id.org/lmodel/mellea/ElementKindEnum#DATACLASS> <https://w3id.org/lmodel/mellea/ElementKindEnum#TYPED_DICT> <https://w3id.org/lmodel/mellea/ElementKindEnum#PYDANTIC_MODEL> <https://w3id.org/lmodel/mellea/ElementKindEnum#PROTOCOL> <https://w3id.org/lmodel/mellea/ElementKindEnum#FUNCTION> <https://w3id.org/lmodel/mellea/ElementKindEnum#MIXIN> ) ;
+    skos:definition "Kind of Python declaration captured by a ModelElement entry." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    linkml:permissible_values <https://w3id.org/lmodel/mellea/ElementKindEnum#CLASS>,
+        <https://w3id.org/lmodel/mellea/ElementKindEnum#DATACLASS>,
+        <https://w3id.org/lmodel/mellea/ElementKindEnum#ENUM>,
+        <https://w3id.org/lmodel/mellea/ElementKindEnum#FUNCTION>,
+        <https://w3id.org/lmodel/mellea/ElementKindEnum#MIXIN>,
+        <https://w3id.org/lmodel/mellea/ElementKindEnum#PROTOCOL>,
+        <https://w3id.org/lmodel/mellea/ElementKindEnum#PYDANTIC_MODEL>,
+        <https://w3id.org/lmodel/mellea/ElementKindEnum#TYPED_DICT> .
+
+mellea:PackageKindEnum a owl:Class ;
+    rdfs:label "PackageKindEnum" ;
+    owl:unionOf ( <https://w3id.org/lmodel/mellea/PackageKindEnum#CORE> <https://w3id.org/lmodel/mellea/PackageKindEnum#STDLIB> <https://w3id.org/lmodel/mellea/PackageKindEnum#BACKENDS> <https://w3id.org/lmodel/mellea/PackageKindEnum#FORMATTERS> <https://w3id.org/lmodel/mellea/PackageKindEnum#HELPERS> <https://w3id.org/lmodel/mellea/PackageKindEnum#PLUGINS> <https://w3id.org/lmodel/mellea/PackageKindEnum#TELEMETRY> <https://w3id.org/lmodel/mellea/PackageKindEnum#CLI> <https://w3id.org/lmodel/mellea/PackageKindEnum#DOCS_EXAMPLES> <https://w3id.org/lmodel/mellea/PackageKindEnum#TEST> ) ;
+    skos:definition "Logical package buckets used to classify Mellea source modules." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    linkml:permissible_values <https://w3id.org/lmodel/mellea/PackageKindEnum#BACKENDS>,
+        <https://w3id.org/lmodel/mellea/PackageKindEnum#CLI>,
+        <https://w3id.org/lmodel/mellea/PackageKindEnum#CORE>,
+        <https://w3id.org/lmodel/mellea/PackageKindEnum#DOCS_EXAMPLES>,
+        <https://w3id.org/lmodel/mellea/PackageKindEnum#FORMATTERS>,
+        <https://w3id.org/lmodel/mellea/PackageKindEnum#HELPERS>,
+        <https://w3id.org/lmodel/mellea/PackageKindEnum#PLUGINS>,
+        <https://w3id.org/lmodel/mellea/PackageKindEnum#STDLIB>,
+        <https://w3id.org/lmodel/mellea/PackageKindEnum#TELEMETRY>,
+        <https://w3id.org/lmodel/mellea/PackageKindEnum#TEST> .
+
+mellea:ComponentCategoryEnum a owl:Class ;
+    rdfs:label "ComponentCategoryEnum" ;
+    owl:unionOf ( <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#INSTRUCTION> <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#MESSAGE> <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#TOOL_MESSAGE> <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#DOCUMENT> <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#INTRINSIC> <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#MOBJECT> <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#QUERY> <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#TRANSFORM> <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#GENSTUB> <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#REQUIREMENT> <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#STREAM_EVENT> ) ;
+    skos:definition "High-level category of a Mellea stdlib component." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    linkml:permissible_values <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#DOCUMENT>,
+        <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#GENSTUB>,
+        <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#INSTRUCTION>,
+        <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#INTRINSIC>,
+        <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#MESSAGE>,
+        <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#MOBJECT>,
+        <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#QUERY>,
+        <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#REQUIREMENT>,
+        <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#STREAM_EVENT>,
+        <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#TOOL_MESSAGE>,
+        <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#TRANSFORM> .
+
+mellea:ModelElement a owl:Class ;
+    rdfs:label "ModelElement" ;
+    rdfs:subClassOf [ owl:unionOf ( mellea:ApiModelSpec mellea:BackendSpec mellea:CliCommandSpec mellea:ComponentSpec mellea:ContextSpec mellea:FormatterSpec mellea:HookPayloadSpec mellea:PluginSpec mellea:RequirementSpec mellea:SamplingStrategySpec mellea:SessionSpec mellea:TelemetryMetricSpec ) ],
+        mellea:NamedElement ;
+    skos:definition "Abstract base for concrete architectural elements." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    skos:relatedMatch spdx:Element,
+        common_domain_model:ContractBase .
+
+mellea:HookTypeEnum a owl:Class ;
+    rdfs:label "HookTypeEnum" ;
+    owl:unionOf ( <https://w3id.org/lmodel/mellea/HookTypeEnum#SESSION_PRE_INIT> <https://w3id.org/lmodel/mellea/HookTypeEnum#SESSION_POST_INIT> <https://w3id.org/lmodel/mellea/HookTypeEnum#SESSION_RESET> <https://w3id.org/lmodel/mellea/HookTypeEnum#SESSION_CLEANUP> <https://w3id.org/lmodel/mellea/HookTypeEnum#COMPONENT_PRE_EXECUTE> <https://w3id.org/lmodel/mellea/HookTypeEnum#COMPONENT_POST_SUCCESS> <https://w3id.org/lmodel/mellea/HookTypeEnum#COMPONENT_POST_ERROR> <https://w3id.org/lmodel/mellea/HookTypeEnum#GENERATION_PRE_CALL> <https://w3id.org/lmodel/mellea/HookTypeEnum#GENERATION_POST_CALL> <https://w3id.org/lmodel/mellea/HookTypeEnum#GENERATION_ERROR> <https://w3id.org/lmodel/mellea/HookTypeEnum#VALIDATION_PRE_CHECK> <https://w3id.org/lmodel/mellea/HookTypeEnum#VALIDATION_POST_CHECK> <https://w3id.org/lmodel/mellea/HookTypeEnum#SAMPLING_LOOP_START> <https://w3id.org/lmodel/mellea/HookTypeEnum#SAMPLING_ITERATION> <https://w3id.org/lmodel/mellea/HookTypeEnum#SAMPLING_REPAIR> <https://w3id.org/lmodel/mellea/HookTypeEnum#SAMPLING_LOOP_END> <https://w3id.org/lmodel/mellea/HookTypeEnum#TOOL_PRE_INVOKE> <https://w3id.org/lmodel/mellea/HookTypeEnum#TOOL_POST_INVOKE> ) ;
+    skos:definition "Lifecycle hook stages (derived from HookType)." ;
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    skos:relatedMatch attack:KillChainPhase,
+        mcp:TaskStatusEnum ;
+    linkml:permissible_values <https://w3id.org/lmodel/mellea/HookTypeEnum#COMPONENT_POST_ERROR>,
+        <https://w3id.org/lmodel/mellea/HookTypeEnum#COMPONENT_POST_SUCCESS>,
+        <https://w3id.org/lmodel/mellea/HookTypeEnum#COMPONENT_PRE_EXECUTE>,
+        <https://w3id.org/lmodel/mellea/HookTypeEnum#GENERATION_ERROR>,
+        <https://w3id.org/lmodel/mellea/HookTypeEnum#GENERATION_POST_CALL>,
+        <https://w3id.org/lmodel/mellea/HookTypeEnum#GENERATION_PRE_CALL>,
+        <https://w3id.org/lmodel/mellea/HookTypeEnum#SAMPLING_ITERATION>,
+        <https://w3id.org/lmodel/mellea/HookTypeEnum#SAMPLING_LOOP_END>,
+        <https://w3id.org/lmodel/mellea/HookTypeEnum#SAMPLING_LOOP_START>,
+        <https://w3id.org/lmodel/mellea/HookTypeEnum#SAMPLING_REPAIR>,
+        <https://w3id.org/lmodel/mellea/HookTypeEnum#SESSION_CLEANUP>,
+        <https://w3id.org/lmodel/mellea/HookTypeEnum#SESSION_POST_INIT>,
+        <https://w3id.org/lmodel/mellea/HookTypeEnum#SESSION_PRE_INIT>,
+        <https://w3id.org/lmodel/mellea/HookTypeEnum#SESSION_RESET>,
+        <https://w3id.org/lmodel/mellea/HookTypeEnum#TOOL_POST_INVOKE>,
+        <https://w3id.org/lmodel/mellea/HookTypeEnum#TOOL_PRE_INVOKE>,
+        <https://w3id.org/lmodel/mellea/HookTypeEnum#VALIDATION_POST_CHECK>,
+        <https://w3id.org/lmodel/mellea/HookTypeEnum#VALIDATION_PRE_CHECK> ;
+    mellea:derived_from "mellea/plugins/types.py::HookType" .
+
+xsd:string a rdfs:Datatype ;
+    owl:equivalentClass [ a rdfs:Datatype ;
+            owl:onDatatype xsd:string ;
+            owl:withRestrictions ( [ xsd:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ] ) ],
+        [ a rdfs:Datatype ;
+            owl:onDatatype xsd:string ;
+            owl:withRestrictions ( [ xsd:pattern "^[^\\0]+$" ] ) ] .
+
+

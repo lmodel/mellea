@@ -1,0 +1,22 @@
+id,mappings,description
+ApiFieldSpec,,Specification of a single field in an API model.
+ApiModelSpec,,Specification of an HTTP API wire model.
+BackendSpec,,Specification of a Mellea backend implementation.
+CliCommandSpec,,Specification of a CLI command exposed under `m`.
+ComponentSpec,,Specification of a Mellea stdlib component type.
+ContextSpec,,Specification of a context implementation.
+FormatterSpec,,Specification of an output formatter for a backend.
+HookPayloadSpec,,Specification of a hook payload model.
+IntrinsicAdapterSpec,,Specification of an intrinsic adapter (LoRA / aLoRA).
+MethodSpec,,Specification of a method exposed by a runtime class.
+ModelElement,,Abstract base for concrete architectural elements.
+ModelIdentifierSpec,,Cross-provider identifier table for a single model.
+NamedElement,,"Abstract base for any named, identifiable schema element."
+PluginSpec,,Specification of a Mellea plugin and the hooks it registers.
+PythonPackage,,A logical Python package (directory) inside the repository.
+RepositoryCatalog,,Top-level catalog rooting the analysed repository snapshot.
+RequirementSpec,,Specification of a requirement validator.
+SamplingStrategySpec,,Specification of a sampling-loop strategy.
+SessionSpec,,Specification of a Mellea session.
+TelemetryMetricSpec,,Specification of a telemetry metric emitted by Mellea.
+

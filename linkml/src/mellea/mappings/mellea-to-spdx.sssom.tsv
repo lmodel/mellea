@@ -1,0 +1,31 @@
+# mapping_set_id: https://w3id.org/lmodel/mellea/mappings/mellea-to-spdx.sssom.tsv
+# mapping_set_description: Manually curated alignment of the Mellea LinkML schema (linkml/src/mellea/schema/mellea.yaml) to the SPDX 3 LinkML schema (linkml/src/mellea/mappings/spdx/). Subjects are Mellea schema elements (classes and enum permissible values); objects are SBOM/AI-package concepts from the SPDX schema. The strongest alignments centre on AI model packaging (SPDX AIPackage) and on document/element provenance primitives (Sbom, Package, Element, Annotation).
+# license: https://creativecommons.org/licenses/by/4.0/
+# mapping_date: 2026-05-26
+# curie_map:
+#  mellea: https://w3id.org/lmodel/mellea/
+#  spdx: https://spdx.org/rdf/3.0.1/terms/
+#  linkml: https://w3id.org/linkml/
+# creator_id:
+#  - https://github.com/lmodel/mellea
+# see_also:
+#   - https://spdx.github.io/spdx-spec/v3.0.1/
+#   - https://spdx.github.io/spdx-spec/v3.0.1/model/AI/Classes/AIPackage/
+#subject_source: mellea
+#subject_source_version: '2026-05-26'
+#object_source: spdx
+subject_id	subject_label	predicate_id	object_id	object_label	mapping_justification	confidence	comment
+mellea:ModelIdentifierSpec	ModelIdentifierSpec	skos:closeMatch	spdx:AIPackage	AIPackage	semapv:LLMBasedMatching	0.75	ModelIdentifierSpec is the cross-provider name table for an AI model; SPDX AIPackage is the SBOM package type representing that AI model.
+mellea:IntrinsicAdapterSpec	IntrinsicAdapterSpec	skos:closeMatch	spdx:AIPackage	AIPackage	semapv:LLMBasedMatching	0.7	Intrinsic adapters are themselves shippable AI model artefacts (LoRA / aLoRA) and best modelled as SPDX AIPackages.
+mellea:RepositoryCatalog	RepositoryCatalog	skos:closeMatch	spdx:Sbom	Sbom	semapv:LLMBasedMatching	0.7	RepositoryCatalog is a top-level, dated catalogue of the analysed code; SPDX Sbom is a top-level inventory document. Both are tree-root containers of elements.
+mellea:RepositoryCatalog	RepositoryCatalog	skos:relatedMatch	spdx:SpdxDocument	SpdxDocument	semapv:LLMBasedMatching	0.6	SpdxDocument is the generic SPDX document container; conceptually adjacent to the Mellea catalogue.
+mellea:PythonPackage	PythonPackage	skos:closeMatch	spdx:Package	Package	semapv:LLMBasedMatching	0.8	PythonPackage is a logical Python package (directory) inside the repository; SPDX Package is the generic packaged-software concept.
+mellea:PluginSpec	PluginSpec	skos:closeMatch	spdx:Extension	Extension	semapv:LLMBasedMatching	0.6	Plugins are pluggable runtime extensions; SPDX Extension is the SBOM-side concept for an extension carried on an element.
+mellea:HookPayloadSpec	HookPayloadSpec	skos:relatedMatch	spdx:Annotation	Annotation	semapv:LLMBasedMatching	0.4	Hook payloads attach structured runtime observations to elements; SPDX Annotation attaches structured commentary to elements.
+mellea:NamedElement	NamedElement	skos:closeMatch	spdx:Element	Element	semapv:LLMBasedMatching	0.75	Both are the abstract root carrying id, name, summary, description, comment on every concrete subclass.
+mellea:ModelElement	ModelElement	skos:relatedMatch	spdx:Element	Element	semapv:LLMBasedMatching	0.5	ModelElement is the architectural-element base used by concrete Mellea specs; closest SPDX analogue is the generic Element root.
+mellea:ApiFieldSpec	ApiFieldSpec	skos:relatedMatch	spdx:DictionaryEntry	DictionaryEntry	semapv:LLMBasedMatching	0.3	Both model a single named field/key entry within a larger structure.
+mellea:TelemetryMetricSpec	TelemetryMetricSpec	skos:relatedMatch	spdx:AIPackage	AIPackage	semapv:LLMBasedMatching	0.35	AIPackage carries metric/threshold metadata about an AI model; Mellea TelemetryMetricSpec is the runtime emission analogue.
+mellea:BackendFamilyEnum	BackendFamilyEnum	skos:relatedMatch	spdx:Agent	Agent	semapv:LLMBasedMatching	0.3	Backend families denote the model-serving provider; SPDX Agent (Organization/Person/SoftwareAgent) is the closest provenance concept.
+mellea:IntrinsicAdapterSpec	IntrinsicAdapterSpec	skos:relatedMatch	spdx:Relationship	Relationship	semapv:LLMBasedMatching	0.3	Adapters relate to a base model; SPDX Relationship is how such "depends on / variant of" links are expressed.
+mellea:CliCommandSpec	CliCommandSpec	skos:relatedMatch	spdx:Tool	Tool	semapv:LLMBasedMatching	0.4	CLI commands are tool-like operational entry points; SPDX Tool models software tools used during SBOM creation.

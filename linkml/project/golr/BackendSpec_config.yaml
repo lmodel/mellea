@@ -1,0 +1,59 @@
+# metamodel_version: 1.11.0# version: 2026-05-26id: BackendSpec
+schema_generating: true
+description: Specification of a Mellea backend implementation.
+display_name: BackendSpec
+document_category: BackendSpec
+weight: 20
+fields:
+- id: id
+  description: Stable identifier for a schema element.
+  display_name: id
+- id: name
+  description: Human-readable name.
+  display_name: name
+- id: description
+  description: Narrative description of the element.
+  display_name: description
+- id: module_path
+  description: Python module path where this element is defined.
+  display_name: module_path
+- id: source_file
+  description: Source file relative to repository root.
+  display_name: source_file
+- id: package_kind
+  description: Package bucket.
+  display_name: package_kind
+- id: element_kind
+  description: Kind of Python declaration.
+  display_name: element_kind
+- id: coverage_scope
+  description: Where this element surfaces (source/API/CLI/example/test).
+  display_name: coverage_scope
+  cardinality: multi
+- id: tags
+  description: Free-form classification tags.
+  display_name: tags
+  cardinality: multi
+- id: backend_family
+  description: Slot describing the backend family.
+  display_name: backend_family
+- id: model_identifier
+  description: Slot describing the model identifier.
+  display_name: model_identifier
+  cardinality: multi
+- id: default_formatter
+  description: Slot describing the default formatter.
+  display_name: default_formatter
+- id: model_options_key
+  description: Slot describing the model options key.
+  display_name: model_options_key
+  cardinality: multi
+- id: supports_streaming
+  description: Slot describing the supports streaming.
+  display_name: supports_streaming
+- id: supports_tool_calls
+  description: Slot describing the supports tool calls.
+  display_name: supports_tool_calls
+- id: supports_multimodal
+  description: Slot describing the supports multimodal.
+  display_name: supports_multimodal

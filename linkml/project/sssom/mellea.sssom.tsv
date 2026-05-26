@@ -1,0 +1,86 @@
+#license: Apache-2.0
+#mapping_set_id: https://w3id.org/lmodel/mellea
+#mapping_tool: https://w3id.org/linkml/
+#creator_id: linkml_user
+#mapping_date: 2026-05-26
+#curie_map: 
+# mellea: https://w3id.org/lmodel/mellea/
+# linkml: https://w3id.org/linkml/
+# schema: http://schema.org/
+# dcterms: http://purl.org/dc/terms/
+# attack: https://w3id.org/lmodel/attack/
+# common_domain_model: https://w3id.org/lmodel/common-domain-model/
+# iso27001: https://w3id.org/lmodel/iso27001/
+# mcp: https://w3id.org/lmodel/mcp/
+# nexus: https://ibm.github.io/ai-atlas-nexus/ontology/
+# spdx: https://spdx.org/rdf/3.0.1/terms/
+subject_id	subject_label	predicate_id	predicate_modifier	object_id	object_label	match_type	subject_source	object_source	mapping_tool	confidence	subject_match_field	object_match_field	subject_category	object_category	match_string	comment
+mellea:ApiFieldSpec	ApiFieldSpec	skos:relatedMatch		spdx:DictionaryEntry		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:ApiModelSpec	ApiModelSpec	skos:relatedMatch		nexus:Input		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:ApiModelSpec	ApiModelSpec	skos:relatedMatch		mcp:JSONRPCRequest		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:ApiModelSpec	ApiModelSpec	skos:relatedMatch		mcp:JSONRPCResponse		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:BackendSpec	BackendSpec	skos:relatedMatch		nexus:AiSystem		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:BackendSpec	BackendSpec	skos:relatedMatch		mcp:Implementation		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:BackendSpec	BackendSpec	skos:closeMatch		nexus:AiProvider		skos:closeMatch	https://w3id.org/lmodel/mellea									
+mellea:CliCommandSpec	CliCommandSpec	skos:relatedMatch		attack:Tool		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:CliCommandSpec	CliCommandSpec	skos:relatedMatch		iso27001:OperationalProcedure		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:CliCommandSpec	CliCommandSpec	skos:relatedMatch		spdx:Tool		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:ComponentSpec	ComponentSpec	skos:closeMatch		nexus:AIComponent		skos:closeMatch	https://w3id.org/lmodel/mellea									
+mellea:ComponentSpec	ComponentSpec	skos:closeMatch		mcp:Tool		skos:closeMatch	https://w3id.org/lmodel/mellea									
+mellea:ContextSpec	ContextSpec	skos:relatedMatch		nexus:AiLifecyclePhase		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:FormatterSpec	FormatterSpec	skos:relatedMatch		nexus:Modality		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:FormatterSpec	FormatterSpec	skos:relatedMatch		mcp:ContentBlock		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:HookPayloadSpec	HookPayloadSpec	skos:relatedMatch		nexus:Fact		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:HookPayloadSpec	HookPayloadSpec	skos:relatedMatch		attack:DataComponent		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:HookPayloadSpec	HookPayloadSpec	skos:relatedMatch		iso27001:InformationSecurityEvent		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:HookPayloadSpec	HookPayloadSpec	skos:relatedMatch		mcp:MetaObject		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:HookPayloadSpec	HookPayloadSpec	skos:relatedMatch		spdx:Annotation		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:IntrinsicAdapterSpec	IntrinsicAdapterSpec	skos:relatedMatch		spdx:Relationship		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:IntrinsicAdapterSpec	IntrinsicAdapterSpec	skos:closeMatch		nexus:Adapter		skos:closeMatch	https://w3id.org/lmodel/mellea									
+mellea:IntrinsicAdapterSpec	IntrinsicAdapterSpec	skos:closeMatch		nexus:LLMIntrinsic		skos:closeMatch	https://w3id.org/lmodel/mellea									
+mellea:IntrinsicAdapterSpec	IntrinsicAdapterSpec	skos:closeMatch		spdx:AIPackage		skos:closeMatch	https://w3id.org/lmodel/mellea									
+mellea:ModelElement	ModelElement	skos:relatedMatch		common_domain_model:ContractBase		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:ModelElement	ModelElement	skos:relatedMatch		spdx:Element		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:ModelIdentifierSpec	ModelIdentifierSpec	skos:relatedMatch		nexus:ModelInfo		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:ModelIdentifierSpec	ModelIdentifierSpec	skos:relatedMatch		common_domain_model:positionIdentifier		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:ModelIdentifierSpec	ModelIdentifierSpec	skos:relatedMatch		mcp:ModelHint		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:ModelIdentifierSpec	ModelIdentifierSpec	skos:closeMatch		nexus:AiModel		skos:closeMatch	https://w3id.org/lmodel/mellea									
+mellea:ModelIdentifierSpec	ModelIdentifierSpec	skos:closeMatch		nexus:LargeLanguageModel		skos:closeMatch	https://w3id.org/lmodel/mellea									
+mellea:ModelIdentifierSpec	ModelIdentifierSpec	skos:closeMatch		spdx:AIPackage		skos:closeMatch	https://w3id.org/lmodel/mellea									
+mellea:NamedElement	NamedElement	skos:relatedMatch		attack:StixEntity		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:NamedElement	NamedElement	skos:relatedMatch		common_domain_model:InventoryRecord		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:NamedElement	NamedElement	skos:relatedMatch		mcp:HasName		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:NamedElement	NamedElement	skos:closeMatch		nexus:Entity		skos:closeMatch	https://w3id.org/lmodel/mellea									
+mellea:NamedElement	NamedElement	skos:closeMatch		iso27001:NamedEntity		skos:closeMatch	https://w3id.org/lmodel/mellea									
+mellea:NamedElement	NamedElement	skos:closeMatch		spdx:Element		skos:closeMatch	https://w3id.org/lmodel/mellea									
+mellea:PluginSpec	PluginSpec	skos:relatedMatch		nexus:AIComponent		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:PluginSpec	PluginSpec	skos:relatedMatch		attack:Analytic		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:PluginSpec	PluginSpec	skos:relatedMatch		iso27001:OperationalProcedure		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:PluginSpec	PluginSpec	skos:relatedMatch		mcp:ExtensionAppCapability		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:PluginSpec	PluginSpec	skos:closeMatch		spdx:Extension		skos:closeMatch	https://w3id.org/lmodel/mellea									
+mellea:PythonPackage	PythonPackage	skos:relatedMatch		common_domain_model:Position		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:PythonPackage	PythonPackage	skos:narrowMatch		nexus:Entity		skos:narrowMatch	https://w3id.org/lmodel/mellea									
+mellea:PythonPackage	PythonPackage	skos:closeMatch		spdx:Package		skos:closeMatch	https://w3id.org/lmodel/mellea									
+mellea:RepositoryCatalog	RepositoryCatalog	skos:relatedMatch		nexus:Container		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:RepositoryCatalog	RepositoryCatalog	skos:relatedMatch		attack:AttackBundle		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:RepositoryCatalog	RepositoryCatalog	skos:relatedMatch		common_domain_model:Portfolio		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:RepositoryCatalog	RepositoryCatalog	skos:relatedMatch		common_domain_model:PortfolioState		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:RepositoryCatalog	RepositoryCatalog	skos:relatedMatch		iso27001:DocumentedInformation		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:RepositoryCatalog	RepositoryCatalog	skos:relatedMatch		spdx:SpdxDocument		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:RepositoryCatalog	RepositoryCatalog	skos:closeMatch		spdx:Sbom		skos:closeMatch	https://w3id.org/lmodel/mellea									
+mellea:RequirementSpec	RequirementSpec	skos:relatedMatch		nexus:Requirement		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:RequirementSpec	RequirementSpec	skos:relatedMatch		nexus:Rule		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:RequirementSpec	RequirementSpec	skos:relatedMatch		iso27001:SecurityControl		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:RequirementSpec	RequirementSpec	skos:relatedMatch		iso27001:InformationSecurityObjective		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:SamplingStrategySpec	SamplingStrategySpec	skos:relatedMatch		nexus:Action		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:SamplingStrategySpec	SamplingStrategySpec	skos:relatedMatch		mcp:ModelPreferences		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:SamplingStrategySpec	SamplingStrategySpec	skos:closeMatch		mcp:SamplingCapability		skos:closeMatch	https://w3id.org/lmodel/mellea									
+mellea:SessionSpec	SessionSpec	skos:relatedMatch		nexus:AiTask		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:SessionSpec	SessionSpec	skos:relatedMatch		iso27001:RiskAssessmentProcess		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:SessionSpec	SessionSpec	skos:relatedMatch		mcp:Task		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:TelemetryMetricSpec	TelemetryMetricSpec	skos:relatedMatch		nexus:AiEval		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:TelemetryMetricSpec	TelemetryMetricSpec	skos:relatedMatch		attack:DataSource		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:TelemetryMetricSpec	TelemetryMetricSpec	skos:relatedMatch		iso27001:MonitoringProgram		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:TelemetryMetricSpec	TelemetryMetricSpec	skos:relatedMatch		spdx:AIPackage		skos:relatedMatch	https://w3id.org/lmodel/mellea									
+mellea:TelemetryMetricSpec	TelemetryMetricSpec	skos:closeMatch		nexus:MetricConfig		skos:closeMatch	https://w3id.org/lmodel/mellea									
+mellea:TelemetryMetricSpec	TelemetryMetricSpec	skos:closeMatch		iso27001:MonitoringItem		skos:closeMatch	https://w3id.org/lmodel/mellea									

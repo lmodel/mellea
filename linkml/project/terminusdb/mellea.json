@@ -1,0 +1,1457 @@
+[
+  {
+    "@type": "@context",
+    "@documentation": {
+      "@title": "mellea",
+      "@description": "LinkML schema describing the Mellea codebase architecture and public data models. Generated from Python sources by linkml/scripts/schema_to_linkml.py."
+    },
+    "@schema": "https://w3id.org/lmodel/mellea#",
+    "@base": "https://w3id.org/lmodel/data/"
+  },
+  {
+    "@type": "Class",
+    "@id": "ApiFieldSpec",
+    "@documentation": {
+      "@comment": "Specification of a single field in an API model.",
+      "@properties": {
+        "id": "Stable identifier for a schema element.",
+        "name": "Human-readable name.",
+        "description": "Narrative description of the element.",
+        "module_path": "Python module path where this element is defined.",
+        "source_file": "Source file relative to repository root.",
+        "package_kind": "Package bucket.",
+        "element_kind": "Kind of Python declaration.",
+        "coverage_scope": "Where this element surfaces (source/API/CLI/example/test).",
+        "tags": "Free-form classification tags.",
+        "field_name": "Slot describing the field name.",
+        "field_type": "Slot describing the field type.",
+        "required_field": "Slot describing the required field.",
+        "allows_null": "Slot describing the allows null."
+      }
+    },
+    "@inherits": [
+      "NamedElement"
+    ],
+    "id": "xsd:anyURI",
+    "name": "xsd:string",
+    "description": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "module_path": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "source_file": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "package_kind": {
+      "@type": "Optional",
+      "@class": "PackageKindEnum"
+    },
+    "element_kind": {
+      "@type": "Optional",
+      "@class": "ElementKindEnum"
+    },
+    "coverage_scope": {
+      "@type": "Set",
+      "@class": "CoverageScopeEnum"
+    },
+    "tags": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    },
+    "field_name": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "field_type": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "required_field": {
+      "@type": "Optional",
+      "@class": "xsd:boolean"
+    },
+    "allows_null": {
+      "@type": "Optional",
+      "@class": "xsd:boolean"
+    }
+  },
+  {
+    "@type": "Class",
+    "@id": "ApiModelSpec",
+    "@documentation": {
+      "@comment": "Specification of an HTTP API wire model.",
+      "@properties": {
+        "id": "Stable identifier for a schema element.",
+        "name": "Human-readable name.",
+        "description": "Narrative description of the element.",
+        "module_path": "Python module path where this element is defined.",
+        "source_file": "Source file relative to repository root.",
+        "package_kind": "Package bucket.",
+        "element_kind": "Kind of Python declaration.",
+        "coverage_scope": "Where this element surfaces (source/API/CLI/example/test).",
+        "tags": "Free-form classification tags.",
+        "request_or_response": "Slot describing the request or response.",
+        "openai_object_type": "Slot describing the openai object type.",
+        "has_field": "Slot describing the has field."
+      }
+    },
+    "@inherits": [
+      "ModelElement"
+    ],
+    "id": "xsd:anyURI",
+    "name": "xsd:string",
+    "description": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "module_path": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "source_file": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "package_kind": {
+      "@type": "Optional",
+      "@class": "PackageKindEnum"
+    },
+    "element_kind": {
+      "@type": "Optional",
+      "@class": "ElementKindEnum"
+    },
+    "coverage_scope": {
+      "@type": "Set",
+      "@class": "CoverageScopeEnum"
+    },
+    "tags": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    },
+    "request_or_response": {
+      "@type": "Optional",
+      "@class": "RequestResponseEnum"
+    },
+    "openai_object_type": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "has_field": {
+      "@type": "List",
+      "@class": "ApiFieldSpec"
+    }
+  },
+  {
+    "@type": "Class",
+    "@id": "BackendSpec",
+    "@documentation": {
+      "@comment": "Specification of a Mellea backend implementation.",
+      "@properties": {
+        "id": "Stable identifier for a schema element.",
+        "name": "Human-readable name.",
+        "description": "Narrative description of the element.",
+        "module_path": "Python module path where this element is defined.",
+        "source_file": "Source file relative to repository root.",
+        "package_kind": "Package bucket.",
+        "element_kind": "Kind of Python declaration.",
+        "coverage_scope": "Where this element surfaces (source/API/CLI/example/test).",
+        "tags": "Free-form classification tags.",
+        "backend_family": "Slot describing the backend family.",
+        "model_identifier": "Slot describing the model identifier.",
+        "default_formatter": "Slot describing the default formatter.",
+        "model_options_key": "Slot describing the model options key.",
+        "supports_streaming": "Slot describing the supports streaming.",
+        "supports_tool_calls": "Slot describing the supports tool calls.",
+        "supports_multimodal": "Slot describing the supports multimodal."
+      }
+    },
+    "@inherits": [
+      "ModelElement"
+    ],
+    "id": "xsd:anyURI",
+    "name": "xsd:string",
+    "description": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "module_path": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "source_file": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "package_kind": {
+      "@type": "Optional",
+      "@class": "PackageKindEnum"
+    },
+    "element_kind": {
+      "@type": "Optional",
+      "@class": "ElementKindEnum"
+    },
+    "coverage_scope": {
+      "@type": "Set",
+      "@class": "CoverageScopeEnum"
+    },
+    "tags": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    },
+    "backend_family": {
+      "@type": "Optional",
+      "@class": "BackendFamilyEnum"
+    },
+    "model_identifier": {
+      "@type": "List",
+      "@class": "ModelIdentifierSpec"
+    },
+    "default_formatter": {
+      "@type": "Optional",
+      "@class": "FormatterSpec"
+    },
+    "model_options_key": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    },
+    "supports_streaming": {
+      "@type": "Optional",
+      "@class": "xsd:boolean"
+    },
+    "supports_tool_calls": {
+      "@type": "Optional",
+      "@class": "xsd:boolean"
+    },
+    "supports_multimodal": {
+      "@type": "Optional",
+      "@class": "xsd:boolean"
+    }
+  },
+  {
+    "@type": "Class",
+    "@id": "CliCommandSpec",
+    "@documentation": {
+      "@comment": "Specification of a CLI command exposed under `m`.",
+      "@properties": {
+        "id": "Stable identifier for a schema element.",
+        "name": "Human-readable name.",
+        "description": "Narrative description of the element.",
+        "module_path": "Python module path where this element is defined.",
+        "source_file": "Source file relative to repository root.",
+        "package_kind": "Package bucket.",
+        "element_kind": "Kind of Python declaration.",
+        "coverage_scope": "Where this element surfaces (source/API/CLI/example/test).",
+        "tags": "Free-form classification tags.",
+        "command_group": "Slot describing the command group.",
+        "command_path": "Slot describing the command path.",
+        "command_purpose": "Slot describing the command purpose.",
+        "input_model": "Slot describing the input model.",
+        "output_model": "Slot describing the output model."
+      }
+    },
+    "@inherits": [
+      "ModelElement"
+    ],
+    "id": "xsd:anyURI",
+    "name": "xsd:string",
+    "description": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "module_path": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "source_file": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "package_kind": {
+      "@type": "Optional",
+      "@class": "PackageKindEnum"
+    },
+    "element_kind": {
+      "@type": "Optional",
+      "@class": "ElementKindEnum"
+    },
+    "coverage_scope": {
+      "@type": "Set",
+      "@class": "CoverageScopeEnum"
+    },
+    "tags": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    },
+    "command_group": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "command_path": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "command_purpose": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "input_model": {
+      "@type": "List",
+      "@class": "ApiModelSpec"
+    },
+    "output_model": {
+      "@type": "List",
+      "@class": "ApiModelSpec"
+    }
+  },
+  {
+    "@type": "Class",
+    "@id": "ComponentSpec",
+    "@documentation": {
+      "@comment": "Specification of a Mellea stdlib component type.",
+      "@properties": {
+        "id": "Stable identifier for a schema element.",
+        "name": "Human-readable name.",
+        "description": "Narrative description of the element.",
+        "module_path": "Python module path where this element is defined.",
+        "source_file": "Source file relative to repository root.",
+        "package_kind": "Package bucket.",
+        "element_kind": "Kind of Python declaration.",
+        "coverage_scope": "Where this element surfaces (source/API/CLI/example/test).",
+        "tags": "Free-form classification tags.",
+        "component_category": "Slot describing the component category.",
+        "input_modality": "Slot describing the input modality.",
+        "parsed_output_type": "Slot describing the parsed output type."
+      }
+    },
+    "@inherits": [
+      "ModelElement"
+    ],
+    "id": "xsd:anyURI",
+    "name": "xsd:string",
+    "description": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "module_path": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "source_file": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "package_kind": {
+      "@type": "Optional",
+      "@class": "PackageKindEnum"
+    },
+    "element_kind": {
+      "@type": "Optional",
+      "@class": "ElementKindEnum"
+    },
+    "coverage_scope": {
+      "@type": "Set",
+      "@class": "CoverageScopeEnum"
+    },
+    "tags": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    },
+    "component_category": {
+      "@type": "Optional",
+      "@class": "ComponentCategoryEnum"
+    },
+    "input_modality": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    },
+    "parsed_output_type": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    }
+  },
+  {
+    "@type": "Class",
+    "@id": "ContextSpec",
+    "@documentation": {
+      "@comment": "Specification of a context implementation.",
+      "@properties": {
+        "id": "Stable identifier for a schema element.",
+        "name": "Human-readable name.",
+        "description": "Narrative description of the element.",
+        "module_path": "Python module path where this element is defined.",
+        "source_file": "Source file relative to repository root.",
+        "package_kind": "Package bucket.",
+        "element_kind": "Kind of Python declaration.",
+        "coverage_scope": "Where this element surfaces (source/API/CLI/example/test).",
+        "tags": "Free-form classification tags.",
+        "context_linearity": "Slot describing the context linearity.",
+        "stores_component_history": "Slot describing the stores component history.",
+        "accepts_message_attachments": "Slot describing the accepts message attachments."
+      }
+    },
+    "@inherits": [
+      "ModelElement"
+    ],
+    "id": "xsd:anyURI",
+    "name": "xsd:string",
+    "description": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "module_path": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "source_file": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "package_kind": {
+      "@type": "Optional",
+      "@class": "PackageKindEnum"
+    },
+    "element_kind": {
+      "@type": "Optional",
+      "@class": "ElementKindEnum"
+    },
+    "coverage_scope": {
+      "@type": "Set",
+      "@class": "CoverageScopeEnum"
+    },
+    "tags": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    },
+    "context_linearity": {
+      "@type": "Optional",
+      "@class": "ContextLinearityEnum"
+    },
+    "stores_component_history": {
+      "@type": "Optional",
+      "@class": "xsd:boolean"
+    },
+    "accepts_message_attachments": {
+      "@type": "Optional",
+      "@class": "xsd:boolean"
+    }
+  },
+  {
+    "@type": "Class",
+    "@id": "FormatterSpec",
+    "@documentation": {
+      "@comment": "Specification of an output formatter for a backend.",
+      "@properties": {
+        "id": "Stable identifier for a schema element.",
+        "name": "Human-readable name.",
+        "description": "Narrative description of the element.",
+        "module_path": "Python module path where this element is defined.",
+        "source_file": "Source file relative to repository root.",
+        "package_kind": "Package bucket.",
+        "element_kind": "Kind of Python declaration.",
+        "coverage_scope": "Where this element surfaces (source/API/CLI/example/test).",
+        "tags": "Free-form classification tags."
+      }
+    },
+    "@inherits": [
+      "ModelElement"
+    ],
+    "id": "xsd:anyURI",
+    "name": "xsd:string",
+    "description": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "module_path": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "source_file": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "package_kind": {
+      "@type": "Optional",
+      "@class": "PackageKindEnum"
+    },
+    "element_kind": {
+      "@type": "Optional",
+      "@class": "ElementKindEnum"
+    },
+    "coverage_scope": {
+      "@type": "Set",
+      "@class": "CoverageScopeEnum"
+    },
+    "tags": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    }
+  },
+  {
+    "@type": "Class",
+    "@id": "HookPayloadSpec",
+    "@documentation": {
+      "@comment": "Specification of a hook payload model.",
+      "@properties": {
+        "id": "Stable identifier for a schema element.",
+        "name": "Human-readable name.",
+        "description": "Narrative description of the element.",
+        "module_path": "Python module path where this element is defined.",
+        "source_file": "Source file relative to repository root.",
+        "package_kind": "Package bucket.",
+        "element_kind": "Kind of Python declaration.",
+        "coverage_scope": "Where this element surfaces (source/API/CLI/example/test).",
+        "tags": "Free-form classification tags.",
+        "hook_type": "Slot describing the hook type.",
+        "lifecycle_role": "Slot describing the lifecycle role."
+      }
+    },
+    "@inherits": [
+      "ModelElement"
+    ],
+    "id": "xsd:anyURI",
+    "name": "xsd:string",
+    "description": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "module_path": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "source_file": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "package_kind": {
+      "@type": "Optional",
+      "@class": "PackageKindEnum"
+    },
+    "element_kind": {
+      "@type": "Optional",
+      "@class": "ElementKindEnum"
+    },
+    "coverage_scope": {
+      "@type": "Set",
+      "@class": "CoverageScopeEnum"
+    },
+    "tags": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    },
+    "hook_type": {
+      "@type": "Set",
+      "@class": "HookTypeEnum"
+    },
+    "lifecycle_role": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    }
+  },
+  {
+    "@type": "Class",
+    "@id": "IntrinsicAdapterSpec",
+    "@documentation": {
+      "@comment": "Specification of an intrinsic adapter (LoRA / aLoRA).",
+      "@properties": {
+        "id": "Stable identifier for a schema element.",
+        "name": "Human-readable name.",
+        "description": "Narrative description of the element.",
+        "module_path": "Python module path where this element is defined.",
+        "source_file": "Source file relative to repository root.",
+        "package_kind": "Package bucket.",
+        "element_kind": "Kind of Python declaration.",
+        "coverage_scope": "Where this element surfaces (source/API/CLI/example/test).",
+        "tags": "Free-form classification tags.",
+        "repo_id": "Slot describing the repo id.",
+        "adapter_type": "Slot describing the adapter type."
+      }
+    },
+    "@inherits": [
+      "NamedElement"
+    ],
+    "id": "xsd:anyURI",
+    "name": "xsd:string",
+    "description": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "module_path": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "source_file": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "package_kind": {
+      "@type": "Optional",
+      "@class": "PackageKindEnum"
+    },
+    "element_kind": {
+      "@type": "Optional",
+      "@class": "ElementKindEnum"
+    },
+    "coverage_scope": {
+      "@type": "Set",
+      "@class": "CoverageScopeEnum"
+    },
+    "tags": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    },
+    "repo_id": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "adapter_type": {
+      "@type": "Set",
+      "@class": "AdapterTypeEnum"
+    }
+  },
+  {
+    "@type": "Class",
+    "@id": "MethodSpec",
+    "@documentation": {
+      "@comment": "Specification of a method exposed by a runtime class.",
+      "@properties": {
+        "id": "Stable identifier for a schema element.",
+        "name": "Human-readable name.",
+        "description": "Narrative description of the element.",
+        "module_path": "Python module path where this element is defined.",
+        "source_file": "Source file relative to repository root.",
+        "package_kind": "Package bucket.",
+        "element_kind": "Kind of Python declaration.",
+        "coverage_scope": "Where this element surfaces (source/API/CLI/example/test).",
+        "tags": "Free-form classification tags.",
+        "method_name": "Slot describing the method name.",
+        "method_signature": "Slot describing the method signature.",
+        "lifecycle_role": "Slot describing the lifecycle role."
+      }
+    },
+    "@inherits": [
+      "NamedElement"
+    ],
+    "id": "xsd:anyURI",
+    "name": "xsd:string",
+    "description": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "module_path": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "source_file": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "package_kind": {
+      "@type": "Optional",
+      "@class": "PackageKindEnum"
+    },
+    "element_kind": {
+      "@type": "Optional",
+      "@class": "ElementKindEnum"
+    },
+    "coverage_scope": {
+      "@type": "Set",
+      "@class": "CoverageScopeEnum"
+    },
+    "tags": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    },
+    "method_name": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "method_signature": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "lifecycle_role": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    }
+  },
+  {
+    "@type": "Class",
+    "@id": "ModelElement",
+    "@documentation": {
+      "@comment": "Abstract base for concrete architectural elements.",
+      "@properties": {
+        "id": "Stable identifier for a schema element.",
+        "name": "Human-readable name.",
+        "description": "Narrative description of the element.",
+        "module_path": "Python module path where this element is defined.",
+        "source_file": "Source file relative to repository root.",
+        "package_kind": "Package bucket.",
+        "element_kind": "Kind of Python declaration.",
+        "coverage_scope": "Where this element surfaces (source/API/CLI/example/test).",
+        "tags": "Free-form classification tags."
+      }
+    },
+    "@inherits": [
+      "NamedElement"
+    ],
+    "@abstract": [],
+    "id": "xsd:anyURI",
+    "name": "xsd:string",
+    "description": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "module_path": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "source_file": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "package_kind": {
+      "@type": "Optional",
+      "@class": "PackageKindEnum"
+    },
+    "element_kind": {
+      "@type": "Optional",
+      "@class": "ElementKindEnum"
+    },
+    "coverage_scope": {
+      "@type": "Set",
+      "@class": "CoverageScopeEnum"
+    },
+    "tags": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    }
+  },
+  {
+    "@type": "Class",
+    "@id": "ModelIdentifierSpec",
+    "@documentation": {
+      "@comment": "Cross-provider identifier table for a single model.",
+      "@properties": {
+        "id": "Stable identifier for a schema element.",
+        "name": "Human-readable name.",
+        "description": "Narrative description of the element.",
+        "module_path": "Python module path where this element is defined.",
+        "source_file": "Source file relative to repository root.",
+        "package_kind": "Package bucket.",
+        "element_kind": "Kind of Python declaration.",
+        "coverage_scope": "Where this element surfaces (source/API/CLI/example/test).",
+        "tags": "Free-form classification tags.",
+        "hf_model_name": "Slot describing the hf model name.",
+        "ollama_name": "Slot describing the ollama name.",
+        "watsonx_name": "Slot describing the watsonx name.",
+        "openai_name": "Slot describing the openai name.",
+        "bedrock_name": "Slot describing the bedrock name.",
+        "provider_name": "Slot describing the provider name."
+      }
+    },
+    "@inherits": [
+      "NamedElement"
+    ],
+    "id": "xsd:anyURI",
+    "name": "xsd:string",
+    "description": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "module_path": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "source_file": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "package_kind": {
+      "@type": "Optional",
+      "@class": "PackageKindEnum"
+    },
+    "element_kind": {
+      "@type": "Optional",
+      "@class": "ElementKindEnum"
+    },
+    "coverage_scope": {
+      "@type": "Set",
+      "@class": "CoverageScopeEnum"
+    },
+    "tags": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    },
+    "hf_model_name": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "ollama_name": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "watsonx_name": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "openai_name": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "bedrock_name": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "provider_name": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    }
+  },
+  {
+    "@type": "Class",
+    "@id": "NamedElement",
+    "@documentation": {
+      "@comment": "Abstract base for any named, identifiable schema element.",
+      "@properties": {
+        "id": "Stable identifier for a schema element.",
+        "name": "Human-readable name.",
+        "description": "Narrative description of the element.",
+        "module_path": "Python module path where this element is defined.",
+        "source_file": "Source file relative to repository root.",
+        "package_kind": "Package bucket.",
+        "element_kind": "Kind of Python declaration.",
+        "coverage_scope": "Where this element surfaces (source/API/CLI/example/test).",
+        "tags": "Free-form classification tags."
+      }
+    },
+    "@abstract": [],
+    "id": "xsd:anyURI",
+    "name": "xsd:string",
+    "description": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "module_path": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "source_file": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "package_kind": {
+      "@type": "Optional",
+      "@class": "PackageKindEnum"
+    },
+    "element_kind": {
+      "@type": "Optional",
+      "@class": "ElementKindEnum"
+    },
+    "coverage_scope": {
+      "@type": "Set",
+      "@class": "CoverageScopeEnum"
+    },
+    "tags": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    }
+  },
+  {
+    "@type": "Class",
+    "@id": "PluginSpec",
+    "@documentation": {
+      "@comment": "Specification of a Mellea plugin and the hooks it registers.",
+      "@properties": {
+        "id": "Stable identifier for a schema element.",
+        "name": "Human-readable name.",
+        "description": "Narrative description of the element.",
+        "module_path": "Python module path where this element is defined.",
+        "source_file": "Source file relative to repository root.",
+        "package_kind": "Package bucket.",
+        "element_kind": "Kind of Python declaration.",
+        "coverage_scope": "Where this element surfaces (source/API/CLI/example/test).",
+        "tags": "Free-form classification tags.",
+        "plugin_mode": "Slot describing the plugin mode.",
+        "hook_type": "Slot describing the hook type.",
+        "payload_model": "Slot describing the payload model.",
+        "plugin_priority": "Slot describing the plugin priority."
+      }
+    },
+    "@inherits": [
+      "ModelElement"
+    ],
+    "id": "xsd:anyURI",
+    "name": "xsd:string",
+    "description": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "module_path": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "source_file": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "package_kind": {
+      "@type": "Optional",
+      "@class": "PackageKindEnum"
+    },
+    "element_kind": {
+      "@type": "Optional",
+      "@class": "ElementKindEnum"
+    },
+    "coverage_scope": {
+      "@type": "Set",
+      "@class": "CoverageScopeEnum"
+    },
+    "tags": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    },
+    "plugin_mode": {
+      "@type": "Optional",
+      "@class": "PluginModeEnum"
+    },
+    "hook_type": {
+      "@type": "Set",
+      "@class": "HookTypeEnum"
+    },
+    "payload_model": {
+      "@type": "List",
+      "@class": "HookPayloadSpec"
+    },
+    "plugin_priority": {
+      "@type": "Optional",
+      "@class": "xsd:integer"
+    }
+  },
+  {
+    "@type": "Class",
+    "@id": "PythonPackage",
+    "@documentation": {
+      "@comment": "A logical Python package (directory) inside the repository.",
+      "@properties": {
+        "id": "Stable identifier for a schema element.",
+        "name": "Human-readable name.",
+        "description": "Narrative description of the element.",
+        "module_path": "Python module path where this element is defined.",
+        "source_file": "Source file relative to repository root.",
+        "package_kind": "Package bucket.",
+        "element_kind": "Kind of Python declaration.",
+        "coverage_scope": "Where this element surfaces (source/API/CLI/example/test).",
+        "tags": "Free-form classification tags.",
+        "package_name": "Slot describing the package name.",
+        "depends_on_package": "Slot describing the depends on package.",
+        "declares_element": "Slot describing the declares element."
+      }
+    },
+    "@inherits": [
+      "NamedElement"
+    ],
+    "id": "xsd:anyURI",
+    "name": "xsd:string",
+    "description": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "module_path": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "source_file": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "package_kind": {
+      "@type": "Optional",
+      "@class": "PackageKindEnum"
+    },
+    "element_kind": {
+      "@type": "Optional",
+      "@class": "ElementKindEnum"
+    },
+    "coverage_scope": {
+      "@type": "Set",
+      "@class": "CoverageScopeEnum"
+    },
+    "tags": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    },
+    "package_name": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "depends_on_package": {
+      "@type": "List",
+      "@class": "PythonPackage"
+    },
+    "declares_element": {
+      "@type": "List",
+      "@class": "ModelElement"
+    }
+  },
+  {
+    "@type": "Class",
+    "@id": "RepositoryCatalog",
+    "@documentation": {
+      "@comment": "Top-level catalog rooting the analysed repository snapshot.",
+      "@properties": {
+        "id": "Stable identifier for a schema element.",
+        "name": "Human-readable name.",
+        "description": "Narrative description of the element.",
+        "module_path": "Python module path where this element is defined.",
+        "source_file": "Source file relative to repository root.",
+        "package_kind": "Package bucket.",
+        "element_kind": "Kind of Python declaration.",
+        "coverage_scope": "Where this element surfaces (source/API/CLI/example/test).",
+        "tags": "Free-form classification tags.",
+        "repository_root": "Slot describing the repository root.",
+        "analyzed_on": "Slot describing the analyzed on.",
+        "includes_path": "Slot describing the includes path.",
+        "excludes_path": "Slot describing the excludes path.",
+        "declares_element": "Slot describing the declares element."
+      }
+    },
+    "@inherits": [
+      "NamedElement"
+    ],
+    "id": "xsd:anyURI",
+    "name": "xsd:string",
+    "description": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "module_path": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "source_file": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "package_kind": {
+      "@type": "Optional",
+      "@class": "PackageKindEnum"
+    },
+    "element_kind": {
+      "@type": "Optional",
+      "@class": "ElementKindEnum"
+    },
+    "coverage_scope": {
+      "@type": "Set",
+      "@class": "CoverageScopeEnum"
+    },
+    "tags": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    },
+    "repository_root": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "analyzed_on": {
+      "@type": "Optional",
+      "@class": "xsd:dateTime"
+    },
+    "includes_path": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    },
+    "excludes_path": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    },
+    "declares_element": {
+      "@type": "List",
+      "@class": "ModelElement"
+    }
+  },
+  {
+    "@type": "Class",
+    "@id": "RequirementSpec",
+    "@documentation": {
+      "@comment": "Specification of a requirement validator.",
+      "@properties": {
+        "id": "Stable identifier for a schema element.",
+        "name": "Human-readable name.",
+        "description": "Narrative description of the element.",
+        "module_path": "Python module path where this element is defined.",
+        "source_file": "Source file relative to repository root.",
+        "package_kind": "Package bucket.",
+        "element_kind": "Kind of Python declaration.",
+        "coverage_scope": "Where this element surfaces (source/API/CLI/example/test).",
+        "tags": "Free-form classification tags.",
+        "validation_style": "Slot describing the validation style.",
+        "may_trigger_repair": "Slot describing the may trigger repair."
+      }
+    },
+    "@inherits": [
+      "ModelElement"
+    ],
+    "id": "xsd:anyURI",
+    "name": "xsd:string",
+    "description": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "module_path": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "source_file": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "package_kind": {
+      "@type": "Optional",
+      "@class": "PackageKindEnum"
+    },
+    "element_kind": {
+      "@type": "Optional",
+      "@class": "ElementKindEnum"
+    },
+    "coverage_scope": {
+      "@type": "Set",
+      "@class": "CoverageScopeEnum"
+    },
+    "tags": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    },
+    "validation_style": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "may_trigger_repair": {
+      "@type": "Optional",
+      "@class": "xsd:boolean"
+    }
+  },
+  {
+    "@type": "Class",
+    "@id": "SamplingStrategySpec",
+    "@documentation": {
+      "@comment": "Specification of a sampling-loop strategy.",
+      "@properties": {
+        "id": "Stable identifier for a schema element.",
+        "name": "Human-readable name.",
+        "description": "Narrative description of the element.",
+        "module_path": "Python module path where this element is defined.",
+        "source_file": "Source file relative to repository root.",
+        "package_kind": "Package bucket.",
+        "element_kind": "Kind of Python declaration.",
+        "coverage_scope": "Where this element surfaces (source/API/CLI/example/test).",
+        "tags": "Free-form classification tags.",
+        "selection_policy": "Slot describing the selection policy.",
+        "loop_budget_hint": "Slot describing the loop budget hint.",
+        "may_trigger_repair": "Slot describing the may trigger repair."
+      }
+    },
+    "@inherits": [
+      "ModelElement"
+    ],
+    "id": "xsd:anyURI",
+    "name": "xsd:string",
+    "description": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "module_path": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "source_file": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "package_kind": {
+      "@type": "Optional",
+      "@class": "PackageKindEnum"
+    },
+    "element_kind": {
+      "@type": "Optional",
+      "@class": "ElementKindEnum"
+    },
+    "coverage_scope": {
+      "@type": "Set",
+      "@class": "CoverageScopeEnum"
+    },
+    "tags": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    },
+    "selection_policy": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "loop_budget_hint": {
+      "@type": "Optional",
+      "@class": "xsd:integer"
+    },
+    "may_trigger_repair": {
+      "@type": "Optional",
+      "@class": "xsd:boolean"
+    }
+  },
+  {
+    "@type": "Class",
+    "@id": "SessionSpec",
+    "@documentation": {
+      "@comment": "Specification of a Mellea session.",
+      "@properties": {
+        "id": "Stable identifier for a schema element.",
+        "name": "Human-readable name.",
+        "description": "Narrative description of the element.",
+        "module_path": "Python module path where this element is defined.",
+        "source_file": "Source file relative to repository root.",
+        "package_kind": "Package bucket.",
+        "element_kind": "Kind of Python declaration.",
+        "coverage_scope": "Where this element surfaces (source/API/CLI/example/test).",
+        "tags": "Free-form classification tags.",
+        "uses_backend": "Slot describing the uses backend.",
+        "uses_context": "Slot describing the uses context.",
+        "exposed_method": "Slot describing the exposed method."
+      }
+    },
+    "@inherits": [
+      "ModelElement"
+    ],
+    "id": "xsd:anyURI",
+    "name": "xsd:string",
+    "description": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "module_path": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "source_file": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "package_kind": {
+      "@type": "Optional",
+      "@class": "PackageKindEnum"
+    },
+    "element_kind": {
+      "@type": "Optional",
+      "@class": "ElementKindEnum"
+    },
+    "coverage_scope": {
+      "@type": "Set",
+      "@class": "CoverageScopeEnum"
+    },
+    "tags": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    },
+    "uses_backend": {
+      "@type": "Optional",
+      "@class": "BackendSpec"
+    },
+    "uses_context": {
+      "@type": "Optional",
+      "@class": "ContextSpec"
+    },
+    "exposed_method": {
+      "@type": "List",
+      "@class": "MethodSpec"
+    }
+  },
+  {
+    "@type": "Class",
+    "@id": "TelemetryMetricSpec",
+    "@documentation": {
+      "@comment": "Specification of a telemetry metric emitted by Mellea.",
+      "@properties": {
+        "id": "Stable identifier for a schema element.",
+        "name": "Human-readable name.",
+        "description": "Narrative description of the element.",
+        "module_path": "Python module path where this element is defined.",
+        "source_file": "Source file relative to repository root.",
+        "package_kind": "Package bucket.",
+        "element_kind": "Kind of Python declaration.",
+        "coverage_scope": "Where this element surfaces (source/API/CLI/example/test).",
+        "tags": "Free-form classification tags.",
+        "metric_name": "Slot describing the metric name."
+      }
+    },
+    "@inherits": [
+      "ModelElement"
+    ],
+    "id": "xsd:anyURI",
+    "name": "xsd:string",
+    "description": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "module_path": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "source_file": {
+      "@type": "Optional",
+      "@class": "xsd:string"
+    },
+    "package_kind": {
+      "@type": "Optional",
+      "@class": "PackageKindEnum"
+    },
+    "element_kind": {
+      "@type": "Optional",
+      "@class": "ElementKindEnum"
+    },
+    "coverage_scope": {
+      "@type": "Set",
+      "@class": "CoverageScopeEnum"
+    },
+    "tags": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    },
+    "metric_name": {
+      "@type": "Set",
+      "@class": "xsd:string"
+    }
+  },
+  {
+    "@type": "Enum",
+    "@id": "PackageKindEnum",
+    "@value": [
+      "CORE",
+      "STDLIB",
+      "BACKENDS",
+      "FORMATTERS",
+      "HELPERS",
+      "PLUGINS",
+      "TELEMETRY",
+      "CLI",
+      "DOCS_EXAMPLES",
+      "TEST"
+    ]
+  },
+  {
+    "@type": "Enum",
+    "@id": "ElementKindEnum",
+    "@value": [
+      "CLASS",
+      "ENUM",
+      "DATACLASS",
+      "TYPED_DICT",
+      "PYDANTIC_MODEL",
+      "PROTOCOL",
+      "FUNCTION",
+      "MIXIN"
+    ]
+  },
+  {
+    "@type": "Enum",
+    "@id": "CoverageScopeEnum",
+    "@value": [
+      "SOURCE",
+      "API",
+      "CLI",
+      "EXAMPLE",
+      "TEST"
+    ]
+  },
+  {
+    "@type": "Enum",
+    "@id": "ContextLinearityEnum",
+    "@value": [
+      "LINEAR",
+      "NON_LINEAR"
+    ]
+  },
+  {
+    "@type": "Enum",
+    "@id": "ComponentCategoryEnum",
+    "@value": [
+      "INSTRUCTION",
+      "MESSAGE",
+      "TOOL_MESSAGE",
+      "DOCUMENT",
+      "INTRINSIC",
+      "MOBJECT",
+      "QUERY",
+      "TRANSFORM",
+      "GENSTUB",
+      "REQUIREMENT",
+      "STREAM_EVENT"
+    ]
+  },
+  {
+    "@type": "Enum",
+    "@id": "RequestResponseEnum",
+    "@value": [
+      "REQUEST",
+      "RESPONSE",
+      "BOTH"
+    ]
+  },
+  {
+    "@type": "Enum",
+    "@id": "BackendFamilyEnum",
+    "@value": [
+      "BEDROCK",
+      "DUMMY",
+      "HUGGINGFACE",
+      "LITELLM",
+      "OLLAMA",
+      "OPENAI",
+      "WATSONX"
+    ]
+  },
+  {
+    "@type": "Enum",
+    "@id": "PluginModeEnum",
+    "@value": [
+      "SEQUENTIAL",
+      "TRANSFORM",
+      "CONCURRENT",
+      "AUDIT",
+      "FIRE_AND_FORGET"
+    ]
+  },
+  {
+    "@type": "Enum",
+    "@id": "HookTypeEnum",
+    "@value": [
+      "SESSION_PRE_INIT",
+      "SESSION_POST_INIT",
+      "SESSION_RESET",
+      "SESSION_CLEANUP",
+      "COMPONENT_PRE_EXECUTE",
+      "COMPONENT_POST_SUCCESS",
+      "COMPONENT_POST_ERROR",
+      "GENERATION_PRE_CALL",
+      "GENERATION_POST_CALL",
+      "GENERATION_ERROR",
+      "VALIDATION_PRE_CHECK",
+      "VALIDATION_POST_CHECK",
+      "SAMPLING_LOOP_START",
+      "SAMPLING_ITERATION",
+      "SAMPLING_REPAIR",
+      "SAMPLING_LOOP_END",
+      "TOOL_PRE_INVOKE",
+      "TOOL_POST_INVOKE"
+    ]
+  },
+  {
+    "@type": "Enum",
+    "@id": "AdapterTypeEnum",
+    "@value": [
+      "LORA",
+      "ALORA"
+    ]
+  }
+]
+

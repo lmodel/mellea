@@ -1,0 +1,34 @@
+PREFIX mellea: <https://w3id.org/lmodel/mellea/>
+PREFIX linkml: <https://w3id.org/linkml/>
+PREFIX schema: <http://schema.org/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX attack: <https://w3id.org/lmodel/attack/>
+PREFIX common_domain_model: <https://w3id.org/lmodel/common-domain-model/>
+PREFIX iso27001: <https://w3id.org/lmodel/iso27001/>
+PREFIX mcp: <https://w3id.org/lmodel/mcp/>
+PREFIX nexus: <https://ibm.github.io/ai-atlas-nexus/ontology/>
+PREFIX spdx: <https://spdx.org/rdf/3.0.1/terms/>
+
+SELECT
+  ?check
+  ?graph
+  ?subject
+  ?predicate
+  ?object
+WHERE {
+ GRAPH ?graph {
+  ?subject rdf:type mellea:CliCommandSpec ;
+     ?predicate ?object .
+  FILTER NOT EXISTS {
+    ?object rdf:type ?otype .
+    FILTER ( ?otype IN (
+      mellea:ApiModelSpec
+      
+      ))
+  }
+ }
+ VALUES ?check { linkml:range }
+ VALUES ?predicate { mellea:output_model  }
+ 
+}  
+

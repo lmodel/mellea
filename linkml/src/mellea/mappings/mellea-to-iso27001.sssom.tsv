@@ -1,0 +1,28 @@
+# mapping_set_id: https://w3id.org/lmodel/mellea/mappings/mellea-to-iso27001.sssom.tsv
+# mapping_set_description: Manually curated alignment of the Mellea LinkML schema (linkml/src/mellea/schema/mellea.yaml) to the ISO/IEC 27001 LinkML schema (linkml/src/mellea/mappings/iso27001/). Subjects are Mellea schema elements (classes and enum permissible values); objects are ISMS concepts from the iso27001 schema. Mappings are mostly skos:relatedMatch -- Mellea is an AI runtime/code architecture, while ISO 27001 is an information security management standard, so the alignments centre on observability, audit, and policy/requirement primitives that show up in both worlds.
+# license: https://creativecommons.org/licenses/by/4.0/
+# mapping_date: 2026-05-26
+# curie_map:
+#  mellea: https://w3id.org/lmodel/mellea/
+#  iso27001: https://w3id.org/lmodel/iso27001/
+#  linkml: https://w3id.org/linkml/
+# creator_id:
+#  - https://github.com/lmodel/mellea
+# see_also:
+#   - https://www.iso.org/standard/27001
+#subject_source: mellea
+#subject_source_version: '2026-05-26'
+#object_source: iso27001
+subject_id	subject_label	predicate_id	object_id	object_label	mapping_justification	confidence	comment
+mellea:RequirementSpec	RequirementSpec	skos:relatedMatch	iso27001:SecurityControl	SecurityControl	semapv:LLMBasedMatching	0.5	Mellea RequirementSpec validates runtime output against a constraint; ISO 27001 SecurityControl is a policy-level safeguard. Name collision on "requirement/control" with different enforcement layers.
+mellea:RequirementSpec	RequirementSpec	skos:relatedMatch	iso27001:InformationSecurityObjective	InformationSecurityObjective	semapv:LLMBasedMatching	0.35	Both express a target/constraint that needs to be met. Runtime validation vs management-system objective.
+mellea:PluginSpec	PluginSpec	skos:relatedMatch	iso27001:OperationalProcedure	OperationalProcedure	semapv:LLMBasedMatching	0.35	Plugins encapsulate reusable procedural logic invoked at lifecycle events; OperationalProcedure is the documented procedure analogue at the management-system level.
+mellea:PluginModeEnum.AUDIT	AUDIT	skos:relatedMatch	iso27001:InternalAudit	InternalAudit	semapv:LLMBasedMatching	0.55	Audit-mode plugins observe runtime activity for governance/compliance; InternalAudit is the ISMS audit activity.
+mellea:HookTypeEnum.VALIDATION_POST_CHECK	VALIDATION_POST_CHECK	skos:relatedMatch	iso27001:AuditFinding	AuditFinding	semapv:LLMBasedMatching	0.4	Validation-post-check hook payloads carry a pass/fail finding from a runtime control; AuditFinding is the documented finding from an ISMS audit.
+mellea:TelemetryMetricSpec	TelemetryMetricSpec	skos:closeMatch	iso27001:MonitoringItem	MonitoringItem	semapv:LLMBasedMatching	0.65	Both name a measurable quantity tracked by a monitoring programme.
+mellea:TelemetryMetricSpec	TelemetryMetricSpec	skos:relatedMatch	iso27001:MonitoringProgram	MonitoringProgram	semapv:LLMBasedMatching	0.45	Mellea telemetry is the runtime monitoring programme; ISO MonitoringProgram is the documented monitoring activity at the management-system level.
+mellea:HookPayloadSpec	HookPayloadSpec	skos:relatedMatch	iso27001:InformationSecurityEvent	InformationSecurityEvent	semapv:LLMBasedMatching	0.45	Hook payloads describe observed runtime events; ISO InformationSecurityEvent describes observed security-relevant occurrences.
+mellea:RepositoryCatalog	RepositoryCatalog	skos:relatedMatch	iso27001:DocumentedInformation	DocumentedInformation	semapv:LLMBasedMatching	0.4	RepositoryCatalog is a structured, dated documentation of the analysed code; DocumentedInformation is the ISMS term for controlled, dated documents.
+mellea:CliCommandSpec	CliCommandSpec	skos:relatedMatch	iso27001:OperationalProcedure	OperationalProcedure	semapv:LLMBasedMatching	0.35	CLI commands codify operational steps an engineer runs; OperationalProcedure documents such steps at the ISMS level.
+mellea:SessionSpec	SessionSpec	skos:relatedMatch	iso27001:RiskAssessmentProcess	RiskAssessmentProcess	semapv:LLMBasedMatching	0.2	Both describe a process that orchestrates a sequence of steps; semantics differ significantly.
+mellea:NamedElement	NamedElement	skos:closeMatch	iso27001:NamedEntity	NamedEntity	semapv:LLMBasedMatching	0.75	Both are the abstract root carrying id/name on every concrete subclass.

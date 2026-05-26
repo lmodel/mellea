@@ -1,0 +1,2142 @@
+{
+    "$defs": {
+        "AdapterTypeEnum": {
+            "description": "Adapter implementation type (derived from AdapterType).",
+            "enum": [
+                "LORA",
+                "ALORA"
+            ],
+            "title": "AdapterTypeEnum",
+            "type": "string"
+        },
+        "ApiFieldSpec": {
+            "additionalProperties": false,
+            "description": "Specification of a single field in an API model.",
+            "properties": {
+                "allows_null": {
+                    "description": "Slot describing the allows null.",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "coverage_scope": {
+                    "description": "Where this element surfaces (source/API/CLI/example/test).",
+                    "items": {
+                        "$ref": "#/$defs/CoverageScopeEnum"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Narrative description of the element.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "element_kind": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "Kind of Python declaration."
+                },
+                "field_name": {
+                    "description": "Slot describing the field name.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "field_type": {
+                    "description": "Slot describing the field type.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable identifier for a schema element.",
+                    "type": "string"
+                },
+                "module_path": {
+                    "description": "Python module path where this element is defined.",
+                    "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name.",
+                    "type": "string"
+                },
+                "package_kind": {
+                    "$ref": "#/$defs/PackageKindEnum",
+                    "description": "Package bucket."
+                },
+                "required_field": {
+                    "description": "Slot describing the required field.",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "source_file": {
+                    "description": "Source file relative to repository root.",
+                    "pattern": "^[^\\0]+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "description": "Free-form classification tags.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "ApiFieldSpec",
+            "type": "object"
+        },
+        "ApiModelSpec": {
+            "additionalProperties": false,
+            "description": "Specification of an HTTP API wire model.",
+            "properties": {
+                "coverage_scope": {
+                    "description": "Where this element surfaces (source/API/CLI/example/test).",
+                    "items": {
+                        "$ref": "#/$defs/CoverageScopeEnum"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Narrative description of the element.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "element_kind": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "Kind of Python declaration."
+                },
+                "has_field": {
+                    "description": "Slot describing the has field.",
+                    "items": {
+                        "$ref": "#/$defs/ApiFieldSpec"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable identifier for a schema element.",
+                    "type": "string"
+                },
+                "module_path": {
+                    "description": "Python module path where this element is defined.",
+                    "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name.",
+                    "type": "string"
+                },
+                "openai_object_type": {
+                    "description": "Slot describing the openai object type.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "package_kind": {
+                    "$ref": "#/$defs/PackageKindEnum",
+                    "description": "Package bucket."
+                },
+                "request_or_response": {
+                    "$ref": "#/$defs/RequestResponseEnum",
+                    "description": "Slot describing the request or response."
+                },
+                "source_file": {
+                    "description": "Source file relative to repository root.",
+                    "pattern": "^[^\\0]+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "description": "Free-form classification tags.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "ApiModelSpec",
+            "type": "object"
+        },
+        "BackendFamilyEnum": {
+            "description": "Backend families discovered under mellea/backends/.",
+            "enum": [
+                "BEDROCK",
+                "DUMMY",
+                "HUGGINGFACE",
+                "LITELLM",
+                "OLLAMA",
+                "OPENAI",
+                "WATSONX"
+            ],
+            "title": "BackendFamilyEnum",
+            "type": "string"
+        },
+        "BackendSpec": {
+            "additionalProperties": false,
+            "description": "Specification of a Mellea backend implementation.",
+            "properties": {
+                "backend_family": {
+                    "$ref": "#/$defs/BackendFamilyEnum",
+                    "description": "Slot describing the backend family."
+                },
+                "coverage_scope": {
+                    "description": "Where this element surfaces (source/API/CLI/example/test).",
+                    "items": {
+                        "$ref": "#/$defs/CoverageScopeEnum"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "default_formatter": {
+                    "description": "Slot describing the default formatter.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Narrative description of the element.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "element_kind": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "Kind of Python declaration."
+                },
+                "id": {
+                    "description": "Stable identifier for a schema element.",
+                    "type": "string"
+                },
+                "model_identifier": {
+                    "description": "Slot describing the model identifier.",
+                    "items": {
+                        "$ref": "#/$defs/ModelIdentifierSpec"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "model_options_key": {
+                    "description": "Slot describing the model options key.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "module_path": {
+                    "description": "Python module path where this element is defined.",
+                    "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name.",
+                    "type": "string"
+                },
+                "package_kind": {
+                    "$ref": "#/$defs/PackageKindEnum",
+                    "description": "Package bucket."
+                },
+                "source_file": {
+                    "description": "Source file relative to repository root.",
+                    "pattern": "^[^\\0]+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "supports_multimodal": {
+                    "description": "Slot describing the supports multimodal.",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "supports_streaming": {
+                    "description": "Slot describing the supports streaming.",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "supports_tool_calls": {
+                    "description": "Slot describing the supports tool calls.",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "description": "Free-form classification tags.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "BackendSpec",
+            "type": "object"
+        },
+        "CliCommandSpec": {
+            "additionalProperties": false,
+            "description": "Specification of a CLI command exposed under `m`.",
+            "properties": {
+                "command_group": {
+                    "description": "Slot describing the command group.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "command_path": {
+                    "description": "Slot describing the command path.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "command_purpose": {
+                    "description": "Slot describing the command purpose.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "coverage_scope": {
+                    "description": "Where this element surfaces (source/API/CLI/example/test).",
+                    "items": {
+                        "$ref": "#/$defs/CoverageScopeEnum"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Narrative description of the element.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "element_kind": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "Kind of Python declaration."
+                },
+                "id": {
+                    "description": "Stable identifier for a schema element.",
+                    "type": "string"
+                },
+                "input_model": {
+                    "description": "Slot describing the input model.",
+                    "items": {
+                        "$ref": "#/$defs/ApiModelSpec"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "module_path": {
+                    "description": "Python module path where this element is defined.",
+                    "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name.",
+                    "type": "string"
+                },
+                "output_model": {
+                    "description": "Slot describing the output model.",
+                    "items": {
+                        "$ref": "#/$defs/ApiModelSpec"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "package_kind": {
+                    "$ref": "#/$defs/PackageKindEnum",
+                    "description": "Package bucket."
+                },
+                "source_file": {
+                    "description": "Source file relative to repository root.",
+                    "pattern": "^[^\\0]+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "description": "Free-form classification tags.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "CliCommandSpec",
+            "type": "object"
+        },
+        "ComponentCategoryEnum": {
+            "description": "High-level category of a Mellea stdlib component.",
+            "enum": [
+                "INSTRUCTION",
+                "MESSAGE",
+                "TOOL_MESSAGE",
+                "DOCUMENT",
+                "INTRINSIC",
+                "MOBJECT",
+                "QUERY",
+                "TRANSFORM",
+                "GENSTUB",
+                "REQUIREMENT",
+                "STREAM_EVENT"
+            ],
+            "title": "ComponentCategoryEnum",
+            "type": "string"
+        },
+        "ComponentSpec": {
+            "additionalProperties": false,
+            "description": "Specification of a Mellea stdlib component type.",
+            "properties": {
+                "component_category": {
+                    "$ref": "#/$defs/ComponentCategoryEnum",
+                    "description": "Slot describing the component category."
+                },
+                "coverage_scope": {
+                    "description": "Where this element surfaces (source/API/CLI/example/test).",
+                    "items": {
+                        "$ref": "#/$defs/CoverageScopeEnum"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Narrative description of the element.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "element_kind": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "Kind of Python declaration."
+                },
+                "id": {
+                    "description": "Stable identifier for a schema element.",
+                    "type": "string"
+                },
+                "input_modality": {
+                    "description": "Slot describing the input modality.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "module_path": {
+                    "description": "Python module path where this element is defined.",
+                    "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name.",
+                    "type": "string"
+                },
+                "package_kind": {
+                    "$ref": "#/$defs/PackageKindEnum",
+                    "description": "Package bucket."
+                },
+                "parsed_output_type": {
+                    "description": "Slot describing the parsed output type.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "source_file": {
+                    "description": "Source file relative to repository root.",
+                    "pattern": "^[^\\0]+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "description": "Free-form classification tags.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "ComponentSpec",
+            "type": "object"
+        },
+        "ContextLinearityEnum": {
+            "description": "Whether a Mellea context preserves linear ordering or not.",
+            "enum": [
+                "LINEAR",
+                "NON_LINEAR"
+            ],
+            "title": "ContextLinearityEnum",
+            "type": "string"
+        },
+        "ContextSpec": {
+            "additionalProperties": false,
+            "description": "Specification of a context implementation.",
+            "properties": {
+                "accepts_message_attachments": {
+                    "description": "Slot describing the accepts message attachments.",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "context_linearity": {
+                    "$ref": "#/$defs/ContextLinearityEnum",
+                    "description": "Slot describing the context linearity."
+                },
+                "coverage_scope": {
+                    "description": "Where this element surfaces (source/API/CLI/example/test).",
+                    "items": {
+                        "$ref": "#/$defs/CoverageScopeEnum"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Narrative description of the element.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "element_kind": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "Kind of Python declaration."
+                },
+                "id": {
+                    "description": "Stable identifier for a schema element.",
+                    "type": "string"
+                },
+                "module_path": {
+                    "description": "Python module path where this element is defined.",
+                    "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name.",
+                    "type": "string"
+                },
+                "package_kind": {
+                    "$ref": "#/$defs/PackageKindEnum",
+                    "description": "Package bucket."
+                },
+                "source_file": {
+                    "description": "Source file relative to repository root.",
+                    "pattern": "^[^\\0]+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "stores_component_history": {
+                    "description": "Slot describing the stores component history.",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "description": "Free-form classification tags.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "ContextSpec",
+            "type": "object"
+        },
+        "CoverageScopeEnum": {
+            "description": "Where in the project an element surfaces (source, API, CLI, ...).",
+            "enum": [
+                "SOURCE",
+                "API",
+                "CLI",
+                "EXAMPLE",
+                "TEST"
+            ],
+            "title": "CoverageScopeEnum",
+            "type": "string"
+        },
+        "ElementKindEnum": {
+            "description": "Kind of Python declaration captured by a ModelElement entry.",
+            "enum": [
+                "CLASS",
+                "ENUM",
+                "DATACLASS",
+                "TYPED_DICT",
+                "PYDANTIC_MODEL",
+                "PROTOCOL",
+                "FUNCTION",
+                "MIXIN"
+            ],
+            "title": "ElementKindEnum",
+            "type": "string"
+        },
+        "FormatterSpec": {
+            "additionalProperties": false,
+            "description": "Specification of an output formatter for a backend.",
+            "properties": {
+                "coverage_scope": {
+                    "description": "Where this element surfaces (source/API/CLI/example/test).",
+                    "items": {
+                        "$ref": "#/$defs/CoverageScopeEnum"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Narrative description of the element.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "element_kind": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "Kind of Python declaration."
+                },
+                "id": {
+                    "description": "Stable identifier for a schema element.",
+                    "type": "string"
+                },
+                "module_path": {
+                    "description": "Python module path where this element is defined.",
+                    "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name.",
+                    "type": "string"
+                },
+                "package_kind": {
+                    "$ref": "#/$defs/PackageKindEnum",
+                    "description": "Package bucket."
+                },
+                "source_file": {
+                    "description": "Source file relative to repository root.",
+                    "pattern": "^[^\\0]+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "description": "Free-form classification tags.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "FormatterSpec",
+            "type": "object"
+        },
+        "HookPayloadSpec": {
+            "additionalProperties": false,
+            "description": "Specification of a hook payload model.",
+            "properties": {
+                "coverage_scope": {
+                    "description": "Where this element surfaces (source/API/CLI/example/test).",
+                    "items": {
+                        "$ref": "#/$defs/CoverageScopeEnum"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Narrative description of the element.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "element_kind": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "Kind of Python declaration."
+                },
+                "hook_type": {
+                    "description": "Slot describing the hook type.",
+                    "items": {
+                        "$ref": "#/$defs/HookTypeEnum"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable identifier for a schema element.",
+                    "type": "string"
+                },
+                "lifecycle_role": {
+                    "description": "Slot describing the lifecycle role.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "module_path": {
+                    "description": "Python module path where this element is defined.",
+                    "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name.",
+                    "type": "string"
+                },
+                "package_kind": {
+                    "$ref": "#/$defs/PackageKindEnum",
+                    "description": "Package bucket."
+                },
+                "source_file": {
+                    "description": "Source file relative to repository root.",
+                    "pattern": "^[^\\0]+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "description": "Free-form classification tags.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "HookPayloadSpec",
+            "type": "object"
+        },
+        "HookTypeEnum": {
+            "description": "Lifecycle hook stages (derived from HookType).",
+            "enum": [
+                "SESSION_PRE_INIT",
+                "SESSION_POST_INIT",
+                "SESSION_RESET",
+                "SESSION_CLEANUP",
+                "COMPONENT_PRE_EXECUTE",
+                "COMPONENT_POST_SUCCESS",
+                "COMPONENT_POST_ERROR",
+                "GENERATION_PRE_CALL",
+                "GENERATION_POST_CALL",
+                "GENERATION_ERROR",
+                "VALIDATION_PRE_CHECK",
+                "VALIDATION_POST_CHECK",
+                "SAMPLING_LOOP_START",
+                "SAMPLING_ITERATION",
+                "SAMPLING_REPAIR",
+                "SAMPLING_LOOP_END",
+                "TOOL_PRE_INVOKE",
+                "TOOL_POST_INVOKE"
+            ],
+            "title": "HookTypeEnum",
+            "type": "string"
+        },
+        "IntrinsicAdapterSpec": {
+            "additionalProperties": false,
+            "description": "Specification of an intrinsic adapter (LoRA / aLoRA).",
+            "properties": {
+                "adapter_type": {
+                    "description": "Slot describing the adapter type.",
+                    "items": {
+                        "$ref": "#/$defs/AdapterTypeEnum"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "coverage_scope": {
+                    "description": "Where this element surfaces (source/API/CLI/example/test).",
+                    "items": {
+                        "$ref": "#/$defs/CoverageScopeEnum"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Narrative description of the element.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "element_kind": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "Kind of Python declaration."
+                },
+                "id": {
+                    "description": "Stable identifier for a schema element.",
+                    "type": "string"
+                },
+                "module_path": {
+                    "description": "Python module path where this element is defined.",
+                    "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name.",
+                    "type": "string"
+                },
+                "package_kind": {
+                    "$ref": "#/$defs/PackageKindEnum",
+                    "description": "Package bucket."
+                },
+                "repo_id": {
+                    "description": "Slot describing the repo id.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "source_file": {
+                    "description": "Source file relative to repository root.",
+                    "pattern": "^[^\\0]+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "description": "Free-form classification tags.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "IntrinsicAdapterSpec",
+            "type": "object"
+        },
+        "MethodSpec": {
+            "additionalProperties": false,
+            "description": "Specification of a method exposed by a runtime class.",
+            "properties": {
+                "coverage_scope": {
+                    "description": "Where this element surfaces (source/API/CLI/example/test).",
+                    "items": {
+                        "$ref": "#/$defs/CoverageScopeEnum"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Narrative description of the element.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "element_kind": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "Kind of Python declaration."
+                },
+                "id": {
+                    "description": "Stable identifier for a schema element.",
+                    "type": "string"
+                },
+                "lifecycle_role": {
+                    "description": "Slot describing the lifecycle role.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "method_name": {
+                    "description": "Slot describing the method name.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "method_signature": {
+                    "description": "Slot describing the method signature.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "module_path": {
+                    "description": "Python module path where this element is defined.",
+                    "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name.",
+                    "type": "string"
+                },
+                "package_kind": {
+                    "$ref": "#/$defs/PackageKindEnum",
+                    "description": "Package bucket."
+                },
+                "source_file": {
+                    "description": "Source file relative to repository root.",
+                    "pattern": "^[^\\0]+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "description": "Free-form classification tags.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "MethodSpec",
+            "type": "object"
+        },
+        "ModelElement": {
+            "additionalProperties": false,
+            "description": "Abstract base for concrete architectural elements.",
+            "properties": {
+                "coverage_scope": {
+                    "description": "Where this element surfaces (source/API/CLI/example/test).",
+                    "items": {
+                        "$ref": "#/$defs/CoverageScopeEnum"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Narrative description of the element.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "element_kind": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "Kind of Python declaration."
+                },
+                "id": {
+                    "description": "Stable identifier for a schema element.",
+                    "type": "string"
+                },
+                "module_path": {
+                    "description": "Python module path where this element is defined.",
+                    "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name.",
+                    "type": "string"
+                },
+                "package_kind": {
+                    "$ref": "#/$defs/PackageKindEnum",
+                    "description": "Package bucket."
+                },
+                "source_file": {
+                    "description": "Source file relative to repository root.",
+                    "pattern": "^[^\\0]+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "description": "Free-form classification tags.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "ModelElement",
+            "type": "object"
+        },
+        "ModelIdentifierSpec": {
+            "additionalProperties": false,
+            "description": "Cross-provider identifier table for a single model.",
+            "properties": {
+                "bedrock_name": {
+                    "description": "Slot describing the bedrock name.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "coverage_scope": {
+                    "description": "Where this element surfaces (source/API/CLI/example/test).",
+                    "items": {
+                        "$ref": "#/$defs/CoverageScopeEnum"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Narrative description of the element.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "element_kind": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "Kind of Python declaration."
+                },
+                "hf_model_name": {
+                    "description": "Slot describing the hf model name.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable identifier for a schema element.",
+                    "type": "string"
+                },
+                "module_path": {
+                    "description": "Python module path where this element is defined.",
+                    "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name.",
+                    "type": "string"
+                },
+                "ollama_name": {
+                    "description": "Slot describing the ollama name.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "openai_name": {
+                    "description": "Slot describing the openai name.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "package_kind": {
+                    "$ref": "#/$defs/PackageKindEnum",
+                    "description": "Package bucket."
+                },
+                "provider_name": {
+                    "description": "Slot describing the provider name.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "source_file": {
+                    "description": "Source file relative to repository root.",
+                    "pattern": "^[^\\0]+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "description": "Free-form classification tags.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "watsonx_name": {
+                    "description": "Slot describing the watsonx name.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "ModelIdentifierSpec",
+            "type": "object"
+        },
+        "NamedElement": {
+            "additionalProperties": false,
+            "description": "Abstract base for any named, identifiable schema element.",
+            "properties": {
+                "coverage_scope": {
+                    "description": "Where this element surfaces (source/API/CLI/example/test).",
+                    "items": {
+                        "$ref": "#/$defs/CoverageScopeEnum"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Narrative description of the element.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "element_kind": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "Kind of Python declaration."
+                },
+                "id": {
+                    "description": "Stable identifier for a schema element.",
+                    "type": "string"
+                },
+                "module_path": {
+                    "description": "Python module path where this element is defined.",
+                    "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name.",
+                    "type": "string"
+                },
+                "package_kind": {
+                    "$ref": "#/$defs/PackageKindEnum",
+                    "description": "Package bucket."
+                },
+                "source_file": {
+                    "description": "Source file relative to repository root.",
+                    "pattern": "^[^\\0]+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "description": "Free-form classification tags.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "NamedElement",
+            "type": "object"
+        },
+        "PackageKindEnum": {
+            "description": "Logical package buckets used to classify Mellea source modules.",
+            "enum": [
+                "CORE",
+                "STDLIB",
+                "BACKENDS",
+                "FORMATTERS",
+                "HELPERS",
+                "PLUGINS",
+                "TELEMETRY",
+                "CLI",
+                "DOCS_EXAMPLES",
+                "TEST"
+            ],
+            "title": "PackageKindEnum",
+            "type": "string"
+        },
+        "PluginModeEnum": {
+            "description": "Execution mode of a Mellea plugin (derived from PluginMode).",
+            "enum": [
+                "SEQUENTIAL",
+                "TRANSFORM",
+                "CONCURRENT",
+                "AUDIT",
+                "FIRE_AND_FORGET"
+            ],
+            "title": "PluginModeEnum",
+            "type": "string"
+        },
+        "PluginSpec": {
+            "additionalProperties": false,
+            "description": "Specification of a Mellea plugin and the hooks it registers.",
+            "properties": {
+                "coverage_scope": {
+                    "description": "Where this element surfaces (source/API/CLI/example/test).",
+                    "items": {
+                        "$ref": "#/$defs/CoverageScopeEnum"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Narrative description of the element.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "element_kind": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "Kind of Python declaration."
+                },
+                "hook_type": {
+                    "description": "Slot describing the hook type.",
+                    "items": {
+                        "$ref": "#/$defs/HookTypeEnum"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable identifier for a schema element.",
+                    "type": "string"
+                },
+                "module_path": {
+                    "description": "Python module path where this element is defined.",
+                    "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name.",
+                    "type": "string"
+                },
+                "package_kind": {
+                    "$ref": "#/$defs/PackageKindEnum",
+                    "description": "Package bucket."
+                },
+                "payload_model": {
+                    "description": "Slot describing the payload model.",
+                    "items": {
+                        "$ref": "#/$defs/HookPayloadSpec"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "plugin_mode": {
+                    "$ref": "#/$defs/PluginModeEnum",
+                    "description": "Slot describing the plugin mode."
+                },
+                "plugin_priority": {
+                    "description": "Slot describing the plugin priority.",
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "source_file": {
+                    "description": "Source file relative to repository root.",
+                    "pattern": "^[^\\0]+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "description": "Free-form classification tags.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "PluginSpec",
+            "type": "object"
+        },
+        "PythonPackage": {
+            "additionalProperties": false,
+            "description": "A logical Python package (directory) inside the repository.",
+            "properties": {
+                "coverage_scope": {
+                    "description": "Where this element surfaces (source/API/CLI/example/test).",
+                    "items": {
+                        "$ref": "#/$defs/CoverageScopeEnum"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "declares_element": {
+                    "description": "Slot describing the declares element.",
+                    "items": {
+                        "$ref": "#/$defs/ModelElement"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "depends_on_package": {
+                    "description": "Slot describing the depends on package.",
+                    "items": {
+                        "$ref": "#/$defs/PythonPackage"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Narrative description of the element.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "element_kind": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "Kind of Python declaration."
+                },
+                "id": {
+                    "description": "Stable identifier for a schema element.",
+                    "type": "string"
+                },
+                "module_path": {
+                    "description": "Python module path where this element is defined.",
+                    "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name.",
+                    "type": "string"
+                },
+                "package_kind": {
+                    "$ref": "#/$defs/PackageKindEnum",
+                    "description": "Package bucket."
+                },
+                "package_name": {
+                    "description": "Slot describing the package name.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "source_file": {
+                    "description": "Source file relative to repository root.",
+                    "pattern": "^[^\\0]+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "description": "Free-form classification tags.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "PythonPackage",
+            "type": "object"
+        },
+        "RepositoryCatalog": {
+            "additionalProperties": false,
+            "description": "Top-level catalog rooting the analysed repository snapshot.",
+            "properties": {
+                "analyzed_on": {
+                    "description": "Slot describing the analyzed on.",
+                    "format": "date",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "coverage_scope": {
+                    "description": "Where this element surfaces (source/API/CLI/example/test).",
+                    "items": {
+                        "$ref": "#/$defs/CoverageScopeEnum"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "declares_element": {
+                    "description": "Slot describing the declares element.",
+                    "items": {
+                        "$ref": "#/$defs/ModelElement"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Narrative description of the element.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "element_kind": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "Kind of Python declaration."
+                },
+                "excludes_path": {
+                    "description": "Slot describing the excludes path.",
+                    "items": {
+                        "pattern": "^[^\\0]+$",
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable identifier for a schema element.",
+                    "type": "string"
+                },
+                "includes_path": {
+                    "description": "Slot describing the includes path.",
+                    "items": {
+                        "pattern": "^[^\\0]+$",
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "module_path": {
+                    "description": "Python module path where this element is defined.",
+                    "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name.",
+                    "type": "string"
+                },
+                "package_kind": {
+                    "$ref": "#/$defs/PackageKindEnum",
+                    "description": "Package bucket."
+                },
+                "repository_root": {
+                    "description": "Slot describing the repository root.",
+                    "pattern": "^[^\\0]+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "source_file": {
+                    "description": "Source file relative to repository root.",
+                    "pattern": "^[^\\0]+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "description": "Free-form classification tags.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "RepositoryCatalog",
+            "type": "object"
+        },
+        "RequestResponseEnum": {
+            "description": "Direction of a wire model (HTTP request, response, or both).",
+            "enum": [
+                "REQUEST",
+                "RESPONSE",
+                "BOTH"
+            ],
+            "title": "RequestResponseEnum",
+            "type": "string"
+        },
+        "RequirementSpec": {
+            "additionalProperties": false,
+            "description": "Specification of a requirement validator.",
+            "properties": {
+                "coverage_scope": {
+                    "description": "Where this element surfaces (source/API/CLI/example/test).",
+                    "items": {
+                        "$ref": "#/$defs/CoverageScopeEnum"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Narrative description of the element.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "element_kind": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "Kind of Python declaration."
+                },
+                "id": {
+                    "description": "Stable identifier for a schema element.",
+                    "type": "string"
+                },
+                "may_trigger_repair": {
+                    "description": "Slot describing the may trigger repair.",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "module_path": {
+                    "description": "Python module path where this element is defined.",
+                    "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name.",
+                    "type": "string"
+                },
+                "package_kind": {
+                    "$ref": "#/$defs/PackageKindEnum",
+                    "description": "Package bucket."
+                },
+                "source_file": {
+                    "description": "Source file relative to repository root.",
+                    "pattern": "^[^\\0]+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "description": "Free-form classification tags.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "validation_style": {
+                    "description": "Slot describing the validation style.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "RequirementSpec",
+            "type": "object"
+        },
+        "SamplingStrategySpec": {
+            "additionalProperties": false,
+            "description": "Specification of a sampling-loop strategy.",
+            "properties": {
+                "coverage_scope": {
+                    "description": "Where this element surfaces (source/API/CLI/example/test).",
+                    "items": {
+                        "$ref": "#/$defs/CoverageScopeEnum"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Narrative description of the element.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "element_kind": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "Kind of Python declaration."
+                },
+                "id": {
+                    "description": "Stable identifier for a schema element.",
+                    "type": "string"
+                },
+                "loop_budget_hint": {
+                    "description": "Slot describing the loop budget hint.",
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "may_trigger_repair": {
+                    "description": "Slot describing the may trigger repair.",
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
+                "module_path": {
+                    "description": "Python module path where this element is defined.",
+                    "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name.",
+                    "type": "string"
+                },
+                "package_kind": {
+                    "$ref": "#/$defs/PackageKindEnum",
+                    "description": "Package bucket."
+                },
+                "selection_policy": {
+                    "description": "Slot describing the selection policy.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "source_file": {
+                    "description": "Source file relative to repository root.",
+                    "pattern": "^[^\\0]+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "description": "Free-form classification tags.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "SamplingStrategySpec",
+            "type": "object"
+        },
+        "SessionSpec": {
+            "additionalProperties": false,
+            "description": "Specification of a Mellea session.",
+            "properties": {
+                "coverage_scope": {
+                    "description": "Where this element surfaces (source/API/CLI/example/test).",
+                    "items": {
+                        "$ref": "#/$defs/CoverageScopeEnum"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Narrative description of the element.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "element_kind": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "Kind of Python declaration."
+                },
+                "exposed_method": {
+                    "description": "Slot describing the exposed method.",
+                    "items": {
+                        "$ref": "#/$defs/MethodSpec"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Stable identifier for a schema element.",
+                    "type": "string"
+                },
+                "module_path": {
+                    "description": "Python module path where this element is defined.",
+                    "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name.",
+                    "type": "string"
+                },
+                "package_kind": {
+                    "$ref": "#/$defs/PackageKindEnum",
+                    "description": "Package bucket."
+                },
+                "source_file": {
+                    "description": "Source file relative to repository root.",
+                    "pattern": "^[^\\0]+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "description": "Free-form classification tags.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "uses_backend": {
+                    "description": "Slot describing the uses backend.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "uses_context": {
+                    "description": "Slot describing the uses context.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "SessionSpec",
+            "type": "object"
+        },
+        "TelemetryMetricSpec": {
+            "additionalProperties": false,
+            "description": "Specification of a telemetry metric emitted by Mellea.",
+            "properties": {
+                "coverage_scope": {
+                    "description": "Where this element surfaces (source/API/CLI/example/test).",
+                    "items": {
+                        "$ref": "#/$defs/CoverageScopeEnum"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "description": "Narrative description of the element.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "element_kind": {
+                    "$ref": "#/$defs/ElementKindEnum",
+                    "description": "Kind of Python declaration."
+                },
+                "id": {
+                    "description": "Stable identifier for a schema element.",
+                    "type": "string"
+                },
+                "metric_name": {
+                    "description": "Slot describing the metric name.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "module_path": {
+                    "description": "Python module path where this element is defined.",
+                    "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Human-readable name.",
+                    "type": "string"
+                },
+                "package_kind": {
+                    "$ref": "#/$defs/PackageKindEnum",
+                    "description": "Package bucket."
+                },
+                "source_file": {
+                    "description": "Source file relative to repository root.",
+                    "pattern": "^[^\\0]+$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "tags": {
+                    "description": "Free-form classification tags.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "TelemetryMetricSpec",
+            "type": "object"
+        }
+    },
+    "$id": "https://w3id.org/lmodel/mellea",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "additionalProperties": true,
+    "description": "Top-level catalog rooting the analysed repository snapshot.",
+    "metamodel_version": "1.11.0",
+    "properties": {
+        "analyzed_on": {
+            "description": "Slot describing the analyzed on.",
+            "format": "date",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "coverage_scope": {
+            "description": "Where this element surfaces (source/API/CLI/example/test).",
+            "items": {
+                "$ref": "#/$defs/CoverageScopeEnum"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "declares_element": {
+            "description": "Slot describing the declares element.",
+            "items": {
+                "$ref": "#/$defs/ModelElement"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "description": {
+            "description": "Narrative description of the element.",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "element_kind": {
+            "$ref": "#/$defs/ElementKindEnum",
+            "description": "Kind of Python declaration."
+        },
+        "excludes_path": {
+            "description": "Slot describing the excludes path.",
+            "items": {
+                "pattern": "^[^\\0]+$",
+                "type": "string"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "id": {
+            "description": "Stable identifier for a schema element.",
+            "type": "string"
+        },
+        "includes_path": {
+            "description": "Slot describing the includes path.",
+            "items": {
+                "pattern": "^[^\\0]+$",
+                "type": "string"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "module_path": {
+            "description": "Python module path where this element is defined.",
+            "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "name": {
+            "description": "Human-readable name.",
+            "type": "string"
+        },
+        "package_kind": {
+            "$ref": "#/$defs/PackageKindEnum",
+            "description": "Package bucket."
+        },
+        "repository_root": {
+            "description": "Slot describing the repository root.",
+            "pattern": "^[^\\0]+$",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "source_file": {
+            "description": "Source file relative to repository root.",
+            "pattern": "^[^\\0]+$",
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "tags": {
+            "description": "Free-form classification tags.",
+            "items": {
+                "type": "string"
+            },
+            "type": [
+                "array",
+                "null"
+            ]
+        }
+    },
+    "required": [
+        "id",
+        "name"
+    ],
+    "title": "mellea",
+    "type": "object",
+    "version": "2026-05-26"
+}

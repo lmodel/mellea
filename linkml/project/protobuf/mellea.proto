@@ -1,0 +1,297 @@
+ syntax="proto3";
+ package
+// metamodel_version: 1.11.0
+// version: 2026-05-26
+// Specification of a single field in an API model.
+message ApiFieldSpec
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  pythonDottedPath modulePath = 0
+  repositoryRelativePath sourceFile = 0
+  packageKindEnum packageKind = 0
+  elementKindEnum elementKind = 0
+ repeated  coverageScopeEnum coverageScope = 0
+ repeated  string tags = 0
+  string fieldName = 0
+  string fieldType = 0
+  boolean requiredField = 0
+  boolean allowsNull = 0
+ }
+// Specification of an HTTP API wire model.
+message ApiModelSpec
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  pythonDottedPath modulePath = 0
+  repositoryRelativePath sourceFile = 0
+  packageKindEnum packageKind = 0
+  elementKindEnum elementKind = 0
+ repeated  coverageScopeEnum coverageScope = 0
+ repeated  string tags = 0
+  requestResponseEnum requestOrResponse = 0
+  string openaiObjectType = 0
+ repeated  apiFieldSpec hasField = 0
+ }
+// Specification of a Mellea backend implementation.
+message BackendSpec
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  pythonDottedPath modulePath = 0
+  repositoryRelativePath sourceFile = 0
+  packageKindEnum packageKind = 0
+  elementKindEnum elementKind = 0
+ repeated  coverageScopeEnum coverageScope = 0
+ repeated  string tags = 0
+  backendFamilyEnum backendFamily = 0
+ repeated  modelIdentifierSpec modelIdentifier = 0
+  formatterSpec defaultFormatter = 0
+ repeated  string modelOptionsKey = 0
+  boolean supportsStreaming = 0
+  boolean supportsToolCalls = 0
+  boolean supportsMultimodal = 0
+ }
+// Specification of a CLI command exposed under `m`.
+message CliCommandSpec
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  pythonDottedPath modulePath = 0
+  repositoryRelativePath sourceFile = 0
+  packageKindEnum packageKind = 0
+  elementKindEnum elementKind = 0
+ repeated  coverageScopeEnum coverageScope = 0
+ repeated  string tags = 0
+  string commandGroup = 0
+  string commandPath = 0
+  string commandPurpose = 0
+ repeated  apiModelSpec inputModel = 0
+ repeated  apiModelSpec outputModel = 0
+ }
+// Specification of a Mellea stdlib component type.
+message ComponentSpec
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  pythonDottedPath modulePath = 0
+  repositoryRelativePath sourceFile = 0
+  packageKindEnum packageKind = 0
+  elementKindEnum elementKind = 0
+ repeated  coverageScopeEnum coverageScope = 0
+ repeated  string tags = 0
+  componentCategoryEnum componentCategory = 0
+ repeated  string inputModality = 0
+  string parsedOutputType = 0
+ }
+// Specification of a context implementation.
+message ContextSpec
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  pythonDottedPath modulePath = 0
+  repositoryRelativePath sourceFile = 0
+  packageKindEnum packageKind = 0
+  elementKindEnum elementKind = 0
+ repeated  coverageScopeEnum coverageScope = 0
+ repeated  string tags = 0
+  contextLinearityEnum contextLinearity = 0
+  boolean storesComponentHistory = 0
+  boolean acceptsMessageAttachments = 0
+ }
+// Specification of an output formatter for a backend.
+message FormatterSpec
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  pythonDottedPath modulePath = 0
+  repositoryRelativePath sourceFile = 0
+  packageKindEnum packageKind = 0
+  elementKindEnum elementKind = 0
+ repeated  coverageScopeEnum coverageScope = 0
+ repeated  string tags = 0
+ }
+// Specification of a hook payload model.
+message HookPayloadSpec
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  pythonDottedPath modulePath = 0
+  repositoryRelativePath sourceFile = 0
+  packageKindEnum packageKind = 0
+  elementKindEnum elementKind = 0
+ repeated  coverageScopeEnum coverageScope = 0
+ repeated  string tags = 0
+ repeated  hookTypeEnum hookType = 0
+  string lifecycleRole = 0
+ }
+// Specification of an intrinsic adapter (LoRA / aLoRA).
+message IntrinsicAdapterSpec
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  pythonDottedPath modulePath = 0
+  repositoryRelativePath sourceFile = 0
+  packageKindEnum packageKind = 0
+  elementKindEnum elementKind = 0
+ repeated  coverageScopeEnum coverageScope = 0
+ repeated  string tags = 0
+  string repoId = 0
+ repeated  adapterTypeEnum adapterType = 0
+ }
+// Specification of a method exposed by a runtime class.
+message MethodSpec
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  pythonDottedPath modulePath = 0
+  repositoryRelativePath sourceFile = 0
+  packageKindEnum packageKind = 0
+  elementKindEnum elementKind = 0
+ repeated  coverageScopeEnum coverageScope = 0
+ repeated  string tags = 0
+  string methodName = 0
+  string methodSignature = 0
+  string lifecycleRole = 0
+ }
+// Cross-provider identifier table for a single model.
+message ModelIdentifierSpec
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  pythonDottedPath modulePath = 0
+  repositoryRelativePath sourceFile = 0
+  packageKindEnum packageKind = 0
+  elementKindEnum elementKind = 0
+ repeated  coverageScopeEnum coverageScope = 0
+ repeated  string tags = 0
+  string hfModelName = 0
+  string ollamaName = 0
+  string watsonxName = 0
+  string openaiName = 0
+  string bedrockName = 0
+ repeated  string providerName = 0
+ }
+// Specification of a Mellea plugin and the hooks it registers.
+message PluginSpec
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  pythonDottedPath modulePath = 0
+  repositoryRelativePath sourceFile = 0
+  packageKindEnum packageKind = 0
+  elementKindEnum elementKind = 0
+ repeated  coverageScopeEnum coverageScope = 0
+ repeated  string tags = 0
+  pluginModeEnum pluginMode = 0
+ repeated  hookTypeEnum hookType = 0
+ repeated  hookPayloadSpec payloadModel = 0
+  integer pluginPriority = 0
+ }
+// A logical Python package (directory) inside the repository.
+message PythonPackage
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  pythonDottedPath modulePath = 0
+  repositoryRelativePath sourceFile = 0
+  packageKindEnum packageKind = 0
+  elementKindEnum elementKind = 0
+ repeated  coverageScopeEnum coverageScope = 0
+ repeated  string tags = 0
+  string packageName = 0
+ repeated  pythonPackage dependsOnPackage = 0
+ repeated  modelElement declaresElement = 0
+ }
+// Top-level catalog rooting the analysed repository snapshot.
+message RepositoryCatalog
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  pythonDottedPath modulePath = 0
+  repositoryRelativePath sourceFile = 0
+  packageKindEnum packageKind = 0
+  elementKindEnum elementKind = 0
+ repeated  coverageScopeEnum coverageScope = 0
+ repeated  string tags = 0
+  repositoryRelativePath repositoryRoot = 0
+  date analyzedOn = 0
+ repeated  repositoryRelativePath includesPath = 0
+ repeated  repositoryRelativePath excludesPath = 0
+ repeated  modelElement declaresElement = 0
+ }
+// Specification of a requirement validator.
+message RequirementSpec
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  pythonDottedPath modulePath = 0
+  repositoryRelativePath sourceFile = 0
+  packageKindEnum packageKind = 0
+  elementKindEnum elementKind = 0
+ repeated  coverageScopeEnum coverageScope = 0
+ repeated  string tags = 0
+  string validationStyle = 0
+  boolean mayTriggerRepair = 0
+ }
+// Specification of a sampling-loop strategy.
+message SamplingStrategySpec
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  pythonDottedPath modulePath = 0
+  repositoryRelativePath sourceFile = 0
+  packageKindEnum packageKind = 0
+  elementKindEnum elementKind = 0
+ repeated  coverageScopeEnum coverageScope = 0
+ repeated  string tags = 0
+  string selectionPolicy = 0
+  integer loopBudgetHint = 0
+  boolean mayTriggerRepair = 0
+ }
+// Specification of a Mellea session.
+message SessionSpec
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  pythonDottedPath modulePath = 0
+  repositoryRelativePath sourceFile = 0
+  packageKindEnum packageKind = 0
+  elementKindEnum elementKind = 0
+ repeated  coverageScopeEnum coverageScope = 0
+ repeated  string tags = 0
+  backendSpec usesBackend = 0
+  contextSpec usesContext = 0
+ repeated  methodSpec exposedMethod = 0
+ }
+// Specification of a telemetry metric emitted by Mellea.
+message TelemetryMetricSpec
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  pythonDottedPath modulePath = 0
+  repositoryRelativePath sourceFile = 0
+  packageKindEnum packageKind = 0
+  elementKindEnum elementKind = 0
+ repeated  coverageScopeEnum coverageScope = 0
+ repeated  string tags = 0
+ repeated  string metricName = 0
+ }

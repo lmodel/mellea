@@ -1,0 +1,431 @@
+# metamodel_version: 1.11.0
+# version: 2026-05-26
+enum AdapterTypeEnum
+  {
+    LORA
+    ALORA
+  }
+
+enum BackendFamilyEnum
+  {
+    BEDROCK
+    DUMMY
+    HUGGINGFACE
+    LITELLM
+    OLLAMA
+    OPENAI
+    WATSONX
+  }
+
+enum ComponentCategoryEnum
+  {
+    INSTRUCTION
+    MESSAGE
+    TOOL_MESSAGE
+    DOCUMENT
+    INTRINSIC
+    MOBJECT
+    QUERY
+    TRANSFORM
+    GENSTUB
+    REQUIREMENT
+    STREAM_EVENT
+  }
+
+enum ContextLinearityEnum
+  {
+    LINEAR
+    NON_LINEAR
+  }
+
+enum CoverageScopeEnum
+  {
+    SOURCE
+    API
+    CLI
+    EXAMPLE
+    TEST
+  }
+
+enum ElementKindEnum
+  {
+    CLASS
+    ENUM
+    DATACLASS
+    TYPED_DICT
+    PYDANTIC_MODEL
+    PROTOCOL
+    FUNCTION
+    MIXIN
+  }
+
+enum HookTypeEnum
+  {
+    SESSION_PRE_INIT
+    SESSION_POST_INIT
+    SESSION_RESET
+    SESSION_CLEANUP
+    COMPONENT_PRE_EXECUTE
+    COMPONENT_POST_SUCCESS
+    COMPONENT_POST_ERROR
+    GENERATION_PRE_CALL
+    GENERATION_POST_CALL
+    GENERATION_ERROR
+    VALIDATION_PRE_CHECK
+    VALIDATION_POST_CHECK
+    SAMPLING_LOOP_START
+    SAMPLING_ITERATION
+    SAMPLING_REPAIR
+    SAMPLING_LOOP_END
+    TOOL_PRE_INVOKE
+    TOOL_POST_INVOKE
+  }
+
+enum PackageKindEnum
+  {
+    CORE
+    STDLIB
+    BACKENDS
+    FORMATTERS
+    HELPERS
+    PLUGINS
+    TELEMETRY
+    CLI
+    DOCS_EXAMPLES
+    TEST
+  }
+
+enum PluginModeEnum
+  {
+    SEQUENTIAL
+    TRANSFORM
+    CONCURRENT
+    AUDIT
+    FIRE_AND_FORGET
+  }
+
+enum RequestResponseEnum
+  {
+    REQUEST
+    RESPONSE
+    BOTH
+  }
+
+type ApiFieldSpec
+  {
+    id: String!
+    name: String!
+    description: String
+    modulePath: PythonDottedPath
+    sourceFile: RepositoryRelativePath
+    packageKind: PackageKindEnum
+    elementKind: ElementKindEnum
+    coverageScope: [CoverageScopeEnum]
+    tags: [String]
+    fieldName: String
+    fieldType: String
+    requiredField: Boolean
+    allowsNull: Boolean
+  }
+
+type ApiModelSpec
+  {
+    id: String!
+    name: String!
+    description: String
+    modulePath: PythonDottedPath
+    sourceFile: RepositoryRelativePath
+    packageKind: PackageKindEnum
+    elementKind: ElementKindEnum
+    coverageScope: [CoverageScopeEnum]
+    tags: [String]
+    requestOrResponse: RequestResponseEnum
+    openaiObjectType: String
+    hasField: [ApiFieldSpec]
+  }
+
+type BackendSpec
+  {
+    id: String!
+    name: String!
+    description: String
+    modulePath: PythonDottedPath
+    sourceFile: RepositoryRelativePath
+    packageKind: PackageKindEnum
+    elementKind: ElementKindEnum
+    coverageScope: [CoverageScopeEnum]
+    tags: [String]
+    backendFamily: BackendFamilyEnum
+    modelIdentifier: [ModelIdentifierSpec]
+    defaultFormatter: FormatterSpec
+    modelOptionsKey: [String]
+    supportsStreaming: Boolean
+    supportsToolCalls: Boolean
+    supportsMultimodal: Boolean
+  }
+
+type CliCommandSpec
+  {
+    id: String!
+    name: String!
+    description: String
+    modulePath: PythonDottedPath
+    sourceFile: RepositoryRelativePath
+    packageKind: PackageKindEnum
+    elementKind: ElementKindEnum
+    coverageScope: [CoverageScopeEnum]
+    tags: [String]
+    commandGroup: String
+    commandPath: String
+    commandPurpose: String
+    inputModel: [ApiModelSpec]
+    outputModel: [ApiModelSpec]
+  }
+
+type ComponentSpec
+  {
+    id: String!
+    name: String!
+    description: String
+    modulePath: PythonDottedPath
+    sourceFile: RepositoryRelativePath
+    packageKind: PackageKindEnum
+    elementKind: ElementKindEnum
+    coverageScope: [CoverageScopeEnum]
+    tags: [String]
+    componentCategory: ComponentCategoryEnum
+    inputModality: [String]
+    parsedOutputType: String
+  }
+
+type ContextSpec
+  {
+    id: String!
+    name: String!
+    description: String
+    modulePath: PythonDottedPath
+    sourceFile: RepositoryRelativePath
+    packageKind: PackageKindEnum
+    elementKind: ElementKindEnum
+    coverageScope: [CoverageScopeEnum]
+    tags: [String]
+    contextLinearity: ContextLinearityEnum
+    storesComponentHistory: Boolean
+    acceptsMessageAttachments: Boolean
+  }
+
+type FormatterSpec
+  {
+    id: String!
+    name: String!
+    description: String
+    modulePath: PythonDottedPath
+    sourceFile: RepositoryRelativePath
+    packageKind: PackageKindEnum
+    elementKind: ElementKindEnum
+    coverageScope: [CoverageScopeEnum]
+    tags: [String]
+  }
+
+type HookPayloadSpec
+  {
+    id: String!
+    name: String!
+    description: String
+    modulePath: PythonDottedPath
+    sourceFile: RepositoryRelativePath
+    packageKind: PackageKindEnum
+    elementKind: ElementKindEnum
+    coverageScope: [CoverageScopeEnum]
+    tags: [String]
+    hookType: [HookTypeEnum]
+    lifecycleRole: String
+  }
+
+type IntrinsicAdapterSpec
+  {
+    id: String!
+    name: String!
+    description: String
+    modulePath: PythonDottedPath
+    sourceFile: RepositoryRelativePath
+    packageKind: PackageKindEnum
+    elementKind: ElementKindEnum
+    coverageScope: [CoverageScopeEnum]
+    tags: [String]
+    repoId: String
+    adapterType: [AdapterTypeEnum]
+  }
+
+type MethodSpec
+  {
+    id: String!
+    name: String!
+    description: String
+    modulePath: PythonDottedPath
+    sourceFile: RepositoryRelativePath
+    packageKind: PackageKindEnum
+    elementKind: ElementKindEnum
+    coverageScope: [CoverageScopeEnum]
+    tags: [String]
+    methodName: String
+    methodSignature: String
+    lifecycleRole: String
+  }
+
+interface ModelElement
+  {
+    id: String!
+    name: String!
+    description: String
+    modulePath: PythonDottedPath
+    sourceFile: RepositoryRelativePath
+    packageKind: PackageKindEnum
+    elementKind: ElementKindEnum
+    coverageScope: [CoverageScopeEnum]
+    tags: [String]
+  }
+
+type ModelIdentifierSpec
+  {
+    id: String!
+    name: String!
+    description: String
+    modulePath: PythonDottedPath
+    sourceFile: RepositoryRelativePath
+    packageKind: PackageKindEnum
+    elementKind: ElementKindEnum
+    coverageScope: [CoverageScopeEnum]
+    tags: [String]
+    hfModelName: String
+    ollamaName: String
+    watsonxName: String
+    openaiName: String
+    bedrockName: String
+    providerName: [String]
+  }
+
+interface NamedElement
+  {
+    id: String!
+    name: String!
+    description: String
+    modulePath: PythonDottedPath
+    sourceFile: RepositoryRelativePath
+    packageKind: PackageKindEnum
+    elementKind: ElementKindEnum
+    coverageScope: [CoverageScopeEnum]
+    tags: [String]
+  }
+
+type PluginSpec
+  {
+    id: String!
+    name: String!
+    description: String
+    modulePath: PythonDottedPath
+    sourceFile: RepositoryRelativePath
+    packageKind: PackageKindEnum
+    elementKind: ElementKindEnum
+    coverageScope: [CoverageScopeEnum]
+    tags: [String]
+    pluginMode: PluginModeEnum
+    hookType: [HookTypeEnum]
+    payloadModel: [HookPayloadSpec]
+    pluginPriority: Int
+  }
+
+type PythonPackage
+  {
+    id: String!
+    name: String!
+    description: String
+    modulePath: PythonDottedPath
+    sourceFile: RepositoryRelativePath
+    packageKind: PackageKindEnum
+    elementKind: ElementKindEnum
+    coverageScope: [CoverageScopeEnum]
+    tags: [String]
+    packageName: String
+    dependsOnPackage: [PythonPackage]
+    declaresElement: [ModelElement]
+  }
+
+type RepositoryCatalog
+  {
+    id: String!
+    name: String!
+    description: String
+    modulePath: PythonDottedPath
+    sourceFile: RepositoryRelativePath
+    packageKind: PackageKindEnum
+    elementKind: ElementKindEnum
+    coverageScope: [CoverageScopeEnum]
+    tags: [String]
+    repositoryRoot: RepositoryRelativePath
+    analyzedOn: String
+    includesPath: [RepositoryRelativePath]
+    excludesPath: [RepositoryRelativePath]
+    declaresElement: [ModelElement]
+  }
+
+type RequirementSpec
+  {
+    id: String!
+    name: String!
+    description: String
+    modulePath: PythonDottedPath
+    sourceFile: RepositoryRelativePath
+    packageKind: PackageKindEnum
+    elementKind: ElementKindEnum
+    coverageScope: [CoverageScopeEnum]
+    tags: [String]
+    validationStyle: String
+    mayTriggerRepair: Boolean
+  }
+
+type SamplingStrategySpec
+  {
+    id: String!
+    name: String!
+    description: String
+    modulePath: PythonDottedPath
+    sourceFile: RepositoryRelativePath
+    packageKind: PackageKindEnum
+    elementKind: ElementKindEnum
+    coverageScope: [CoverageScopeEnum]
+    tags: [String]
+    selectionPolicy: String
+    loopBudgetHint: Int
+    mayTriggerRepair: Boolean
+  }
+
+type SessionSpec
+  {
+    id: String!
+    name: String!
+    description: String
+    modulePath: PythonDottedPath
+    sourceFile: RepositoryRelativePath
+    packageKind: PackageKindEnum
+    elementKind: ElementKindEnum
+    coverageScope: [CoverageScopeEnum]
+    tags: [String]
+    usesBackend: BackendSpec
+    usesContext: ContextSpec
+    exposedMethod: [MethodSpec]
+  }
+
+type TelemetryMetricSpec
+  {
+    id: String!
+    name: String!
+    description: String
+    modulePath: PythonDottedPath
+    sourceFile: RepositoryRelativePath
+    packageKind: PackageKindEnum
+    elementKind: ElementKindEnum
+    coverageScope: [CoverageScopeEnum]
+    tags: [String]
+    metricName: [String]
+  }
