@@ -33,6 +33,7 @@ For each YAML file in ``--schema-dir`` the script:
 The script is idempotent: running it twice on a clean tree produces no
 further changes.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -45,23 +46,20 @@ import yaml
 # Reuse the canonical YAML formatter from schema_to_linkml.py so overlaid
 # files keep the exact byte-level shape of a fresh generator run.
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from schema_to_linkml import _yaml_dump  # noqa: E402
-
+from schema_to_linkml import _yaml_dump
 
 # SKOS predicate -> LinkML mapping slot.
 SSSOM_PREDICATE_TO_LINKML_SLOT: dict[str, str] = {
-    "skos:exactMatch":   "exact_mappings",
-    "skos:closeMatch":   "close_mappings",
-    "skos:broadMatch":   "broad_mappings",
-    "skos:narrowMatch":  "narrow_mappings",
+    "skos:exactMatch": "exact_mappings",
+    "skos:closeMatch": "close_mappings",
+    "skos:broadMatch": "broad_mappings",
+    "skos:narrowMatch": "narrow_mappings",
     "skos:relatedMatch": "related_mappings",
 }
 
 # Prefixes that are intrinsic to LinkML / SSSOM and need not be declared on
 # every schema YAML.
-_SSSOM_BUILTIN_PREFIXES = {
-    "sssom", "owl", "rdf", "rdfs", "skos", "semapv", "linkml",
-}
+_SSSOM_BUILTIN_PREFIXES = {"sssom", "owl", "rdf", "rdfs", "skos", "semapv", "linkml"}
 
 
 # ---------------------------------------------------------------------------
@@ -81,18 +79,18 @@ _SSSOM_BUILTIN_PREFIXES = {
 # that already exists.
 
 _POST_MAPPING_ANCHORS_CLASS = (
-    "aliases", "in_subset", "attributes", "slots", "slot_usage",
-    "rules", "comments", "annotations",
+    "aliases",
+    "in_subset",
+    "attributes",
+    "slots",
+    "slot_usage",
+    "rules",
+    "comments",
+    "annotations",
 )
-_POST_MAPPING_ANCHORS_ENUM = (
-    "aliases", "in_subset", "permissible_values",
-)
-_POST_MAPPING_ANCHORS_TYPE = (
-    "aliases", "in_subset", "pattern", "annotations",
-)
-_POST_MAPPING_ANCHORS_SLOT = (
-    "aliases", "in_subset", "annotations",
-)
+_POST_MAPPING_ANCHORS_ENUM = ("aliases", "in_subset", "permissible_values")
+_POST_MAPPING_ANCHORS_TYPE = ("aliases", "in_subset", "pattern", "annotations")
+_POST_MAPPING_ANCHORS_SLOT = ("aliases", "in_subset", "annotations")
 
 # Relative order of the five mapping slots within a body.
 _MAPPING_SLOT_ORDER = (
@@ -112,7 +110,7 @@ _MAPPING_SLOT_ORDER = (
 def _parse_sssom_metadata(path: Path) -> dict:
     """Parse the leading ``#`` metadata block of an SSSOM TSV as YAML."""
     buf: list[str] = []
-    with open(path, "r", encoding="utf-8") as fh:
+    with open(path, encoding="utf-8") as fh:
         for line in fh:
             if not line.startswith("#"):
                 break
@@ -137,7 +135,7 @@ def _parse_sssom_rows(path: Path) -> tuple[list[str], list[list[str]]]:
     """Return ``(header, rows)`` from the TSV body (skipping metadata)."""
     header: list[str] | None = None
     rows: list[list[str]] = []
-    with open(path, "r", encoding="utf-8") as fh:
+    with open(path, encoding="utf-8") as fh:
         for line in fh:
             line = line.rstrip("\r\n")
             if not line or line.startswith("#"):
@@ -159,7 +157,7 @@ def _strip_subject_prefix(curie: str, subject_prefix: str) -> str | None:
     """
     px = f"{subject_prefix}:"
     if curie.startswith(px):
-        return curie[len(px):]
+        return curie[len(px) :]
     return None
 
 
@@ -172,16 +170,19 @@ class MappingIndex:
     """subject_local_name -> mapping_slot -> ordered list of object CURIEs."""
 
     def __init__(self) -> None:
+        """Initialize empty per-subject mapping and prefix-URI dictionaries."""
         self.by_name: dict[str, dict[str, list[str]]] = {}
         self.prefix_uris: dict[str, str] = {}
 
     def add(self, name: str, slot: str, obj_curie: str) -> None:
+        """Record a CURIE mapping under ``name``/``slot``, preserving insertion order."""
         slot_map = self.by_name.setdefault(name, {})
         existing = slot_map.setdefault(slot, [])
         if obj_curie not in existing:
             existing.append(obj_curie)
 
     def used_prefixes_for(self, name: str) -> set[str]:
+        """Return the set of CURIE prefixes referenced by any mapping on ``name``."""
         out: set[str] = set()
         for curies in self.by_name.get(name, {}).values():
             for c in curies:
@@ -199,11 +200,13 @@ class RawMappings:
     """
 
     def __init__(self) -> None:
+        """Initialize an empty row pool and prefix-URI dictionary."""
         # (subject_curie, predicate, object_curie)
         self.rows: list[tuple[str, str, str]] = []
         self.prefix_uris: dict[str, str] = {}
 
     def index_for(self, subject_prefix: str) -> MappingIndex:
+        """Build a :class:`MappingIndex` filtered to rows whose subject uses ``subject_prefix``."""
         idx = MappingIndex()
         idx.prefix_uris = dict(self.prefix_uris)
         for subject, predicate, obj in self.rows:
@@ -271,10 +274,7 @@ def _to_ordered(value):
 
 
 def _insert_mapping_slot(
-    body: OrderedDict,
-    slot: str,
-    curies: list[str],
-    post_anchors: tuple[str, ...],
+    body: OrderedDict, slot: str, curies: list[str], post_anchors: tuple[str, ...]
 ) -> None:
     """Place ``slot`` at its canonical position within ``body``.
 
@@ -298,7 +298,7 @@ def _insert_mapping_slot(
 
     target_before: str | None = None
     if target_after is None:
-        for s in _MAPPING_SLOT_ORDER[slot_idx + 1:]:
+        for s in _MAPPING_SLOT_ORDER[slot_idx + 1 :]:
             if s in body:
                 target_before = s
                 break
@@ -331,9 +331,7 @@ def _insert_mapping_slot(
 
 
 def _merge_mappings(
-    body: OrderedDict,
-    slot_map: dict[str, list[str]],
-    post_anchors: tuple[str, ...],
+    body: OrderedDict, slot_map: dict[str, list[str]], post_anchors: tuple[str, ...]
 ) -> tuple[bool, int]:
     """Merge ``slot_map`` into ``body``. Returns ``(touched, links_added)``."""
     touched = False
@@ -400,7 +398,7 @@ def _ensure_prefixes(
 
 def overlay_file(
     schema_path: Path,
-    raw_mappings: "RawMappings",
+    raw_mappings: RawMappings,
     subject_prefix_override: str | None = None,
 ) -> tuple[int, int]:
     """Overlay mappings onto one schema YAML in place.
@@ -454,9 +452,9 @@ def overlay_file(
 
     for collection_key, post_anchors in (
         ("classes", _POST_MAPPING_ANCHORS_CLASS),
-        ("slots",   _POST_MAPPING_ANCHORS_SLOT),
-        ("enums",   _POST_MAPPING_ANCHORS_ENUM),
-        ("types",   _POST_MAPPING_ANCHORS_TYPE),
+        ("slots", _POST_MAPPING_ANCHORS_SLOT),
+        ("enums", _POST_MAPPING_ANCHORS_ENUM),
+        ("types", _POST_MAPPING_ANCHORS_TYPE),
     ):
         collection = data.get(collection_key)
         if not isinstance(collection, dict):
@@ -528,26 +526,28 @@ def overlay_file(
 
 
 def main(argv: list[str] | None = None) -> int:
+    """CLI entry point: merge SSSOM mappings into the generated LinkML schema."""
     here = Path(__file__).resolve().parent
     repo_root = here.parent
-    default_schema_dir = (
-        repo_root / "src" / "mellea" / "schema"
-    )
-    default_mappings_dir = (
-        repo_root / "src" / "mellea" / "mappings"
-    )
+    default_schema_dir = repo_root / "src" / "mellea" / "schema"
+    default_mappings_dir = repo_root / "src" / "mellea" / "mappings"
 
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     p.add_argument(
-        "--schema-dir", type=Path, default=default_schema_dir,
+        "--schema-dir",
+        type=Path,
+        default=default_schema_dir,
         help="directory containing LinkML schema YAML files",
     )
     p.add_argument(
-        "--mappings-dir", type=Path, default=default_mappings_dir,
+        "--mappings-dir",
+        type=Path,
+        default=default_mappings_dir,
         help="directory containing *.sssom.tsv mapping files",
     )
     p.add_argument(
-        "--subject-prefix", default=None,
+        "--subject-prefix",
+        default=None,
         help=(
             "CURIE prefix (without trailing ':') identifying subject rows "
             "in the SSSOM TSVs. Defaults to each schema's own "
@@ -557,12 +557,15 @@ def main(argv: list[str] | None = None) -> int:
     args = p.parse_args(argv)
 
     if not args.schema_dir.is_dir():
-        print(f"ERROR: schema-dir {args.schema_dir} is not a directory",
-              file=sys.stderr)
+        print(
+            f"ERROR: schema-dir {args.schema_dir} is not a directory", file=sys.stderr
+        )
         return 1
     if not args.mappings_dir.is_dir():
-        print(f"ERROR: mappings-dir {args.mappings_dir} is not a directory",
-              file=sys.stderr)
+        print(
+            f"ERROR: mappings-dir {args.mappings_dir} is not a directory",
+            file=sys.stderr,
+        )
         return 1
 
     raw = load_mappings(args.mappings_dir)
@@ -574,10 +577,7 @@ def main(argv: list[str] | None = None) -> int:
         )
         return 0
 
-    print(
-        f"Loaded {len(raw.rows)} mapping rows from "
-        f"{args.mappings_dir}"
-    )
+    print(f"Loaded {len(raw.rows)} mapping rows from {args.mappings_dir}")
 
     schemas = sorted(args.schema_dir.glob("*.yaml"))
     if not schemas:

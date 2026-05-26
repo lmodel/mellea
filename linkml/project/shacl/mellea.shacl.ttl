@@ -9,24 +9,11 @@ mellea:CliCommandSpec a sh:NodeShape ;
     rdfs:comment "Specification of a CLI command exposed under `m`." ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
-            sh:description "Narrative description of the element." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 7 ;
-            sh:path schema1:description ],
-        [ sh:datatype xsd:string ;
-            sh:description "Source file relative to repository root." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 9 ;
-            sh:path mellea:source_file ;
-            sh:pattern "^[^\\0]+$" ],
-        [ sh:description "Kind of Python declaration." ;
-            sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
-            sh:maxCount 1 ;
-            sh:order 11 ;
-            sh:path mellea:element_kind ],
+    sh:property [ sh:class mellea:ApiModelSpec ;
+            sh:description "Slot describing the input model." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path mellea:input_model ],
         [ sh:datatype xsd:string ;
             sh:description "Python module path where this element is defined." ;
             sh:maxCount 1 ;
@@ -34,26 +21,21 @@ mellea:CliCommandSpec a sh:NodeShape ;
             sh:order 8 ;
             sh:path mellea:module_path ;
             sh:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ],
+        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
+            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
+            sh:order 12 ;
+            sh:path mellea:coverage_scope ],
         [ sh:datatype xsd:string ;
             sh:description "Slot describing the command path." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 1 ;
             sh:path mellea:command_path ],
-        [ sh:description "Package bucket." ;
-            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
-            sh:maxCount 1 ;
-            sh:order 10 ;
-            sh:path mellea:package_kind ],
-        [ sh:class mellea:ApiModelSpec ;
-            sh:description "Slot describing the input model." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 3 ;
-            sh:path mellea:input_model ],
-        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
-            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
-            sh:order 12 ;
-            sh:path mellea:coverage_scope ],
+        [ sh:datatype xsd:string ;
+            sh:description "Free-form classification tags." ;
+            sh:nodeKind sh:Literal ;
+            sh:order 13 ;
+            sh:path mellea:tags ],
         [ sh:datatype xsd:string ;
             sh:description "Human-readable name." ;
             sh:maxCount 1 ;
@@ -61,78 +43,105 @@ mellea:CliCommandSpec a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 6 ;
             sh:path schema1:name ],
+        [ sh:description "Stable identifier for a schema element." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 5 ;
+            sh:path schema1:identifier ],
+        [ sh:description "Package bucket." ;
+            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
+            sh:maxCount 1 ;
+            sh:order 10 ;
+            sh:path mellea:package_kind ],
         [ sh:datatype xsd:string ;
             sh:description "Slot describing the command group." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 0 ;
             sh:path mellea:command_group ],
-        [ sh:datatype xsd:string ;
-            sh:description "Free-form classification tags." ;
-            sh:nodeKind sh:Literal ;
-            sh:order 13 ;
-            sh:path mellea:tags ],
-        [ sh:description "Stable identifier for a schema element." ;
-            sh:maxCount 1 ;
+        [ sh:class mellea:ApiModelSpec ;
+            sh:description "Slot describing the output model." ;
             sh:nodeKind sh:IRI ;
-            sh:order 5 ;
-            sh:path schema1:identifier ],
+            sh:order 4 ;
+            sh:path mellea:output_model ],
+        [ sh:datatype xsd:string ;
+            sh:description "Narrative description of the element." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path schema1:description ],
+        [ sh:description "Kind of Python declaration." ;
+            sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
+            sh:maxCount 1 ;
+            sh:order 11 ;
+            sh:path mellea:element_kind ],
+        [ sh:datatype xsd:string ;
+            sh:description "Source file relative to repository root." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path mellea:source_file ;
+            sh:pattern "^[^\\0]+$" ],
         [ sh:datatype xsd:string ;
             sh:description "Slot describing the command purpose." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 2 ;
-            sh:path mellea:command_purpose ],
-        [ sh:class mellea:ApiModelSpec ;
-            sh:description "Slot describing the output model." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 4 ;
-            sh:path mellea:output_model ] ;
+            sh:path mellea:command_purpose ] ;
     sh:targetClass mellea:CliCommandSpec .
 
 mellea:ComponentSpec a sh:NodeShape ;
     rdfs:comment "Specification of a Mellea stdlib component type." ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "Package bucket." ;
-            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
-            sh:maxCount 1 ;
-            sh:order 8 ;
-            sh:path mellea:package_kind ],
-        [ sh:datatype xsd:string ;
-            sh:description "Narrative description of the element." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 5 ;
-            sh:path schema1:description ],
-        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
-            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
-            sh:order 10 ;
-            sh:path mellea:coverage_scope ],
-        [ sh:description "Stable identifier for a schema element." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:order 3 ;
-            sh:path schema1:identifier ],
-        [ sh:description "Slot describing the component category." ;
-            sh:in ( "INSTRUCTION" "MESSAGE" "TOOL_MESSAGE" "DOCUMENT" "INTRINSIC" "MOBJECT" "QUERY" "TRANSFORM" "GENSTUB" "REQUIREMENT" "STREAM_EVENT" ) ;
-            sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path mellea:component_category ],
-        [ sh:datatype xsd:string ;
-            sh:description "Source file relative to repository root." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 7 ;
-            sh:path mellea:source_file ;
-            sh:pattern "^[^\\0]+$" ],
-        [ sh:datatype xsd:string ;
+    sh:property [ sh:datatype xsd:string ;
             sh:description "Human-readable name." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 4 ;
             sh:path schema1:name ],
+        [ sh:description "Package bucket." ;
+            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
+            sh:maxCount 1 ;
+            sh:order 8 ;
+            sh:path mellea:package_kind ],
+        [ sh:description "Kind of Python declaration." ;
+            sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
+            sh:maxCount 1 ;
+            sh:order 9 ;
+            sh:path mellea:element_kind ],
+        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
+            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
+            sh:order 10 ;
+            sh:path mellea:coverage_scope ],
+        [ sh:datatype xsd:string ;
+            sh:description "Python module path where this element is defined." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path mellea:module_path ;
+            sh:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ],
+        [ sh:datatype xsd:string ;
+            sh:description "Free-form classification tags." ;
+            sh:nodeKind sh:Literal ;
+            sh:order 11 ;
+            sh:path mellea:tags ],
+        [ sh:description "Slot describing the component category." ;
+            sh:in ( "INSTRUCTION" "MESSAGE" "TOOL_MESSAGE" "DOCUMENT" "INTRINSIC" "MOBJECT" "QUERY" "TRANSFORM" "GENSTUB" "REQUIREMENT" "STREAM_EVENT" ) ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path mellea:component_category ],
+        [ sh:datatype xsd:string ;
+            sh:description "Slot describing the input modality." ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path mellea:input_modality ],
+        [ sh:description "Stable identifier for a schema element." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path schema1:identifier ],
         [ sh:datatype xsd:string ;
             sh:description "Slot describing the parsed output type." ;
             sh:maxCount 1 ;
@@ -140,27 +149,18 @@ mellea:ComponentSpec a sh:NodeShape ;
             sh:order 2 ;
             sh:path mellea:parsed_output_type ],
         [ sh:datatype xsd:string ;
-            sh:description "Free-form classification tags." ;
-            sh:nodeKind sh:Literal ;
-            sh:order 11 ;
-            sh:path mellea:tags ],
-        [ sh:datatype xsd:string ;
-            sh:description "Slot describing the input modality." ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path mellea:input_modality ],
-        [ sh:datatype xsd:string ;
-            sh:description "Python module path where this element is defined." ;
+            sh:description "Source file relative to repository root." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 6 ;
-            sh:path mellea:module_path ;
-            sh:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ],
-        [ sh:description "Kind of Python declaration." ;
-            sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
+            sh:order 7 ;
+            sh:path mellea:source_file ;
+            sh:pattern "^[^\\0]+$" ],
+        [ sh:datatype xsd:string ;
+            sh:description "Narrative description of the element." ;
             sh:maxCount 1 ;
-            sh:order 9 ;
-            sh:path mellea:element_kind ] ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path schema1:description ] ;
     sh:targetClass mellea:ComponentSpec .
 
 mellea:IntrinsicAdapterSpec a sh:NodeShape ;
@@ -168,31 +168,34 @@ mellea:IntrinsicAdapterSpec a sh:NodeShape ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
-            sh:description "Free-form classification tags." ;
-            sh:nodeKind sh:Literal ;
-            sh:order 10 ;
-            sh:path mellea:tags ],
-        [ sh:datatype xsd:string ;
-            sh:description "Narrative description of the element." ;
+            sh:description "Source file relative to repository root." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 4 ;
-            sh:path schema1:description ],
+            sh:order 6 ;
+            sh:path mellea:source_file ;
+            sh:pattern "^[^\\0]+$" ],
+        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
+            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
+            sh:order 9 ;
+            sh:path mellea:coverage_scope ],
         [ sh:datatype xsd:string ;
             sh:description "Slot describing the repo id." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 0 ;
             sh:path mellea:repo_id ],
-        [ sh:description "Package bucket." ;
-            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
+        [ sh:datatype xsd:string ;
+            sh:description "Python module path where this element is defined." ;
             sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path mellea:package_kind ],
-        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
-            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
-            sh:order 9 ;
-            sh:path mellea:coverage_scope ],
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path mellea:module_path ;
+            sh:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ],
+        [ sh:datatype xsd:string ;
+            sh:description "Free-form classification tags." ;
+            sh:nodeKind sh:Literal ;
+            sh:order 10 ;
+            sh:path mellea:tags ],
         [ sh:description "Stable identifier for a schema element." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:IRI ;
@@ -205,51 +208,38 @@ mellea:IntrinsicAdapterSpec a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 3 ;
             sh:path schema1:name ],
-        [ sh:datatype xsd:string ;
-            sh:description "Python module path where this element is defined." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 5 ;
-            sh:path mellea:module_path ;
-            sh:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ],
-        [ sh:datatype xsd:string ;
-            sh:description "Source file relative to repository root." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 6 ;
-            sh:path mellea:source_file ;
-            sh:pattern "^[^\\0]+$" ],
         [ sh:description "Kind of Python declaration." ;
             sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
             sh:maxCount 1 ;
             sh:order 8 ;
             sh:path mellea:element_kind ],
+        [ sh:datatype xsd:string ;
+            sh:description "Narrative description of the element." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path schema1:description ],
         [ sh:description "Slot describing the adapter type." ;
             sh:in ( "LORA" "ALORA" ) ;
             sh:order 1 ;
-            sh:path mellea:adapter_type ] ;
+            sh:path mellea:adapter_type ],
+        [ sh:description "Package bucket." ;
+            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
+            sh:maxCount 1 ;
+            sh:order 7 ;
+            sh:path mellea:package_kind ] ;
     sh:targetClass mellea:IntrinsicAdapterSpec .
 
 mellea:NamedElement a sh:NodeShape ;
     rdfs:comment "Abstract base for any named, identifiable schema element." ;
     sh:closed false ;
-    sh:ignoredProperties ( mellea:payload_model mellea:field_type mellea:watsonx_name mellea:provider_name mellea:hook_type mellea:command_path mellea:metric_name mellea:package_name mellea:bedrock_name mellea:ollama_name mellea:plugin_priority mellea:openai_name mellea:supports_streaming mellea:validation_style mellea:repo_id mellea:includes_path mellea:hf_model_name mellea:component_category mellea:command_purpose mellea:selection_policy mellea:loop_budget_hint mellea:method_signature mellea:analyzed_on mellea:input_modality mellea:plugin_mode mellea:depends_on_package mellea:excludes_path mellea:context_linearity mellea:openai_object_type mellea:command_group mellea:allows_null mellea:lifecycle_role mellea:declares_element mellea:model_options_key mellea:default_formatter mellea:stores_component_history mellea:required_field mellea:method_name mellea:output_model rdf:type mellea:uses_context mellea:accepts_message_attachments mellea:has_field mellea:may_trigger_repair mellea:field_name mellea:uses_backend mellea:supports_tool_calls mellea:backend_family mellea:supports_multimodal mellea:input_model mellea:request_or_response mellea:parsed_output_type mellea:adapter_type mellea:model_identifier mellea:exposed_method mellea:repository_root ) ;
+    sh:ignoredProperties ( mellea:exposed_method mellea:plugin_priority mellea:openai_name mellea:may_trigger_repair mellea:method_signature mellea:supports_streaming mellea:loop_budget_hint mellea:accepts_message_attachments mellea:depends_on_package mellea:excludes_path mellea:package_name mellea:output_model mellea:required_field mellea:uses_backend mellea:parsed_output_type mellea:lifecycle_role mellea:provider_name mellea:watsonx_name mellea:has_field rdf:type mellea:supports_multimodal mellea:input_model mellea:backend_family mellea:stores_component_history mellea:command_purpose mellea:adapter_type mellea:allows_null mellea:model_identifier mellea:supports_tool_calls mellea:openai_object_type mellea:uses_context mellea:context_linearity mellea:hf_model_name mellea:repository_root mellea:command_group mellea:analyzed_on mellea:payload_model mellea:bedrock_name mellea:hook_type mellea:request_or_response mellea:plugin_mode mellea:component_category mellea:selection_policy mellea:field_type mellea:default_formatter mellea:method_name mellea:metric_name mellea:model_options_key mellea:validation_style mellea:field_name mellea:includes_path mellea:declares_element mellea:ollama_name mellea:command_path mellea:input_modality mellea:repo_id ) ;
     sh:property [ sh:datatype xsd:string ;
-            sh:description "Human-readable name." ;
+            sh:description "Narrative description of the element." ;
             sh:maxCount 1 ;
-            sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path schema1:name ],
-        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
-            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
-            sh:order 7 ;
-            sh:path mellea:coverage_scope ],
-        [ sh:datatype xsd:string ;
-            sh:description "Free-form classification tags." ;
-            sh:nodeKind sh:Literal ;
-            sh:order 8 ;
-            sh:path mellea:tags ],
+            sh:order 2 ;
+            sh:path schema1:description ],
         [ sh:description "Stable identifier for a schema element." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:IRI ;
@@ -263,16 +253,10 @@ mellea:NamedElement a sh:NodeShape ;
             sh:path mellea:source_file ;
             sh:pattern "^[^\\0]+$" ],
         [ sh:datatype xsd:string ;
-            sh:description "Narrative description of the element." ;
-            sh:maxCount 1 ;
+            sh:description "Free-form classification tags." ;
             sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path schema1:description ],
-        [ sh:description "Package bucket." ;
-            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
-            sh:maxCount 1 ;
-            sh:order 5 ;
-            sh:path mellea:package_kind ],
+            sh:order 8 ;
+            sh:path mellea:tags ],
         [ sh:datatype xsd:string ;
             sh:description "Python module path where this element is defined." ;
             sh:maxCount 1 ;
@@ -284,18 +268,67 @@ mellea:NamedElement a sh:NodeShape ;
             sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
             sh:maxCount 1 ;
             sh:order 6 ;
-            sh:path mellea:element_kind ] ;
+            sh:path mellea:element_kind ],
+        [ sh:description "Package bucket." ;
+            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path mellea:package_kind ],
+        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
+            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
+            sh:order 7 ;
+            sh:path mellea:coverage_scope ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable name." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path schema1:name ] ;
     sh:targetClass mellea:NamedElement .
 
 mellea:PluginSpec a sh:NodeShape ;
     rdfs:comment "Specification of a Mellea plugin and the hooks it registers." ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "Slot describing the plugin mode." ;
-            sh:in ( "SEQUENTIAL" "TRANSFORM" "CONCURRENT" "AUDIT" "FIRE_AND_FORGET" ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Source file relative to repository root." ;
             sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path mellea:plugin_mode ],
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path mellea:source_file ;
+            sh:pattern "^[^\\0]+$" ],
+        [ sh:description "Kind of Python declaration." ;
+            sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
+            sh:maxCount 1 ;
+            sh:order 10 ;
+            sh:path mellea:element_kind ],
+        [ sh:datatype xsd:string ;
+            sh:description "Narrative description of the element." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path schema1:description ],
+        [ sh:description "Stable identifier for a schema element." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path schema1:identifier ],
+        [ sh:description "Slot describing the hook type." ;
+            sh:in ( "SESSION_PRE_INIT" "SESSION_POST_INIT" "SESSION_RESET" "SESSION_CLEANUP" "COMPONENT_PRE_EXECUTE" "COMPONENT_POST_SUCCESS" "COMPONENT_POST_ERROR" "GENERATION_PRE_CALL" "GENERATION_POST_CALL" "GENERATION_ERROR" "VALIDATION_PRE_CHECK" "VALIDATION_POST_CHECK" "SAMPLING_LOOP_START" "SAMPLING_ITERATION" "SAMPLING_REPAIR" "SAMPLING_LOOP_END" "TOOL_PRE_INVOKE" "TOOL_POST_INVOKE" ) ;
+            sh:order 1 ;
+            sh:path mellea:hook_type ],
+        [ sh:datatype xsd:integer ;
+            sh:description "Slot describing the plugin priority." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path mellea:plugin_priority ],
+        [ sh:description "Package bucket." ;
+            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
+            sh:maxCount 1 ;
+            sh:order 9 ;
+            sh:path mellea:package_kind ],
         [ sh:datatype xsd:string ;
             sh:description "Python module path where this element is defined." ;
             sh:maxCount 1 ;
@@ -303,35 +336,6 @@ mellea:PluginSpec a sh:NodeShape ;
             sh:order 7 ;
             sh:path mellea:module_path ;
             sh:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ],
-        [ sh:description "Stable identifier for a schema element." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:order 4 ;
-            sh:path schema1:identifier ],
-        [ sh:description "Package bucket." ;
-            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
-            sh:maxCount 1 ;
-            sh:order 9 ;
-            sh:path mellea:package_kind ],
-        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
-            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
-            sh:order 11 ;
-            sh:path mellea:coverage_scope ],
-        [ sh:datatype xsd:integer ;
-            sh:description "Slot describing the plugin priority." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 3 ;
-            sh:path mellea:plugin_priority ],
-        [ sh:description "Kind of Python declaration." ;
-            sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
-            sh:maxCount 1 ;
-            sh:order 10 ;
-            sh:path mellea:element_kind ],
-        [ sh:description "Slot describing the hook type." ;
-            sh:in ( "SESSION_PRE_INIT" "SESSION_POST_INIT" "SESSION_RESET" "SESSION_CLEANUP" "COMPONENT_PRE_EXECUTE" "COMPONENT_POST_SUCCESS" "COMPONENT_POST_ERROR" "GENERATION_PRE_CALL" "GENERATION_POST_CALL" "GENERATION_ERROR" "VALIDATION_PRE_CHECK" "VALIDATION_POST_CHECK" "SAMPLING_LOOP_START" "SAMPLING_ITERATION" "SAMPLING_REPAIR" "SAMPLING_LOOP_END" "TOOL_PRE_INVOKE" "TOOL_POST_INVOKE" ) ;
-            sh:order 1 ;
-            sh:path mellea:hook_type ],
         [ sh:datatype xsd:string ;
             sh:description "Human-readable name." ;
             sh:maxCount 1 ;
@@ -344,50 +348,51 @@ mellea:PluginSpec a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 12 ;
             sh:path mellea:tags ],
-        [ sh:datatype xsd:string ;
-            sh:description "Narrative description of the element." ;
+        [ sh:description "Slot describing the plugin mode." ;
+            sh:in ( "SEQUENTIAL" "TRANSFORM" "CONCURRENT" "AUDIT" "FIRE_AND_FORGET" ) ;
             sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 6 ;
-            sh:path schema1:description ],
+            sh:order 0 ;
+            sh:path mellea:plugin_mode ],
+        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
+            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
+            sh:order 11 ;
+            sh:path mellea:coverage_scope ],
         [ sh:class mellea:HookPayloadSpec ;
             sh:description "Slot describing the payload model." ;
             sh:nodeKind sh:IRI ;
             sh:order 2 ;
-            sh:path mellea:payload_model ],
-        [ sh:datatype xsd:string ;
-            sh:description "Source file relative to repository root." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 8 ;
-            sh:path mellea:source_file ;
-            sh:pattern "^[^\\0]+$" ] ;
+            sh:path mellea:payload_model ] ;
     sh:targetClass mellea:PluginSpec .
 
 mellea:RepositoryCatalog a sh:NodeShape ;
     rdfs:comment "Top-level catalog rooting the analysed repository snapshot." ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "Stable identifier for a schema element." ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Narrative description of the element." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path schema1:description ],
+        [ sh:description "Kind of Python declaration." ;
+            sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
+            sh:maxCount 1 ;
+            sh:order 11 ;
+            sh:path mellea:element_kind ],
+        [ sh:description "Stable identifier for a schema element." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:IRI ;
             sh:order 5 ;
             sh:path schema1:identifier ],
-        [ sh:datatype xsd:string ;
-            sh:description "Free-form classification tags." ;
-            sh:nodeKind sh:Literal ;
-            sh:order 13 ;
-            sh:path mellea:tags ],
+        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
+            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
+            sh:order 12 ;
+            sh:path mellea:coverage_scope ],
         [ sh:class mellea:ModelElement ;
             sh:description "Slot describing the declares element." ;
             sh:nodeKind sh:IRI ;
             sh:order 4 ;
             sh:path mellea:declares_element ],
-        [ sh:description "Package bucket." ;
-            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
-            sh:maxCount 1 ;
-            sh:order 10 ;
-            sh:path mellea:package_kind ],
         [ sh:datatype xsd:string ;
             sh:description "Python module path where this element is defined." ;
             sh:maxCount 1 ;
@@ -395,34 +400,25 @@ mellea:RepositoryCatalog a sh:NodeShape ;
             sh:order 8 ;
             sh:path mellea:module_path ;
             sh:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ],
-        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
-            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
-            sh:order 12 ;
-            sh:path mellea:coverage_scope ],
-        [ sh:datatype xsd:date ;
-            sh:description "Slot describing the analyzed on." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path mellea:analyzed_on ],
         [ sh:datatype xsd:string ;
-            sh:description "Slot describing the excludes path." ;
-            sh:nodeKind sh:Literal ;
-            sh:order 3 ;
-            sh:path mellea:excludes_path ;
-            sh:pattern "^[^\\0]+$" ],
-        [ sh:description "Kind of Python declaration." ;
-            sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
+            sh:description "Human-readable name." ;
             sh:maxCount 1 ;
-            sh:order 11 ;
-            sh:path mellea:element_kind ],
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path schema1:name ],
         [ sh:datatype xsd:string ;
-            sh:description "Source file relative to repository root." ;
+            sh:description "Slot describing the repository root." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 9 ;
-            sh:path mellea:source_file ;
+            sh:order 0 ;
+            sh:path mellea:repository_root ;
             sh:pattern "^[^\\0]+$" ],
+        [ sh:datatype xsd:string ;
+            sh:description "Free-form classification tags." ;
+            sh:nodeKind sh:Literal ;
+            sh:order 13 ;
+            sh:path mellea:tags ],
         [ sh:datatype xsd:string ;
             sh:description "Slot describing the includes path." ;
             sh:nodeKind sh:Literal ;
@@ -430,66 +426,64 @@ mellea:RepositoryCatalog a sh:NodeShape ;
             sh:path mellea:includes_path ;
             sh:pattern "^[^\\0]+$" ],
         [ sh:datatype xsd:string ;
-            sh:description "Human-readable name." ;
+            sh:description "Source file relative to repository root." ;
             sh:maxCount 1 ;
-            sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 6 ;
-            sh:path schema1:name ],
+            sh:order 9 ;
+            sh:path mellea:source_file ;
+            sh:pattern "^[^\\0]+$" ],
         [ sh:datatype xsd:string ;
-            sh:description "Narrative description of the element." ;
+            sh:description "Slot describing the excludes path." ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path mellea:excludes_path ;
+            sh:pattern "^[^\\0]+$" ],
+        [ sh:description "Package bucket." ;
+            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
+            sh:maxCount 1 ;
+            sh:order 10 ;
+            sh:path mellea:package_kind ],
+        [ sh:datatype xsd:date ;
+            sh:description "Slot describing the analyzed on." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 7 ;
-            sh:path schema1:description ],
-        [ sh:datatype xsd:string ;
-            sh:description "Slot describing the repository root." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path mellea:repository_root ;
-            sh:pattern "^[^\\0]+$" ] ;
+            sh:order 1 ;
+            sh:path mellea:analyzed_on ] ;
     sh:targetClass mellea:RepositoryCatalog .
 
 mellea:RequirementSpec a sh:NodeShape ;
     rdfs:comment "Specification of a requirement validator." ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
+    sh:property [ sh:datatype xsd:boolean ;
+            sh:description "Slot describing the may trigger repair." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path mellea:may_trigger_repair ],
+        [ sh:datatype xsd:string ;
             sh:description "Source file relative to repository root." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 6 ;
             sh:path mellea:source_file ;
             sh:pattern "^[^\\0]+$" ],
-        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
-            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
-            sh:order 9 ;
-            sh:path mellea:coverage_scope ],
-        [ sh:datatype xsd:boolean ;
-            sh:description "Slot describing the may trigger repair." ;
-            sh:maxCount 1 ;
+        [ sh:datatype xsd:string ;
+            sh:description "Free-form classification tags." ;
             sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path mellea:may_trigger_repair ],
+            sh:order 10 ;
+            sh:path mellea:tags ],
         [ sh:description "Stable identifier for a schema element." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:IRI ;
             sh:order 2 ;
             sh:path schema1:identifier ],
         [ sh:datatype xsd:string ;
-            sh:description "Slot describing the validation style." ;
+            sh:description "Narrative description of the element." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path mellea:validation_style ],
-        [ sh:datatype xsd:string ;
-            sh:description "Python module path where this element is defined." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 5 ;
-            sh:path mellea:module_path ;
-            sh:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ],
+            sh:order 4 ;
+            sh:path schema1:description ],
         [ sh:description "Kind of Python declaration." ;
             sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
             sh:maxCount 1 ;
@@ -500,31 +494,53 @@ mellea:RequirementSpec a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:order 7 ;
             sh:path mellea:package_kind ],
-        [ sh:datatype xsd:string ;
-            sh:description "Narrative description of the element." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 4 ;
-            sh:path schema1:description ],
-        [ sh:datatype xsd:string ;
-            sh:description "Free-form classification tags." ;
-            sh:nodeKind sh:Literal ;
-            sh:order 10 ;
-            sh:path mellea:tags ],
+        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
+            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
+            sh:order 9 ;
+            sh:path mellea:coverage_scope ],
         [ sh:datatype xsd:string ;
             sh:description "Human-readable name." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 3 ;
-            sh:path schema1:name ] ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "Python module path where this element is defined." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path mellea:module_path ;
+            sh:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ],
+        [ sh:datatype xsd:string ;
+            sh:description "Slot describing the validation style." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path mellea:validation_style ] ;
     sh:targetClass mellea:RequirementSpec .
 
 mellea:SamplingStrategySpec a sh:NodeShape ;
     rdfs:comment "Specification of a sampling-loop strategy." ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:boolean ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Slot describing the selection policy." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path mellea:selection_policy ],
+        [ sh:description "Kind of Python declaration." ;
+            sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
+            sh:maxCount 1 ;
+            sh:order 9 ;
+            sh:path mellea:element_kind ],
+        [ sh:description "Package bucket." ;
+            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
+            sh:maxCount 1 ;
+            sh:order 8 ;
+            sh:path mellea:package_kind ],
+        [ sh:datatype xsd:boolean ;
             sh:description "Slot describing the may trigger repair." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
@@ -535,47 +551,6 @@ mellea:SamplingStrategySpec a sh:NodeShape ;
             sh:nodeKind sh:IRI ;
             sh:order 3 ;
             sh:path schema1:identifier ],
-        [ sh:description "Package bucket." ;
-            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
-            sh:maxCount 1 ;
-            sh:order 8 ;
-            sh:path mellea:package_kind ],
-        [ sh:datatype xsd:string ;
-            sh:description "Slot describing the selection policy." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path mellea:selection_policy ],
-        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
-            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
-            sh:order 10 ;
-            sh:path mellea:coverage_scope ],
-        [ sh:datatype xsd:integer ;
-            sh:description "Slot describing the loop budget hint." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path mellea:loop_budget_hint ],
-        [ sh:datatype xsd:string ;
-            sh:description "Narrative description of the element." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 5 ;
-            sh:path schema1:description ],
-        [ sh:datatype xsd:string ;
-            sh:description "Source file relative to repository root." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 7 ;
-            sh:path mellea:source_file ;
-            sh:pattern "^[^\\0]+$" ],
-        [ sh:datatype xsd:string ;
-            sh:description "Python module path where this element is defined." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 6 ;
-            sh:path mellea:module_path ;
-            sh:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ],
         [ sh:datatype xsd:string ;
             sh:description "Human-readable name." ;
             sh:maxCount 1 ;
@@ -583,50 +558,60 @@ mellea:SamplingStrategySpec a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 4 ;
             sh:path schema1:name ],
-        [ sh:description "Kind of Python declaration." ;
-            sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
-            sh:maxCount 1 ;
-            sh:order 9 ;
-            sh:path mellea:element_kind ],
         [ sh:datatype xsd:string ;
             sh:description "Free-form classification tags." ;
             sh:nodeKind sh:Literal ;
             sh:order 11 ;
-            sh:path mellea:tags ] ;
+            sh:path mellea:tags ],
+        [ sh:datatype xsd:string ;
+            sh:description "Source file relative to repository root." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path mellea:source_file ;
+            sh:pattern "^[^\\0]+$" ],
+        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
+            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
+            sh:order 10 ;
+            sh:path mellea:coverage_scope ],
+        [ sh:datatype xsd:string ;
+            sh:description "Narrative description of the element." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path schema1:description ],
+        [ sh:datatype xsd:string ;
+            sh:description "Python module path where this element is defined." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path mellea:module_path ;
+            sh:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ],
+        [ sh:datatype xsd:integer ;
+            sh:description "Slot describing the loop budget hint." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path mellea:loop_budget_hint ] ;
     sh:targetClass mellea:SamplingStrategySpec .
 
 mellea:SessionSpec a sh:NodeShape ;
     rdfs:comment "Specification of a Mellea session." ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "Stable identifier for a schema element." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:order 3 ;
-            sh:path schema1:identifier ],
-        [ sh:datatype xsd:string ;
+    sh:property [ sh:datatype xsd:string ;
             sh:description "Human-readable name." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 4 ;
             sh:path schema1:name ],
-        [ sh:datatype xsd:string ;
-            sh:description "Python module path where this element is defined." ;
+        [ sh:class mellea:ContextSpec ;
+            sh:description "Slot describing the uses context." ;
             sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 6 ;
-            sh:path mellea:module_path ;
-            sh:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ],
-        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
-            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
-            sh:order 10 ;
-            sh:path mellea:coverage_scope ],
-        [ sh:class mellea:MethodSpec ;
-            sh:description "Slot describing the exposed method." ;
             sh:nodeKind sh:IRI ;
-            sh:order 2 ;
-            sh:path mellea:exposed_method ],
+            sh:order 1 ;
+            sh:path mellea:uses_context ],
         [ sh:datatype xsd:string ;
             sh:description "Source file relative to repository root." ;
             sh:maxCount 1 ;
@@ -634,50 +619,93 @@ mellea:SessionSpec a sh:NodeShape ;
             sh:order 7 ;
             sh:path mellea:source_file ;
             sh:pattern "^[^\\0]+$" ],
-        [ sh:description "Package bucket." ;
-            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
-            sh:maxCount 1 ;
-            sh:order 8 ;
-            sh:path mellea:package_kind ],
-        [ sh:datatype xsd:string ;
-            sh:description "Free-form classification tags." ;
-            sh:nodeKind sh:Literal ;
-            sh:order 11 ;
-            sh:path mellea:tags ],
-        [ sh:class mellea:ContextSpec ;
-            sh:description "Slot describing the uses context." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:order 1 ;
-            sh:path mellea:uses_context ],
-        [ sh:class mellea:BackendSpec ;
-            sh:description "Slot describing the uses backend." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:order 0 ;
-            sh:path mellea:uses_backend ],
         [ sh:datatype xsd:string ;
             sh:description "Narrative description of the element." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 5 ;
             sh:path schema1:description ],
+        [ sh:datatype xsd:string ;
+            sh:description "Python module path where this element is defined." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path mellea:module_path ;
+            sh:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ],
+        [ sh:datatype xsd:string ;
+            sh:description "Free-form classification tags." ;
+            sh:nodeKind sh:Literal ;
+            sh:order 11 ;
+            sh:path mellea:tags ],
+        [ sh:description "Package bucket." ;
+            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
+            sh:maxCount 1 ;
+            sh:order 8 ;
+            sh:path mellea:package_kind ],
+        [ sh:class mellea:BackendSpec ;
+            sh:description "Slot describing the uses backend." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path mellea:uses_backend ],
+        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
+            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
+            sh:order 10 ;
+            sh:path mellea:coverage_scope ],
+        [ sh:description "Stable identifier for a schema element." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path schema1:identifier ],
         [ sh:description "Kind of Python declaration." ;
             sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
             sh:maxCount 1 ;
             sh:order 9 ;
-            sh:path mellea:element_kind ] ;
+            sh:path mellea:element_kind ],
+        [ sh:class mellea:MethodSpec ;
+            sh:description "Slot describing the exposed method." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path mellea:exposed_method ] ;
     sh:targetClass mellea:SessionSpec .
 
 mellea:TelemetryMetricSpec a sh:NodeShape ;
     rdfs:comment "Specification of a telemetry metric emitted by Mellea." ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "Kind of Python declaration." ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Slot describing the metric name." ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path mellea:metric_name ],
+        [ sh:description "Kind of Python declaration." ;
             sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
             sh:maxCount 1 ;
             sh:order 7 ;
             sh:path mellea:element_kind ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable name." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "Source file relative to repository root." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path mellea:source_file ;
+            sh:pattern "^[^\\0]+$" ],
+        [ sh:description "Package bucket." ;
+            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path mellea:package_kind ],
+        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
+            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
+            sh:order 8 ;
+            sh:path mellea:coverage_scope ],
         [ sh:description "Stable identifier for a schema element." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:IRI ;
@@ -689,34 +717,6 @@ mellea:TelemetryMetricSpec a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 3 ;
             sh:path schema1:description ],
-        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
-            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
-            sh:order 8 ;
-            sh:path mellea:coverage_scope ],
-        [ sh:datatype xsd:string ;
-            sh:description "Human-readable name." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path schema1:name ],
-        [ sh:description "Package bucket." ;
-            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
-            sh:maxCount 1 ;
-            sh:order 6 ;
-            sh:path mellea:package_kind ],
-        [ sh:datatype xsd:string ;
-            sh:description "Source file relative to repository root." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 5 ;
-            sh:path mellea:source_file ;
-            sh:pattern "^[^\\0]+$" ],
-        [ sh:datatype xsd:string ;
-            sh:description "Slot describing the metric name." ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path mellea:metric_name ],
         [ sh:datatype xsd:string ;
             sh:description "Free-form classification tags." ;
             sh:nodeKind sh:Literal ;
@@ -735,15 +735,11 @@ mellea:ApiFieldSpec a sh:NodeShape ;
     rdfs:comment "Specification of a single field in an API model." ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "Package bucket." ;
-            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
+    sh:property [ sh:description "Kind of Python declaration." ;
+            sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
             sh:maxCount 1 ;
-            sh:order 9 ;
-            sh:path mellea:package_kind ],
-        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
-            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
-            sh:order 11 ;
-            sh:path mellea:coverage_scope ],
+            sh:order 10 ;
+            sh:path mellea:element_kind ],
         [ sh:datatype xsd:string ;
             sh:description "Human-readable name." ;
             sh:maxCount 1 ;
@@ -752,51 +748,17 @@ mellea:ApiFieldSpec a sh:NodeShape ;
             sh:order 5 ;
             sh:path schema1:name ],
         [ sh:datatype xsd:string ;
-            sh:description "Narrative description of the element." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 6 ;
-            sh:path schema1:description ],
-        [ sh:datatype xsd:string ;
-            sh:description "Python module path where this element is defined." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 7 ;
-            sh:path mellea:module_path ;
-            sh:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ],
-        [ sh:datatype xsd:boolean ;
-            sh:description "Slot describing the required field." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path mellea:required_field ],
-        [ sh:datatype xsd:string ;
-            sh:description "Free-form classification tags." ;
-            sh:nodeKind sh:Literal ;
-            sh:order 12 ;
-            sh:path mellea:tags ],
-        [ sh:description "Stable identifier for a schema element." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:order 4 ;
-            sh:path schema1:identifier ],
-        [ sh:datatype xsd:string ;
             sh:description "Slot describing the field name." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 0 ;
             sh:path mellea:field_name ],
-        [ sh:description "Kind of Python declaration." ;
-            sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
-            sh:maxCount 1 ;
-            sh:order 10 ;
-            sh:path mellea:element_kind ],
-        [ sh:datatype xsd:boolean ;
-            sh:description "Slot describing the allows null." ;
+        [ sh:datatype xsd:string ;
+            sh:description "Slot describing the field type." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 3 ;
-            sh:path mellea:allows_null ],
+            sh:order 1 ;
+            sh:path mellea:field_type ],
         [ sh:datatype xsd:string ;
             sh:description "Source file relative to repository root." ;
             sh:maxCount 1 ;
@@ -804,43 +766,99 @@ mellea:ApiFieldSpec a sh:NodeShape ;
             sh:order 8 ;
             sh:path mellea:source_file ;
             sh:pattern "^[^\\0]+$" ],
-        [ sh:datatype xsd:string ;
-            sh:description "Slot describing the field type." ;
+        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
+            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
+            sh:order 11 ;
+            sh:path mellea:coverage_scope ],
+        [ sh:datatype xsd:boolean ;
+            sh:description "Slot describing the allows null." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path mellea:field_type ] ;
+            sh:order 3 ;
+            sh:path mellea:allows_null ],
+        [ sh:datatype xsd:string ;
+            sh:description "Narrative description of the element." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path schema1:description ],
+        [ sh:description "Package bucket." ;
+            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
+            sh:maxCount 1 ;
+            sh:order 9 ;
+            sh:path mellea:package_kind ],
+        [ sh:datatype xsd:string ;
+            sh:description "Python module path where this element is defined." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 7 ;
+            sh:path mellea:module_path ;
+            sh:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ],
+        [ sh:description "Stable identifier for a schema element." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "Free-form classification tags." ;
+            sh:nodeKind sh:Literal ;
+            sh:order 12 ;
+            sh:path mellea:tags ],
+        [ sh:datatype xsd:boolean ;
+            sh:description "Slot describing the required field." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path mellea:required_field ] ;
     sh:targetClass mellea:ApiFieldSpec .
 
 mellea:BackendSpec a sh:NodeShape ;
     rdfs:comment "Specification of a Mellea backend implementation." ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:class mellea:ModelIdentifierSpec ;
-            sh:description "Slot describing the model identifier." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 1 ;
-            sh:path mellea:model_identifier ],
-        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
-            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
-            sh:order 14 ;
-            sh:path mellea:coverage_scope ],
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Free-form classification tags." ;
+            sh:nodeKind sh:Literal ;
+            sh:order 15 ;
+            sh:path mellea:tags ],
         [ sh:datatype xsd:boolean ;
-            sh:description "Slot describing the supports multimodal." ;
+            sh:description "Slot describing the supports tool calls." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 6 ;
-            sh:path mellea:supports_multimodal ],
+            sh:order 5 ;
+            sh:path mellea:supports_tool_calls ],
+        [ sh:description "Stable identifier for a schema element." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 7 ;
+            sh:path schema1:identifier ],
+        [ sh:description "Kind of Python declaration." ;
+            sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
+            sh:maxCount 1 ;
+            sh:order 13 ;
+            sh:path mellea:element_kind ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable name." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path schema1:name ],
+        [ sh:datatype xsd:string ;
+            sh:description "Narrative description of the element." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 9 ;
+            sh:path schema1:description ],
         [ sh:datatype xsd:string ;
             sh:description "Slot describing the model options key." ;
             sh:nodeKind sh:Literal ;
             sh:order 3 ;
             sh:path mellea:model_options_key ],
-        [ sh:description "Slot describing the backend family." ;
-            sh:in ( "BEDROCK" "DUMMY" "HUGGINGFACE" "LITELLM" "OLLAMA" "OPENAI" "WATSONX" ) ;
-            sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path mellea:backend_family ],
+        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
+            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
+            sh:order 14 ;
+            sh:path mellea:coverage_scope ],
         [ sh:datatype xsd:string ;
             sh:description "Python module path where this element is defined." ;
             sh:maxCount 1 ;
@@ -854,51 +872,33 @@ mellea:BackendSpec a sh:NodeShape ;
             sh:nodeKind sh:IRI ;
             sh:order 2 ;
             sh:path mellea:default_formatter ],
-        [ sh:datatype xsd:string ;
-            sh:description "Narrative description of the element." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 9 ;
-            sh:path schema1:description ],
-        [ sh:description "Package bucket." ;
-            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
-            sh:maxCount 1 ;
-            sh:order 12 ;
-            sh:path mellea:package_kind ],
-        [ sh:datatype xsd:string ;
-            sh:description "Free-form classification tags." ;
-            sh:nodeKind sh:Literal ;
-            sh:order 15 ;
-            sh:path mellea:tags ],
-        [ sh:description "Stable identifier for a schema element." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:order 7 ;
-            sh:path schema1:identifier ],
-        [ sh:datatype xsd:string ;
-            sh:description "Human-readable name." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 8 ;
-            sh:path schema1:name ],
         [ sh:datatype xsd:boolean ;
-            sh:description "Slot describing the supports tool calls." ;
+            sh:description "Slot describing the supports multimodal." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 5 ;
-            sh:path mellea:supports_tool_calls ],
+            sh:order 6 ;
+            sh:path mellea:supports_multimodal ],
         [ sh:datatype xsd:boolean ;
             sh:description "Slot describing the supports streaming." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 4 ;
             sh:path mellea:supports_streaming ],
-        [ sh:description "Kind of Python declaration." ;
-            sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
+        [ sh:class mellea:ModelIdentifierSpec ;
+            sh:description "Slot describing the model identifier." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path mellea:model_identifier ],
+        [ sh:description "Package bucket." ;
+            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
             sh:maxCount 1 ;
-            sh:order 13 ;
-            sh:path mellea:element_kind ],
+            sh:order 12 ;
+            sh:path mellea:package_kind ],
+        [ sh:description "Slot describing the backend family." ;
+            sh:in ( "BEDROCK" "DUMMY" "HUGGINGFACE" "LITELLM" "OLLAMA" "OPENAI" "WATSONX" ) ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path mellea:backend_family ],
         [ sh:datatype xsd:string ;
             sh:description "Source file relative to repository root." ;
             sh:maxCount 1 ;
@@ -912,16 +912,17 @@ mellea:ContextSpec a sh:NodeShape ;
     rdfs:comment "Specification of a context implementation." ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "Stable identifier for a schema element." ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Human-readable name." ;
             sh:maxCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:order 3 ;
-            sh:path schema1:identifier ],
-        [ sh:datatype xsd:string ;
-            sh:description "Free-form classification tags." ;
+            sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 11 ;
-            sh:path mellea:tags ],
+            sh:order 4 ;
+            sh:path schema1:name ],
+        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
+            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
+            sh:order 10 ;
+            sh:path mellea:coverage_scope ],
         [ sh:datatype xsd:string ;
             sh:description "Source file relative to repository root." ;
             sh:maxCount 1 ;
@@ -930,27 +931,42 @@ mellea:ContextSpec a sh:NodeShape ;
             sh:path mellea:source_file ;
             sh:pattern "^[^\\0]+$" ],
         [ sh:datatype xsd:string ;
-            sh:description "Narrative description of the element." ;
+            sh:description "Free-form classification tags." ;
+            sh:nodeKind sh:Literal ;
+            sh:order 11 ;
+            sh:path mellea:tags ],
+        [ sh:datatype xsd:boolean ;
+            sh:description "Slot describing the accepts message attachments." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 5 ;
-            sh:path schema1:description ],
-        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
-            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
-            sh:order 10 ;
-            sh:path mellea:coverage_scope ],
+            sh:order 2 ;
+            sh:path mellea:accepts_message_attachments ],
+        [ sh:description "Stable identifier for a schema element." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path schema1:identifier ],
         [ sh:description "Kind of Python declaration." ;
             sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
             sh:maxCount 1 ;
             sh:order 9 ;
             sh:path mellea:element_kind ],
-        [ sh:datatype xsd:string ;
-            sh:description "Human-readable name." ;
+        [ sh:description "Slot describing the context linearity." ;
+            sh:in ( "LINEAR" "NON_LINEAR" ) ;
             sh:maxCount 1 ;
-            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path mellea:context_linearity ],
+        [ sh:datatype xsd:string ;
+            sh:description "Narrative description of the element." ;
+            sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 4 ;
-            sh:path schema1:name ],
+            sh:order 5 ;
+            sh:path schema1:description ],
+        [ sh:description "Package bucket." ;
+            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
+            sh:maxCount 1 ;
+            sh:order 8 ;
+            sh:path mellea:package_kind ],
         [ sh:datatype xsd:string ;
             sh:description "Python module path where this element is defined." ;
             sh:maxCount 1 ;
@@ -958,22 +974,6 @@ mellea:ContextSpec a sh:NodeShape ;
             sh:order 6 ;
             sh:path mellea:module_path ;
             sh:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ],
-        [ sh:description "Package bucket." ;
-            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
-            sh:maxCount 1 ;
-            sh:order 8 ;
-            sh:path mellea:package_kind ],
-        [ sh:description "Slot describing the context linearity." ;
-            sh:in ( "LINEAR" "NON_LINEAR" ) ;
-            sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path mellea:context_linearity ],
-        [ sh:datatype xsd:boolean ;
-            sh:description "Slot describing the accepts message attachments." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path mellea:accepts_message_attachments ],
         [ sh:datatype xsd:boolean ;
             sh:description "Slot describing the stores component history." ;
             sh:maxCount 1 ;
@@ -986,37 +986,43 @@ mellea:FormatterSpec a sh:NodeShape ;
     rdfs:comment "Specification of an output formatter for a backend." ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "Package bucket." ;
-            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Python module path where this element is defined." ;
             sh:maxCount 1 ;
-            sh:order 5 ;
-            sh:path mellea:package_kind ],
-        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
-            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
-            sh:order 7 ;
-            sh:path mellea:coverage_scope ],
-        [ sh:description "Kind of Python declaration." ;
-            sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
-            sh:maxCount 1 ;
-            sh:order 6 ;
-            sh:path mellea:element_kind ],
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path mellea:module_path ;
+            sh:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ],
         [ sh:description "Stable identifier for a schema element." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:IRI ;
             sh:order 0 ;
             sh:path schema1:identifier ],
-        [ sh:datatype xsd:string ;
-            sh:description "Source file relative to repository root." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 4 ;
-            sh:path mellea:source_file ;
-            sh:pattern "^[^\\0]+$" ],
+        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
+            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
+            sh:order 7 ;
+            sh:path mellea:coverage_scope ],
         [ sh:datatype xsd:string ;
             sh:description "Free-form classification tags." ;
             sh:nodeKind sh:Literal ;
             sh:order 8 ;
             sh:path mellea:tags ],
+        [ sh:description "Package bucket." ;
+            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path mellea:package_kind ],
+        [ sh:datatype xsd:string ;
+            sh:description "Narrative description of the element." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path schema1:description ],
+        [ sh:description "Kind of Python declaration." ;
+            sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path mellea:element_kind ],
         [ sh:datatype xsd:string ;
             sh:description "Human-readable name." ;
             sh:maxCount 1 ;
@@ -1025,25 +1031,34 @@ mellea:FormatterSpec a sh:NodeShape ;
             sh:order 1 ;
             sh:path schema1:name ],
         [ sh:datatype xsd:string ;
-            sh:description "Narrative description of the element." ;
+            sh:description "Source file relative to repository root." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path schema1:description ],
-        [ sh:datatype xsd:string ;
-            sh:description "Python module path where this element is defined." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 3 ;
-            sh:path mellea:module_path ;
-            sh:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ] ;
+            sh:order 4 ;
+            sh:path mellea:source_file ;
+            sh:pattern "^[^\\0]+$" ] ;
     sh:targetClass mellea:FormatterSpec .
 
 mellea:HookPayloadSpec a sh:NodeShape ;
     rdfs:comment "Specification of a hook payload model." ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "Kind of Python declaration." ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Narrative description of the element." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path schema1:description ],
+        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
+            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
+            sh:order 9 ;
+            sh:path mellea:coverage_scope ],
+        [ sh:description "Stable identifier for a schema element." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path schema1:identifier ],
+        [ sh:description "Kind of Python declaration." ;
             sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
             sh:maxCount 1 ;
             sh:order 8 ;
@@ -1055,23 +1070,23 @@ mellea:HookPayloadSpec a sh:NodeShape ;
             sh:order 6 ;
             sh:path mellea:source_file ;
             sh:pattern "^[^\\0]+$" ],
-        [ sh:description "Stable identifier for a schema element." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:order 2 ;
-            sh:path schema1:identifier ],
         [ sh:datatype xsd:string ;
-            sh:description "Narrative description of the element." ;
+            sh:description "Human-readable name." ;
             sh:maxCount 1 ;
+            sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 4 ;
-            sh:path schema1:description ],
+            sh:order 3 ;
+            sh:path schema1:name ],
         [ sh:datatype xsd:string ;
             sh:description "Slot describing the lifecycle role." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 1 ;
             sh:path mellea:lifecycle_role ],
+        [ sh:description "Slot describing the hook type." ;
+            sh:in ( "SESSION_PRE_INIT" "SESSION_POST_INIT" "SESSION_RESET" "SESSION_CLEANUP" "COMPONENT_PRE_EXECUTE" "COMPONENT_POST_SUCCESS" "COMPONENT_POST_ERROR" "GENERATION_PRE_CALL" "GENERATION_POST_CALL" "GENERATION_ERROR" "VALIDATION_PRE_CHECK" "VALIDATION_POST_CHECK" "SAMPLING_LOOP_START" "SAMPLING_ITERATION" "SAMPLING_REPAIR" "SAMPLING_LOOP_END" "TOOL_PRE_INVOKE" "TOOL_POST_INVOKE" ) ;
+            sh:order 0 ;
+            sh:path mellea:hook_type ],
         [ sh:datatype xsd:string ;
             sh:description "Python module path where this element is defined." ;
             sh:maxCount 1 ;
@@ -1079,31 +1094,16 @@ mellea:HookPayloadSpec a sh:NodeShape ;
             sh:order 5 ;
             sh:path mellea:module_path ;
             sh:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ],
-        [ sh:datatype xsd:string ;
-            sh:description "Free-form classification tags." ;
-            sh:nodeKind sh:Literal ;
-            sh:order 10 ;
-            sh:path mellea:tags ],
         [ sh:description "Package bucket." ;
             sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
             sh:maxCount 1 ;
             sh:order 7 ;
             sh:path mellea:package_kind ],
         [ sh:datatype xsd:string ;
-            sh:description "Human-readable name." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
+            sh:description "Free-form classification tags." ;
             sh:nodeKind sh:Literal ;
-            sh:order 3 ;
-            sh:path schema1:name ],
-        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
-            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
-            sh:order 9 ;
-            sh:path mellea:coverage_scope ],
-        [ sh:description "Slot describing the hook type." ;
-            sh:in ( "SESSION_PRE_INIT" "SESSION_POST_INIT" "SESSION_RESET" "SESSION_CLEANUP" "COMPONENT_PRE_EXECUTE" "COMPONENT_POST_SUCCESS" "COMPONENT_POST_ERROR" "GENERATION_PRE_CALL" "GENERATION_POST_CALL" "GENERATION_ERROR" "VALIDATION_PRE_CHECK" "VALIDATION_POST_CHECK" "SAMPLING_LOOP_START" "SAMPLING_ITERATION" "SAMPLING_REPAIR" "SAMPLING_LOOP_END" "TOOL_PRE_INVOKE" "TOOL_POST_INVOKE" ) ;
-            sh:order 0 ;
-            sh:path mellea:hook_type ] ;
+            sh:order 10 ;
+            sh:path mellea:tags ] ;
     sh:targetClass mellea:HookPayloadSpec .
 
 mellea:MethodSpec a sh:NodeShape ;
@@ -1111,38 +1111,34 @@ mellea:MethodSpec a sh:NodeShape ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
-            sh:description "Narrative description of the element." ;
+            sh:description "Python module path where this element is defined." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 5 ;
-            sh:path schema1:description ],
-        [ sh:description "Stable identifier for a schema element." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:order 3 ;
-            sh:path schema1:identifier ],
+            sh:order 6 ;
+            sh:path mellea:module_path ;
+            sh:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ],
         [ sh:datatype xsd:string ;
             sh:description "Slot describing the method signature." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 1 ;
             sh:path mellea:method_signature ],
-        [ sh:description "Package bucket." ;
-            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
+        [ sh:description "Stable identifier for a schema element." ;
             sh:maxCount 1 ;
-            sh:order 8 ;
-            sh:path mellea:package_kind ],
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path schema1:identifier ],
         [ sh:datatype xsd:string ;
-            sh:description "Human-readable name." ;
+            sh:description "Slot describing the method name." ;
             sh:maxCount 1 ;
-            sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 4 ;
-            sh:path schema1:name ],
-        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
-            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
-            sh:order 10 ;
-            sh:path mellea:coverage_scope ],
+            sh:order 0 ;
+            sh:path mellea:method_name ],
+        [ sh:datatype xsd:string ;
+            sh:description "Free-form classification tags." ;
+            sh:nodeKind sh:Literal ;
+            sh:order 11 ;
+            sh:path mellea:tags ],
         [ sh:datatype xsd:string ;
             sh:description "Slot describing the lifecycle role." ;
             sh:maxCount 1 ;
@@ -1154,24 +1150,28 @@ mellea:MethodSpec a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:order 9 ;
             sh:path mellea:element_kind ],
+        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
+            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
+            sh:order 10 ;
+            sh:path mellea:coverage_scope ],
         [ sh:datatype xsd:string ;
-            sh:description "Free-form classification tags." ;
-            sh:nodeKind sh:Literal ;
-            sh:order 11 ;
-            sh:path mellea:tags ],
-        [ sh:datatype xsd:string ;
-            sh:description "Python module path where this element is defined." ;
+            sh:description "Narrative description of the element." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 6 ;
-            sh:path mellea:module_path ;
-            sh:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ],
+            sh:order 5 ;
+            sh:path schema1:description ],
         [ sh:datatype xsd:string ;
-            sh:description "Slot describing the method name." ;
+            sh:description "Human-readable name." ;
             sh:maxCount 1 ;
+            sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path mellea:method_name ],
+            sh:order 4 ;
+            sh:path schema1:name ],
+        [ sh:description "Package bucket." ;
+            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
+            sh:maxCount 1 ;
+            sh:order 8 ;
+            sh:path mellea:package_kind ],
         [ sh:datatype xsd:string ;
             sh:description "Source file relative to repository root." ;
             sh:maxCount 1 ;
@@ -1185,11 +1185,34 @@ mellea:ModelIdentifierSpec a sh:NodeShape ;
     rdfs:comment "Cross-provider identifier table for a single model." ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
-            sh:description "Slot describing the provider name." ;
+    sh:property [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
+            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
+            sh:order 13 ;
+            sh:path mellea:coverage_scope ],
+        [ sh:datatype xsd:string ;
+            sh:description "Narrative description of the element." ;
+            sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 5 ;
-            sh:path mellea:provider_name ],
+            sh:order 8 ;
+            sh:path schema1:description ],
+        [ sh:datatype xsd:string ;
+            sh:description "Slot describing the watsonx name." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path mellea:watsonx_name ],
+        [ sh:datatype xsd:string ;
+            sh:description "Slot describing the openai name." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path mellea:openai_name ],
+        [ sh:datatype xsd:string ;
+            sh:description "Slot describing the ollama name." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path mellea:ollama_name ],
         [ sh:datatype xsd:string ;
             sh:description "Source file relative to repository root." ;
             sh:maxCount 1 ;
@@ -1198,42 +1221,12 @@ mellea:ModelIdentifierSpec a sh:NodeShape ;
             sh:path mellea:source_file ;
             sh:pattern "^[^\\0]+$" ],
         [ sh:datatype xsd:string ;
-            sh:description "Narrative description of the element." ;
+            sh:description "Human-readable name." ;
             sh:maxCount 1 ;
+            sh:minCount 1 ;
             sh:nodeKind sh:Literal ;
-            sh:order 8 ;
-            sh:path schema1:description ],
-        [ sh:description "Kind of Python declaration." ;
-            sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
-            sh:maxCount 1 ;
-            sh:order 12 ;
-            sh:path mellea:element_kind ],
-        [ sh:description "Package bucket." ;
-            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
-            sh:maxCount 1 ;
-            sh:order 11 ;
-            sh:path mellea:package_kind ],
-        [ sh:datatype xsd:string ;
-            sh:description "Slot describing the watsonx name." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path mellea:watsonx_name ],
-        [ sh:datatype xsd:string ;
-            sh:description "Slot describing the ollama name." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path mellea:ollama_name ],
-        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
-            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
-            sh:order 13 ;
-            sh:path mellea:coverage_scope ],
-        [ sh:datatype xsd:string ;
-            sh:description "Free-form classification tags." ;
-            sh:nodeKind sh:Literal ;
-            sh:order 14 ;
-            sh:path mellea:tags ],
+            sh:order 7 ;
+            sh:path schema1:name ],
         [ sh:datatype xsd:string ;
             sh:description "Python module path where this element is defined." ;
             sh:maxCount 1 ;
@@ -1246,64 +1239,87 @@ mellea:ModelIdentifierSpec a sh:NodeShape ;
             sh:nodeKind sh:IRI ;
             sh:order 6 ;
             sh:path schema1:identifier ],
-        [ sh:datatype xsd:string ;
-            sh:description "Human-readable name." ;
+        [ sh:description "Kind of Python declaration." ;
+            sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
             sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 7 ;
-            sh:path schema1:name ],
+            sh:order 12 ;
+            sh:path mellea:element_kind ],
         [ sh:datatype xsd:string ;
-            sh:description "Slot describing the bedrock name." ;
-            sh:maxCount 1 ;
+            sh:description "Free-form classification tags." ;
             sh:nodeKind sh:Literal ;
-            sh:order 4 ;
-            sh:path mellea:bedrock_name ],
-        [ sh:datatype xsd:string ;
-            sh:description "Slot describing the openai name." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 3 ;
-            sh:path mellea:openai_name ],
+            sh:order 14 ;
+            sh:path mellea:tags ],
         [ sh:datatype xsd:string ;
             sh:description "Slot describing the hf model name." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 0 ;
-            sh:path mellea:hf_model_name ] ;
+            sh:path mellea:hf_model_name ],
+        [ sh:datatype xsd:string ;
+            sh:description "Slot describing the provider name." ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path mellea:provider_name ],
+        [ sh:description "Package bucket." ;
+            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
+            sh:maxCount 1 ;
+            sh:order 11 ;
+            sh:path mellea:package_kind ],
+        [ sh:datatype xsd:string ;
+            sh:description "Slot describing the bedrock name." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path mellea:bedrock_name ] ;
     sh:targetClass mellea:ModelIdentifierSpec .
 
 mellea:PythonPackage a sh:NodeShape ;
     rdfs:comment "A logical Python package (directory) inside the repository." ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "Kind of Python declaration." ;
-            sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
-            sh:maxCount 1 ;
-            sh:order 9 ;
-            sh:path mellea:element_kind ],
-        [ sh:class mellea:ModelElement ;
-            sh:description "Slot describing the declares element." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 2 ;
-            sh:path mellea:declares_element ],
-        [ sh:datatype xsd:string ;
+    sh:property [ sh:datatype xsd:string ;
             sh:description "Source file relative to repository root." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 7 ;
             sh:path mellea:source_file ;
             sh:pattern "^[^\\0]+$" ],
-        [ sh:class mellea:PythonPackage ;
-            sh:description "Slot describing the depends on package." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 1 ;
-            sh:path mellea:depends_on_package ],
+        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
+            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
+            sh:order 10 ;
+            sh:path mellea:coverage_scope ],
+        [ sh:description "Kind of Python declaration." ;
+            sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
+            sh:maxCount 1 ;
+            sh:order 9 ;
+            sh:path mellea:element_kind ],
+        [ sh:datatype xsd:string ;
+            sh:description "Free-form classification tags." ;
+            sh:nodeKind sh:Literal ;
+            sh:order 11 ;
+            sh:path mellea:tags ],
+        [ sh:description "Package bucket." ;
+            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
+            sh:maxCount 1 ;
+            sh:order 8 ;
+            sh:path mellea:package_kind ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable name." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path schema1:name ],
         [ sh:description "Stable identifier for a schema element." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:IRI ;
             sh:order 3 ;
             sh:path schema1:identifier ],
+        [ sh:class mellea:ModelElement ;
+            sh:description "Slot describing the declares element." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path mellea:declares_element ],
         [ sh:datatype xsd:string ;
             sh:description "Slot describing the package name." ;
             sh:maxCount 1 ;
@@ -1318,64 +1334,47 @@ mellea:PythonPackage a sh:NodeShape ;
             sh:path mellea:module_path ;
             sh:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ],
         [ sh:datatype xsd:string ;
-            sh:description "Human-readable name." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 4 ;
-            sh:path schema1:name ],
-        [ sh:datatype xsd:string ;
-            sh:description "Free-form classification tags." ;
-            sh:nodeKind sh:Literal ;
-            sh:order 11 ;
-            sh:path mellea:tags ],
-        [ sh:datatype xsd:string ;
             sh:description "Narrative description of the element." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 5 ;
             sh:path schema1:description ],
-        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
-            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
-            sh:order 10 ;
-            sh:path mellea:coverage_scope ],
-        [ sh:description "Package bucket." ;
-            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
-            sh:maxCount 1 ;
-            sh:order 8 ;
-            sh:path mellea:package_kind ] ;
+        [ sh:class mellea:PythonPackage ;
+            sh:description "Slot describing the depends on package." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path mellea:depends_on_package ] ;
     sh:targetClass mellea:PythonPackage .
 
 mellea:ApiModelSpec a sh:NodeShape ;
     rdfs:comment "Specification of an HTTP API wire model." ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "Slot describing the request or response." ;
-            sh:in ( "REQUEST" "RESPONSE" "BOTH" ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Slot describing the openai object type." ;
             sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path mellea:request_or_response ],
-        [ sh:datatype xsd:string ;
-            sh:description "Free-form classification tags." ;
             sh:nodeKind sh:Literal ;
-            sh:order 11 ;
-            sh:path mellea:tags ],
-        [ sh:description "Kind of Python declaration." ;
-            sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
-            sh:maxCount 1 ;
-            sh:order 9 ;
-            sh:path mellea:element_kind ],
+            sh:order 1 ;
+            sh:path mellea:openai_object_type ],
+        [ sh:class mellea:ApiFieldSpec ;
+            sh:description "Slot describing the has field." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path mellea:has_field ],
+        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
+            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
+            sh:order 10 ;
+            sh:path mellea:coverage_scope ],
         [ sh:description "Stable identifier for a schema element." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:IRI ;
             sh:order 3 ;
             sh:path schema1:identifier ],
-        [ sh:datatype xsd:string ;
-            sh:description "Narrative description of the element." ;
+        [ sh:description "Slot describing the request or response." ;
+            sh:in ( "REQUEST" "RESPONSE" "BOTH" ) ;
             sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 5 ;
-            sh:path schema1:description ],
+            sh:order 0 ;
+            sh:path mellea:request_or_response ],
         [ sh:datatype xsd:string ;
             sh:description "Human-readable name." ;
             sh:maxCount 1 ;
@@ -1383,15 +1382,29 @@ mellea:ApiModelSpec a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 4 ;
             sh:path schema1:name ],
-        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
-            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
-            sh:order 10 ;
-            sh:path mellea:coverage_scope ],
-        [ sh:class mellea:ApiFieldSpec ;
-            sh:description "Slot describing the has field." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 2 ;
-            sh:path mellea:has_field ],
+        [ sh:description "Kind of Python declaration." ;
+            sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
+            sh:maxCount 1 ;
+            sh:order 9 ;
+            sh:path mellea:element_kind ],
+        [ sh:datatype xsd:string ;
+            sh:description "Narrative description of the element." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 5 ;
+            sh:path schema1:description ],
+        [ sh:datatype xsd:string ;
+            sh:description "Free-form classification tags." ;
+            sh:nodeKind sh:Literal ;
+            sh:order 11 ;
+            sh:path mellea:tags ],
+        [ sh:datatype xsd:string ;
+            sh:description "Python module path where this element is defined." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path mellea:module_path ;
+            sh:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ],
         [ sh:datatype xsd:string ;
             sh:description "Source file relative to repository root." ;
             sh:maxCount 1 ;
@@ -1399,40 +1412,45 @@ mellea:ApiModelSpec a sh:NodeShape ;
             sh:order 7 ;
             sh:path mellea:source_file ;
             sh:pattern "^[^\\0]+$" ],
-        [ sh:datatype xsd:string ;
-            sh:description "Slot describing the openai object type." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path mellea:openai_object_type ],
         [ sh:description "Package bucket." ;
             sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
             sh:maxCount 1 ;
             sh:order 8 ;
-            sh:path mellea:package_kind ],
-        [ sh:datatype xsd:string ;
-            sh:description "Python module path where this element is defined." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 6 ;
-            sh:path mellea:module_path ;
-            sh:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ] ;
+            sh:path mellea:package_kind ] ;
     sh:targetClass mellea:ApiModelSpec .
 
 mellea:ModelElement a sh:NodeShape ;
     rdfs:comment "Abstract base for concrete architectural elements." ;
     sh:closed false ;
-    sh:ignoredProperties ( mellea:payload_model mellea:context_linearity mellea:openai_object_type mellea:command_group mellea:lifecycle_role mellea:model_options_key mellea:default_formatter mellea:stores_component_history mellea:hook_type mellea:output_model mellea:command_path mellea:metric_name rdf:type mellea:uses_context mellea:accepts_message_attachments mellea:has_field mellea:may_trigger_repair mellea:plugin_priority mellea:uses_backend mellea:supports_streaming mellea:validation_style mellea:supports_tool_calls mellea:backend_family mellea:supports_multimodal mellea:input_model mellea:request_or_response mellea:parsed_output_type mellea:component_category mellea:command_purpose mellea:model_identifier mellea:selection_policy mellea:loop_budget_hint mellea:exposed_method mellea:input_modality mellea:plugin_mode ) ;
-    sh:property [ sh:description "Package bucket." ;
-            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
+    sh:ignoredProperties ( mellea:exposed_method mellea:plugin_priority mellea:may_trigger_repair mellea:model_identifier mellea:supports_tool_calls mellea:supports_streaming mellea:loop_budget_hint mellea:openai_object_type mellea:accepts_message_attachments mellea:uses_context mellea:context_linearity mellea:command_group mellea:payload_model mellea:output_model mellea:uses_backend mellea:hook_type mellea:request_or_response mellea:plugin_mode mellea:parsed_output_type mellea:component_category mellea:selection_policy mellea:lifecycle_role mellea:default_formatter mellea:metric_name mellea:model_options_key mellea:has_field mellea:validation_style rdf:type mellea:supports_multimodal mellea:input_model mellea:backend_family mellea:stores_component_history mellea:command_path mellea:input_modality mellea:command_purpose ) ;
+    sh:property [ sh:datatype xsd:string ;
+            sh:description "Source file relative to repository root." ;
             sh:maxCount 1 ;
-            sh:order 5 ;
-            sh:path mellea:package_kind ],
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path mellea:source_file ;
+            sh:pattern "^[^\\0]+$" ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable name." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path schema1:name ],
         [ sh:description "Kind of Python declaration." ;
             sh:in ( "CLASS" "ENUM" "DATACLASS" "TYPED_DICT" "PYDANTIC_MODEL" "PROTOCOL" "FUNCTION" "MIXIN" ) ;
             sh:maxCount 1 ;
             sh:order 6 ;
             sh:path mellea:element_kind ],
+        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
+            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
+            sh:order 7 ;
+            sh:path mellea:coverage_scope ],
+        [ sh:description "Package bucket." ;
+            sh:in ( "CORE" "STDLIB" "BACKENDS" "FORMATTERS" "HELPERS" "PLUGINS" "TELEMETRY" "CLI" "DOCS_EXAMPLES" "TEST" ) ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path mellea:package_kind ],
         [ sh:datatype xsd:string ;
             sh:description "Python module path where this element is defined." ;
             sh:maxCount 1 ;
@@ -1440,34 +1458,16 @@ mellea:ModelElement a sh:NodeShape ;
             sh:order 3 ;
             sh:path mellea:module_path ;
             sh:pattern "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$" ],
-        [ sh:datatype xsd:string ;
-            sh:description "Source file relative to repository root." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 4 ;
-            sh:path mellea:source_file ;
-            sh:pattern "^[^\\0]+$" ],
-        [ sh:datatype xsd:string ;
-            sh:description "Human-readable name." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path schema1:name ],
-        [ sh:description "Where this element surfaces (source/API/CLI/example/test)." ;
-            sh:in ( "SOURCE" "API" "CLI" "EXAMPLE" "TEST" ) ;
-            sh:order 7 ;
-            sh:path mellea:coverage_scope ],
-        [ sh:datatype xsd:string ;
-            sh:description "Free-form classification tags." ;
-            sh:nodeKind sh:Literal ;
-            sh:order 8 ;
-            sh:path mellea:tags ],
         [ sh:description "Stable identifier for a schema element." ;
             sh:maxCount 1 ;
             sh:nodeKind sh:IRI ;
             sh:order 0 ;
             sh:path schema1:identifier ],
+        [ sh:datatype xsd:string ;
+            sh:description "Free-form classification tags." ;
+            sh:nodeKind sh:Literal ;
+            sh:order 8 ;
+            sh:path mellea:tags ],
         [ sh:datatype xsd:string ;
             sh:description "Narrative description of the element." ;
             sh:maxCount 1 ;

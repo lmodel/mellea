@@ -8,11 +8,14 @@ title: mellea
 description: LinkML schema describing the Mellea codebase architecture and public data models. Generated
   from Python sources by linkml/scripts/schema_to_linkml.py.
 license: Apache-2.0
+
 see_also:
   - https://github.com/lmodel/mellea
   - https://lmodel.github.io/mellea
+
 source: https://github.com/lmodel/mellea
 version: '2026-05-26'
+
 annotations:
   coverage_target: core-library-and-cli
   analyzed_scope: mellea+cli (linkml/ excluded)
@@ -35,6 +38,7 @@ annotations:
     mellea/telemetry: total=11 (CLASS=11)
 
     enum_total: 11'
+
 prefixes:
   mellea: https://w3id.org/lmodel/mellea/
   linkml: https://w3id.org/linkml/
@@ -42,14 +46,18 @@ prefixes:
   dcterms: http://purl.org/dc/terms/
   attack: https://w3id.org/lmodel/attack/
   common_domain_model: https://w3id.org/lmodel/common-domain-model/
+  gist_linkml: https://w3id.org/lmodel/gist/
   iso27001: https://w3id.org/lmodel/iso27001/
   mcp: https://w3id.org/lmodel/mcp/
   nexus: https://ibm.github.io/ai-atlas-nexus/ontology/
   spdx: https://spdx.org/rdf/3.0.1/terms/
+
 default_prefix: mellea
 default_range: string
+
 imports:
   - linkml:types
+
 types:
   PythonDottedPath:
     base: str
@@ -61,6 +69,7 @@ types:
     uri: xsd:string
     description: Relative path from repository root.
     pattern: ^[^\0]+$
+
 subsets:
   core_runtime:
     description: Core runtime abstractions and execution flow.
@@ -68,6 +77,7 @@ subsets:
     description: API or CLI-facing interfaces and wire models.
   observability:
     description: Telemetry, plugin hooks, and instrumentation.
+
 enums:
   PackageKindEnum:
     description: Logical package buckets used to classify Mellea source modules.
@@ -92,6 +102,7 @@ enums:
         description: docs examples
       TEST:
         description: test
+
   ElementKindEnum:
     description: Kind of Python declaration captured by a ModelElement entry.
     permissible_values:
@@ -111,6 +122,7 @@ enums:
         description: function
       MIXIN:
         description: mixin
+
   CoverageScopeEnum:
     description: Where in the project an element surfaces (source, API, CLI, ...).
     permissible_values:
@@ -124,6 +136,7 @@ enums:
         description: example
       TEST:
         description: test
+
   ContextLinearityEnum:
     description: Whether a Mellea context preserves linear ordering or not.
     permissible_values:
@@ -131,6 +144,7 @@ enums:
         description: Sequential, ordered history.
       NON_LINEAR:
         description: Tree- or graph-shaped history.
+
   ComponentCategoryEnum:
     description: High-level category of a Mellea stdlib component.
     permissible_values:
@@ -175,6 +189,7 @@ enums:
           - nexus:Requirement
       STREAM_EVENT:
         description: stream event
+
   RequestResponseEnum:
     description: Direction of a wire model (HTTP request, response, or both).
     permissible_values:
@@ -184,6 +199,7 @@ enums:
         description: Outbound response payload.
       BOTH:
         description: Model used in both directions (rare).
+
   BackendFamilyEnum:
     description: Backend families discovered under mellea/backends/.
     related_mappings:
@@ -232,6 +248,7 @@ enums:
           - nexus:AiProvider
     annotations:
       derived_from: mellea/backends/*.py
+
   PluginModeEnum:
     description: Execution mode of a Mellea plugin (derived from PluginMode).
     permissible_values:
@@ -261,6 +278,7 @@ enums:
           python_value: fire_and_forget
     annotations:
       derived_from: mellea/plugins/types.py::PluginMode
+
   HookTypeEnum:
     description: Lifecycle hook stages (derived from HookType).
     related_mappings:
@@ -346,6 +364,7 @@ enums:
           python_value: tool_post_invoke
     annotations:
       derived_from: mellea/plugins/types.py::HookType
+
   AdapterTypeEnum:
     description: Adapter implementation type (derived from AdapterType).
     exact_mappings:
@@ -361,6 +380,7 @@ enums:
           python_value: alora
     annotations:
       derived_from: mellea/backends/adapters/catalog.py::AdapterType
+
 slots:
   id:
     identifier: true
@@ -368,235 +388,301 @@ slots:
     range: uriorcurie
     slot_uri: schema:identifier
     description: Stable identifier for a schema element.
+
   name:
     required: true
     range: string
     slot_uri: schema:name
     description: Human-readable name.
+
   description:
     range: string
     slot_uri: schema:description
     description: Narrative description of the element.
+
   module_path:
     range: PythonDottedPath
     description: Python module path where this element is defined.
+
   source_file:
     range: RepositoryRelativePath
     description: Source file relative to repository root.
+
   package_kind:
     range: PackageKindEnum
     description: Package bucket.
+
   element_kind:
     range: ElementKindEnum
     description: Kind of Python declaration.
+
   coverage_scope:
     range: CoverageScopeEnum
     multivalued: true
     description: Where this element surfaces (source/API/CLI/example/test).
+
   tags:
     range: string
     multivalued: true
     description: Free-form classification tags.
+
   repository_root:
     range: RepositoryRelativePath
     description: Slot describing the repository root.
+
   analyzed_on:
     range: date
     description: Slot describing the analyzed on.
+
   includes_path:
     range: RepositoryRelativePath
     multivalued: true
     description: Slot describing the includes path.
+
   excludes_path:
     range: RepositoryRelativePath
     multivalued: true
     description: Slot describing the excludes path.
+
   package_name:
     range: string
     description: Slot describing the package name.
+
   depends_on_package:
     range: PythonPackage
     multivalued: true
     inlined_as_list: true
     description: Slot describing the depends on package.
+
   declares_element:
     range: ModelElement
     multivalued: true
     inlined_as_list: true
     description: Slot describing the declares element.
+
   backend_family:
     range: BackendFamilyEnum
     description: Slot describing the backend family.
+
   model_identifier:
     range: ModelIdentifierSpec
     multivalued: true
     inlined_as_list: true
     description: Slot describing the model identifier.
+
   default_formatter:
     range: FormatterSpec
     description: Slot describing the default formatter.
+
   model_options_key:
     range: string
     multivalued: true
     description: Slot describing the model options key.
+
   supports_streaming:
     range: boolean
     description: Slot describing the supports streaming.
+
   supports_tool_calls:
     range: boolean
     description: Slot describing the supports tool calls.
+
   supports_multimodal:
     range: boolean
     description: Slot describing the supports multimodal.
+
   context_linearity:
     range: ContextLinearityEnum
     description: Slot describing the context linearity.
+
   stores_component_history:
     range: boolean
     description: Slot describing the stores component history.
+
   accepts_message_attachments:
     range: boolean
     description: Slot describing the accepts message attachments.
+
   uses_backend:
     range: BackendSpec
     description: Slot describing the uses backend.
+
   uses_context:
     range: ContextSpec
     description: Slot describing the uses context.
+
   exposed_method:
     range: MethodSpec
     multivalued: true
     inlined_as_list: true
     description: Slot describing the exposed method.
+
   uses_component_type:
     range: ComponentSpec
     multivalued: true
     inlined_as_list: true
     description: Slot describing the uses component type.
+
   component_category:
     range: ComponentCategoryEnum
     description: Slot describing the component category.
+
   input_modality:
     range: string
     multivalued: true
     description: Slot describing the input modality.
+
   parsed_output_type:
     range: string
     description: Slot describing the parsed output type.
+
   validation_style:
     range: string
     description: Slot describing the validation style.
+
   may_trigger_repair:
     range: boolean
     description: Slot describing the may trigger repair.
+
   selection_policy:
     range: string
     description: Slot describing the selection policy.
+
   loop_budget_hint:
     range: integer
     description: Slot describing the loop budget hint.
+
   plugin_mode:
     range: PluginModeEnum
     description: Slot describing the plugin mode.
+
   hook_type:
     range: HookTypeEnum
     multivalued: true
     description: Slot describing the hook type.
+
   payload_model:
     range: HookPayloadSpec
     multivalued: true
     inlined_as_list: true
     description: Slot describing the payload model.
+
   plugin_priority:
     range: integer
     description: Slot describing the plugin priority.
+
   metric_name:
     range: string
     multivalued: true
     description: Slot describing the metric name.
+
   command_group:
     range: string
     description: Slot describing the command group.
+
   command_path:
     range: string
     description: Slot describing the command path.
+
   command_purpose:
     range: string
     description: Slot describing the command purpose.
+
   input_model:
     range: ApiModelSpec
     multivalued: true
     inlined_as_list: true
     description: Slot describing the input model.
+
   output_model:
     range: ApiModelSpec
     multivalued: true
     inlined_as_list: true
     description: Slot describing the output model.
+
   request_or_response:
     range: RequestResponseEnum
     description: Slot describing the request or response.
+
   openai_object_type:
     range: string
     description: Slot describing the openai object type.
+
   has_field:
     range: ApiFieldSpec
     multivalued: true
     inlined_as_list: true
     description: Slot describing the has field.
+
   field_name:
     range: string
     description: Slot describing the field name.
+
   field_type:
     range: string
     description: Slot describing the field type.
+
   required_field:
     range: boolean
     description: Slot describing the required field.
+
   allows_null:
     range: boolean
     description: Slot describing the allows null.
+
   method_name:
     range: string
     description: Slot describing the method name.
+
   method_signature:
     range: string
     description: Slot describing the method signature.
+
   lifecycle_role:
     range: string
     description: Slot describing the lifecycle role.
+
   adapter_type:
     range: AdapterTypeEnum
     multivalued: true
     description: Slot describing the adapter type.
+
   repo_id:
     range: string
     description: Slot describing the repo id.
+
   provider_name:
     range: string
     multivalued: true
     description: Slot describing the provider name.
+
   hf_model_name:
     range: string
     description: Slot describing the hf model name.
+
   ollama_name:
     range: string
     description: Slot describing the ollama name.
+
   watsonx_name:
     range: string
     description: Slot describing the watsonx name.
+
   openai_name:
     range: string
     description: Slot describing the openai name.
+
   bedrock_name:
     range: string
     description: Slot describing the bedrock name.
+
 classes:
   NamedElement:
     description: Abstract base for any named, identifiable schema element.
     abstract: true
     close_mappings:
       - nexus:Entity
+      - gist_linkml:GistThing
       - iso27001:NamedEntity
       - spdx:Element
     related_mappings:
@@ -613,11 +699,13 @@ classes:
       - element_kind
       - coverage_scope
       - tags
+
   RepositoryCatalog:
     description: Top-level catalog rooting the analysed repository snapshot.
     is_a: NamedElement
     tree_root: true
     close_mappings:
+      - gist_linkml:Collection
       - spdx:Sbom
     related_mappings:
       - nexus:Container
@@ -634,10 +722,12 @@ classes:
       - includes_path
       - excludes_path
       - declares_element
+
   PythonPackage:
     description: A logical Python package (directory) inside the repository.
     is_a: NamedElement
     close_mappings:
+      - gist_linkml:Composite
       - spdx:Package
     narrow_mappings:
       - nexus:Entity
@@ -647,18 +737,23 @@ classes:
       - package_name
       - depends_on_package
       - declares_element
+
   ModelElement:
     description: Abstract base for concrete architectural elements.
     is_a: NamedElement
     abstract: true
+    broad_mappings:
+      - gist_linkml:Specification
     related_mappings:
       - common_domain_model:ContractBase
       - spdx:Element
+
   BackendSpec:
     description: Specification of a Mellea backend implementation.
     is_a: ModelElement
     close_mappings:
       - nexus:AiProvider
+      - gist_linkml:Specification
     related_mappings:
       - nexus:AiSystem
       - mcp:Implementation
@@ -673,17 +768,23 @@ classes:
       - supports_streaming
       - supports_tool_calls
       - supports_multimodal
+
   FormatterSpec:
     description: Specification of an output formatter for a backend.
     is_a: ModelElement
+    close_mappings:
+      - gist_linkml:Specification
     related_mappings:
       - nexus:Modality
       - mcp:ContentBlock
     in_subset:
       - core_runtime
+
   ContextSpec:
     description: Specification of a context implementation.
     is_a: ModelElement
+    close_mappings:
+      - gist_linkml:Specification
     related_mappings:
       - nexus:AiLifecyclePhase
     in_subset:
@@ -692,11 +793,13 @@ classes:
       - context_linearity
       - stores_component_history
       - accepts_message_attachments
+
   SessionSpec:
     description: Specification of a Mellea session.
     is_a: ModelElement
     related_mappings:
       - nexus:AiTask
+      - gist_linkml:Task
       - iso27001:RiskAssessmentProcess
       - mcp:Task
     in_subset:
@@ -705,11 +808,13 @@ classes:
       - uses_backend
       - uses_context
       - exposed_method
+
   ComponentSpec:
     description: Specification of a Mellea stdlib component type.
     is_a: ModelElement
     close_mappings:
       - nexus:AIComponent
+      - gist_linkml:Component
       - mcp:Tool
     in_subset:
       - core_runtime
@@ -717,9 +822,12 @@ classes:
       - component_category
       - input_modality
       - parsed_output_type
+
   RequirementSpec:
     description: Specification of a requirement validator.
     is_a: ModelElement
+    close_mappings:
+      - gist_linkml:Requirement
     related_mappings:
       - nexus:Requirement
       - nexus:Rule
@@ -730,6 +838,7 @@ classes:
     slots:
       - validation_style
       - may_trigger_repair
+
   SamplingStrategySpec:
     description: Specification of a sampling-loop strategy.
     is_a: ModelElement
@@ -737,6 +846,7 @@ classes:
       - mcp:SamplingCapability
     related_mappings:
       - nexus:Action
+      - gist_linkml:Behavior
       - mcp:ModelPreferences
     in_subset:
       - core_runtime
@@ -744,6 +854,7 @@ classes:
       - selection_policy
       - loop_budget_hint
       - may_trigger_repair
+
   PluginSpec:
     description: Specification of a Mellea plugin and the hooks it registers.
     is_a: ModelElement
@@ -752,6 +863,7 @@ classes:
     related_mappings:
       - nexus:AIComponent
       - attack:Analytic
+      - gist_linkml:Component
       - iso27001:OperationalProcedure
       - mcp:ExtensionAppCapability
     in_subset:
@@ -761,12 +873,14 @@ classes:
       - hook_type
       - payload_model
       - plugin_priority
+
   HookPayloadSpec:
     description: Specification of a hook payload model.
     is_a: ModelElement
     related_mappings:
       - nexus:Fact
       - attack:DataComponent
+      - gist_linkml:ContentExpression
       - iso27001:InformationSecurityEvent
       - mcp:MetaObject
       - spdx:Annotation
@@ -775,6 +889,7 @@ classes:
     slots:
       - hook_type
       - lifecycle_role
+
   TelemetryMetricSpec:
     description: Specification of a telemetry metric emitted by Mellea.
     is_a: ModelElement
@@ -784,15 +899,19 @@ classes:
     related_mappings:
       - nexus:AiEval
       - attack:DataSource
+      - gist_linkml:Magnitude
       - iso27001:MonitoringProgram
       - spdx:AIPackage
     in_subset:
       - observability
     slots:
       - metric_name
+
   CliCommandSpec:
     description: Specification of a CLI command exposed under `m`.
     is_a: ModelElement
+    close_mappings:
+      - gist_linkml:TaskTemplate
     related_mappings:
       - attack:Tool
       - iso27001:OperationalProcedure
@@ -805,9 +924,12 @@ classes:
       - command_purpose
       - input_model
       - output_model
+
   ApiModelSpec:
     description: Specification of an HTTP API wire model.
     is_a: ModelElement
+    close_mappings:
+      - gist_linkml:Specification
     related_mappings:
       - nexus:Input
       - mcp:JSONRPCRequest
@@ -818,9 +940,12 @@ classes:
       - request_or_response
       - openai_object_type
       - has_field
+
   ApiFieldSpec:
     description: Specification of a single field in an API model.
     is_a: NamedElement
+    close_mappings:
+      - gist_linkml:Component
     related_mappings:
       - spdx:DictionaryEntry
     in_subset:
@@ -830,21 +955,26 @@ classes:
       - field_type
       - required_field
       - allows_null
+
   MethodSpec:
     description: Specification of a method exposed by a runtime class.
     is_a: NamedElement
+    related_mappings:
+      - gist_linkml:Behavior
     in_subset:
       - core_runtime
     slots:
       - method_name
       - method_signature
       - lifecycle_role
+
   ModelIdentifierSpec:
     description: Cross-provider identifier table for a single model.
     is_a: NamedElement
     close_mappings:
       - nexus:AiModel
       - nexus:LargeLanguageModel
+      - gist_linkml:ID
       - spdx:AIPackage
     related_mappings:
       - nexus:ModelInfo
@@ -859,6 +989,7 @@ classes:
       - openai_name
       - bedrock_name
       - provider_name
+
   IntrinsicAdapterSpec:
     description: Specification of an intrinsic adapter (LoRA / aLoRA).
     is_a: NamedElement
@@ -867,6 +998,7 @@ classes:
       - nexus:LLMIntrinsic
       - spdx:AIPackage
     related_mappings:
+      - gist_linkml:Component
       - spdx:Relationship
     in_subset:
       - interface_surface

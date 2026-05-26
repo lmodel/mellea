@@ -57,6 +57,10 @@
       "prefix_prefix": "common_domain_model",
       "prefix_reference": "https://w3id.org/lmodel/common-domain-model/"
     },
+    "gist_linkml": {
+      "prefix_prefix": "gist_linkml",
+      "prefix_reference": "https://w3id.org/lmodel/gist/"
+    },
     "iso27001": {
       "prefix_prefix": "iso27001",
       "prefix_reference": "https://w3id.org/lmodel/iso27001/"
@@ -1639,6 +1643,7 @@
       "from_schema": "https://w3id.org/lmodel/mellea",
       "close_mappings": [
         "nexus:Entity",
+        "gist_linkml:GistThing",
         "iso27001:NamedEntity",
         "spdx:Element"
       ],
@@ -1768,6 +1773,7 @@
       ],
       "from_schema": "https://w3id.org/lmodel/mellea",
       "close_mappings": [
+        "gist_linkml:Collection",
         "spdx:Sbom"
       ],
       "related_mappings": [
@@ -1949,6 +1955,7 @@
       "description": "A logical Python package (directory) inside the repository.",
       "from_schema": "https://w3id.org/lmodel/mellea",
       "close_mappings": [
+        "gist_linkml:Composite",
         "spdx:Package"
       ],
       "related_mappings": [
@@ -2109,6 +2116,9 @@
         "common_domain_model:ContractBase",
         "spdx:Element"
       ],
+      "broad_mappings": [
+        "gist_linkml:Specification"
+      ],
       "is_a": "NamedElement",
       "abstract": true,
       "attributes": {
@@ -2221,7 +2231,8 @@
       ],
       "from_schema": "https://w3id.org/lmodel/mellea",
       "close_mappings": [
-        "nexus:AiProvider"
+        "nexus:AiProvider",
+        "gist_linkml:Specification"
       ],
       "related_mappings": [
         "nexus:AiSystem",
@@ -2419,6 +2430,9 @@
         "core_runtime"
       ],
       "from_schema": "https://w3id.org/lmodel/mellea",
+      "close_mappings": [
+        "gist_linkml:Specification"
+      ],
       "related_mappings": [
         "nexus:Modality",
         "mcp:ContentBlock"
@@ -2532,6 +2546,9 @@
         "core_runtime"
       ],
       "from_schema": "https://w3id.org/lmodel/mellea",
+      "close_mappings": [
+        "gist_linkml:Specification"
+      ],
       "related_mappings": [
         "nexus:AiLifecyclePhase"
       ],
@@ -2681,6 +2698,7 @@
       "from_schema": "https://w3id.org/lmodel/mellea",
       "related_mappings": [
         "nexus:AiTask",
+        "gist_linkml:Task",
         "iso27001:RiskAssessmentProcess",
         "mcp:Task"
       ],
@@ -2833,6 +2851,7 @@
       "from_schema": "https://w3id.org/lmodel/mellea",
       "close_mappings": [
         "nexus:AIComponent",
+        "gist_linkml:Component",
         "mcp:Tool"
       ],
       "is_a": "ModelElement",
@@ -2980,6 +2999,9 @@
         "core_runtime"
       ],
       "from_schema": "https://w3id.org/lmodel/mellea",
+      "close_mappings": [
+        "gist_linkml:Requirement"
+      ],
       "related_mappings": [
         "nexus:Requirement",
         "nexus:Rule",
@@ -3125,6 +3147,7 @@
       ],
       "related_mappings": [
         "nexus:Action",
+        "gist_linkml:Behavior",
         "mcp:ModelPreferences"
       ],
       "is_a": "ModelElement",
@@ -3278,6 +3301,7 @@
       "related_mappings": [
         "nexus:AIComponent",
         "attack:Analytic",
+        "gist_linkml:Component",
         "iso27001:OperationalProcedure",
         "mcp:ExtensionAppCapability"
       ],
@@ -3444,6 +3468,7 @@
       "related_mappings": [
         "nexus:Fact",
         "attack:DataComponent",
+        "gist_linkml:ContentExpression",
         "iso27001:InformationSecurityEvent",
         "mcp:MetaObject",
         "spdx:Annotation"
@@ -3591,6 +3616,7 @@
       "related_mappings": [
         "nexus:AiEval",
         "attack:DataSource",
+        "gist_linkml:Magnitude",
         "iso27001:MonitoringProgram",
         "spdx:AIPackage"
       ],
@@ -3717,6 +3743,9 @@
         "interface_surface"
       ],
       "from_schema": "https://w3id.org/lmodel/mellea",
+      "close_mappings": [
+        "gist_linkml:TaskTemplate"
+      ],
       "related_mappings": [
         "attack:Tool",
         "iso27001:OperationalProcedure",
@@ -3894,6 +3923,9 @@
         "interface_surface"
       ],
       "from_schema": "https://w3id.org/lmodel/mellea",
+      "close_mappings": [
+        "gist_linkml:Specification"
+      ],
       "related_mappings": [
         "nexus:Input",
         "mcp:JSONRPCRequest",
@@ -4046,6 +4078,9 @@
         "interface_surface"
       ],
       "from_schema": "https://w3id.org/lmodel/mellea",
+      "close_mappings": [
+        "gist_linkml:Component"
+      ],
       "related_mappings": [
         "spdx:DictionaryEntry"
       ],
@@ -4204,6 +4239,9 @@
         "core_runtime"
       ],
       "from_schema": "https://w3id.org/lmodel/mellea",
+      "related_mappings": [
+        "gist_linkml:Behavior"
+      ],
       "is_a": "NamedElement",
       "slots": [
         "method_name",
@@ -4352,6 +4390,7 @@
       "close_mappings": [
         "nexus:AiModel",
         "nexus:LargeLanguageModel",
+        "gist_linkml:ID",
         "spdx:AIPackage"
       ],
       "related_mappings": [
@@ -4543,6 +4582,7 @@
         "spdx:AIPackage"
       ],
       "related_mappings": [
+        "gist_linkml:Component",
         "spdx:Relationship"
       ],
       "is_a": "NamedElement",

@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Wrapper for linkml gen-dbml that patches two upstream bugs.
+"""Wrapper for linkml gen-dbml that patches two upstream bugs.
 
 Bug A — FileNotFoundError on schema imports (schemaloader.py + dbmlgen.py):
   DBMLGenerator.__post_init__ creates a fresh SchemaView(self.schema) after
@@ -22,7 +21,7 @@ Bug B — ValueError for classes without an identifier slot (dbmlgen.py):
   be expressed.
 
   Bugs raised upstream.
-  
+
 See project.justfile gen-dbml-artifact for usage.
 """
 
@@ -42,6 +41,7 @@ class PatchedDBMLGenerator(DBMLGenerator):
     """DBMLGenerator subclass that patches import resolution and relationship generation."""
 
     def __post_init__(self) -> None:
+        """Run base init then restore source_file / SchemaView so relative imports resolve."""
         # Run Generator (grandparent) __post_init__ via SchemaLoader: loads the
         # schema, resolves imports, and sets self.base_dir / self.schema_location.
         # NOTE: this also strips self.schema.source_file to its basename.

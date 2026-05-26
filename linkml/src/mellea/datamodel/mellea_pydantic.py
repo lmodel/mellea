@@ -118,6 +118,8 @@ linkml_meta = LinkMLMeta({'annotations': {'analyzed_scope': {'tag': 'analyzed_sc
                                           'prefix_reference': 'https://w3id.org/lmodel/common-domain-model/'},
                   'dcterms': {'prefix_prefix': 'dcterms',
                               'prefix_reference': 'http://purl.org/dc/terms/'},
+                  'gist_linkml': {'prefix_prefix': 'gist_linkml',
+                                  'prefix_reference': 'https://w3id.org/lmodel/gist/'},
                   'iso27001': {'prefix_prefix': 'iso27001',
                                'prefix_reference': 'https://w3id.org/lmodel/iso27001/'},
                   'linkml': {'prefix_prefix': 'linkml',
@@ -514,7 +516,10 @@ class NamedElement(ConfiguredBaseModel):
     Abstract base for any named, identifiable schema element.
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'abstract': True,
-         'close_mappings': ['nexus:Entity', 'iso27001:NamedEntity', 'spdx:Element'],
+         'close_mappings': ['nexus:Entity',
+                            'gist_linkml:GistThing',
+                            'iso27001:NamedEntity',
+                            'spdx:Element'],
          'from_schema': 'https://w3id.org/lmodel/mellea',
          'related_mappings': ['attack:StixEntity',
                               'common_domain_model:InventoryRecord',
@@ -535,7 +540,7 @@ class RepositoryCatalog(NamedElement):
     """
     Top-level catalog rooting the analysed repository snapshot.
     """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'close_mappings': ['spdx:Sbom'],
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'close_mappings': ['gist_linkml:Collection', 'spdx:Sbom'],
          'from_schema': 'https://w3id.org/lmodel/mellea',
          'in_subset': ['interface_surface'],
          'related_mappings': ['nexus:Container',
@@ -566,7 +571,7 @@ class PythonPackage(NamedElement):
     """
     A logical Python package (directory) inside the repository.
     """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'close_mappings': ['spdx:Package'],
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'close_mappings': ['gist_linkml:Composite', 'spdx:Package'],
          'from_schema': 'https://w3id.org/lmodel/mellea',
          'narrow_mappings': ['nexus:Entity'],
          'related_mappings': ['common_domain_model:Position']})
@@ -590,6 +595,7 @@ class ModelElement(NamedElement):
     Abstract base for concrete architectural elements.
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'abstract': True,
+         'broad_mappings': ['gist_linkml:Specification'],
          'from_schema': 'https://w3id.org/lmodel/mellea',
          'related_mappings': ['common_domain_model:ContractBase', 'spdx:Element']})
 
@@ -608,7 +614,7 @@ class BackendSpec(ModelElement):
     """
     Specification of a Mellea backend implementation.
     """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'close_mappings': ['nexus:AiProvider'],
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'close_mappings': ['nexus:AiProvider', 'gist_linkml:Specification'],
          'from_schema': 'https://w3id.org/lmodel/mellea',
          'in_subset': ['core_runtime', 'interface_surface'],
          'related_mappings': ['nexus:AiSystem', 'mcp:Implementation']})
@@ -635,7 +641,8 @@ class FormatterSpec(ModelElement):
     """
     Specification of an output formatter for a backend.
     """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/lmodel/mellea',
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'close_mappings': ['gist_linkml:Specification'],
+         'from_schema': 'https://w3id.org/lmodel/mellea',
          'in_subset': ['core_runtime'],
          'related_mappings': ['nexus:Modality', 'mcp:ContentBlock']})
 
@@ -654,7 +661,8 @@ class ContextSpec(ModelElement):
     """
     Specification of a context implementation.
     """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/lmodel/mellea',
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'close_mappings': ['gist_linkml:Specification'],
+         'from_schema': 'https://w3id.org/lmodel/mellea',
          'in_subset': ['core_runtime'],
          'related_mappings': ['nexus:AiLifecyclePhase']})
 
@@ -679,6 +687,7 @@ class SessionSpec(ModelElement):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/lmodel/mellea',
          'in_subset': ['core_runtime'],
          'related_mappings': ['nexus:AiTask',
+                              'gist_linkml:Task',
                               'iso27001:RiskAssessmentProcess',
                               'mcp:Task']})
 
@@ -700,7 +709,7 @@ class ComponentSpec(ModelElement):
     """
     Specification of a Mellea stdlib component type.
     """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'close_mappings': ['nexus:AIComponent', 'mcp:Tool'],
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'close_mappings': ['nexus:AIComponent', 'gist_linkml:Component', 'mcp:Tool'],
          'from_schema': 'https://w3id.org/lmodel/mellea',
          'in_subset': ['core_runtime']})
 
@@ -722,7 +731,8 @@ class RequirementSpec(ModelElement):
     """
     Specification of a requirement validator.
     """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/lmodel/mellea',
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'close_mappings': ['gist_linkml:Requirement'],
+         'from_schema': 'https://w3id.org/lmodel/mellea',
          'in_subset': ['core_runtime'],
          'related_mappings': ['nexus:Requirement',
                               'nexus:Rule',
@@ -749,7 +759,9 @@ class SamplingStrategySpec(ModelElement):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'close_mappings': ['mcp:SamplingCapability'],
          'from_schema': 'https://w3id.org/lmodel/mellea',
          'in_subset': ['core_runtime'],
-         'related_mappings': ['nexus:Action', 'mcp:ModelPreferences']})
+         'related_mappings': ['nexus:Action',
+                              'gist_linkml:Behavior',
+                              'mcp:ModelPreferences']})
 
     selection_policy: Optional[str] = Field(default=None, description="""Slot describing the selection policy.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SamplingStrategySpec']} })
     loop_budget_hint: Optional[int] = Field(default=None, description="""Slot describing the loop budget hint.""", json_schema_extra = { "linkml_meta": {'domain_of': ['SamplingStrategySpec']} })
@@ -774,6 +786,7 @@ class PluginSpec(ModelElement):
          'in_subset': ['observability'],
          'related_mappings': ['nexus:AIComponent',
                               'attack:Analytic',
+                              'gist_linkml:Component',
                               'iso27001:OperationalProcedure',
                               'mcp:ExtensionAppCapability']})
 
@@ -800,6 +813,7 @@ class HookPayloadSpec(ModelElement):
          'in_subset': ['observability'],
          'related_mappings': ['nexus:Fact',
                               'attack:DataComponent',
+                              'gist_linkml:ContentExpression',
                               'iso27001:InformationSecurityEvent',
                               'mcp:MetaObject',
                               'spdx:Annotation']})
@@ -826,6 +840,7 @@ class TelemetryMetricSpec(ModelElement):
          'in_subset': ['observability'],
          'related_mappings': ['nexus:AiEval',
                               'attack:DataSource',
+                              'gist_linkml:Magnitude',
                               'iso27001:MonitoringProgram',
                               'spdx:AIPackage']})
 
@@ -845,7 +860,8 @@ class CliCommandSpec(ModelElement):
     """
     Specification of a CLI command exposed under `m`.
     """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/lmodel/mellea',
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'close_mappings': ['gist_linkml:TaskTemplate'],
+         'from_schema': 'https://w3id.org/lmodel/mellea',
          'in_subset': ['interface_surface'],
          'related_mappings': ['attack:Tool',
                               'iso27001:OperationalProcedure',
@@ -871,7 +887,8 @@ class ApiModelSpec(ModelElement):
     """
     Specification of an HTTP API wire model.
     """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/lmodel/mellea',
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'close_mappings': ['gist_linkml:Specification'],
+         'from_schema': 'https://w3id.org/lmodel/mellea',
          'in_subset': ['interface_surface'],
          'related_mappings': ['nexus:Input',
                               'mcp:JSONRPCRequest',
@@ -895,7 +912,8 @@ class ApiFieldSpec(NamedElement):
     """
     Specification of a single field in an API model.
     """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/lmodel/mellea',
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'close_mappings': ['gist_linkml:Component'],
+         'from_schema': 'https://w3id.org/lmodel/mellea',
          'in_subset': ['interface_surface'],
          'related_mappings': ['spdx:DictionaryEntry']})
 
@@ -918,7 +936,9 @@ class MethodSpec(NamedElement):
     """
     Specification of a method exposed by a runtime class.
     """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/lmodel/mellea', 'in_subset': ['core_runtime']})
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://w3id.org/lmodel/mellea',
+         'in_subset': ['core_runtime'],
+         'related_mappings': ['gist_linkml:Behavior']})
 
     method_name: Optional[str] = Field(default=None, description="""Slot describing the method name.""", json_schema_extra = { "linkml_meta": {'domain_of': ['MethodSpec']} })
     method_signature: Optional[str] = Field(default=None, description="""Slot describing the method signature.""", json_schema_extra = { "linkml_meta": {'domain_of': ['MethodSpec']} })
@@ -940,6 +960,7 @@ class ModelIdentifierSpec(NamedElement):
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'close_mappings': ['nexus:AiModel',
                             'nexus:LargeLanguageModel',
+                            'gist_linkml:ID',
                             'spdx:AIPackage'],
          'from_schema': 'https://w3id.org/lmodel/mellea',
          'in_subset': ['interface_surface'],
@@ -971,7 +992,7 @@ class IntrinsicAdapterSpec(NamedElement):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'close_mappings': ['nexus:Adapter', 'nexus:LLMIntrinsic', 'spdx:AIPackage'],
          'from_schema': 'https://w3id.org/lmodel/mellea',
          'in_subset': ['interface_surface'],
-         'related_mappings': ['spdx:Relationship']})
+         'related_mappings': ['gist_linkml:Component', 'spdx:Relationship']})
 
     repo_id: Optional[str] = Field(default=None, description="""Slot describing the repo id.""", json_schema_extra = { "linkml_meta": {'domain_of': ['IntrinsicAdapterSpec']} })
     adapter_type: Optional[list[AdapterTypeEnum]] = Field(default=None, description="""Slot describing the adapter type.""", json_schema_extra = { "linkml_meta": {'domain_of': ['IntrinsicAdapterSpec']} })

@@ -10,7 +10,7 @@ LinkML schema describing the [Mellea](https://github.com/lmodel/mellea) codebase
   [`linkml/scripts/schema_to_linkml.py`](https://github.com/lmodel/mellea/blob/main/linkml/scripts/schema_to_linkml.py)
 - **Test fixtures:** auto-derived from live sources by
   [`linkml/scripts/gen_test_fixtures.py`](https://github.com/lmodel/mellea/blob/main/linkml/scripts/gen_test_fixtures.py)
-  — 62 valid + 4 counter-examples under `linkml/tests/data/`
+  - 62 valid + 4 counter-examples under `linkml/tests/data/`
 - **SSSOM overlay:** schema-agnostic injector
   [`linkml/scripts/apply_sssom_overlay.py`](https://github.com/lmodel/mellea/blob/main/linkml/scripts/apply_sssom_overlay.py) merges CURIE alignments from `src/mellea/mappings/*.sssom.tsv` into the generated YAML's `exact_mappings` / `close_mappings` / `broad_mappings` / `narrow_mappings` / `related_mappings` slots (classes, enums, types, slots, and per-permissible-value)
 - **Validated by:** `just lint` (0 errors), `just gen-project`, `just test` (62 pytest fixtures pass; `linkml-run-examples` accepts valid set and rejects all counter-examples)
@@ -26,7 +26,7 @@ LinkML schema describing the [Mellea](https://github.com/lmodel/mellea) codebase
 ## Source-derived elements
 
 These schema elements are re-extracted from Python sources on every
-regeneration — no hand-editing required when upstream changes:
+regeneration - no hand-editing required when upstream changes:
 
 | Schema element        | Source of truth                                    |
 |-----------------------|----------------------------------------------------|
@@ -58,6 +58,9 @@ just regen-and-test
 
 # Generate project files (Python, Java, TypeScript, OWL)
 just gen-project
+
+# Generated extended/experimental project files (optional)
+just gen-project-extended
 
 # Generate documentation
 just gen-doc
@@ -118,37 +121,40 @@ counter-examples are rejected by `linkml-run-examples`.
 
 ## Cross-schema mappings
 
-Curated SSSOM/TSV alignments to six downstream schemas live under
-[`src/mellea/mappings/`](https://github.com/lmodel/mellea/blob/main/linkml/src/mellea/mappings/).
+Curated SSSOM/TSV alignments to seven downstream schemas live under
+[`linkml/src/mellea/mappings/`](https://github.com/lmodel/mellea/blob/main/linkml/src/mellea/mappings/).
 
 These files contain artificially-curated (`semapv:LLMBasedMatching`) mappings, parse cleanly with [pypi sssom](https://pypi.org/project/sssom/), use real Mellea CURIEs validated against [`linkml/src/mellea/schema/mellea.yaml`](https://github.com/lmodel/mellea/blob/main/linkml/src/mellea/schema/mellea.yaml), and carry per-row rationale (with name-collision notes such as `RequirementSpec` vs `nexus:Requirement`) in the `comment` column.
 
-The three **flagship** alignments are the densest and target schemas with genuine domain overlap with the Mellea runtime: the [ai-atlas-nexus](https://github.com/IBM/ai-atlas-nexus) AI Risk Ontology, the [Model Context Protocol](https://modelcontextprotocol.io/), and [SPDX 3](https://spdx.github.io/spdx-spec/v3.0.1/) (AI-package / SBOM).
+The **flagship** alignments are the densest and target schemas with genuine domain overlap with the Mellea runtime: the [ai-atlas-nexus](https://github.com/IBM/ai-atlas-nexus) AI Risk Ontology, the [Model Context Protocol](https://w3id.org/lmodel/mcp), [SPDX](https://w3id.org/lmodel/spdx/) (AI-package / SBOM), and [_gist_linkml_](https://w3id.org/lmodel/gist/) (Semantic Arts upper ontology, LinkML port - anchors mellea's architectural classes against general-purpose top-level concepts).
 
 The remaining three (ISO 27001, MITRE ATT&CK, FINOS CDM event-position) are provided as smaller, honest cross-domain alignments centred on observability, audit, and structural analogues.
 
-| Mapping set | exact | close | narrow | related | Total | Strongest alignment |
-|---|---:|---:|---:|---:|---:|---|
-| [`mellea-to-ai-atlas-nexus`](https://github.com/lmodel/mellea/blob/main/linkml/src/mellea/mappings/mellea-to-ai-atlas-nexus.sssom.tsv) | 1 | 9 | 1 | 25 | **36** | `AdapterTypeEnum` <-> `nexus:AdapterType` (exact) |
-| [`mellea-to-mcp`](https://github.com/lmodel/mellea/blob/main/linkml/src/mellea/mappings/mellea-to-mcp.sssom.tsv) | – | 8 | – | 12 | **20** | `ComponentCategoryEnum.MESSAGE` <-> `mcp:PromptMessage` |
-| [`mellea-to-spdx`](https://github.com/lmodel/mellea/blob/main/linkml/src/mellea/mappings/mellea-to-spdx.sssom.tsv) | – | 6 | – | 8 | **14** | `ModelIdentifierSpec` / `IntrinsicAdapterSpec` <-> `spdx:AIPackage` |
-| [`mellea-to-iso27001`](https://github.com/lmodel/mellea/blob/main/linkml/src/mellea/mappings/mellea-to-iso27001.sssom.tsv) | – | 2 | – | 10 | **12** | `TelemetryMetricSpec` <-> `iso27001:MonitoringItem` |
-| [`mellea-to-attack`](https://github.com/lmodel/mellea/blob/main/linkml/src/mellea/mappings/mellea-to-attack.sssom.tsv) | – | – | – | 9 | **9** | `TelemetryMetricSpec` <-> `attack:DataSource` |
-| [`mellea-to-cdm_event_position`](https://github.com/lmodel/mellea/blob/main/linkml/src/mellea/mappings/mellea-to-cdm_event_position.sssom.tsv) | – | – | – | 6 | **6** | `RepositoryCatalog` <-> `common_domain_model:Portfolio` (structural) |
-| **Total** | **1** | **25** | **1** | **70** | **97** | |
+> **gist prefix note:** the gist mapping uses the local prefix `gist_linkml:` (`https://w3id.org/lmodel/gist/`) to avoid collision with the upstream Semantic Arts namespace (`gist_upstream:` `https://w3id.org/semanticarts/ns/ontology/gist/`).
+
+| Mapping set | exact | close | broad | narrow | related | Total | Strongest alignment |
+|---|---:|---:|---:|---:|---:|---:|---|
+| [`mellea-to-ai-atlas-nexus`](https://github.com/lmodel/mellea/blob/main/linkml/src/mellea/mappings/mellea-to-ai-atlas-nexus.sssom.tsv) | 1 | 9 | – | 1 | 25 | **36** | `AdapterTypeEnum` <-> `nexus:AdapterType` (exact) |
+| [`mellea-to-mcp`](https://github.com/lmodel/mellea/blob/main/linkml/src/mellea/mappings/mellea-to-mcp.sssom.tsv) | – | 8 | – | – | 12 | **20** | `ComponentCategoryEnum.MESSAGE` <-> `mcp:PromptMessage` |
+| [`mellea-to-gist`](https://github.com/lmodel/mellea/blob/main/linkml/src/mellea/mappings/mellea-to-gist.sssom.tsv) | – | 12 | 1 | – | 7 | **20** | `RequirementSpec` <-> `gist_linkml:Requirement` (closeMatch) |
+| [`mellea-to-spdx`](https://github.com/lmodel/mellea/blob/main/linkml/src/mellea/mappings/mellea-to-spdx.sssom.tsv) | – | 6 | – | – | 8 | **14** | `ModelIdentifierSpec` / `IntrinsicAdapterSpec` <-> `spdx:AIPackage` |
+| [`mellea-to-iso27001`](https://github.com/lmodel/mellea/blob/main/linkml/src/mellea/mappings/mellea-to-iso27001.sssom.tsv) | – | 2 | – | – | 10 | **12** | `TelemetryMetricSpec` <-> `iso27001:MonitoringItem` |
+| [`mellea-to-attack`](https://github.com/lmodel/mellea/blob/main/linkml/src/mellea/mappings/mellea-to-attack.sssom.tsv) | – | – | – | – | 9 | **9** | `TelemetryMetricSpec` <-> `attack:DataSource` |
+| [`mellea-to-cdm_event_position`](https://github.com/lmodel/mellea/blob/main/linkml/src/mellea/mappings/mellea-to-cdm_event_position.sssom.tsv) | – | – | – | – | 6 | **6** | `RepositoryCatalog` <-> `common_domain_model:Portfolio` (structural) |
+| **Total** | **1** | **37** | **1** | **1** | **77** | **117** | |
 
 Coverage reflects genuine domain overlap, not row inflation. Mellea models an AI runtime / code architecture, so:
 
 - **ai-atlas-nexus** (AI governance ontology) aligns on adapter type,
   provider, model, intrinsic, component, requirement, and lifecycle hooks.
 - **MCP** (AI runtime protocol) aligns cleanly on stdlib component
-  categories — `INSTRUCTION` <-> `Prompt`, `MESSAGE` <-> `PromptMessage` / `SamplingMessage`, `TOOL_MESSAGE` <-> `ToolUseContent` / `ToolResultContent`, `DOCUMENT` <-> `Resource`.
-- **SPDX 3** aligns on AI model provenance via `AIPackage`, on repository
-  packaging via `Sbom` / `Package`, and on plugins via `Extension`.
-- **ISO 27001** aligns on observability/audit primitives —
+  categories - `INSTRUCTION` <-> `Prompt`, `MESSAGE` <-> `PromptMessage` / `SamplingMessage`, `TOOL_MESSAGE` <-> `ToolUseContent` / `ToolResultContent`, `DOCUMENT` <-> `Resource`.
+- **_gist_linkml_** (Semantic Arts upper ontology) aligns mellea's architectural classes against general-purpose top-level concepts - `RequirementSpec` <-> `Requirement`, `ComponentSpec` <-> `Component`, `ModelIdentifierSpec` <-> `ID`, `RepositoryCatalog` <-> `Collection`, `PythonPackage` <-> `Composite`, `CliCommandSpec` <-> `TaskTemplate`, `BackendSpec` / `FormatterSpec` / `ContextSpec` / `ApiModelSpec` <-> `Specification`. Validated against [`gist_linkml`](https://raw.githubusercontent.com/lmodel/gist/refs/heads/main/src/gist/schema/gist.yaml) (gist 14.1.0).
+- **SPDX 3** aligns on AI model provenance via `AIPackage`, on repository packaging via `Sbom` / `Package`, and on plugins via `Extension`.
+- **ISO 27001** aligns on observability/audit primitives -
   `TelemetryMetricSpec` <-> `MonitoringItem` (closeMatch),
   `PluginModeEnum.AUDIT` <-> `InternalAudit`.
-- **MITRE ATT&CK** aligns weakly on detection/observability —
+- **MITRE ATT&CK** aligns weakly on detection/observability -
   `TelemetryMetricSpec` <-> `DataSource`, `HookPayloadSpec` <-> `DataComponent`.
 - **FINOS CDM event-position** has essentially no domain overlap; only
   structural aggregation analogues at low confidence are recorded.
@@ -167,12 +173,12 @@ Two GitHub Actions workflows operate against the `linkml/` subdirectory (both se
 | [`.github/workflows/linkml-deploy-docs.yaml`](https://github.com/lmodel/mellea/blob/main/.github/workflows/linkml-deploy-docs.yaml) | `push: [main]`, `workflow_dispatch` | `just gen-doc` + `mkdocs gh-deploy` |
 
 The deploy workflow pushes to the `gh-pages` branch via git, so only
-`contents: write` is required — Pages / OIDC permissions are unused.
+`contents: write` is required - Pages / OIDC permissions are unused.
 
 ## Known gaps
 
-- Stylistic `linkml-lint` warnings (naming conventions on permissible values, missing per-slot descriptions) — non-blocking; addressable in a follow-up.
-- `mellea/templates/` (Jinja templates) is intentionally excluded — no Python declarations to capture.
+- Stylistic `linkml-lint` warnings (naming conventions on permissible values, missing per-slot descriptions) - non-blocking; addressable in a follow-up.
+- `mellea/templates/` (Jinja templates) is intentionally excluded - no Python declarations to capture.
 - Per-component instance data (concrete `BackendSpec` / `ComponentSpec`
   records) is not yet emitted; the schema currently defines the *shape* of such instances. A follow-up generator pass can populate them.
-- Generator output under [`linkml/project/`](https://github.com/lmodel/mellea/blob/main/linkml/project/) (gen-sqla, gen-pandera, gen-namespaces, …) is excluded from ruff via `force-exclude` + `extend-exclude` in the root [`pyproject.toml`](https://github.com/lmodel/mellea/blob/main/pyproject.toml) `[tool.ruff]` block. In-place fixes are pointless because `just gen-project` regenerates and clobbers them — upstream linkml templates are the source of the style noise.
+- Generator output under [`linkml/project/`](https://github.com/lmodel/mellea/blob/main/linkml/project/) (gen-sqla, gen-pandera, gen-namespaces, …) is excluded from ruff via `force-exclude` + `extend-exclude` in the root [`pyproject.toml`](https://github.com/lmodel/mellea/blob/main/pyproject.toml) `[tool.ruff]` block. In-place fixes are pointless because `just gen-project` regenerates and clobbers them - upstream linkml templates are the source of the style noise.

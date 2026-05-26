@@ -1,5 +1,5 @@
 # Auto generated from mellea.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-05-26T14:24:40
+# Generation date: 2026-05-26T21:03:11
 # Schema: mellea
 #
 # id: https://w3id.org/lmodel/mellea
@@ -66,6 +66,7 @@ version = "2026-05-26"
 ATTACK = CurieNamespace('attack', 'https://w3id.org/lmodel/attack/')
 COMMON_DOMAIN_MODEL = CurieNamespace('common_domain_model', 'https://w3id.org/lmodel/common-domain-model/')
 DCTERMS = CurieNamespace('dcterms', 'http://purl.org/dc/terms/')
+GIST_LINKML = CurieNamespace('gist_linkml', 'https://w3id.org/lmodel/gist/')
 ISO27001 = CurieNamespace('iso27001', 'https://w3id.org/lmodel/iso27001/')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 MCP = CurieNamespace('mcp', 'https://w3id.org/lmodel/mcp/')

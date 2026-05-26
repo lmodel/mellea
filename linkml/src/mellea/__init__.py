@@ -1,3 +1,5 @@
+"""Mellea LinkML schema package: codebase architecture and public data models."""
+
 try:
     from mellea._version import __version__, __version_tuple__
 except ImportError:  # pragma: no cover

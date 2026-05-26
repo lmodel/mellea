@@ -1,5 +1,8 @@
+"""Auto-generated dataclass and Pydantic datamodels for the Mellea LinkML schema."""
+
 from pathlib import Path
-from .mellea import *
+
+from .mellea import *  # noqa: F403
 
 THIS_PATH = Path(__file__).parent
 
