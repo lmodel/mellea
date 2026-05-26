@@ -1,0 +1,43 @@
+# metamodel_version: 1.11.0# version: 2026-05-26id: IntrinsicAdapterSpec
+schema_generating: true
+description: Specification of an intrinsic adapter (LoRA / aLoRA).
+display_name: IntrinsicAdapterSpec
+document_category: IntrinsicAdapterSpec
+weight: 20
+fields:
+- id: id
+  description: Stable identifier for a schema element.
+  display_name: id
+- id: name
+  description: Human-readable name.
+  display_name: name
+- id: description
+  description: Narrative description of the element.
+  display_name: description
+- id: module_path
+  description: Python module path where this element is defined.
+  display_name: module_path
+- id: source_file
+  description: Source file relative to repository root.
+  display_name: source_file
+- id: package_kind
+  description: Package bucket.
+  display_name: package_kind
+- id: element_kind
+  description: Kind of Python declaration.
+  display_name: element_kind
+- id: coverage_scope
+  description: Where this element surfaces (source/API/CLI/example/test).
+  display_name: coverage_scope
+  cardinality: multi
+- id: tags
+  description: Free-form classification tags.
+  display_name: tags
+  cardinality: multi
+- id: repo_id
+  description: Slot describing the repo id.
+  display_name: repo_id
+- id: adapter_type
+  description: Slot describing the adapter type.
+  display_name: adapter_type
+  cardinality: multi

@@ -1,0 +1,55 @@
+# mapping_set_id: https://w3id.org/lmodel/mellea/mappings/mellea-to-ai-atlas-nexus.sssom.tsv
+# mapping_set_description: Manually curated alignment of the Mellea LinkML schema (linkml/src/mellea/schema/mellea.yaml) to the IBM ai-atlas-nexus AI Risk Ontology. Subjects are Mellea schema elements (classes and enum permissible values); objects are concepts from the ai-atlas-nexus schema modules (common, ai_system, ai_eval, ai_intrinsic, ai_capability, ai_aiuc, ai-risk-ontology). Mappings express conceptual alignment only -- the schemas have different modelling intents (Mellea = runtime/code architecture; ai-atlas-nexus = AI governance ontology).
+# license: https://creativecommons.org/licenses/by/4.0/
+# mapping_date: 2026-05-26
+# curie_map:
+#  mellea: https://w3id.org/lmodel/mellea/
+#  nexus: https://ibm.github.io/ai-atlas-nexus/ontology/
+#  airo: https://w3id.org/airo#
+#  linkml: https://w3id.org/linkml/
+# creator_id:
+#  - https://github.com/lmodel/mellea
+# see_also:
+#   - https://github.com/mapping-commons/semantic-mapping-vocabulary/issues/27
+#   - https://github.com/mapping-commons/semantic-mapping-vocabulary/pull/29
+#   - https://github.com/IBM/ai-atlas-nexus
+#subject_source: mellea
+#subject_source_version: '2026-05-26'
+#object_source: nexus
+subject_id	subject_label	predicate_id	object_id	object_label	mapping_justification	confidence	comment
+mellea:RepositoryCatalog	RepositoryCatalog	skos:relatedMatch	nexus:Container	Container	semapv:LLMBasedMatching	0.7	Both are top-level container/catalog classes; semantics differ (code snapshot vs AI governance artifact bundle).
+mellea:BackendSpec	BackendSpec	skos:closeMatch	nexus:AiProvider	AiProvider	semapv:LLMBasedMatching	0.7	Mellea BackendSpec abstracts a model-serving provider; nexus AiProvider names the organisation/platform that provides AI capabilities.
+mellea:BackendSpec	BackendSpec	skos:relatedMatch	nexus:AiSystem	AiSystem	semapv:LLMBasedMatching	0.5	BackendSpec instances configure a runtime AI system; nexus AiSystem is the deployed system itself.
+mellea:ModelIdentifierSpec	ModelIdentifierSpec	skos:closeMatch	nexus:AiModel	AiModel	semapv:LLMBasedMatching	0.8	ModelIdentifierSpec is the cross-provider naming of one model; nexus AiModel is the model entity proper.
+mellea:ModelIdentifierSpec	ModelIdentifierSpec	skos:closeMatch	nexus:LargeLanguageModel	LargeLanguageModel	semapv:LLMBasedMatching	0.8	Most ModelIdentifierSpec instances in mellea name LLMs; LargeLanguageModel is the corresponding nexus subclass.
+mellea:ModelIdentifierSpec	ModelIdentifierSpec	skos:relatedMatch	nexus:ModelInfo	ModelInfo	semapv:LLMBasedMatching	0.6	ModelInfo (used in AiEval) records the model an evaluation was run against; overlaps with ModelIdentifierSpec on the identifier surface.
+mellea:IntrinsicAdapterSpec	IntrinsicAdapterSpec	skos:closeMatch	nexus:Adapter	Adapter	semapv:LLMBasedMatching	0.85	Both describe a LoRA/aLoRA adapter that augments a base model.
+mellea:IntrinsicAdapterSpec	IntrinsicAdapterSpec	skos:closeMatch	nexus:LLMIntrinsic	LLMIntrinsic	semapv:LLMBasedMatching	0.85	Mellea intrinsic adapters back what nexus calls LLMIntrinsics (capability primitives delivered as adapters).
+mellea:AdapterTypeEnum	AdapterTypeEnum	skos:exactMatch	nexus:AdapterType	AdapterType	semapv:LLMBasedMatching	0.95	Both enumerate the implementation kind of an adapter (lora, alora).
+mellea:ComponentSpec	ComponentSpec	skos:closeMatch	nexus:AIComponent	AIComponent	semapv:LLMBasedMatching	0.75	Mellea ComponentSpec names a stdlib component type (Instruction, Message, ...); nexus AIComponent names a component of an AI system.
+mellea:SessionSpec	SessionSpec	skos:relatedMatch	nexus:AiTask	AiTask	semapv:LLMBasedMatching	0.55	A Mellea session orchestrates an AI execution; AiTask describes the task an AI is performing -- conceptually adjacent but not equivalent.
+mellea:RequirementSpec	RequirementSpec	skos:relatedMatch	nexus:Requirement	Requirement	semapv:LLMBasedMatching	0.4	Name collision: Mellea RequirementSpec validates model output; nexus Requirement is an AIUC1 governance requirement.
+mellea:RequirementSpec	RequirementSpec	skos:relatedMatch	nexus:Rule	Rule	semapv:LLMBasedMatching	0.45	Both express a constraint, in very different domains (runtime validation vs policy rule).
+mellea:SamplingStrategySpec	SamplingStrategySpec	skos:relatedMatch	nexus:Action	Action	semapv:LLMBasedMatching	0.3	Sampling-loop strategy and nexus Action both denote an active behaviour pattern; weak alignment.
+mellea:TelemetryMetricSpec	TelemetryMetricSpec	skos:closeMatch	nexus:MetricConfig	MetricConfig	semapv:LLMBasedMatching	0.75	TelemetryMetricSpec describes a runtime telemetry metric; MetricConfig describes a metric used during evaluation.
+mellea:TelemetryMetricSpec	TelemetryMetricSpec	skos:relatedMatch	nexus:AiEval	AiEval	semapv:LLMBasedMatching	0.5	Mellea telemetry feeds into observability; nexus AiEval is the offline evaluation analogue.
+mellea:PluginSpec	PluginSpec	skos:relatedMatch	nexus:AIComponent	AIComponent	semapv:LLMBasedMatching	0.4	Plugins are pluggable runtime components; nexus AIComponent is closest available umbrella.
+mellea:HookPayloadSpec	HookPayloadSpec	skos:relatedMatch	nexus:Fact	Fact	semapv:LLMBasedMatching	0.3	Hook payloads carry runtime observation data; nexus Fact represents an observed statement. Weak alignment.
+mellea:ApiModelSpec	ApiModelSpec	skos:relatedMatch	nexus:Input	Input	semapv:LLMBasedMatching	0.4	ApiModelSpec describes HTTP wire models; nexus Input describes inputs accepted by an AI system. Surface-only similarity.
+mellea:FormatterSpec	FormatterSpec	skos:relatedMatch	nexus:Modality	Modality	semapv:LLMBasedMatching	0.3	Formatters shape output representation; modalities describe input/output type. Weak conceptual link.
+mellea:ContextSpec	ContextSpec	skos:relatedMatch	nexus:AiLifecyclePhase	AiLifecyclePhase	semapv:LLMBasedMatching	0.25	Mellea contexts carry conversational history; nexus lifecycle phases are higher-level AI lifecycle stages. Very weak link.
+mellea:PythonPackage	PythonPackage	skos:narrowMatch	nexus:Entity	Entity	semapv:LLMBasedMatching	0.3	PythonPackage is a code-level entity; nexus Entity is the abstract root for all identifiable resources.
+mellea:NamedElement	NamedElement	skos:closeMatch	nexus:Entity	Entity	semapv:LLMBasedMatching	0.8	Both are the abstract root carrying id/name/description on every concrete subclass.
+mellea:BackendFamilyEnum.HUGGINGFACE	HUGGINGFACE	skos:relatedMatch	nexus:AiProvider	AiProvider	semapv:LLMBasedMatching	0.6	HuggingFace backend family corresponds to the HuggingFace AiProvider organisation.
+mellea:BackendFamilyEnum.OPENAI	OPENAI	skos:relatedMatch	nexus:AiProvider	AiProvider	semapv:LLMBasedMatching	0.6	OpenAI backend family corresponds to the OpenAI AiProvider organisation.
+mellea:BackendFamilyEnum.WATSONX	WATSONX	skos:relatedMatch	nexus:AiProvider	AiProvider	semapv:LLMBasedMatching	0.6	Watsonx backend family corresponds to the IBM watsonx AiProvider.
+mellea:BackendFamilyEnum.OLLAMA	OLLAMA	skos:relatedMatch	nexus:AiProvider	AiProvider	semapv:LLMBasedMatching	0.6	Ollama backend family corresponds to the Ollama runtime AiProvider.
+mellea:BackendFamilyEnum.BEDROCK	BEDROCK	skos:relatedMatch	nexus:AiProvider	AiProvider	semapv:LLMBasedMatching	0.6	AWS Bedrock backend family corresponds to the Bedrock AiProvider.
+mellea:BackendFamilyEnum.LITELLM	LITELLM	skos:relatedMatch	nexus:AiProvider	AiProvider	semapv:LLMBasedMatching	0.5	LiteLLM is a meta-provider gateway -- maps to AiProvider as the closest available concept.
+mellea:ComponentCategoryEnum.INSTRUCTION	INSTRUCTION	skos:relatedMatch	nexus:Input	Input	semapv:LLMBasedMatching	0.4	Instruction components are inputs in conversational AI; nexus Input is the analogous concept.
+mellea:ComponentCategoryEnum.DOCUMENT	DOCUMENT	skos:relatedMatch	nexus:Dataset	Dataset	semapv:LLMBasedMatching	0.4	Document components carry retrieval-style context; nexus Dataset is the closest available concept.
+mellea:ComponentCategoryEnum.INTRINSIC	INTRINSIC	skos:closeMatch	nexus:LLMIntrinsic	LLMIntrinsic	semapv:LLMBasedMatching	0.8	Intrinsic component category names the same construct as nexus LLMIntrinsic.
+mellea:ComponentCategoryEnum.REQUIREMENT	REQUIREMENT	skos:relatedMatch	nexus:Requirement	Requirement	semapv:LLMBasedMatching	0.4	Same name collision as RequirementSpec vs nexus Requirement; runtime validator vs governance requirement.
+mellea:HookTypeEnum.VALIDATION_POST_CHECK	VALIDATION_POST_CHECK	skos:relatedMatch	nexus:AiEval	AiEval	semapv:LLMBasedMatching	0.4	Post-check hook outputs are conceptually adjacent to evaluation results, though emitted at runtime.
+mellea:HookTypeEnum.GENERATION_POST_CALL	GENERATION_POST_CALL	skos:relatedMatch	nexus:EvaluationResultRecord	EvaluationResultRecord	semapv:LLMBasedMatching	0.4	Generation post-call payload carries the per-call generation result; loosely analogous to an evaluation record.
+mellea:PluginModeEnum.AUDIT	AUDIT	skos:relatedMatch	nexus:RiskControl	RiskControl	semapv:LLMBasedMatching	0.4	Audit-mode plugins implement runtime governance checks; nexus RiskControl is the governance-side analogue.

@@ -1,0 +1,343 @@
+{
+   "@context": {
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "attack": "https://w3id.org/lmodel/attack/",
+      "common_domain_model": "https://w3id.org/lmodel/common-domain-model/",
+      "dcterms": "http://purl.org/dc/terms/",
+      "iso27001": "https://w3id.org/lmodel/iso27001/",
+      "linkml": "https://w3id.org/linkml/",
+      "mcp": "https://w3id.org/lmodel/mcp/",
+      "mellea": "https://w3id.org/lmodel/mellea/",
+      "nexus": "https://ibm.github.io/ai-atlas-nexus/ontology/",
+      "schema": "http://schema.org/",
+      "skos": "http://www.w3.org/2004/02/skos/core#",
+      "spdx": "https://spdx.org/rdf/3.0.1/terms/",
+      "@vocab": "https://w3id.org/lmodel/mellea/",
+      "accepts_message_attachments": {
+         "@type": "xsd:boolean",
+         "@id": "accepts_message_attachments"
+      },
+      "adapter_type": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "adapter_type"
+      },
+      "allows_null": {
+         "@type": "xsd:boolean",
+         "@id": "allows_null"
+      },
+      "analyzed_on": {
+         "@type": "xsd:date",
+         "@id": "analyzed_on"
+      },
+      "backend_family": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "backend_family"
+      },
+      "bedrock_name": {
+         "@id": "bedrock_name"
+      },
+      "command_group": {
+         "@id": "command_group"
+      },
+      "command_path": {
+         "@id": "command_path"
+      },
+      "command_purpose": {
+         "@id": "command_purpose"
+      },
+      "component_category": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "component_category"
+      },
+      "context_linearity": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "context_linearity"
+      },
+      "coverage_scope": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "coverage_scope"
+      },
+      "declares_element": {
+         "@type": "@id",
+         "@id": "declares_element"
+      },
+      "default_formatter": {
+         "@type": "@id",
+         "@id": "default_formatter"
+      },
+      "depends_on_package": {
+         "@type": "@id",
+         "@id": "depends_on_package"
+      },
+      "description": {
+         "@id": "schema:description"
+      },
+      "element_kind": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "element_kind"
+      },
+      "excludes_path": {
+         "@id": "excludes_path"
+      },
+      "exposed_method": {
+         "@type": "@id",
+         "@id": "exposed_method"
+      },
+      "field_name": {
+         "@id": "field_name"
+      },
+      "field_type": {
+         "@id": "field_type"
+      },
+      "has_field": {
+         "@type": "@id",
+         "@id": "has_field"
+      },
+      "hf_model_name": {
+         "@id": "hf_model_name"
+      },
+      "hook_type": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "hook_type"
+      },
+      "id": "@id",
+      "includes_path": {
+         "@id": "includes_path"
+      },
+      "input_modality": {
+         "@id": "input_modality"
+      },
+      "input_model": {
+         "@type": "@id",
+         "@id": "input_model"
+      },
+      "lifecycle_role": {
+         "@id": "lifecycle_role"
+      },
+      "loop_budget_hint": {
+         "@type": "xsd:integer",
+         "@id": "loop_budget_hint"
+      },
+      "may_trigger_repair": {
+         "@type": "xsd:boolean",
+         "@id": "may_trigger_repair"
+      },
+      "method_name": {
+         "@id": "method_name"
+      },
+      "method_signature": {
+         "@id": "method_signature"
+      },
+      "metric_name": {
+         "@id": "metric_name"
+      },
+      "model_identifier": {
+         "@type": "@id",
+         "@id": "model_identifier"
+      },
+      "model_options_key": {
+         "@id": "model_options_key"
+      },
+      "module_path": {
+         "@id": "module_path"
+      },
+      "name": {
+         "@id": "schema:name"
+      },
+      "ollama_name": {
+         "@id": "ollama_name"
+      },
+      "openai_name": {
+         "@id": "openai_name"
+      },
+      "openai_object_type": {
+         "@id": "openai_object_type"
+      },
+      "output_model": {
+         "@type": "@id",
+         "@id": "output_model"
+      },
+      "package_kind": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "package_kind"
+      },
+      "package_name": {
+         "@id": "package_name"
+      },
+      "parsed_output_type": {
+         "@id": "parsed_output_type"
+      },
+      "payload_model": {
+         "@type": "@id",
+         "@id": "payload_model"
+      },
+      "plugin_mode": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "plugin_mode"
+      },
+      "plugin_priority": {
+         "@type": "xsd:integer",
+         "@id": "plugin_priority"
+      },
+      "provider_name": {
+         "@id": "provider_name"
+      },
+      "repo_id": {
+         "@id": "repo_id"
+      },
+      "repository_root": {
+         "@id": "repository_root"
+      },
+      "request_or_response": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "request_or_response"
+      },
+      "required_field": {
+         "@type": "xsd:boolean",
+         "@id": "required_field"
+      },
+      "selection_policy": {
+         "@id": "selection_policy"
+      },
+      "source_file": {
+         "@id": "source_file"
+      },
+      "stores_component_history": {
+         "@type": "xsd:boolean",
+         "@id": "stores_component_history"
+      },
+      "supports_multimodal": {
+         "@type": "xsd:boolean",
+         "@id": "supports_multimodal"
+      },
+      "supports_streaming": {
+         "@type": "xsd:boolean",
+         "@id": "supports_streaming"
+      },
+      "supports_tool_calls": {
+         "@type": "xsd:boolean",
+         "@id": "supports_tool_calls"
+      },
+      "tags": {
+         "@id": "tags"
+      },
+      "uses_backend": {
+         "@type": "@id",
+         "@id": "uses_backend"
+      },
+      "uses_component_type": {
+         "@type": "@id",
+         "@id": "uses_component_type"
+      },
+      "uses_context": {
+         "@type": "@id",
+         "@id": "uses_context"
+      },
+      "validation_style": {
+         "@id": "validation_style"
+      },
+      "watsonx_name": {
+         "@id": "watsonx_name"
+      },
+      "ApiFieldSpec": {
+         "@id": "ApiFieldSpec"
+      },
+      "ApiModelSpec": {
+         "@id": "ApiModelSpec"
+      },
+      "BackendSpec": {
+         "@id": "BackendSpec"
+      },
+      "CliCommandSpec": {
+         "@id": "CliCommandSpec"
+      },
+      "ComponentSpec": {
+         "@id": "ComponentSpec"
+      },
+      "ContextSpec": {
+         "@id": "ContextSpec"
+      },
+      "FormatterSpec": {
+         "@id": "FormatterSpec"
+      },
+      "HookPayloadSpec": {
+         "@id": "HookPayloadSpec"
+      },
+      "IntrinsicAdapterSpec": {
+         "@id": "IntrinsicAdapterSpec"
+      },
+      "MethodSpec": {
+         "@id": "MethodSpec"
+      },
+      "ModelElement": {
+         "@id": "ModelElement"
+      },
+      "ModelIdentifierSpec": {
+         "@id": "ModelIdentifierSpec"
+      },
+      "NamedElement": {
+         "@id": "NamedElement"
+      },
+      "PluginSpec": {
+         "@id": "PluginSpec"
+      },
+      "PythonPackage": {
+         "@id": "PythonPackage"
+      },
+      "RepositoryCatalog": {
+         "@id": "RepositoryCatalog"
+      },
+      "RequirementSpec": {
+         "@id": "RequirementSpec"
+      },
+      "SamplingStrategySpec": {
+         "@id": "SamplingStrategySpec"
+      },
+      "SessionSpec": {
+         "@id": "SessionSpec"
+      },
+      "TelemetryMetricSpec": {
+         "@id": "TelemetryMetricSpec"
+      }
+   }
+}

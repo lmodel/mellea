@@ -1,0 +1,46 @@
+# metamodel_version: 1.11.0# version: 2026-05-26id: SessionSpec
+schema_generating: true
+description: Specification of a Mellea session.
+display_name: SessionSpec
+document_category: SessionSpec
+weight: 20
+fields:
+- id: id
+  description: Stable identifier for a schema element.
+  display_name: id
+- id: name
+  description: Human-readable name.
+  display_name: name
+- id: description
+  description: Narrative description of the element.
+  display_name: description
+- id: module_path
+  description: Python module path where this element is defined.
+  display_name: module_path
+- id: source_file
+  description: Source file relative to repository root.
+  display_name: source_file
+- id: package_kind
+  description: Package bucket.
+  display_name: package_kind
+- id: element_kind
+  description: Kind of Python declaration.
+  display_name: element_kind
+- id: coverage_scope
+  description: Where this element surfaces (source/API/CLI/example/test).
+  display_name: coverage_scope
+  cardinality: multi
+- id: tags
+  description: Free-form classification tags.
+  display_name: tags
+  cardinality: multi
+- id: uses_backend
+  description: Slot describing the uses backend.
+  display_name: uses_backend
+- id: uses_context
+  description: Slot describing the uses context.
+  display_name: uses_context
+- id: exposed_method
+  description: Slot describing the exposed method.
+  display_name: exposed_method
+  cardinality: multi

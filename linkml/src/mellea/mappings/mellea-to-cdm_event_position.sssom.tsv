@@ -1,0 +1,22 @@
+# mapping_set_id: https://w3id.org/lmodel/mellea/mappings/mellea-to-cdm_event_position.sssom.tsv
+# mapping_set_description: Manually curated alignment of the Mellea LinkML schema (linkml/src/mellea/schema/mellea.yaml) to the FINOS Common Domain Model (CDM) event-position module (cdm_event_position.yaml). The two schemas have essentially no domain overlap (AI runtime/code architecture vs financial position aggregation), so all mappings here are structural/aggregation analogues at low confidence. Provided for completeness rather than substantive equivalence.
+# license: https://creativecommons.org/licenses/by/4.0/
+# mapping_date: 2026-05-26
+# curie_map:
+#  mellea: https://w3id.org/lmodel/mellea/
+#  common_domain_model: https://w3id.org/lmodel/common-domain-model/
+#  linkml: https://w3id.org/linkml/
+# creator_id:
+#  - https://github.com/lmodel/mellea
+# see_also:
+#   - https://cdm.finos.org/
+#subject_source: mellea
+#subject_source_version: '2026-05-26'
+#object_source: common_domain_model
+subject_id	subject_label	predicate_id	object_id	object_label	mapping_justification	confidence	comment
+mellea:RepositoryCatalog	RepositoryCatalog	skos:relatedMatch	common_domain_model:Portfolio	Portfolio	semapv:LLMBasedMatching	0.3	Both are top-level aggregation containers (code snapshot vs portfolio of positions). Structural analogue only.
+mellea:RepositoryCatalog	RepositoryCatalog	skos:relatedMatch	common_domain_model:PortfolioState	PortfolioState	semapv:LLMBasedMatching	0.3	RepositoryCatalog is a state-full snapshot of analysed elements at a point in time; PortfolioState is a state-full snapshot of positions at a point in time.
+mellea:PythonPackage	PythonPackage	skos:relatedMatch	common_domain_model:Position	Position	semapv:LLMBasedMatching	0.2	PythonPackage is the atomic packaging unit grouped by RepositoryCatalog; Position is the atomic unit grouped by Portfolio. Aggregation-shape analogy only.
+mellea:ModelElement	ModelElement	skos:relatedMatch	common_domain_model:ContractBase	ContractBase	semapv:LLMBasedMatching	0.2	Both are abstract base classes used to derive concrete domain elements in their respective schemas.
+mellea:ModelIdentifierSpec	ModelIdentifierSpec	skos:relatedMatch	common_domain_model:positionIdentifier	positionIdentifier	semapv:LLMBasedMatching	0.3	Both gather multiple identifiers issued by different systems for the same entity (model vs position).
+mellea:NamedElement	NamedElement	skos:relatedMatch	common_domain_model:InventoryRecord	InventoryRecord	semapv:LLMBasedMatching	0.15	Both serve as named, identifiable record types in their schemas; semantics are otherwise unrelated.

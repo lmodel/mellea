@@ -1,0 +1,90 @@
+Class Name	Parent Class	YAML Class Name	Description	Flags	Slot Name	YAML Slot Name	Range	Card	Slot Description	URI
+ApiFieldSpec	NamedElement	ApiFieldSpec	Specification of a single field in an API model.							
+					field_name		str	0..1	Slot describing the field name.	mellea:field_name
+					field_type		str	0..1	Slot describing the field type.	mellea:field_type
+					required_field		Bool	0..1	Slot describing the required field.	mellea:required_field
+					allows_null		Bool	0..1	Slot describing the allows null.	mellea:allows_null
+ApiModelSpec	ModelElement	ApiModelSpec	Specification of an HTTP API wire model.							
+					request_or_response		RequestResponseEnum	0..1	Slot describing the request or response.	mellea:request_or_response
+					openai_object_type		str	0..1	Slot describing the openai object type.	mellea:openai_object_type
+					has_field		ApiFieldSpec	0..*	Slot describing the has field.	mellea:has_field
+BackendSpec	ModelElement	BackendSpec	Specification of a Mellea backend implementation.							
+					backend_family		BackendFamilyEnum	0..1	Slot describing the backend family.	mellea:backend_family
+					model_identifier		ModelIdentifierSpec	0..*	Slot describing the model identifier.	mellea:model_identifier
+					default_formatter		*FormatterSpec	0..1	Slot describing the default formatter.	mellea:default_formatter
+					model_options_key		str	0..*	Slot describing the model options key.	mellea:model_options_key
+					supports_streaming		Bool	0..1	Slot describing the supports streaming.	mellea:supports_streaming
+					supports_tool_calls		Bool	0..1	Slot describing the supports tool calls.	mellea:supports_tool_calls
+					supports_multimodal		Bool	0..1	Slot describing the supports multimodal.	mellea:supports_multimodal
+CliCommandSpec	ModelElement	CliCommandSpec	Specification of a CLI command exposed under `m`.							
+					command_group		str	0..1	Slot describing the command group.	mellea:command_group
+					command_path		str	0..1	Slot describing the command path.	mellea:command_path
+					command_purpose		str	0..1	Slot describing the command purpose.	mellea:command_purpose
+					input_model		ApiModelSpec	0..*	Slot describing the input model.	mellea:input_model
+					output_model		ApiModelSpec	0..*	Slot describing the output model.	mellea:output_model
+ComponentSpec	ModelElement	ComponentSpec	Specification of a Mellea stdlib component type.							
+					component_category		ComponentCategoryEnum	0..1	Slot describing the component category.	mellea:component_category
+					input_modality		str	0..*	Slot describing the input modality.	mellea:input_modality
+					parsed_output_type		str	0..1	Slot describing the parsed output type.	mellea:parsed_output_type
+ContextSpec	ModelElement	ContextSpec	Specification of a context implementation.							
+					context_linearity		ContextLinearityEnum	0..1	Slot describing the context linearity.	mellea:context_linearity
+					stores_component_history		Bool	0..1	Slot describing the stores component history.	mellea:stores_component_history
+					accepts_message_attachments		Bool	0..1	Slot describing the accepts message attachments.	mellea:accepts_message_attachments
+FormatterSpec	ModelElement	FormatterSpec	Specification of an output formatter for a backend.							
+HookPayloadSpec	ModelElement	HookPayloadSpec	Specification of a hook payload model.							
+					hook_type		HookTypeEnum	0..*	Slot describing the hook type.	mellea:hook_type
+					lifecycle_role		str	0..1	Slot describing the lifecycle role.	mellea:lifecycle_role
+IntrinsicAdapterSpec	NamedElement	IntrinsicAdapterSpec	Specification of an intrinsic adapter (LoRA / aLoRA).							
+					repo_id		str	0..1	Slot describing the repo id.	mellea:repo_id
+					adapter_type		AdapterTypeEnum	0..*	Slot describing the adapter type.	mellea:adapter_type
+MethodSpec	NamedElement	MethodSpec	Specification of a method exposed by a runtime class.							
+					method_name		str	0..1	Slot describing the method name.	mellea:method_name
+					method_signature		str	0..1	Slot describing the method signature.	mellea:method_signature
+					lifecycle_role		str	0..1	Slot describing the lifecycle role.	mellea:lifecycle_role
+ModelElement	NamedElement	ModelElement	Abstract base for concrete architectural elements.							
+ModelIdentifierSpec	NamedElement	ModelIdentifierSpec	Cross-provider identifier table for a single model.							
+					hf_model_name		str	0..1	Slot describing the hf model name.	mellea:hf_model_name
+					ollama_name		str	0..1	Slot describing the ollama name.	mellea:ollama_name
+					watsonx_name		str	0..1	Slot describing the watsonx name.	mellea:watsonx_name
+					openai_name		str	0..1	Slot describing the openai name.	mellea:openai_name
+					bedrock_name		str	0..1	Slot describing the bedrock name.	mellea:bedrock_name
+					provider_name		str	0..*	Slot describing the provider name.	mellea:provider_name
+NamedElement		NamedElement	Abstract base for any named, identifiable schema element.							
+				I	id		URIorCURIE	1..1	Stable identifier for a schema element.	schema:identifier
+					name		str	1..1	Human-readable name.	schema:name
+					description		str	0..1	Narrative description of the element.	schema:description
+					module_path		str	0..1	Python module path where this element is defined.	mellea:module_path
+					source_file		str	0..1	Source file relative to repository root.	mellea:source_file
+					package_kind		PackageKindEnum	0..1	Package bucket.	mellea:package_kind
+					element_kind		ElementKindEnum	0..1	Kind of Python declaration.	mellea:element_kind
+					coverage_scope		CoverageScopeEnum	0..*	Where this element surfaces (source/API/CLI/example/test).	mellea:coverage_scope
+					tags		str	0..*	Free-form classification tags.	mellea:tags
+PluginSpec	ModelElement	PluginSpec	Specification of a Mellea plugin and the hooks it registers.							
+					plugin_mode		PluginModeEnum	0..1	Slot describing the plugin mode.	mellea:plugin_mode
+					hook_type		HookTypeEnum	0..*	Slot describing the hook type.	mellea:hook_type
+					payload_model		HookPayloadSpec	0..*	Slot describing the payload model.	mellea:payload_model
+					plugin_priority		int	0..1	Slot describing the plugin priority.	mellea:plugin_priority
+PythonPackage	NamedElement	PythonPackage	A logical Python package (directory) inside the repository.							
+					package_name		str	0..1	Slot describing the package name.	mellea:package_name
+					depends_on_package		PythonPackage	0..*	Slot describing the depends on package.	mellea:depends_on_package
+					declares_element		ModelElement	0..*	Slot describing the declares element.	mellea:declares_element
+RepositoryCatalog	NamedElement	RepositoryCatalog	Top-level catalog rooting the analysed repository snapshot.							
+					repository_root		str	0..1	Slot describing the repository root.	mellea:repository_root
+					analyzed_on		XSDDate	0..1	Slot describing the analyzed on.	mellea:analyzed_on
+					includes_path		str	0..*	Slot describing the includes path.	mellea:includes_path
+					excludes_path		str	0..*	Slot describing the excludes path.	mellea:excludes_path
+					declares_element		ModelElement	0..*	Slot describing the declares element.	mellea:declares_element
+RequirementSpec	ModelElement	RequirementSpec	Specification of a requirement validator.							
+					validation_style		str	0..1	Slot describing the validation style.	mellea:validation_style
+					may_trigger_repair		Bool	0..1	Slot describing the may trigger repair.	mellea:may_trigger_repair
+SamplingStrategySpec	ModelElement	SamplingStrategySpec	Specification of a sampling-loop strategy.							
+					selection_policy		str	0..1	Slot describing the selection policy.	mellea:selection_policy
+					loop_budget_hint		int	0..1	Slot describing the loop budget hint.	mellea:loop_budget_hint
+					may_trigger_repair		Bool	0..1	Slot describing the may trigger repair.	mellea:may_trigger_repair
+SessionSpec	ModelElement	SessionSpec	Specification of a Mellea session.							
+					uses_backend		*BackendSpec	0..1	Slot describing the uses backend.	mellea:uses_backend
+					uses_context		*ContextSpec	0..1	Slot describing the uses context.	mellea:uses_context
+					exposed_method		MethodSpec	0..*	Slot describing the exposed method.	mellea:exposed_method
+TelemetryMetricSpec	ModelElement	TelemetryMetricSpec	Specification of a telemetry metric emitted by Mellea.							
+					metric_name		str	0..*	Slot describing the metric name.	mellea:metric_name
+

@@ -230,6 +230,15 @@ help = "Remove the generated CLI reference page."
 [tool.ruff]
 target-version = "py311"
 respect-gitignore = true
+# Apply `extend-exclude` even when paths are passed explicitly on the CLI
+# (e.g. `ruff check linkml/project/`) — required for pre-commit hooks that
+# pass changed files directly.
+force-exclude = true
+extend-exclude = [
+  # Generator output from `just gen-project` (gen-sqla, gen-pandera,
+  # gen-namespaces). Regenerated wholesale; any in-place edits are clobbered.
+  "linkml/project",
+]
 
 [tool.ruff.format]
 skip-magic-trailing-comma = true

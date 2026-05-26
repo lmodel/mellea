@@ -1,0 +1,2656 @@
+{
+  "name": "mellea",
+  "annotations": [
+    {
+      "tag": "coverage_target",
+      "value": "core-library-and-cli"
+    },
+    {
+      "tag": "analyzed_scope",
+      "value": "mellea+cli (linkml/ excluded)"
+    },
+    {
+      "tag": "generated_by",
+      "value": "linkml/scripts/schema_to_linkml.py"
+    },
+    {
+      "tag": "generated_on",
+      "value": "2026-05-26"
+    },
+    {
+      "tag": "coverage_inventory",
+      "value": "cli: total=86 (CLASS=42 DATACLASS=5 ENUM=4 PYDANTIC_MODEL=20 TYPED_DICT=15)\nmellea/backends: total=28 (CLASS=22 DATACLASS=2 ENUM=1 MIXIN=1 PYDANTIC_MODEL=2)\nmellea/core: total=27 (CLASS=20 DATACLASS=5 ENUM=1 PROTOCOL=1)\nmellea/formatters: total=57 (CLASS=39 ENUM=1 MIXIN=1 PYDANTIC_MODEL=16)\nmellea/helpers: total=6 (CLASS=2 ENUM=1 PYDANTIC_MODEL=1 TYPED_DICT=2)\nmellea/plugins: total=32 (CLASS=28 DATACLASS=2 ENUM=2)\nmellea/stdlib: total=69 (CLASS=50 DATACLASS=10 ENUM=1 PROTOCOL=2 PYDANTIC_MODEL=4 TYPED_DICT=2)\nmellea/telemetry: total=11 (CLASS=11)\nenum_total: 11"
+    }
+  ],
+  "description": "LinkML schema describing the Mellea codebase architecture and public data models. Generated from Python sources by linkml/scripts/schema_to_linkml.py.",
+  "title": "mellea",
+  "source": "https://github.com/lmodel/mellea",
+  "see_also": [
+    "https://github.com/lmodel/mellea",
+    "https://lmodel.github.io/mellea"
+  ],
+  "id": "https://w3id.org/lmodel/mellea",
+  "version": "2026-05-26",
+  "imports": [
+    "linkml:types"
+  ],
+  "license": "Apache-2.0",
+  "prefixes": [
+    {
+      "prefix_prefix": "mellea",
+      "prefix_reference": "https://w3id.org/lmodel/mellea/"
+    },
+    {
+      "prefix_prefix": "linkml",
+      "prefix_reference": "https://w3id.org/linkml/"
+    },
+    {
+      "prefix_prefix": "schema",
+      "prefix_reference": "http://schema.org/"
+    },
+    {
+      "prefix_prefix": "dcterms",
+      "prefix_reference": "http://purl.org/dc/terms/"
+    },
+    {
+      "prefix_prefix": "attack",
+      "prefix_reference": "https://w3id.org/lmodel/attack/"
+    },
+    {
+      "prefix_prefix": "common_domain_model",
+      "prefix_reference": "https://w3id.org/lmodel/common-domain-model/"
+    },
+    {
+      "prefix_prefix": "iso27001",
+      "prefix_reference": "https://w3id.org/lmodel/iso27001/"
+    },
+    {
+      "prefix_prefix": "mcp",
+      "prefix_reference": "https://w3id.org/lmodel/mcp/"
+    },
+    {
+      "prefix_prefix": "nexus",
+      "prefix_reference": "https://ibm.github.io/ai-atlas-nexus/ontology/"
+    },
+    {
+      "prefix_prefix": "spdx",
+      "prefix_reference": "https://spdx.org/rdf/3.0.1/terms/"
+    }
+  ],
+  "default_prefix": "mellea",
+  "default_range": "string",
+  "subsets": [
+    {
+      "name": "core_runtime",
+      "definition_uri": "https://w3id.org/lmodel/mellea/CoreRuntime",
+      "description": "Core runtime abstractions and execution flow.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "@type": "SubsetDefinition"
+    },
+    {
+      "name": "interface_surface",
+      "definition_uri": "https://w3id.org/lmodel/mellea/InterfaceSurface",
+      "description": "API or CLI-facing interfaces and wire models.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "@type": "SubsetDefinition"
+    },
+    {
+      "name": "observability",
+      "definition_uri": "https://w3id.org/lmodel/mellea/Observability",
+      "description": "Telemetry, plugin hooks, and instrumentation.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "@type": "SubsetDefinition"
+    }
+  ],
+  "types": [
+    {
+      "name": "PythonDottedPath",
+      "definition_uri": "https://w3id.org/lmodel/mellea/PythonDottedPath",
+      "description": "Python import-style dotted path.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "pattern": "^[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*$",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "RepositoryRelativePath",
+      "definition_uri": "https://w3id.org/lmodel/mellea/RepositoryRelativePath",
+      "description": "Relative path from repository root.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "pattern": "^[^\\0]+$",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "string",
+      "definition_uri": "https://w3id.org/linkml/String",
+      "description": "A character string",
+      "notes": [
+        "In RDF serializations, a slot with range of string is treated as a literal or type xsd:string. If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"string\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:Text"
+      ],
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "integer",
+      "definition_uri": "https://w3id.org/linkml/Integer",
+      "description": "An integer",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"integer\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:Integer"
+      ],
+      "base": "int",
+      "uri": "http://www.w3.org/2001/XMLSchema#integer",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "boolean",
+      "definition_uri": "https://w3id.org/linkml/Boolean",
+      "description": "A binary (true or false) value",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"boolean\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:Boolean"
+      ],
+      "base": "Bool",
+      "uri": "http://www.w3.org/2001/XMLSchema#boolean",
+      "repr": "bool",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "float",
+      "definition_uri": "https://w3id.org/linkml/Float",
+      "description": "A real number that conforms to the xsd:float specification",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"float\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:Float"
+      ],
+      "base": "float",
+      "uri": "http://www.w3.org/2001/XMLSchema#float",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "double",
+      "definition_uri": "https://w3id.org/linkml/Double",
+      "description": "A real number that conforms to the xsd:double specification",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"double\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "close_mappings": [
+        "schema:Float"
+      ],
+      "base": "float",
+      "uri": "http://www.w3.org/2001/XMLSchema#double",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "decimal",
+      "definition_uri": "https://w3id.org/linkml/Decimal",
+      "description": "A real number with arbitrary precision that conforms to the xsd:decimal specification",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"decimal\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "broad_mappings": [
+        "schema:Number"
+      ],
+      "base": "Decimal",
+      "uri": "http://www.w3.org/2001/XMLSchema#decimal",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "time",
+      "definition_uri": "https://w3id.org/linkml/Time",
+      "description": "A time object represents a (local) time of day, independent of any particular day",
+      "notes": [
+        "URI is dateTime because OWL reasoners do not work with straight date or time",
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"time\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:Time"
+      ],
+      "base": "XSDTime",
+      "uri": "http://www.w3.org/2001/XMLSchema#time",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "date",
+      "definition_uri": "https://w3id.org/linkml/Date",
+      "description": "a date (year, month and day) in an idealized calendar",
+      "notes": [
+        "URI is dateTime because OWL reasoners don't work with straight date or time",
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:Date"
+      ],
+      "base": "XSDDate",
+      "uri": "http://www.w3.org/2001/XMLSchema#date",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "datetime",
+      "definition_uri": "https://w3id.org/linkml/Datetime",
+      "description": "The combination of a date and time",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"datetime\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:DateTime"
+      ],
+      "base": "XSDDateTime",
+      "uri": "http://www.w3.org/2001/XMLSchema#dateTime",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "date_or_datetime",
+      "definition_uri": "https://w3id.org/linkml/DateOrDatetime",
+      "description": "Either a date or a datetime",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date_or_datetime\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "str",
+      "uri": "https://w3id.org/linkml/DateOrDatetime",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "uriorcurie",
+      "definition_uri": "https://w3id.org/linkml/Uriorcurie",
+      "description": "a URI or a CURIE",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uriorcurie\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "URIorCURIE",
+      "uri": "http://www.w3.org/2001/XMLSchema#anyURI",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "curie",
+      "definition_uri": "https://w3id.org/linkml/Curie",
+      "conforms_to": "https://www.w3.org/TR/curie/",
+      "description": "a compact URI",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"curie\"."
+      ],
+      "comments": [
+        "in RDF serializations this MUST be expanded to a URI",
+        "in non-RDF serializations MAY be serialized as the compact representation"
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "Curie",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "uri",
+      "definition_uri": "https://w3id.org/linkml/Uri",
+      "conforms_to": "https://www.ietf.org/rfc/rfc3987.txt",
+      "description": "a complete URI",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uri\"."
+      ],
+      "comments": [
+        "in RDF serializations a slot with range of uri is treated as a literal or type xsd:anyURI unless it is an identifier or a reference to an identifier, in which case it is translated directly to a node"
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "close_mappings": [
+        "schema:URL"
+      ],
+      "base": "URI",
+      "uri": "http://www.w3.org/2001/XMLSchema#anyURI",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "ncname",
+      "definition_uri": "https://w3id.org/linkml/Ncname",
+      "description": "Prefix part of CURIE",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"ncname\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "NCName",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "objectidentifier",
+      "definition_uri": "https://w3id.org/linkml/Objectidentifier",
+      "description": "A URI or CURIE that represents an object in the model.",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"objectidentifier\"."
+      ],
+      "comments": [
+        "Used for inheritance and type checking"
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "ElementIdentifier",
+      "uri": "http://www.w3.org/ns/shex#iri",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "nodeidentifier",
+      "definition_uri": "https://w3id.org/linkml/Nodeidentifier",
+      "description": "A URI, CURIE or BNODE that represents a node in a model.",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"nodeidentifier\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "NodeIdentifier",
+      "uri": "http://www.w3.org/ns/shex#nonLiteral",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "jsonpointer",
+      "definition_uri": "https://w3id.org/linkml/Jsonpointer",
+      "conforms_to": "https://datatracker.ietf.org/doc/html/rfc6901",
+      "description": "A string encoding a JSON Pointer. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to a valid object within the current instance document when encoded in tree form.",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpointer\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "jsonpath",
+      "definition_uri": "https://w3id.org/linkml/Jsonpath",
+      "conforms_to": "https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html",
+      "description": "A string encoding a JSON Path. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded in tree form.",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpath\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "sparqlpath",
+      "definition_uri": "https://w3id.org/linkml/Sparqlpath",
+      "conforms_to": "https://www.w3.org/TR/sparql11-query/#propertypaths",
+      "description": "A string encoding a SPARQL Property Path. The value of the string MUST conform to SPARQL syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded as RDF.",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"sparqlpath\"."
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    }
+  ],
+  "enums": [
+    {
+      "name": "PackageKindEnum",
+      "definition_uri": "https://w3id.org/lmodel/mellea/PackageKindEnum",
+      "description": "Logical package buckets used to classify Mellea source modules.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "permissible_values": [
+        {
+          "text": "CORE",
+          "description": "core"
+        },
+        {
+          "text": "STDLIB",
+          "description": "stdlib"
+        },
+        {
+          "text": "BACKENDS",
+          "description": "backends"
+        },
+        {
+          "text": "FORMATTERS",
+          "description": "formatters"
+        },
+        {
+          "text": "HELPERS",
+          "description": "helpers"
+        },
+        {
+          "text": "PLUGINS",
+          "description": "plugins"
+        },
+        {
+          "text": "TELEMETRY",
+          "description": "telemetry"
+        },
+        {
+          "text": "CLI",
+          "description": "cli"
+        },
+        {
+          "text": "DOCS_EXAMPLES",
+          "description": "docs examples"
+        },
+        {
+          "text": "TEST",
+          "description": "test"
+        }
+      ]
+    },
+    {
+      "name": "ElementKindEnum",
+      "definition_uri": "https://w3id.org/lmodel/mellea/ElementKindEnum",
+      "description": "Kind of Python declaration captured by a ModelElement entry.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "permissible_values": [
+        {
+          "text": "CLASS",
+          "description": "class"
+        },
+        {
+          "text": "ENUM",
+          "description": "enum"
+        },
+        {
+          "text": "DATACLASS",
+          "description": "dataclass"
+        },
+        {
+          "text": "TYPED_DICT",
+          "description": "typed dict"
+        },
+        {
+          "text": "PYDANTIC_MODEL",
+          "description": "pydantic model"
+        },
+        {
+          "text": "PROTOCOL",
+          "description": "protocol"
+        },
+        {
+          "text": "FUNCTION",
+          "description": "function"
+        },
+        {
+          "text": "MIXIN",
+          "description": "mixin"
+        }
+      ]
+    },
+    {
+      "name": "CoverageScopeEnum",
+      "definition_uri": "https://w3id.org/lmodel/mellea/CoverageScopeEnum",
+      "description": "Where in the project an element surfaces (source, API, CLI, ...).",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "permissible_values": [
+        {
+          "text": "SOURCE",
+          "description": "source"
+        },
+        {
+          "text": "API",
+          "description": "api"
+        },
+        {
+          "text": "CLI",
+          "description": "cli"
+        },
+        {
+          "text": "EXAMPLE",
+          "description": "example"
+        },
+        {
+          "text": "TEST",
+          "description": "test"
+        }
+      ]
+    },
+    {
+      "name": "ContextLinearityEnum",
+      "definition_uri": "https://w3id.org/lmodel/mellea/ContextLinearityEnum",
+      "description": "Whether a Mellea context preserves linear ordering or not.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "permissible_values": [
+        {
+          "text": "LINEAR",
+          "description": "Sequential, ordered history."
+        },
+        {
+          "text": "NON_LINEAR",
+          "description": "Tree- or graph-shaped history."
+        }
+      ]
+    },
+    {
+      "name": "ComponentCategoryEnum",
+      "definition_uri": "https://w3id.org/lmodel/mellea/ComponentCategoryEnum",
+      "description": "High-level category of a Mellea stdlib component.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "permissible_values": [
+        {
+          "text": "INSTRUCTION",
+          "description": "instruction",
+          "close_mappings": [
+            "mcp:Prompt"
+          ],
+          "related_mappings": [
+            "nexus:Input"
+          ]
+        },
+        {
+          "text": "MESSAGE",
+          "description": "message",
+          "close_mappings": [
+            "mcp:PromptMessage",
+            "mcp:SamplingMessage"
+          ]
+        },
+        {
+          "text": "TOOL_MESSAGE",
+          "description": "tool message",
+          "close_mappings": [
+            "mcp:ToolUseContent",
+            "mcp:ToolResultContent"
+          ]
+        },
+        {
+          "text": "DOCUMENT",
+          "description": "document",
+          "close_mappings": [
+            "mcp:Resource"
+          ],
+          "related_mappings": [
+            "nexus:Dataset",
+            "mcp:EmbeddedResource"
+          ]
+        },
+        {
+          "text": "INTRINSIC",
+          "description": "intrinsic",
+          "close_mappings": [
+            "nexus:LLMIntrinsic"
+          ]
+        },
+        {
+          "text": "MOBJECT",
+          "description": "mobject"
+        },
+        {
+          "text": "QUERY",
+          "description": "query"
+        },
+        {
+          "text": "TRANSFORM",
+          "description": "transform"
+        },
+        {
+          "text": "GENSTUB",
+          "description": "genstub"
+        },
+        {
+          "text": "REQUIREMENT",
+          "description": "requirement",
+          "related_mappings": [
+            "nexus:Requirement"
+          ]
+        },
+        {
+          "text": "STREAM_EVENT",
+          "description": "stream event"
+        }
+      ]
+    },
+    {
+      "name": "RequestResponseEnum",
+      "definition_uri": "https://w3id.org/lmodel/mellea/RequestResponseEnum",
+      "description": "Direction of a wire model (HTTP request, response, or both).",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "permissible_values": [
+        {
+          "text": "REQUEST",
+          "description": "Inbound request payload."
+        },
+        {
+          "text": "RESPONSE",
+          "description": "Outbound response payload."
+        },
+        {
+          "text": "BOTH",
+          "description": "Model used in both directions (rare)."
+        }
+      ]
+    },
+    {
+      "name": "BackendFamilyEnum",
+      "definition_uri": "https://w3id.org/lmodel/mellea/BackendFamilyEnum",
+      "annotations": [
+        {
+          "tag": "derived_from",
+          "value": "mellea/backends/*.py"
+        }
+      ],
+      "description": "Backend families discovered under mellea/backends/.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "related_mappings": [
+        "attack:Infrastructure",
+        "spdx:Agent"
+      ],
+      "permissible_values": [
+        {
+          "text": "BEDROCK",
+          "description": "Backend family backed by mellea/backends/bedrock.py.",
+          "annotations": [
+            {
+              "tag": "source_file",
+              "value": "mellea/backends/bedrock.py"
+            }
+          ],
+          "related_mappings": [
+            "nexus:AiProvider"
+          ]
+        },
+        {
+          "text": "DUMMY",
+          "description": "Backend family backed by mellea/backends/dummy.py.",
+          "annotations": [
+            {
+              "tag": "source_file",
+              "value": "mellea/backends/dummy.py"
+            }
+          ]
+        },
+        {
+          "text": "HUGGINGFACE",
+          "description": "Backend family backed by mellea/backends/huggingface.py.",
+          "annotations": [
+            {
+              "tag": "source_file",
+              "value": "mellea/backends/huggingface.py"
+            }
+          ],
+          "related_mappings": [
+            "nexus:AiProvider"
+          ]
+        },
+        {
+          "text": "LITELLM",
+          "description": "Backend family backed by mellea/backends/litellm.py.",
+          "annotations": [
+            {
+              "tag": "source_file",
+              "value": "mellea/backends/litellm.py"
+            }
+          ],
+          "related_mappings": [
+            "nexus:AiProvider"
+          ]
+        },
+        {
+          "text": "OLLAMA",
+          "description": "Backend family backed by mellea/backends/ollama.py.",
+          "annotations": [
+            {
+              "tag": "source_file",
+              "value": "mellea/backends/ollama.py"
+            }
+          ],
+          "related_mappings": [
+            "nexus:AiProvider"
+          ]
+        },
+        {
+          "text": "OPENAI",
+          "description": "Backend family backed by mellea/backends/openai.py.",
+          "annotations": [
+            {
+              "tag": "source_file",
+              "value": "mellea/backends/openai.py"
+            }
+          ],
+          "related_mappings": [
+            "nexus:AiProvider"
+          ]
+        },
+        {
+          "text": "WATSONX",
+          "description": "Backend family backed by mellea/backends/watsonx.py.",
+          "annotations": [
+            {
+              "tag": "source_file",
+              "value": "mellea/backends/watsonx.py"
+            }
+          ],
+          "related_mappings": [
+            "nexus:AiProvider"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "PluginModeEnum",
+      "definition_uri": "https://w3id.org/lmodel/mellea/PluginModeEnum",
+      "annotations": [
+        {
+          "tag": "derived_from",
+          "value": "mellea/plugins/types.py::PluginMode"
+        }
+      ],
+      "description": "Execution mode of a Mellea plugin (derived from PluginMode).",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "permissible_values": [
+        {
+          "text": "SEQUENTIAL",
+          "description": "sequential",
+          "annotations": [
+            {
+              "tag": "python_value",
+              "value": "sequential"
+            }
+          ]
+        },
+        {
+          "text": "TRANSFORM",
+          "description": "transform",
+          "annotations": [
+            {
+              "tag": "python_value",
+              "value": "transform"
+            }
+          ]
+        },
+        {
+          "text": "CONCURRENT",
+          "description": "concurrent",
+          "annotations": [
+            {
+              "tag": "python_value",
+              "value": "concurrent"
+            }
+          ]
+        },
+        {
+          "text": "AUDIT",
+          "description": "audit",
+          "annotations": [
+            {
+              "tag": "python_value",
+              "value": "audit"
+            }
+          ],
+          "related_mappings": [
+            "nexus:RiskControl",
+            "attack:DetectionStrategy",
+            "iso27001:InternalAudit"
+          ]
+        },
+        {
+          "text": "FIRE_AND_FORGET",
+          "description": "fire and forget",
+          "annotations": [
+            {
+              "tag": "python_value",
+              "value": "fire_and_forget"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "HookTypeEnum",
+      "definition_uri": "https://w3id.org/lmodel/mellea/HookTypeEnum",
+      "annotations": [
+        {
+          "tag": "derived_from",
+          "value": "mellea/plugins/types.py::HookType"
+        }
+      ],
+      "description": "Lifecycle hook stages (derived from HookType).",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "related_mappings": [
+        "attack:KillChainPhase",
+        "mcp:TaskStatusEnum"
+      ],
+      "permissible_values": [
+        {
+          "text": "SESSION_PRE_INIT",
+          "description": "session pre init",
+          "annotations": [
+            {
+              "tag": "python_value",
+              "value": "session_pre_init"
+            }
+          ]
+        },
+        {
+          "text": "SESSION_POST_INIT",
+          "description": "session post init",
+          "annotations": [
+            {
+              "tag": "python_value",
+              "value": "session_post_init"
+            }
+          ]
+        },
+        {
+          "text": "SESSION_RESET",
+          "description": "session reset",
+          "annotations": [
+            {
+              "tag": "python_value",
+              "value": "session_reset"
+            }
+          ]
+        },
+        {
+          "text": "SESSION_CLEANUP",
+          "description": "session cleanup",
+          "annotations": [
+            {
+              "tag": "python_value",
+              "value": "session_cleanup"
+            }
+          ]
+        },
+        {
+          "text": "COMPONENT_PRE_EXECUTE",
+          "description": "component pre execute",
+          "annotations": [
+            {
+              "tag": "python_value",
+              "value": "component_pre_execute"
+            }
+          ]
+        },
+        {
+          "text": "COMPONENT_POST_SUCCESS",
+          "description": "component post success",
+          "annotations": [
+            {
+              "tag": "python_value",
+              "value": "component_post_success"
+            }
+          ]
+        },
+        {
+          "text": "COMPONENT_POST_ERROR",
+          "description": "component post error",
+          "annotations": [
+            {
+              "tag": "python_value",
+              "value": "component_post_error"
+            }
+          ]
+        },
+        {
+          "text": "GENERATION_PRE_CALL",
+          "description": "generation pre call",
+          "annotations": [
+            {
+              "tag": "python_value",
+              "value": "generation_pre_call"
+            }
+          ]
+        },
+        {
+          "text": "GENERATION_POST_CALL",
+          "description": "generation post call",
+          "annotations": [
+            {
+              "tag": "python_value",
+              "value": "generation_post_call"
+            }
+          ],
+          "related_mappings": [
+            "nexus:EvaluationResultRecord"
+          ]
+        },
+        {
+          "text": "GENERATION_ERROR",
+          "description": "generation error",
+          "annotations": [
+            {
+              "tag": "python_value",
+              "value": "generation_error"
+            }
+          ]
+        },
+        {
+          "text": "VALIDATION_PRE_CHECK",
+          "description": "validation pre check",
+          "annotations": [
+            {
+              "tag": "python_value",
+              "value": "validation_pre_check"
+            }
+          ]
+        },
+        {
+          "text": "VALIDATION_POST_CHECK",
+          "description": "validation post check",
+          "annotations": [
+            {
+              "tag": "python_value",
+              "value": "validation_post_check"
+            }
+          ],
+          "related_mappings": [
+            "nexus:AiEval",
+            "iso27001:AuditFinding"
+          ]
+        },
+        {
+          "text": "SAMPLING_LOOP_START",
+          "description": "sampling loop start",
+          "annotations": [
+            {
+              "tag": "python_value",
+              "value": "sampling_loop_start"
+            }
+          ]
+        },
+        {
+          "text": "SAMPLING_ITERATION",
+          "description": "sampling iteration",
+          "annotations": [
+            {
+              "tag": "python_value",
+              "value": "sampling_iteration"
+            }
+          ]
+        },
+        {
+          "text": "SAMPLING_REPAIR",
+          "description": "sampling repair",
+          "annotations": [
+            {
+              "tag": "python_value",
+              "value": "sampling_repair"
+            }
+          ]
+        },
+        {
+          "text": "SAMPLING_LOOP_END",
+          "description": "sampling loop end",
+          "annotations": [
+            {
+              "tag": "python_value",
+              "value": "sampling_loop_end"
+            }
+          ]
+        },
+        {
+          "text": "TOOL_PRE_INVOKE",
+          "description": "tool pre invoke",
+          "annotations": [
+            {
+              "tag": "python_value",
+              "value": "tool_pre_invoke"
+            }
+          ]
+        },
+        {
+          "text": "TOOL_POST_INVOKE",
+          "description": "tool post invoke",
+          "annotations": [
+            {
+              "tag": "python_value",
+              "value": "tool_post_invoke"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AdapterTypeEnum",
+      "definition_uri": "https://w3id.org/lmodel/mellea/AdapterTypeEnum",
+      "annotations": [
+        {
+          "tag": "derived_from",
+          "value": "mellea/backends/adapters/catalog.py::AdapterType"
+        }
+      ],
+      "description": "Adapter implementation type (derived from AdapterType).",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "exact_mappings": [
+        "nexus:AdapterType"
+      ],
+      "permissible_values": [
+        {
+          "text": "LORA",
+          "description": "lora",
+          "annotations": [
+            {
+              "tag": "python_value",
+              "value": "lora"
+            }
+          ]
+        },
+        {
+          "text": "ALORA",
+          "description": "alora",
+          "annotations": [
+            {
+              "tag": "python_value",
+              "value": "alora"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "slots": [
+    {
+      "name": "id",
+      "definition_uri": "https://w3id.org/lmodel/mellea/id",
+      "description": "Stable identifier for a schema element.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "mappings": [
+        "http://schema.org/identifier"
+      ],
+      "slot_uri": "http://schema.org/identifier",
+      "identifier": true,
+      "owner": "NamedElement",
+      "domain_of": [
+        "NamedElement"
+      ],
+      "range": "uriorcurie",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "name",
+      "definition_uri": "https://w3id.org/lmodel/mellea/name",
+      "description": "Human-readable name.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "mappings": [
+        "http://schema.org/name"
+      ],
+      "slot_uri": "http://schema.org/name",
+      "owner": "NamedElement",
+      "domain_of": [
+        "NamedElement"
+      ],
+      "range": "string",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "description",
+      "definition_uri": "https://w3id.org/lmodel/mellea/description",
+      "description": "Narrative description of the element.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "mappings": [
+        "http://schema.org/description"
+      ],
+      "slot_uri": "http://schema.org/description",
+      "owner": "NamedElement",
+      "domain_of": [
+        "NamedElement"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "module_path",
+      "definition_uri": "https://w3id.org/lmodel/mellea/module_path",
+      "description": "Python module path where this element is defined.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/module_path",
+      "owner": "NamedElement",
+      "domain_of": [
+        "NamedElement"
+      ],
+      "range": "PythonDottedPath",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "source_file",
+      "definition_uri": "https://w3id.org/lmodel/mellea/source_file",
+      "description": "Source file relative to repository root.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/source_file",
+      "owner": "NamedElement",
+      "domain_of": [
+        "NamedElement"
+      ],
+      "range": "RepositoryRelativePath",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "package_kind",
+      "definition_uri": "https://w3id.org/lmodel/mellea/package_kind",
+      "description": "Package bucket.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/package_kind",
+      "owner": "NamedElement",
+      "domain_of": [
+        "NamedElement"
+      ],
+      "range": "PackageKindEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "element_kind",
+      "definition_uri": "https://w3id.org/lmodel/mellea/element_kind",
+      "description": "Kind of Python declaration.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/element_kind",
+      "owner": "NamedElement",
+      "domain_of": [
+        "NamedElement"
+      ],
+      "range": "ElementKindEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "coverage_scope",
+      "definition_uri": "https://w3id.org/lmodel/mellea/coverage_scope",
+      "description": "Where this element surfaces (source/API/CLI/example/test).",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/coverage_scope",
+      "owner": "NamedElement",
+      "domain_of": [
+        "NamedElement"
+      ],
+      "range": "CoverageScopeEnum",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "tags",
+      "definition_uri": "https://w3id.org/lmodel/mellea/tags",
+      "description": "Free-form classification tags.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/tags",
+      "owner": "NamedElement",
+      "domain_of": [
+        "NamedElement"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "repository_root",
+      "definition_uri": "https://w3id.org/lmodel/mellea/repository_root",
+      "description": "Slot describing the repository root.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/repository_root",
+      "owner": "RepositoryCatalog",
+      "domain_of": [
+        "RepositoryCatalog"
+      ],
+      "range": "RepositoryRelativePath",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "analyzed_on",
+      "definition_uri": "https://w3id.org/lmodel/mellea/analyzed_on",
+      "description": "Slot describing the analyzed on.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/analyzed_on",
+      "owner": "RepositoryCatalog",
+      "domain_of": [
+        "RepositoryCatalog"
+      ],
+      "range": "date",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "includes_path",
+      "definition_uri": "https://w3id.org/lmodel/mellea/includes_path",
+      "description": "Slot describing the includes path.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/includes_path",
+      "owner": "RepositoryCatalog",
+      "domain_of": [
+        "RepositoryCatalog"
+      ],
+      "range": "RepositoryRelativePath",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "excludes_path",
+      "definition_uri": "https://w3id.org/lmodel/mellea/excludes_path",
+      "description": "Slot describing the excludes path.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/excludes_path",
+      "owner": "RepositoryCatalog",
+      "domain_of": [
+        "RepositoryCatalog"
+      ],
+      "range": "RepositoryRelativePath",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "package_name",
+      "definition_uri": "https://w3id.org/lmodel/mellea/package_name",
+      "description": "Slot describing the package name.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/package_name",
+      "owner": "PythonPackage",
+      "domain_of": [
+        "PythonPackage"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "depends_on_package",
+      "definition_uri": "https://w3id.org/lmodel/mellea/depends_on_package",
+      "description": "Slot describing the depends on package.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/depends_on_package",
+      "owner": "PythonPackage",
+      "domain_of": [
+        "PythonPackage"
+      ],
+      "range": "PythonPackage",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "declares_element",
+      "definition_uri": "https://w3id.org/lmodel/mellea/declares_element",
+      "description": "Slot describing the declares element.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/declares_element",
+      "owner": "PythonPackage",
+      "domain_of": [
+        "RepositoryCatalog",
+        "PythonPackage"
+      ],
+      "range": "ModelElement",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "backend_family",
+      "definition_uri": "https://w3id.org/lmodel/mellea/backend_family",
+      "description": "Slot describing the backend family.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/backend_family",
+      "owner": "BackendSpec",
+      "domain_of": [
+        "BackendSpec"
+      ],
+      "range": "BackendFamilyEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "model_identifier",
+      "definition_uri": "https://w3id.org/lmodel/mellea/model_identifier",
+      "description": "Slot describing the model identifier.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/model_identifier",
+      "owner": "BackendSpec",
+      "domain_of": [
+        "BackendSpec"
+      ],
+      "range": "ModelIdentifierSpec",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "default_formatter",
+      "definition_uri": "https://w3id.org/lmodel/mellea/default_formatter",
+      "description": "Slot describing the default formatter.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/default_formatter",
+      "owner": "BackendSpec",
+      "domain_of": [
+        "BackendSpec"
+      ],
+      "range": "FormatterSpec",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "model_options_key",
+      "definition_uri": "https://w3id.org/lmodel/mellea/model_options_key",
+      "description": "Slot describing the model options key.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/model_options_key",
+      "owner": "BackendSpec",
+      "domain_of": [
+        "BackendSpec"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "supports_streaming",
+      "definition_uri": "https://w3id.org/lmodel/mellea/supports_streaming",
+      "description": "Slot describing the supports streaming.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/supports_streaming",
+      "owner": "BackendSpec",
+      "domain_of": [
+        "BackendSpec"
+      ],
+      "range": "boolean",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "supports_tool_calls",
+      "definition_uri": "https://w3id.org/lmodel/mellea/supports_tool_calls",
+      "description": "Slot describing the supports tool calls.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/supports_tool_calls",
+      "owner": "BackendSpec",
+      "domain_of": [
+        "BackendSpec"
+      ],
+      "range": "boolean",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "supports_multimodal",
+      "definition_uri": "https://w3id.org/lmodel/mellea/supports_multimodal",
+      "description": "Slot describing the supports multimodal.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/supports_multimodal",
+      "owner": "BackendSpec",
+      "domain_of": [
+        "BackendSpec"
+      ],
+      "range": "boolean",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "context_linearity",
+      "definition_uri": "https://w3id.org/lmodel/mellea/context_linearity",
+      "description": "Slot describing the context linearity.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/context_linearity",
+      "owner": "ContextSpec",
+      "domain_of": [
+        "ContextSpec"
+      ],
+      "range": "ContextLinearityEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "stores_component_history",
+      "definition_uri": "https://w3id.org/lmodel/mellea/stores_component_history",
+      "description": "Slot describing the stores component history.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/stores_component_history",
+      "owner": "ContextSpec",
+      "domain_of": [
+        "ContextSpec"
+      ],
+      "range": "boolean",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "accepts_message_attachments",
+      "definition_uri": "https://w3id.org/lmodel/mellea/accepts_message_attachments",
+      "description": "Slot describing the accepts message attachments.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/accepts_message_attachments",
+      "owner": "ContextSpec",
+      "domain_of": [
+        "ContextSpec"
+      ],
+      "range": "boolean",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "uses_backend",
+      "definition_uri": "https://w3id.org/lmodel/mellea/uses_backend",
+      "description": "Slot describing the uses backend.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/uses_backend",
+      "owner": "SessionSpec",
+      "domain_of": [
+        "SessionSpec"
+      ],
+      "range": "BackendSpec",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "uses_context",
+      "definition_uri": "https://w3id.org/lmodel/mellea/uses_context",
+      "description": "Slot describing the uses context.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/uses_context",
+      "owner": "SessionSpec",
+      "domain_of": [
+        "SessionSpec"
+      ],
+      "range": "ContextSpec",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "exposed_method",
+      "definition_uri": "https://w3id.org/lmodel/mellea/exposed_method",
+      "description": "Slot describing the exposed method.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/exposed_method",
+      "owner": "SessionSpec",
+      "domain_of": [
+        "SessionSpec"
+      ],
+      "range": "MethodSpec",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "uses_component_type",
+      "definition_uri": "https://w3id.org/lmodel/mellea/uses_component_type",
+      "description": "Slot describing the uses component type.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/uses_component_type",
+      "range": "ComponentSpec",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "component_category",
+      "definition_uri": "https://w3id.org/lmodel/mellea/component_category",
+      "description": "Slot describing the component category.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/component_category",
+      "owner": "ComponentSpec",
+      "domain_of": [
+        "ComponentSpec"
+      ],
+      "range": "ComponentCategoryEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "input_modality",
+      "definition_uri": "https://w3id.org/lmodel/mellea/input_modality",
+      "description": "Slot describing the input modality.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/input_modality",
+      "owner": "ComponentSpec",
+      "domain_of": [
+        "ComponentSpec"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "parsed_output_type",
+      "definition_uri": "https://w3id.org/lmodel/mellea/parsed_output_type",
+      "description": "Slot describing the parsed output type.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/parsed_output_type",
+      "owner": "ComponentSpec",
+      "domain_of": [
+        "ComponentSpec"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "validation_style",
+      "definition_uri": "https://w3id.org/lmodel/mellea/validation_style",
+      "description": "Slot describing the validation style.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/validation_style",
+      "owner": "RequirementSpec",
+      "domain_of": [
+        "RequirementSpec"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "may_trigger_repair",
+      "definition_uri": "https://w3id.org/lmodel/mellea/may_trigger_repair",
+      "description": "Slot describing the may trigger repair.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/may_trigger_repair",
+      "owner": "SamplingStrategySpec",
+      "domain_of": [
+        "RequirementSpec",
+        "SamplingStrategySpec"
+      ],
+      "range": "boolean",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "selection_policy",
+      "definition_uri": "https://w3id.org/lmodel/mellea/selection_policy",
+      "description": "Slot describing the selection policy.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/selection_policy",
+      "owner": "SamplingStrategySpec",
+      "domain_of": [
+        "SamplingStrategySpec"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "loop_budget_hint",
+      "definition_uri": "https://w3id.org/lmodel/mellea/loop_budget_hint",
+      "description": "Slot describing the loop budget hint.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/loop_budget_hint",
+      "owner": "SamplingStrategySpec",
+      "domain_of": [
+        "SamplingStrategySpec"
+      ],
+      "range": "integer",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "plugin_mode",
+      "definition_uri": "https://w3id.org/lmodel/mellea/plugin_mode",
+      "description": "Slot describing the plugin mode.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/plugin_mode",
+      "owner": "PluginSpec",
+      "domain_of": [
+        "PluginSpec"
+      ],
+      "range": "PluginModeEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "hook_type",
+      "definition_uri": "https://w3id.org/lmodel/mellea/hook_type",
+      "description": "Slot describing the hook type.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/hook_type",
+      "owner": "HookPayloadSpec",
+      "domain_of": [
+        "PluginSpec",
+        "HookPayloadSpec"
+      ],
+      "range": "HookTypeEnum",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "payload_model",
+      "definition_uri": "https://w3id.org/lmodel/mellea/payload_model",
+      "description": "Slot describing the payload model.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/payload_model",
+      "owner": "PluginSpec",
+      "domain_of": [
+        "PluginSpec"
+      ],
+      "range": "HookPayloadSpec",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "plugin_priority",
+      "definition_uri": "https://w3id.org/lmodel/mellea/plugin_priority",
+      "description": "Slot describing the plugin priority.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/plugin_priority",
+      "owner": "PluginSpec",
+      "domain_of": [
+        "PluginSpec"
+      ],
+      "range": "integer",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "metric_name",
+      "definition_uri": "https://w3id.org/lmodel/mellea/metric_name",
+      "description": "Slot describing the metric name.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/metric_name",
+      "owner": "TelemetryMetricSpec",
+      "domain_of": [
+        "TelemetryMetricSpec"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "command_group",
+      "definition_uri": "https://w3id.org/lmodel/mellea/command_group",
+      "description": "Slot describing the command group.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/command_group",
+      "owner": "CliCommandSpec",
+      "domain_of": [
+        "CliCommandSpec"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "command_path",
+      "definition_uri": "https://w3id.org/lmodel/mellea/command_path",
+      "description": "Slot describing the command path.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/command_path",
+      "owner": "CliCommandSpec",
+      "domain_of": [
+        "CliCommandSpec"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "command_purpose",
+      "definition_uri": "https://w3id.org/lmodel/mellea/command_purpose",
+      "description": "Slot describing the command purpose.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/command_purpose",
+      "owner": "CliCommandSpec",
+      "domain_of": [
+        "CliCommandSpec"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "input_model",
+      "definition_uri": "https://w3id.org/lmodel/mellea/input_model",
+      "description": "Slot describing the input model.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/input_model",
+      "owner": "CliCommandSpec",
+      "domain_of": [
+        "CliCommandSpec"
+      ],
+      "range": "ApiModelSpec",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "output_model",
+      "definition_uri": "https://w3id.org/lmodel/mellea/output_model",
+      "description": "Slot describing the output model.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/output_model",
+      "owner": "CliCommandSpec",
+      "domain_of": [
+        "CliCommandSpec"
+      ],
+      "range": "ApiModelSpec",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "request_or_response",
+      "definition_uri": "https://w3id.org/lmodel/mellea/request_or_response",
+      "description": "Slot describing the request or response.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/request_or_response",
+      "owner": "ApiModelSpec",
+      "domain_of": [
+        "ApiModelSpec"
+      ],
+      "range": "RequestResponseEnum",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "openai_object_type",
+      "definition_uri": "https://w3id.org/lmodel/mellea/openai_object_type",
+      "description": "Slot describing the openai object type.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/openai_object_type",
+      "owner": "ApiModelSpec",
+      "domain_of": [
+        "ApiModelSpec"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "has_field",
+      "definition_uri": "https://w3id.org/lmodel/mellea/has_field",
+      "description": "Slot describing the has field.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/has_field",
+      "owner": "ApiModelSpec",
+      "domain_of": [
+        "ApiModelSpec"
+      ],
+      "range": "ApiFieldSpec",
+      "multivalued": true,
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "field_name",
+      "definition_uri": "https://w3id.org/lmodel/mellea/field_name",
+      "description": "Slot describing the field name.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/field_name",
+      "owner": "ApiFieldSpec",
+      "domain_of": [
+        "ApiFieldSpec"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "field_type",
+      "definition_uri": "https://w3id.org/lmodel/mellea/field_type",
+      "description": "Slot describing the field type.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/field_type",
+      "owner": "ApiFieldSpec",
+      "domain_of": [
+        "ApiFieldSpec"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "required_field",
+      "definition_uri": "https://w3id.org/lmodel/mellea/required_field",
+      "description": "Slot describing the required field.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/required_field",
+      "owner": "ApiFieldSpec",
+      "domain_of": [
+        "ApiFieldSpec"
+      ],
+      "range": "boolean",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "allows_null",
+      "definition_uri": "https://w3id.org/lmodel/mellea/allows_null",
+      "description": "Slot describing the allows null.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/allows_null",
+      "owner": "ApiFieldSpec",
+      "domain_of": [
+        "ApiFieldSpec"
+      ],
+      "range": "boolean",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "method_name",
+      "definition_uri": "https://w3id.org/lmodel/mellea/method_name",
+      "description": "Slot describing the method name.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/method_name",
+      "owner": "MethodSpec",
+      "domain_of": [
+        "MethodSpec"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "method_signature",
+      "definition_uri": "https://w3id.org/lmodel/mellea/method_signature",
+      "description": "Slot describing the method signature.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/method_signature",
+      "owner": "MethodSpec",
+      "domain_of": [
+        "MethodSpec"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "lifecycle_role",
+      "definition_uri": "https://w3id.org/lmodel/mellea/lifecycle_role",
+      "description": "Slot describing the lifecycle role.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/lifecycle_role",
+      "owner": "MethodSpec",
+      "domain_of": [
+        "HookPayloadSpec",
+        "MethodSpec"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "adapter_type",
+      "definition_uri": "https://w3id.org/lmodel/mellea/adapter_type",
+      "description": "Slot describing the adapter type.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/adapter_type",
+      "owner": "IntrinsicAdapterSpec",
+      "domain_of": [
+        "IntrinsicAdapterSpec"
+      ],
+      "range": "AdapterTypeEnum",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "repo_id",
+      "definition_uri": "https://w3id.org/lmodel/mellea/repo_id",
+      "description": "Slot describing the repo id.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/repo_id",
+      "owner": "IntrinsicAdapterSpec",
+      "domain_of": [
+        "IntrinsicAdapterSpec"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "provider_name",
+      "definition_uri": "https://w3id.org/lmodel/mellea/provider_name",
+      "description": "Slot describing the provider name.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/provider_name",
+      "owner": "ModelIdentifierSpec",
+      "domain_of": [
+        "ModelIdentifierSpec"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "hf_model_name",
+      "definition_uri": "https://w3id.org/lmodel/mellea/hf_model_name",
+      "description": "Slot describing the hf model name.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/hf_model_name",
+      "owner": "ModelIdentifierSpec",
+      "domain_of": [
+        "ModelIdentifierSpec"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ollama_name",
+      "definition_uri": "https://w3id.org/lmodel/mellea/ollama_name",
+      "description": "Slot describing the ollama name.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/ollama_name",
+      "owner": "ModelIdentifierSpec",
+      "domain_of": [
+        "ModelIdentifierSpec"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "watsonx_name",
+      "definition_uri": "https://w3id.org/lmodel/mellea/watsonx_name",
+      "description": "Slot describing the watsonx name.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/watsonx_name",
+      "owner": "ModelIdentifierSpec",
+      "domain_of": [
+        "ModelIdentifierSpec"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "openai_name",
+      "definition_uri": "https://w3id.org/lmodel/mellea/openai_name",
+      "description": "Slot describing the openai name.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/openai_name",
+      "owner": "ModelIdentifierSpec",
+      "domain_of": [
+        "ModelIdentifierSpec"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "bedrock_name",
+      "definition_uri": "https://w3id.org/lmodel/mellea/bedrock_name",
+      "description": "Slot describing the bedrock name.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "slot_uri": "https://w3id.org/lmodel/mellea/bedrock_name",
+      "owner": "ModelIdentifierSpec",
+      "domain_of": [
+        "ModelIdentifierSpec"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    }
+  ],
+  "classes": [
+    {
+      "name": "NamedElement",
+      "definition_uri": "https://w3id.org/lmodel/mellea/NamedElement",
+      "description": "Abstract base for any named, identifiable schema element.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "close_mappings": [
+        "nexus:Entity",
+        "iso27001:NamedEntity",
+        "spdx:Element"
+      ],
+      "related_mappings": [
+        "attack:StixEntity",
+        "common_domain_model:InventoryRecord",
+        "mcp:HasName"
+      ],
+      "abstract": true,
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "module_path",
+        "source_file",
+        "package_kind",
+        "element_kind",
+        "coverage_scope",
+        "tags"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/mellea/NamedElement",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "RepositoryCatalog",
+      "definition_uri": "https://w3id.org/lmodel/mellea/RepositoryCatalog",
+      "description": "Top-level catalog rooting the analysed repository snapshot.",
+      "in_subset": [
+        "interface_surface"
+      ],
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "close_mappings": [
+        "spdx:Sbom"
+      ],
+      "related_mappings": [
+        "nexus:Container",
+        "attack:AttackBundle",
+        "common_domain_model:Portfolio",
+        "common_domain_model:PortfolioState",
+        "iso27001:DocumentedInformation",
+        "spdx:SpdxDocument"
+      ],
+      "is_a": "NamedElement",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "module_path",
+        "source_file",
+        "package_kind",
+        "element_kind",
+        "coverage_scope",
+        "tags",
+        "repository_root",
+        "analyzed_on",
+        "includes_path",
+        "excludes_path",
+        "declares_element"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/mellea/RepositoryCatalog",
+      "tree_root": true,
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "PythonPackage",
+      "definition_uri": "https://w3id.org/lmodel/mellea/PythonPackage",
+      "description": "A logical Python package (directory) inside the repository.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "close_mappings": [
+        "spdx:Package"
+      ],
+      "related_mappings": [
+        "common_domain_model:Position"
+      ],
+      "narrow_mappings": [
+        "nexus:Entity"
+      ],
+      "is_a": "NamedElement",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "module_path",
+        "source_file",
+        "package_kind",
+        "element_kind",
+        "coverage_scope",
+        "tags",
+        "package_name",
+        "depends_on_package",
+        "declares_element"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/mellea/PythonPackage",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ModelElement",
+      "definition_uri": "https://w3id.org/lmodel/mellea/ModelElement",
+      "description": "Abstract base for concrete architectural elements.",
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "related_mappings": [
+        "common_domain_model:ContractBase",
+        "spdx:Element"
+      ],
+      "is_a": "NamedElement",
+      "abstract": true,
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "module_path",
+        "source_file",
+        "package_kind",
+        "element_kind",
+        "coverage_scope",
+        "tags"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/mellea/ModelElement",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "BackendSpec",
+      "definition_uri": "https://w3id.org/lmodel/mellea/BackendSpec",
+      "description": "Specification of a Mellea backend implementation.",
+      "in_subset": [
+        "core_runtime",
+        "interface_surface"
+      ],
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "close_mappings": [
+        "nexus:AiProvider"
+      ],
+      "related_mappings": [
+        "nexus:AiSystem",
+        "mcp:Implementation"
+      ],
+      "is_a": "ModelElement",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "module_path",
+        "source_file",
+        "package_kind",
+        "element_kind",
+        "coverage_scope",
+        "tags",
+        "backend_family",
+        "model_identifier",
+        "default_formatter",
+        "model_options_key",
+        "supports_streaming",
+        "supports_tool_calls",
+        "supports_multimodal"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/mellea/BackendSpec",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "FormatterSpec",
+      "definition_uri": "https://w3id.org/lmodel/mellea/FormatterSpec",
+      "description": "Specification of an output formatter for a backend.",
+      "in_subset": [
+        "core_runtime"
+      ],
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "related_mappings": [
+        "nexus:Modality",
+        "mcp:ContentBlock"
+      ],
+      "is_a": "ModelElement",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "module_path",
+        "source_file",
+        "package_kind",
+        "element_kind",
+        "coverage_scope",
+        "tags"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/mellea/FormatterSpec",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ContextSpec",
+      "definition_uri": "https://w3id.org/lmodel/mellea/ContextSpec",
+      "description": "Specification of a context implementation.",
+      "in_subset": [
+        "core_runtime"
+      ],
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "related_mappings": [
+        "nexus:AiLifecyclePhase"
+      ],
+      "is_a": "ModelElement",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "module_path",
+        "source_file",
+        "package_kind",
+        "element_kind",
+        "coverage_scope",
+        "tags",
+        "context_linearity",
+        "stores_component_history",
+        "accepts_message_attachments"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/mellea/ContextSpec",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "SessionSpec",
+      "definition_uri": "https://w3id.org/lmodel/mellea/SessionSpec",
+      "description": "Specification of a Mellea session.",
+      "in_subset": [
+        "core_runtime"
+      ],
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "related_mappings": [
+        "nexus:AiTask",
+        "iso27001:RiskAssessmentProcess",
+        "mcp:Task"
+      ],
+      "is_a": "ModelElement",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "module_path",
+        "source_file",
+        "package_kind",
+        "element_kind",
+        "coverage_scope",
+        "tags",
+        "uses_backend",
+        "uses_context",
+        "exposed_method"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/mellea/SessionSpec",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ComponentSpec",
+      "definition_uri": "https://w3id.org/lmodel/mellea/ComponentSpec",
+      "description": "Specification of a Mellea stdlib component type.",
+      "in_subset": [
+        "core_runtime"
+      ],
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "close_mappings": [
+        "nexus:AIComponent",
+        "mcp:Tool"
+      ],
+      "is_a": "ModelElement",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "module_path",
+        "source_file",
+        "package_kind",
+        "element_kind",
+        "coverage_scope",
+        "tags",
+        "component_category",
+        "input_modality",
+        "parsed_output_type"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/mellea/ComponentSpec",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "RequirementSpec",
+      "definition_uri": "https://w3id.org/lmodel/mellea/RequirementSpec",
+      "description": "Specification of a requirement validator.",
+      "in_subset": [
+        "core_runtime"
+      ],
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "related_mappings": [
+        "nexus:Requirement",
+        "nexus:Rule",
+        "iso27001:SecurityControl",
+        "iso27001:InformationSecurityObjective"
+      ],
+      "is_a": "ModelElement",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "module_path",
+        "source_file",
+        "package_kind",
+        "element_kind",
+        "coverage_scope",
+        "tags",
+        "validation_style",
+        "may_trigger_repair"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/mellea/RequirementSpec",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "SamplingStrategySpec",
+      "definition_uri": "https://w3id.org/lmodel/mellea/SamplingStrategySpec",
+      "description": "Specification of a sampling-loop strategy.",
+      "in_subset": [
+        "core_runtime"
+      ],
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "close_mappings": [
+        "mcp:SamplingCapability"
+      ],
+      "related_mappings": [
+        "nexus:Action",
+        "mcp:ModelPreferences"
+      ],
+      "is_a": "ModelElement",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "module_path",
+        "source_file",
+        "package_kind",
+        "element_kind",
+        "coverage_scope",
+        "tags",
+        "selection_policy",
+        "loop_budget_hint",
+        "may_trigger_repair"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/mellea/SamplingStrategySpec",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "PluginSpec",
+      "definition_uri": "https://w3id.org/lmodel/mellea/PluginSpec",
+      "description": "Specification of a Mellea plugin and the hooks it registers.",
+      "in_subset": [
+        "observability"
+      ],
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "close_mappings": [
+        "spdx:Extension"
+      ],
+      "related_mappings": [
+        "nexus:AIComponent",
+        "attack:Analytic",
+        "iso27001:OperationalProcedure",
+        "mcp:ExtensionAppCapability"
+      ],
+      "is_a": "ModelElement",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "module_path",
+        "source_file",
+        "package_kind",
+        "element_kind",
+        "coverage_scope",
+        "tags",
+        "plugin_mode",
+        "hook_type",
+        "payload_model",
+        "plugin_priority"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/mellea/PluginSpec",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "HookPayloadSpec",
+      "definition_uri": "https://w3id.org/lmodel/mellea/HookPayloadSpec",
+      "description": "Specification of a hook payload model.",
+      "in_subset": [
+        "observability"
+      ],
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "related_mappings": [
+        "nexus:Fact",
+        "attack:DataComponent",
+        "iso27001:InformationSecurityEvent",
+        "mcp:MetaObject",
+        "spdx:Annotation"
+      ],
+      "is_a": "ModelElement",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "module_path",
+        "source_file",
+        "package_kind",
+        "element_kind",
+        "coverage_scope",
+        "tags",
+        "hook_type",
+        "lifecycle_role"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/mellea/HookPayloadSpec",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "TelemetryMetricSpec",
+      "definition_uri": "https://w3id.org/lmodel/mellea/TelemetryMetricSpec",
+      "description": "Specification of a telemetry metric emitted by Mellea.",
+      "in_subset": [
+        "observability"
+      ],
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "close_mappings": [
+        "nexus:MetricConfig",
+        "iso27001:MonitoringItem"
+      ],
+      "related_mappings": [
+        "nexus:AiEval",
+        "attack:DataSource",
+        "iso27001:MonitoringProgram",
+        "spdx:AIPackage"
+      ],
+      "is_a": "ModelElement",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "module_path",
+        "source_file",
+        "package_kind",
+        "element_kind",
+        "coverage_scope",
+        "tags",
+        "metric_name"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/mellea/TelemetryMetricSpec",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "CliCommandSpec",
+      "definition_uri": "https://w3id.org/lmodel/mellea/CliCommandSpec",
+      "description": "Specification of a CLI command exposed under `m`.",
+      "in_subset": [
+        "interface_surface"
+      ],
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "related_mappings": [
+        "attack:Tool",
+        "iso27001:OperationalProcedure",
+        "spdx:Tool"
+      ],
+      "is_a": "ModelElement",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "module_path",
+        "source_file",
+        "package_kind",
+        "element_kind",
+        "coverage_scope",
+        "tags",
+        "command_group",
+        "command_path",
+        "command_purpose",
+        "input_model",
+        "output_model"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/mellea/CliCommandSpec",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ApiModelSpec",
+      "definition_uri": "https://w3id.org/lmodel/mellea/ApiModelSpec",
+      "description": "Specification of an HTTP API wire model.",
+      "in_subset": [
+        "interface_surface"
+      ],
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "related_mappings": [
+        "nexus:Input",
+        "mcp:JSONRPCRequest",
+        "mcp:JSONRPCResponse"
+      ],
+      "is_a": "ModelElement",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "module_path",
+        "source_file",
+        "package_kind",
+        "element_kind",
+        "coverage_scope",
+        "tags",
+        "request_or_response",
+        "openai_object_type",
+        "has_field"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/mellea/ApiModelSpec",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ApiFieldSpec",
+      "definition_uri": "https://w3id.org/lmodel/mellea/ApiFieldSpec",
+      "description": "Specification of a single field in an API model.",
+      "in_subset": [
+        "interface_surface"
+      ],
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "related_mappings": [
+        "spdx:DictionaryEntry"
+      ],
+      "is_a": "NamedElement",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "module_path",
+        "source_file",
+        "package_kind",
+        "element_kind",
+        "coverage_scope",
+        "tags",
+        "field_name",
+        "field_type",
+        "required_field",
+        "allows_null"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/mellea/ApiFieldSpec",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "MethodSpec",
+      "definition_uri": "https://w3id.org/lmodel/mellea/MethodSpec",
+      "description": "Specification of a method exposed by a runtime class.",
+      "in_subset": [
+        "core_runtime"
+      ],
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "is_a": "NamedElement",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "module_path",
+        "source_file",
+        "package_kind",
+        "element_kind",
+        "coverage_scope",
+        "tags",
+        "method_name",
+        "method_signature",
+        "lifecycle_role"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/mellea/MethodSpec",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ModelIdentifierSpec",
+      "definition_uri": "https://w3id.org/lmodel/mellea/ModelIdentifierSpec",
+      "description": "Cross-provider identifier table for a single model.",
+      "in_subset": [
+        "interface_surface"
+      ],
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "close_mappings": [
+        "nexus:AiModel",
+        "nexus:LargeLanguageModel",
+        "spdx:AIPackage"
+      ],
+      "related_mappings": [
+        "nexus:ModelInfo",
+        "common_domain_model:positionIdentifier",
+        "mcp:ModelHint"
+      ],
+      "is_a": "NamedElement",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "module_path",
+        "source_file",
+        "package_kind",
+        "element_kind",
+        "coverage_scope",
+        "tags",
+        "hf_model_name",
+        "ollama_name",
+        "watsonx_name",
+        "openai_name",
+        "bedrock_name",
+        "provider_name"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/mellea/ModelIdentifierSpec",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "IntrinsicAdapterSpec",
+      "definition_uri": "https://w3id.org/lmodel/mellea/IntrinsicAdapterSpec",
+      "description": "Specification of an intrinsic adapter (LoRA / aLoRA).",
+      "in_subset": [
+        "interface_surface"
+      ],
+      "from_schema": "https://w3id.org/lmodel/mellea",
+      "close_mappings": [
+        "nexus:Adapter",
+        "nexus:LLMIntrinsic",
+        "spdx:AIPackage"
+      ],
+      "related_mappings": [
+        "spdx:Relationship"
+      ],
+      "is_a": "NamedElement",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "module_path",
+        "source_file",
+        "package_kind",
+        "element_kind",
+        "coverage_scope",
+        "tags",
+        "repo_id",
+        "adapter_type"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/mellea/IntrinsicAdapterSpec",
+      "@type": "ClassDefinition"
+    }
+  ],
+  "metamodel_version": "1.11.0",
+  "source_file": "mellea.yaml",
+  "source_file_date": "2026-05-26T14:24:23",
+  "source_file_size": 25242,
+  "generation_date": "2026-05-26T14:24:25",
+  "@type": "SchemaDefinition",
+  "@context": [
+    "project/jsonld/mellea.context.jsonld",
+    "https://w3id.org/linkml/types.context.jsonld",
+    {
+      "@base": "https://w3id.org/lmodel/mellea/"
+    }
+  ]
+}

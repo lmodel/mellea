@@ -1,0 +1,355 @@
+# metamodel_version: 1.11.0
+# version: 2026-05-26
+BASE <https://w3id.org/lmodel/mellea/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX linkml: <https://w3id.org/linkml/>
+PREFIX schema1: <http://schema.org/>
+
+
+<PythonDottedPath> xsd:string
+
+<RepositoryRelativePath> xsd:string
+
+linkml:String xsd:string
+
+linkml:Integer xsd:integer
+
+linkml:Boolean xsd:boolean
+
+linkml:Float xsd:float
+
+linkml:Double xsd:double
+
+linkml:Decimal xsd:decimal
+
+linkml:Time xsd:time
+
+linkml:Date xsd:date
+
+linkml:Datetime xsd:dateTime
+
+linkml:DateOrDatetime linkml:DateOrDatetime
+
+linkml:Uriorcurie IRI
+
+linkml:Curie xsd:string
+
+linkml:Uri IRI
+
+linkml:Ncname xsd:string
+
+linkml:Objectidentifier IRI
+
+linkml:Nodeidentifier NONLITERAL
+
+linkml:Jsonpointer xsd:string
+
+linkml:Jsonpath xsd:string
+
+linkml:Sparqlpath xsd:string
+
+<ApiFieldSpec> CLOSED {
+    (  $<ApiFieldSpec_tes> (  &<NamedElement_tes> ;
+          rdf:type [ <NamedElement> ] ? ;
+          <field_name> @linkml:String ? ;
+          <field_type> @linkml:String ? ;
+          <required_field> @linkml:Boolean ? ;
+          <allows_null> @linkml:Boolean ?
+       ) ;
+       rdf:type [ <ApiFieldSpec> ]
+    )
+}
+
+<ApiModelSpec> CLOSED {
+    (  $<ApiModelSpec_tes> (  &<ModelElement_tes> ;
+          rdf:type [ <ModelElement> ] ? ;
+          <request_or_response> [ <https://w3id.org/lmodel/mellea/RequestResponseEnum#REQUEST>
+             <https://w3id.org/lmodel/mellea/RequestResponseEnum#RESPONSE>
+             <https://w3id.org/lmodel/mellea/RequestResponseEnum#BOTH> ] ? ;
+          <openai_object_type> @linkml:String ? ;
+          <has_field> @<ApiFieldSpec> *
+       ) ;
+       rdf:type [ <ApiModelSpec> ]
+    )
+}
+
+<BackendSpec> CLOSED {
+    (  $<BackendSpec_tes> (  &<ModelElement_tes> ;
+          rdf:type [ <ModelElement> ] ? ;
+          <backend_family> [ <https://w3id.org/lmodel/mellea/BackendFamilyEnum#BEDROCK>
+             <https://w3id.org/lmodel/mellea/BackendFamilyEnum#DUMMY>
+             <https://w3id.org/lmodel/mellea/BackendFamilyEnum#HUGGINGFACE>
+             <https://w3id.org/lmodel/mellea/BackendFamilyEnum#LITELLM> <https://w3id.org/lmodel/mellea/BackendFamilyEnum#OLLAMA>
+             <https://w3id.org/lmodel/mellea/BackendFamilyEnum#OPENAI> <https://w3id.org/lmodel/mellea/BackendFamilyEnum#WATSONX> ]
+          ? ;
+          <model_identifier> @<ModelIdentifierSpec> * ;
+          <default_formatter> @<FormatterSpec> ? ;
+          <model_options_key> @linkml:String * ;
+          <supports_streaming> @linkml:Boolean ? ;
+          <supports_tool_calls> @linkml:Boolean ? ;
+          <supports_multimodal> @linkml:Boolean ?
+       ) ;
+       rdf:type [ <BackendSpec> ]
+    )
+}
+
+<CliCommandSpec> CLOSED {
+    (  $<CliCommandSpec_tes> (  &<ModelElement_tes> ;
+          rdf:type [ <ModelElement> ] ? ;
+          <command_group> @linkml:String ? ;
+          <command_path> @linkml:String ? ;
+          <command_purpose> @linkml:String ? ;
+          <input_model> @<ApiModelSpec> * ;
+          <output_model> @<ApiModelSpec> *
+       ) ;
+       rdf:type [ <CliCommandSpec> ]
+    )
+}
+
+<ComponentSpec> CLOSED {
+    (  $<ComponentSpec_tes> (  &<ModelElement_tes> ;
+          rdf:type [ <ModelElement> ] ? ;
+          <component_category> [ <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#INSTRUCTION>
+             <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#MESSAGE>
+             <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#TOOL_MESSAGE>
+             <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#DOCUMENT>
+             <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#INTRINSIC>
+             <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#MOBJECT>
+             <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#QUERY>
+             <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#TRANSFORM>
+             <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#GENSTUB>
+             <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#REQUIREMENT>
+             <https://w3id.org/lmodel/mellea/ComponentCategoryEnum#STREAM_EVENT> ] ? ;
+          <input_modality> @linkml:String * ;
+          <parsed_output_type> @linkml:String ?
+       ) ;
+       rdf:type [ <ComponentSpec> ]
+    )
+}
+
+<ContextSpec> CLOSED {
+    (  $<ContextSpec_tes> (  &<ModelElement_tes> ;
+          rdf:type [ <ModelElement> ] ? ;
+          <context_linearity> [ <https://w3id.org/lmodel/mellea/ContextLinearityEnum#LINEAR>
+             <https://w3id.org/lmodel/mellea/ContextLinearityEnum#NON_LINEAR> ] ? ;
+          <stores_component_history> @linkml:Boolean ? ;
+          <accepts_message_attachments> @linkml:Boolean ?
+       ) ;
+       rdf:type [ <ContextSpec> ]
+    )
+}
+
+<FormatterSpec> CLOSED {
+    (  $<FormatterSpec_tes> (  &<ModelElement_tes> ;
+          rdf:type [ <ModelElement> ] ?
+       ) ;
+       rdf:type [ <FormatterSpec> ]
+    )
+}
+
+<HookPayloadSpec> CLOSED {
+    (  $<HookPayloadSpec_tes> (  &<ModelElement_tes> ;
+          rdf:type [ <ModelElement> ] ? ;
+          <hook_type> [ <https://w3id.org/lmodel/mellea/HookTypeEnum#SESSION_PRE_INIT>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#SESSION_POST_INIT>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#SESSION_RESET>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#SESSION_CLEANUP>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#COMPONENT_PRE_EXECUTE>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#COMPONENT_POST_SUCCESS>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#COMPONENT_POST_ERROR>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#GENERATION_PRE_CALL>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#GENERATION_POST_CALL>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#GENERATION_ERROR>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#VALIDATION_PRE_CHECK>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#VALIDATION_POST_CHECK>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#SAMPLING_LOOP_START>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#SAMPLING_ITERATION>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#SAMPLING_REPAIR>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#SAMPLING_LOOP_END>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#TOOL_PRE_INVOKE>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#TOOL_POST_INVOKE> ] * ;
+          <lifecycle_role> @linkml:String ?
+       ) ;
+       rdf:type [ <HookPayloadSpec> ]
+    )
+}
+
+<IntrinsicAdapterSpec> CLOSED {
+    (  $<IntrinsicAdapterSpec_tes> (  &<NamedElement_tes> ;
+          rdf:type [ <NamedElement> ] ? ;
+          <repo_id> @linkml:String ? ;
+          <adapter_type> [ <https://w3id.org/lmodel/mellea/AdapterTypeEnum#LORA>
+             <https://w3id.org/lmodel/mellea/AdapterTypeEnum#ALORA> ] *
+       ) ;
+       rdf:type [ <IntrinsicAdapterSpec> ]
+    )
+}
+
+<MethodSpec> CLOSED {
+    (  $<MethodSpec_tes> (  &<NamedElement_tes> ;
+          rdf:type [ <NamedElement> ] ? ;
+          <method_name> @linkml:String ? ;
+          <method_signature> @linkml:String ? ;
+          <lifecycle_role> @linkml:String ?
+       ) ;
+       rdf:type [ <MethodSpec> ]
+    )
+}
+
+<ModelElement>  (
+    @<ApiModelSpec> OR @<BackendSpec> OR @<CliCommandSpec> OR @<ComponentSpec> OR @<ContextSpec> OR @<FormatterSpec> OR
+    @<HookPayloadSpec> OR @<PluginSpec> OR @<RequirementSpec> OR @<SamplingStrategySpec> OR @<SessionSpec> OR
+    @<TelemetryMetricSpec>
+)
+
+<ModelElement_struct> {
+    (  $<ModelElement_tes> (  &<NamedElement_tes> ;
+          rdf:type [ <NamedElement> ] ?
+       ) ;
+       rdf:type [ <ModelElement> ]
+    )
+}
+
+<ModelIdentifierSpec> CLOSED {
+    (  $<ModelIdentifierSpec_tes> (  &<NamedElement_tes> ;
+          rdf:type [ <NamedElement> ] ? ;
+          <hf_model_name> @linkml:String ? ;
+          <ollama_name> @linkml:String ? ;
+          <watsonx_name> @linkml:String ? ;
+          <openai_name> @linkml:String ? ;
+          <bedrock_name> @linkml:String ? ;
+          <provider_name> @linkml:String *
+       ) ;
+       rdf:type [ <ModelIdentifierSpec> ]
+    )
+}
+
+<NamedElement>  (
+    @<ApiFieldSpec> OR @<IntrinsicAdapterSpec> OR @<MethodSpec> OR @<ModelElement> OR @<ModelIdentifierSpec> OR @<PythonPackage> OR
+    @<RepositoryCatalog>
+)
+
+<NamedElement_struct> {
+    (  $<NamedElement_tes> (  schema1:name @linkml:String ;
+          schema1:description @linkml:String ? ;
+          <module_path> @<PythonDottedPath> ? ;
+          <source_file> @<RepositoryRelativePath> ? ;
+          <package_kind> [ <https://w3id.org/lmodel/mellea/PackageKindEnum#CORE>
+             <https://w3id.org/lmodel/mellea/PackageKindEnum#STDLIB> <https://w3id.org/lmodel/mellea/PackageKindEnum#BACKENDS>
+             <https://w3id.org/lmodel/mellea/PackageKindEnum#FORMATTERS> <https://w3id.org/lmodel/mellea/PackageKindEnum#HELPERS>
+             <https://w3id.org/lmodel/mellea/PackageKindEnum#PLUGINS> <https://w3id.org/lmodel/mellea/PackageKindEnum#TELEMETRY>
+             <https://w3id.org/lmodel/mellea/PackageKindEnum#CLI> <https://w3id.org/lmodel/mellea/PackageKindEnum#DOCS_EXAMPLES>
+             <https://w3id.org/lmodel/mellea/PackageKindEnum#TEST> ] ? ;
+          <element_kind> [ <https://w3id.org/lmodel/mellea/ElementKindEnum#CLASS>
+             <https://w3id.org/lmodel/mellea/ElementKindEnum#ENUM> <https://w3id.org/lmodel/mellea/ElementKindEnum#DATACLASS>
+             <https://w3id.org/lmodel/mellea/ElementKindEnum#TYPED_DICT>
+             <https://w3id.org/lmodel/mellea/ElementKindEnum#PYDANTIC_MODEL>
+             <https://w3id.org/lmodel/mellea/ElementKindEnum#PROTOCOL> <https://w3id.org/lmodel/mellea/ElementKindEnum#FUNCTION>
+             <https://w3id.org/lmodel/mellea/ElementKindEnum#MIXIN> ] ? ;
+          <coverage_scope> [ <https://w3id.org/lmodel/mellea/CoverageScopeEnum#SOURCE>
+             <https://w3id.org/lmodel/mellea/CoverageScopeEnum#API> <https://w3id.org/lmodel/mellea/CoverageScopeEnum#CLI>
+             <https://w3id.org/lmodel/mellea/CoverageScopeEnum#EXAMPLE> <https://w3id.org/lmodel/mellea/CoverageScopeEnum#TEST> ] *
+          ;
+          <tags> @linkml:String *
+       ) ;
+       rdf:type [ <NamedElement> ]
+    )
+}
+
+<PluginSpec> CLOSED {
+    (  $<PluginSpec_tes> (  &<ModelElement_tes> ;
+          rdf:type [ <ModelElement> ] ? ;
+          <plugin_mode> [ <https://w3id.org/lmodel/mellea/PluginModeEnum#SEQUENTIAL>
+             <https://w3id.org/lmodel/mellea/PluginModeEnum#TRANSFORM> <https://w3id.org/lmodel/mellea/PluginModeEnum#CONCURRENT>
+             <https://w3id.org/lmodel/mellea/PluginModeEnum#AUDIT> <https://w3id.org/lmodel/mellea/PluginModeEnum#FIRE_AND_FORGET>
+             ] ? ;
+          <hook_type> [ <https://w3id.org/lmodel/mellea/HookTypeEnum#SESSION_PRE_INIT>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#SESSION_POST_INIT>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#SESSION_RESET>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#SESSION_CLEANUP>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#COMPONENT_PRE_EXECUTE>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#COMPONENT_POST_SUCCESS>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#COMPONENT_POST_ERROR>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#GENERATION_PRE_CALL>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#GENERATION_POST_CALL>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#GENERATION_ERROR>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#VALIDATION_PRE_CHECK>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#VALIDATION_POST_CHECK>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#SAMPLING_LOOP_START>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#SAMPLING_ITERATION>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#SAMPLING_REPAIR>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#SAMPLING_LOOP_END>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#TOOL_PRE_INVOKE>
+             <https://w3id.org/lmodel/mellea/HookTypeEnum#TOOL_POST_INVOKE> ] * ;
+          <payload_model> @<HookPayloadSpec> * ;
+          <plugin_priority> @linkml:Integer ?
+       ) ;
+       rdf:type [ <PluginSpec> ]
+    )
+}
+
+<PythonPackage> CLOSED {
+    (  $<PythonPackage_tes> (  &<NamedElement_tes> ;
+          rdf:type [ <NamedElement> ] ? ;
+          <package_name> @linkml:String ? ;
+          <depends_on_package> @<PythonPackage> * ;
+          <declares_element> @<ModelElement> *
+       ) ;
+       rdf:type [ <PythonPackage> ]
+    )
+}
+
+<RepositoryCatalog> CLOSED {
+    (  $<RepositoryCatalog_tes> (  &<NamedElement_tes> ;
+          rdf:type [ <NamedElement> ] ? ;
+          <repository_root> @<RepositoryRelativePath> ? ;
+          <analyzed_on> @linkml:Date ? ;
+          <includes_path> @<RepositoryRelativePath> * ;
+          <excludes_path> @<RepositoryRelativePath> * ;
+          <declares_element> @<ModelElement> *
+       ) ;
+       rdf:type [ <RepositoryCatalog> ]
+    )
+}
+
+<RequirementSpec> CLOSED {
+    (  $<RequirementSpec_tes> (  &<ModelElement_tes> ;
+          rdf:type [ <ModelElement> ] ? ;
+          <validation_style> @linkml:String ? ;
+          <may_trigger_repair> @linkml:Boolean ?
+       ) ;
+       rdf:type [ <RequirementSpec> ]
+    )
+}
+
+<SamplingStrategySpec> CLOSED {
+    (  $<SamplingStrategySpec_tes> (  &<ModelElement_tes> ;
+          rdf:type [ <ModelElement> ] ? ;
+          <selection_policy> @linkml:String ? ;
+          <loop_budget_hint> @linkml:Integer ? ;
+          <may_trigger_repair> @linkml:Boolean ?
+       ) ;
+       rdf:type [ <SamplingStrategySpec> ]
+    )
+}
+
+<SessionSpec> CLOSED {
+    (  $<SessionSpec_tes> (  &<ModelElement_tes> ;
+          rdf:type [ <ModelElement> ] ? ;
+          <uses_backend> @<BackendSpec> ? ;
+          <uses_context> @<ContextSpec> ? ;
+          <exposed_method> @<MethodSpec> *
+       ) ;
+       rdf:type [ <SessionSpec> ]
+    )
+}
+
+<TelemetryMetricSpec> CLOSED {
+    (  $<TelemetryMetricSpec_tes> (  &<ModelElement_tes> ;
+          rdf:type [ <ModelElement> ] ? ;
+          <metric_name> @linkml:String *
+       ) ;
+       rdf:type [ <TelemetryMetricSpec> ]
+    )
+}

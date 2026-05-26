@@ -1,0 +1,12 @@
+{
+   "attack": "https://w3id.org/lmodel/attack/",
+   "common_domain_model": "https://w3id.org/lmodel/common-domain-model/",
+   "dcterms": "http://purl.org/dc/terms/",
+   "iso27001": "https://w3id.org/lmodel/iso27001/",
+   "linkml": "https://w3id.org/linkml/",
+   "mcp": "https://w3id.org/lmodel/mcp/",
+   "mellea": "https://w3id.org/lmodel/mellea/",
+   "nexus": "https://ibm.github.io/ai-atlas-nexus/ontology/",
+   "schema": "http://schema.org/",
+   "spdx": "https://spdx.org/rdf/3.0.1/terms/"
+}

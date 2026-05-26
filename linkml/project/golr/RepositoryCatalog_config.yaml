@@ -1,0 +1,54 @@
+# metamodel_version: 1.11.0# version: 2026-05-26id: RepositoryCatalog
+schema_generating: true
+description: Top-level catalog rooting the analysed repository snapshot.
+display_name: RepositoryCatalog
+document_category: RepositoryCatalog
+weight: 20
+fields:
+- id: id
+  description: Stable identifier for a schema element.
+  display_name: id
+- id: name
+  description: Human-readable name.
+  display_name: name
+- id: description
+  description: Narrative description of the element.
+  display_name: description
+- id: module_path
+  description: Python module path where this element is defined.
+  display_name: module_path
+- id: source_file
+  description: Source file relative to repository root.
+  display_name: source_file
+- id: package_kind
+  description: Package bucket.
+  display_name: package_kind
+- id: element_kind
+  description: Kind of Python declaration.
+  display_name: element_kind
+- id: coverage_scope
+  description: Where this element surfaces (source/API/CLI/example/test).
+  display_name: coverage_scope
+  cardinality: multi
+- id: tags
+  description: Free-form classification tags.
+  display_name: tags
+  cardinality: multi
+- id: repository_root
+  description: Slot describing the repository root.
+  display_name: repository_root
+- id: analyzed_on
+  description: Slot describing the analyzed on.
+  display_name: analyzed_on
+- id: includes_path
+  description: Slot describing the includes path.
+  display_name: includes_path
+  cardinality: multi
+- id: excludes_path
+  description: Slot describing the excludes path.
+  display_name: excludes_path
+  cardinality: multi
+- id: declares_element
+  description: Slot describing the declares element.
+  display_name: declares_element
+  cardinality: multi

@@ -1,0 +1,45 @@
+# metamodel_version: 1.11.0# version: 2026-05-26id: SamplingStrategySpec
+schema_generating: true
+description: Specification of a sampling-loop strategy.
+display_name: SamplingStrategySpec
+document_category: SamplingStrategySpec
+weight: 20
+fields:
+- id: id
+  description: Stable identifier for a schema element.
+  display_name: id
+- id: name
+  description: Human-readable name.
+  display_name: name
+- id: description
+  description: Narrative description of the element.
+  display_name: description
+- id: module_path
+  description: Python module path where this element is defined.
+  display_name: module_path
+- id: source_file
+  description: Source file relative to repository root.
+  display_name: source_file
+- id: package_kind
+  description: Package bucket.
+  display_name: package_kind
+- id: element_kind
+  description: Kind of Python declaration.
+  display_name: element_kind
+- id: coverage_scope
+  description: Where this element surfaces (source/API/CLI/example/test).
+  display_name: coverage_scope
+  cardinality: multi
+- id: tags
+  description: Free-form classification tags.
+  display_name: tags
+  cardinality: multi
+- id: selection_policy
+  description: Slot describing the selection policy.
+  display_name: selection_policy
+- id: loop_budget_hint
+  description: Slot describing the loop budget hint.
+  display_name: loop_budget_hint
+- id: may_trigger_repair
+  description: Slot describing the may trigger repair.
+  display_name: may_trigger_repair

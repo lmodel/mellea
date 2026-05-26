@@ -1,0 +1,303 @@
+@startuml
+skinparam nodesep 10
+hide circle
+hide empty members
+abstract "NamedElement" [[{Abstract base for any named, identifiable schema element.}]] {
+    {field} id : uriorcurie  
+    {field} name : string  
+    {field} description : string  
+    {field} module_path : PythonDottedPath  
+    {field} source_file : RepositoryRelativePath  
+    {field} package_kind : PackageKindEnum  
+    {field} element_kind : ElementKindEnum  
+    {field} coverage_scope : CoverageScopeEnum  [0..*]
+    {field} tags : string  [0..*]
+}
+class "RepositoryCatalog" [[{Top-level catalog rooting the analysed repository snapshot.}]] {
+    {field} repository_root : RepositoryRelativePath  
+    {field} analyzed_on : date  
+    {field} includes_path : RepositoryRelativePath  [0..*]
+    {field} excludes_path : RepositoryRelativePath  [0..*]
+    {field} id(i) : uriorcurie  
+    {field} name(i) : string  
+    {field} description(i) : string  
+    {field} module_path(i) : PythonDottedPath  
+    {field} source_file(i) : RepositoryRelativePath  
+    {field} package_kind(i) : PackageKindEnum  
+    {field} element_kind(i) : ElementKindEnum  
+    {field} coverage_scope(i) : CoverageScopeEnum  [0..*]
+    {field} tags(i) : string  [0..*]
+}
+class "PythonPackage" [[{A logical Python package (directory) inside the repository.}]] {
+    {field} package_name : string  
+    {field} id(i) : uriorcurie  
+    {field} name(i) : string  
+    {field} description(i) : string  
+    {field} module_path(i) : PythonDottedPath  
+    {field} source_file(i) : RepositoryRelativePath  
+    {field} package_kind(i) : PackageKindEnum  
+    {field} element_kind(i) : ElementKindEnum  
+    {field} coverage_scope(i) : CoverageScopeEnum  [0..*]
+    {field} tags(i) : string  [0..*]
+}
+class "ModelIdentifierSpec" [[{Cross-provider identifier table for a single model.}]] {
+    {field} hf_model_name : string  
+    {field} ollama_name : string  
+    {field} watsonx_name : string  
+    {field} openai_name : string  
+    {field} bedrock_name : string  
+    {field} provider_name : string  [0..*]
+    {field} id(i) : uriorcurie  
+    {field} name(i) : string  
+    {field} description(i) : string  
+    {field} module_path(i) : PythonDottedPath  
+    {field} source_file(i) : RepositoryRelativePath  
+    {field} package_kind(i) : PackageKindEnum  
+    {field} element_kind(i) : ElementKindEnum  
+    {field} coverage_scope(i) : CoverageScopeEnum  [0..*]
+    {field} tags(i) : string  [0..*]
+}
+abstract "ModelElement" [[{Abstract base for concrete architectural elements.}]] {
+    {field} id(i) : uriorcurie  
+    {field} name(i) : string  
+    {field} description(i) : string  
+    {field} module_path(i) : PythonDottedPath  
+    {field} source_file(i) : RepositoryRelativePath  
+    {field} package_kind(i) : PackageKindEnum  
+    {field} element_kind(i) : ElementKindEnum  
+    {field} coverage_scope(i) : CoverageScopeEnum  [0..*]
+    {field} tags(i) : string  [0..*]
+}
+class "MethodSpec" [[{Specification of a method exposed by a runtime class.}]] {
+    {field} method_name : string  
+    {field} method_signature : string  
+    {field} lifecycle_role : string  
+    {field} id(i) : uriorcurie  
+    {field} name(i) : string  
+    {field} description(i) : string  
+    {field} module_path(i) : PythonDottedPath  
+    {field} source_file(i) : RepositoryRelativePath  
+    {field} package_kind(i) : PackageKindEnum  
+    {field} element_kind(i) : ElementKindEnum  
+    {field} coverage_scope(i) : CoverageScopeEnum  [0..*]
+    {field} tags(i) : string  [0..*]
+}
+class "IntrinsicAdapterSpec" [[{Specification of an intrinsic adapter (LoRA / aLoRA).}]] {
+    {field} repo_id : string  
+    {field} adapter_type : AdapterTypeEnum  [0..*]
+    {field} id(i) : uriorcurie  
+    {field} name(i) : string  
+    {field} description(i) : string  
+    {field} module_path(i) : PythonDottedPath  
+    {field} source_file(i) : RepositoryRelativePath  
+    {field} package_kind(i) : PackageKindEnum  
+    {field} element_kind(i) : ElementKindEnum  
+    {field} coverage_scope(i) : CoverageScopeEnum  [0..*]
+    {field} tags(i) : string  [0..*]
+}
+class "ApiFieldSpec" [[{Specification of a single field in an API model.}]] {
+    {field} field_name : string  
+    {field} field_type : string  
+    {field} required_field : boolean  
+    {field} allows_null : boolean  
+    {field} id(i) : uriorcurie  
+    {field} name(i) : string  
+    {field} description(i) : string  
+    {field} module_path(i) : PythonDottedPath  
+    {field} source_file(i) : RepositoryRelativePath  
+    {field} package_kind(i) : PackageKindEnum  
+    {field} element_kind(i) : ElementKindEnum  
+    {field} coverage_scope(i) : CoverageScopeEnum  [0..*]
+    {field} tags(i) : string  [0..*]
+}
+"NamedElement" ^-- "RepositoryCatalog"
+"NamedElement" ^-- "PythonPackage"
+"NamedElement" ^-- "ModelIdentifierSpec"
+"NamedElement" ^-- "ModelElement"
+"NamedElement" ^-- "MethodSpec"
+"NamedElement" ^-- "IntrinsicAdapterSpec"
+"NamedElement" ^-- "ApiFieldSpec"
+"RepositoryCatalog" *--> "0..*" "ModelElement" : "declares_element"
+"PythonPackage" *--> "0..*" "ModelElement" : "declares_element"
+"PythonPackage" *--> "0..*" "PythonPackage" : "depends_on_package"
+class "BackendSpec" [[{Specification of a Mellea backend implementation.}]] {
+    {field} backend_family : BackendFamilyEnum  
+    {field} model_options_key : string  [0..*]
+    {field} supports_streaming : boolean  
+    {field} supports_tool_calls : boolean  
+    {field} supports_multimodal : boolean  
+    {field} id(i) : uriorcurie  
+    {field} name(i) : string  
+    {field} description(i) : string  
+    {field} module_path(i) : PythonDottedPath  
+    {field} source_file(i) : RepositoryRelativePath  
+    {field} package_kind(i) : PackageKindEnum  
+    {field} element_kind(i) : ElementKindEnum  
+    {field} coverage_scope(i) : CoverageScopeEnum  [0..*]
+    {field} tags(i) : string  [0..*]
+}
+"BackendSpec" *--> "0..*" "ModelIdentifierSpec" : "model_identifier"
+class "TelemetryMetricSpec" [[{Specification of a telemetry metric emitted by Mellea.}]] {
+    {field} metric_name : string  [0..*]
+    {field} id(i) : uriorcurie  
+    {field} name(i) : string  
+    {field} description(i) : string  
+    {field} module_path(i) : PythonDottedPath  
+    {field} source_file(i) : RepositoryRelativePath  
+    {field} package_kind(i) : PackageKindEnum  
+    {field} element_kind(i) : ElementKindEnum  
+    {field} coverage_scope(i) : CoverageScopeEnum  [0..*]
+    {field} tags(i) : string  [0..*]
+}
+class "SessionSpec" [[{Specification of a Mellea session.}]] {
+    {field} id(i) : uriorcurie  
+    {field} name(i) : string  
+    {field} description(i) : string  
+    {field} module_path(i) : PythonDottedPath  
+    {field} source_file(i) : RepositoryRelativePath  
+    {field} package_kind(i) : PackageKindEnum  
+    {field} element_kind(i) : ElementKindEnum  
+    {field} coverage_scope(i) : CoverageScopeEnum  [0..*]
+    {field} tags(i) : string  [0..*]
+}
+class "SamplingStrategySpec" [[{Specification of a sampling-loop strategy.}]] {
+    {field} selection_policy : string  
+    {field} loop_budget_hint : integer  
+    {field} may_trigger_repair : boolean  
+    {field} id(i) : uriorcurie  
+    {field} name(i) : string  
+    {field} description(i) : string  
+    {field} module_path(i) : PythonDottedPath  
+    {field} source_file(i) : RepositoryRelativePath  
+    {field} package_kind(i) : PackageKindEnum  
+    {field} element_kind(i) : ElementKindEnum  
+    {field} coverage_scope(i) : CoverageScopeEnum  [0..*]
+    {field} tags(i) : string  [0..*]
+}
+class "RequirementSpec" [[{Specification of a requirement validator.}]] {
+    {field} validation_style : string  
+    {field} may_trigger_repair : boolean  
+    {field} id(i) : uriorcurie  
+    {field} name(i) : string  
+    {field} description(i) : string  
+    {field} module_path(i) : PythonDottedPath  
+    {field} source_file(i) : RepositoryRelativePath  
+    {field} package_kind(i) : PackageKindEnum  
+    {field} element_kind(i) : ElementKindEnum  
+    {field} coverage_scope(i) : CoverageScopeEnum  [0..*]
+    {field} tags(i) : string  [0..*]
+}
+class "PluginSpec" [[{Specification of a Mellea plugin and the hooks it registers.}]] {
+    {field} plugin_mode : PluginModeEnum  
+    {field} hook_type : HookTypeEnum  [0..*]
+    {field} plugin_priority : integer  
+    {field} id(i) : uriorcurie  
+    {field} name(i) : string  
+    {field} description(i) : string  
+    {field} module_path(i) : PythonDottedPath  
+    {field} source_file(i) : RepositoryRelativePath  
+    {field} package_kind(i) : PackageKindEnum  
+    {field} element_kind(i) : ElementKindEnum  
+    {field} coverage_scope(i) : CoverageScopeEnum  [0..*]
+    {field} tags(i) : string  [0..*]
+}
+class "HookPayloadSpec" [[{Specification of a hook payload model.}]] {
+    {field} hook_type : HookTypeEnum  [0..*]
+    {field} lifecycle_role : string  
+    {field} id(i) : uriorcurie  
+    {field} name(i) : string  
+    {field} description(i) : string  
+    {field} module_path(i) : PythonDottedPath  
+    {field} source_file(i) : RepositoryRelativePath  
+    {field} package_kind(i) : PackageKindEnum  
+    {field} element_kind(i) : ElementKindEnum  
+    {field} coverage_scope(i) : CoverageScopeEnum  [0..*]
+    {field} tags(i) : string  [0..*]
+}
+class "FormatterSpec" [[{Specification of an output formatter for a backend.}]] {
+    {field} id(i) : uriorcurie  
+    {field} name(i) : string  
+    {field} description(i) : string  
+    {field} module_path(i) : PythonDottedPath  
+    {field} source_file(i) : RepositoryRelativePath  
+    {field} package_kind(i) : PackageKindEnum  
+    {field} element_kind(i) : ElementKindEnum  
+    {field} coverage_scope(i) : CoverageScopeEnum  [0..*]
+    {field} tags(i) : string  [0..*]
+}
+class "ContextSpec" [[{Specification of a context implementation.}]] {
+    {field} context_linearity : ContextLinearityEnum  
+    {field} stores_component_history : boolean  
+    {field} accepts_message_attachments : boolean  
+    {field} id(i) : uriorcurie  
+    {field} name(i) : string  
+    {field} description(i) : string  
+    {field} module_path(i) : PythonDottedPath  
+    {field} source_file(i) : RepositoryRelativePath  
+    {field} package_kind(i) : PackageKindEnum  
+    {field} element_kind(i) : ElementKindEnum  
+    {field} coverage_scope(i) : CoverageScopeEnum  [0..*]
+    {field} tags(i) : string  [0..*]
+}
+class "ComponentSpec" [[{Specification of a Mellea stdlib component type.}]] {
+    {field} component_category : ComponentCategoryEnum  
+    {field} input_modality : string  [0..*]
+    {field} parsed_output_type : string  
+    {field} id(i) : uriorcurie  
+    {field} name(i) : string  
+    {field} description(i) : string  
+    {field} module_path(i) : PythonDottedPath  
+    {field} source_file(i) : RepositoryRelativePath  
+    {field} package_kind(i) : PackageKindEnum  
+    {field} element_kind(i) : ElementKindEnum  
+    {field} coverage_scope(i) : CoverageScopeEnum  [0..*]
+    {field} tags(i) : string  [0..*]
+}
+class "CliCommandSpec" [[{Specification of a CLI command exposed under `m`.}]] {
+    {field} command_group : string  
+    {field} command_path : string  
+    {field} command_purpose : string  
+    {field} id(i) : uriorcurie  
+    {field} name(i) : string  
+    {field} description(i) : string  
+    {field} module_path(i) : PythonDottedPath  
+    {field} source_file(i) : RepositoryRelativePath  
+    {field} package_kind(i) : PackageKindEnum  
+    {field} element_kind(i) : ElementKindEnum  
+    {field} coverage_scope(i) : CoverageScopeEnum  [0..*]
+    {field} tags(i) : string  [0..*]
+}
+class "ApiModelSpec" [[{Specification of an HTTP API wire model.}]] {
+    {field} request_or_response : RequestResponseEnum  
+    {field} openai_object_type : string  
+    {field} id(i) : uriorcurie  
+    {field} name(i) : string  
+    {field} description(i) : string  
+    {field} module_path(i) : PythonDottedPath  
+    {field} source_file(i) : RepositoryRelativePath  
+    {field} package_kind(i) : PackageKindEnum  
+    {field} element_kind(i) : ElementKindEnum  
+    {field} coverage_scope(i) : CoverageScopeEnum  [0..*]
+    {field} tags(i) : string  [0..*]
+}
+"ModelElement" ^-- "TelemetryMetricSpec"
+"ModelElement" ^-- "SessionSpec"
+"ModelElement" ^-- "SamplingStrategySpec"
+"ModelElement" ^-- "RequirementSpec"
+"ModelElement" ^-- "PluginSpec"
+"ModelElement" ^-- "HookPayloadSpec"
+"ModelElement" ^-- "FormatterSpec"
+"ModelElement" ^-- "ContextSpec"
+"ModelElement" ^-- "ComponentSpec"
+"ModelElement" ^-- "CliCommandSpec"
+"ModelElement" ^-- "BackendSpec"
+"ModelElement" ^-- "ApiModelSpec"
+"SessionSpec" *--> "0..*" "MethodSpec" : "exposed_method"
+"SessionSpec" --> "0..1" "ContextSpec" : "uses_context"
+"SessionSpec" --> "0..1" "BackendSpec" : "uses_backend"
+"PluginSpec" *--> "0..*" "HookPayloadSpec" : "payload_model"
+"BackendSpec" --> "0..1" "FormatterSpec" : "default_formatter"
+"CliCommandSpec" *--> "0..*" "ApiModelSpec" : "output_model"
+"CliCommandSpec" *--> "0..*" "ApiModelSpec" : "input_model"
+"ApiModelSpec" *--> "0..*" "ApiFieldSpec" : "has_field"
+@enduml
