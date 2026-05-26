@@ -63,6 +63,9 @@ prefixes:
   common_domain_model:
     prefix_prefix: common_domain_model
     prefix_reference: https://w3id.org/lmodel/common-domain-model/
+  gist_linkml:
+    prefix_prefix: gist_linkml
+    prefix_reference: https://w3id.org/lmodel/gist/
   iso27001:
     prefix_prefix: iso27001
     prefix_reference: https://w3id.org/lmodel/iso27001/
@@ -1550,6 +1553,7 @@ classes:
     from_schema: https://w3id.org/lmodel/mellea
     close_mappings:
     - nexus:Entity
+    - gist_linkml:GistThing
     - iso27001:NamedEntity
     - spdx:Element
     related_mappings:
@@ -1576,6 +1580,7 @@ classes:
     - interface_surface
     from_schema: https://w3id.org/lmodel/mellea
     close_mappings:
+    - gist_linkml:Collection
     - spdx:Sbom
     related_mappings:
     - nexus:Container
@@ -1608,6 +1613,7 @@ classes:
     description: A logical Python package (directory) inside the repository.
     from_schema: https://w3id.org/lmodel/mellea
     close_mappings:
+    - gist_linkml:Composite
     - spdx:Package
     related_mappings:
     - common_domain_model:Position
@@ -1636,6 +1642,8 @@ classes:
     related_mappings:
     - common_domain_model:ContractBase
     - spdx:Element
+    broad_mappings:
+    - gist_linkml:Specification
     is_a: NamedElement
     abstract: true
     slots:
@@ -1659,6 +1667,7 @@ classes:
     from_schema: https://w3id.org/lmodel/mellea
     close_mappings:
     - nexus:AiProvider
+    - gist_linkml:Specification
     related_mappings:
     - nexus:AiSystem
     - mcp:Implementation
@@ -1688,6 +1697,8 @@ classes:
     in_subset:
     - core_runtime
     from_schema: https://w3id.org/lmodel/mellea
+    close_mappings:
+    - gist_linkml:Specification
     related_mappings:
     - nexus:Modality
     - mcp:ContentBlock
@@ -1710,6 +1721,8 @@ classes:
     in_subset:
     - core_runtime
     from_schema: https://w3id.org/lmodel/mellea
+    close_mappings:
+    - gist_linkml:Specification
     related_mappings:
     - nexus:AiLifecyclePhase
     is_a: ModelElement
@@ -1736,6 +1749,7 @@ classes:
     from_schema: https://w3id.org/lmodel/mellea
     related_mappings:
     - nexus:AiTask
+    - gist_linkml:Task
     - iso27001:RiskAssessmentProcess
     - mcp:Task
     is_a: ModelElement
@@ -1762,6 +1776,7 @@ classes:
     from_schema: https://w3id.org/lmodel/mellea
     close_mappings:
     - nexus:AIComponent
+    - gist_linkml:Component
     - mcp:Tool
     is_a: ModelElement
     slots:
@@ -1785,6 +1800,8 @@ classes:
     in_subset:
     - core_runtime
     from_schema: https://w3id.org/lmodel/mellea
+    close_mappings:
+    - gist_linkml:Requirement
     related_mappings:
     - nexus:Requirement
     - nexus:Rule
@@ -1815,6 +1832,7 @@ classes:
     - mcp:SamplingCapability
     related_mappings:
     - nexus:Action
+    - gist_linkml:Behavior
     - mcp:ModelPreferences
     is_a: ModelElement
     slots:
@@ -1843,6 +1861,7 @@ classes:
     related_mappings:
     - nexus:AIComponent
     - attack:Analytic
+    - gist_linkml:Component
     - iso27001:OperationalProcedure
     - mcp:ExtensionAppCapability
     is_a: ModelElement
@@ -1871,6 +1890,7 @@ classes:
     related_mappings:
     - nexus:Fact
     - attack:DataComponent
+    - gist_linkml:ContentExpression
     - iso27001:InformationSecurityEvent
     - mcp:MetaObject
     - spdx:Annotation
@@ -1901,6 +1921,7 @@ classes:
     related_mappings:
     - nexus:AiEval
     - attack:DataSource
+    - gist_linkml:Magnitude
     - iso27001:MonitoringProgram
     - spdx:AIPackage
     is_a: ModelElement
@@ -1923,6 +1944,8 @@ classes:
     in_subset:
     - interface_surface
     from_schema: https://w3id.org/lmodel/mellea
+    close_mappings:
+    - gist_linkml:TaskTemplate
     related_mappings:
     - attack:Tool
     - iso27001:OperationalProcedure
@@ -1951,6 +1974,8 @@ classes:
     in_subset:
     - interface_surface
     from_schema: https://w3id.org/lmodel/mellea
+    close_mappings:
+    - gist_linkml:Specification
     related_mappings:
     - nexus:Input
     - mcp:JSONRPCRequest
@@ -1977,6 +2002,8 @@ classes:
     in_subset:
     - interface_surface
     from_schema: https://w3id.org/lmodel/mellea
+    close_mappings:
+    - gist_linkml:Component
     related_mappings:
     - spdx:DictionaryEntry
     is_a: NamedElement
@@ -2002,6 +2029,8 @@ classes:
     in_subset:
     - core_runtime
     from_schema: https://w3id.org/lmodel/mellea
+    related_mappings:
+    - gist_linkml:Behavior
     is_a: NamedElement
     slots:
     - id
@@ -2027,6 +2056,7 @@ classes:
     close_mappings:
     - nexus:AiModel
     - nexus:LargeLanguageModel
+    - gist_linkml:ID
     - spdx:AIPackage
     related_mappings:
     - nexus:ModelInfo
@@ -2062,6 +2092,7 @@ classes:
     - nexus:LLMIntrinsic
     - spdx:AIPackage
     related_mappings:
+    - gist_linkml:Component
     - spdx:Relationship
     is_a: NamedElement
     slots:
@@ -2079,7 +2110,7 @@ classes:
     class_uri: mellea:IntrinsicAdapterSpec
 metamodel_version: 1.11.0
 source_file: mellea.yaml
-source_file_date: '2026-05-26T14:30:06'
-source_file_size: 25242
-generation_date: '2026-05-26T14:30:17'
+source_file_date: '2026-05-26T21:29:55'
+source_file_size: 26172
+generation_date: '2026-05-26T21:30:04'
 

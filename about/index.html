@@ -641,8 +641,8 @@
 <li><strong>Generation:</strong> auto-derived from live Mellea Python sources by
   <a href="https://github.com/lmodel/mellea/blob/main/linkml/scripts/schema_to_linkml.py"><code>linkml/scripts/schema_to_linkml.py</code></a></li>
 <li><strong>Test fixtures:</strong> auto-derived from live sources by
-  <a href="https://github.com/lmodel/mellea/blob/main/linkml/scripts/gen_test_fixtures.py"><code>linkml/scripts/gen_test_fixtures.py</code></a>
-  — 62 valid + 4 counter-examples under <code>linkml/tests/data/</code></li>
+  <a href="https://github.com/lmodel/mellea/blob/main/linkml/scripts/gen_test_fixtures.py"><code>linkml/scripts/gen_test_fixtures.py</code></a></li>
+<li>62 valid + 4 counter-examples under <code>linkml/tests/data/</code></li>
 <li><strong>SSSOM overlay:</strong> schema-agnostic injector
   <a href="https://github.com/lmodel/mellea/blob/main/linkml/scripts/apply_sssom_overlay.py"><code>linkml/scripts/apply_sssom_overlay.py</code></a> merges CURIE alignments from <code>src/mellea/mappings/*.sssom.tsv</code> into the generated YAML's <code>exact_mappings</code> / <code>close_mappings</code> / <code>broad_mappings</code> / <code>narrow_mappings</code> / <code>related_mappings</code> slots (classes, enums, types, slots, and per-permissible-value)</li>
 <li><strong>Validated by:</strong> <code>just lint</code> (0 errors), <code>just gen-project</code>, <code>just test</code> (62 pytest fixtures pass; <code>linkml-run-examples</code> accepts valid set and rejects all counter-examples)</li>
@@ -672,7 +672,7 @@
 </table>
 <h2 id="source-derived-elements">Source-derived elements</h2>
 <p>These schema elements are re-extracted from Python sources on every
-regeneration — no hand-editing required when upstream changes:</p>
+regeneration - no hand-editing required when upstream changes:</p>
 <table>
 <thead>
 <tr>
@@ -722,6 +722,9 @@ just<span class="w"> </span>regen-and-test
 
 <span class="c1"># Generate project files (Python, Java, TypeScript, OWL)</span>
 just<span class="w"> </span>gen-project
+
+<span class="c1"># Generated extended/experimental project files (optional)</span>
+just<span class="w"> </span>gen-project-extended
 
 <span class="c1"># Generate documentation</span>
 just<span class="w"> </span>gen-doc
@@ -841,17 +844,21 @@ just<span class="w"> </span>clean
 <p>All valid fixtures load through <code>linkml_runtime.yaml_loader</code>; all
 counter-examples are rejected by <code>linkml-run-examples</code>.</p>
 <h2 id="cross-schema-mappings">Cross-schema mappings</h2>
-<p>Curated SSSOM/TSV alignments to six downstream schemas live under
-<a href="https://github.com/lmodel/mellea/blob/main/linkml/src/mellea/mappings/"><code>src/mellea/mappings/</code></a>.</p>
+<p>Curated SSSOM/TSV alignments to seven downstream schemas live under
+<a href="https://github.com/lmodel/mellea/blob/main/linkml/src/mellea/mappings/"><code>linkml/src/mellea/mappings/</code></a>.</p>
 <p>These files contain artificially-curated (<code>semapv:LLMBasedMatching</code>) mappings, parse cleanly with <a href="https://pypi.org/project/sssom/">pypi sssom</a>, use real Mellea CURIEs validated against <a href="https://github.com/lmodel/mellea/blob/main/linkml/src/mellea/schema/mellea.yaml"><code>linkml/src/mellea/schema/mellea.yaml</code></a>, and carry per-row rationale (with name-collision notes such as <code>RequirementSpec</code> vs <code>nexus:Requirement</code>) in the <code>comment</code> column.</p>
-<p>The three <strong>flagship</strong> alignments are the densest and target schemas with genuine domain overlap with the Mellea runtime: the <a href="https://github.com/IBM/ai-atlas-nexus">ai-atlas-nexus</a> AI Risk Ontology, the <a href="https://modelcontextprotocol.io/">Model Context Protocol</a>, and <a href="https://spdx.github.io/spdx-spec/v3.0.1/">SPDX 3</a> (AI-package / SBOM).</p>
+<p>The <strong>flagship</strong> alignments are the densest and target schemas with genuine domain overlap with the Mellea runtime: the <a href="https://github.com/IBM/ai-atlas-nexus">ai-atlas-nexus</a> AI Risk Ontology, the <a href="https://w3id.org/lmodel/mcp">Model Context Protocol</a>, <a href="https://w3id.org/lmodel/spdx/">SPDX</a> (AI-package / SBOM), and <a href="https://w3id.org/lmodel/gist/"><em>gist_linkml</em></a> (Semantic Arts upper ontology, LinkML port - anchors mellea's architectural classes against general-purpose top-level concepts).</p>
 <p>The remaining three (ISO 27001, MITRE ATT&amp;CK, FINOS CDM event-position) are provided as smaller, honest cross-domain alignments centred on observability, audit, and structural analogues.</p>
+<blockquote>
+<p><strong>gist prefix note:</strong> the gist mapping uses the local prefix <code>gist_linkml:</code> (<code>https://w3id.org/lmodel/gist/</code>) to avoid collision with the upstream Semantic Arts namespace (<code>gist_upstream:</code> <code>https://w3id.org/semanticarts/ns/ontology/gist/</code>).</p>
+</blockquote>
 <table>
 <thead>
 <tr>
 <th>Mapping set</th>
 <th style="text-align: right;">exact</th>
 <th style="text-align: right;">close</th>
+<th style="text-align: right;">broad</th>
 <th style="text-align: right;">narrow</th>
 <th style="text-align: right;">related</th>
 <th style="text-align: right;">Total</th>
@@ -863,6 +870,7 @@ counter-examples are rejected by <code>linkml-run-examples</code>.</p>
 <td><a href="https://github.com/lmodel/mellea/blob/main/linkml/src/mellea/mappings/mellea-to-ai-atlas-nexus.sssom.tsv"><code>mellea-to-ai-atlas-nexus</code></a></td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">9</td>
+<td style="text-align: right;">–</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">25</td>
 <td style="text-align: right;"><strong>36</strong></td>
@@ -873,14 +881,26 @@ counter-examples are rejected by <code>linkml-run-examples</code>.</p>
 <td style="text-align: right;">–</td>
 <td style="text-align: right;">8</td>
 <td style="text-align: right;">–</td>
+<td style="text-align: right;">–</td>
 <td style="text-align: right;">12</td>
 <td style="text-align: right;"><strong>20</strong></td>
 <td><code>ComponentCategoryEnum.MESSAGE</code> &lt;-&gt; <code>mcp:PromptMessage</code></td>
 </tr>
 <tr>
+<td><a href="https://github.com/lmodel/mellea/blob/main/linkml/src/mellea/mappings/mellea-to-gist.sssom.tsv"><code>mellea-to-gist</code></a></td>
+<td style="text-align: right;">–</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">–</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;"><strong>20</strong></td>
+<td><code>RequirementSpec</code> &lt;-&gt; <code>gist_linkml:Requirement</code> (closeMatch)</td>
+</tr>
+<tr>
 <td><a href="https://github.com/lmodel/mellea/blob/main/linkml/src/mellea/mappings/mellea-to-spdx.sssom.tsv"><code>mellea-to-spdx</code></a></td>
 <td style="text-align: right;">–</td>
 <td style="text-align: right;">6</td>
+<td style="text-align: right;">–</td>
 <td style="text-align: right;">–</td>
 <td style="text-align: right;">8</td>
 <td style="text-align: right;"><strong>14</strong></td>
@@ -891,12 +911,14 @@ counter-examples are rejected by <code>linkml-run-examples</code>.</p>
 <td style="text-align: right;">–</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">–</td>
+<td style="text-align: right;">–</td>
 <td style="text-align: right;">10</td>
 <td style="text-align: right;"><strong>12</strong></td>
 <td><code>TelemetryMetricSpec</code> &lt;-&gt; <code>iso27001:MonitoringItem</code></td>
 </tr>
 <tr>
 <td><a href="https://github.com/lmodel/mellea/blob/main/linkml/src/mellea/mappings/mellea-to-attack.sssom.tsv"><code>mellea-to-attack</code></a></td>
+<td style="text-align: right;">–</td>
 <td style="text-align: right;">–</td>
 <td style="text-align: right;">–</td>
 <td style="text-align: right;">–</td>
@@ -909,6 +931,7 @@ counter-examples are rejected by <code>linkml-run-examples</code>.</p>
 <td style="text-align: right;">–</td>
 <td style="text-align: right;">–</td>
 <td style="text-align: right;">–</td>
+<td style="text-align: right;">–</td>
 <td style="text-align: right;">6</td>
 <td style="text-align: right;"><strong>6</strong></td>
 <td><code>RepositoryCatalog</code> &lt;-&gt; <code>common_domain_model:Portfolio</code> (structural)</td>
@@ -916,10 +939,11 @@ counter-examples are rejected by <code>linkml-run-examples</code>.</p>
 <tr>
 <td><strong>Total</strong></td>
 <td style="text-align: right;"><strong>1</strong></td>
-<td style="text-align: right;"><strong>25</strong></td>
+<td style="text-align: right;"><strong>37</strong></td>
 <td style="text-align: right;"><strong>1</strong></td>
-<td style="text-align: right;"><strong>70</strong></td>
-<td style="text-align: right;"><strong>97</strong></td>
+<td style="text-align: right;"><strong>1</strong></td>
+<td style="text-align: right;"><strong>77</strong></td>
+<td style="text-align: right;"><strong>117</strong></td>
 <td></td>
 </tr>
 </tbody>
@@ -929,13 +953,13 @@ counter-examples are rejected by <code>linkml-run-examples</code>.</p>
 <li><strong>ai-atlas-nexus</strong> (AI governance ontology) aligns on adapter type,
   provider, model, intrinsic, component, requirement, and lifecycle hooks.</li>
 <li><strong>MCP</strong> (AI runtime protocol) aligns cleanly on stdlib component
-  categories — <code>INSTRUCTION</code> &lt;-&gt; <code>Prompt</code>, <code>MESSAGE</code> &lt;-&gt; <code>PromptMessage</code> / <code>SamplingMessage</code>, <code>TOOL_MESSAGE</code> &lt;-&gt; <code>ToolUseContent</code> / <code>ToolResultContent</code>, <code>DOCUMENT</code> &lt;-&gt; <code>Resource</code>.</li>
-<li><strong>SPDX 3</strong> aligns on AI model provenance via <code>AIPackage</code>, on repository
-  packaging via <code>Sbom</code> / <code>Package</code>, and on plugins via <code>Extension</code>.</li>
-<li><strong>ISO 27001</strong> aligns on observability/audit primitives —
+  categories - <code>INSTRUCTION</code> &lt;-&gt; <code>Prompt</code>, <code>MESSAGE</code> &lt;-&gt; <code>PromptMessage</code> / <code>SamplingMessage</code>, <code>TOOL_MESSAGE</code> &lt;-&gt; <code>ToolUseContent</code> / <code>ToolResultContent</code>, <code>DOCUMENT</code> &lt;-&gt; <code>Resource</code>.</li>
+<li><strong><em>gist_linkml</em></strong> (Semantic Arts upper ontology) aligns mellea's architectural classes against general-purpose top-level concepts - <code>RequirementSpec</code> &lt;-&gt; <code>Requirement</code>, <code>ComponentSpec</code> &lt;-&gt; <code>Component</code>, <code>ModelIdentifierSpec</code> &lt;-&gt; <code>ID</code>, <code>RepositoryCatalog</code> &lt;-&gt; <code>Collection</code>, <code>PythonPackage</code> &lt;-&gt; <code>Composite</code>, <code>CliCommandSpec</code> &lt;-&gt; <code>TaskTemplate</code>, <code>BackendSpec</code> / <code>FormatterSpec</code> / <code>ContextSpec</code> / <code>ApiModelSpec</code> &lt;-&gt; <code>Specification</code>. Validated against <a href="https://raw.githubusercontent.com/lmodel/gist/refs/heads/main/src/gist/schema/gist.yaml"><code>gist_linkml</code></a> (gist 14.1.0).</li>
+<li><strong>SPDX 3</strong> aligns on AI model provenance via <code>AIPackage</code>, on repository packaging via <code>Sbom</code> / <code>Package</code>, and on plugins via <code>Extension</code>.</li>
+<li><strong>ISO 27001</strong> aligns on observability/audit primitives -
   <code>TelemetryMetricSpec</code> &lt;-&gt; <code>MonitoringItem</code> (closeMatch),
   <code>PluginModeEnum.AUDIT</code> &lt;-&gt; <code>InternalAudit</code>.</li>
-<li><strong>MITRE ATT&amp;CK</strong> aligns weakly on detection/observability —
+<li><strong>MITRE ATT&amp;CK</strong> aligns weakly on detection/observability -
   <code>TelemetryMetricSpec</code> &lt;-&gt; <code>DataSource</code>, <code>HookPayloadSpec</code> &lt;-&gt; <code>DataComponent</code>.</li>
 <li><strong>FINOS CDM event-position</strong> has essentially no domain overlap; only
   structural aggregation analogues at low confidence are recorded.</li>
@@ -967,14 +991,14 @@ counter-examples are rejected by <code>linkml-run-examples</code>.</p>
 </tbody>
 </table>
 <p>The deploy workflow pushes to the <code>gh-pages</code> branch via git, so only
-<code>contents: write</code> is required — Pages / OIDC permissions are unused.</p>
+<code>contents: write</code> is required - Pages / OIDC permissions are unused.</p>
 <h2 id="known-gaps">Known gaps</h2>
 <ul>
-<li>Stylistic <code>linkml-lint</code> warnings (naming conventions on permissible values, missing per-slot descriptions) — non-blocking; addressable in a follow-up.</li>
-<li><code>mellea/templates/</code> (Jinja templates) is intentionally excluded — no Python declarations to capture.</li>
+<li>Stylistic <code>linkml-lint</code> warnings (naming conventions on permissible values, missing per-slot descriptions) - non-blocking; addressable in a follow-up.</li>
+<li><code>mellea/templates/</code> (Jinja templates) is intentionally excluded - no Python declarations to capture.</li>
 <li>Per-component instance data (concrete <code>BackendSpec</code> / <code>ComponentSpec</code>
   records) is not yet emitted; the schema currently defines the <em>shape</em> of such instances. A follow-up generator pass can populate them.</li>
-<li>Generator output under <a href="https://github.com/lmodel/mellea/blob/main/linkml/project/"><code>linkml/project/</code></a> (gen-sqla, gen-pandera, gen-namespaces, …) is excluded from ruff via <code>force-exclude</code> + <code>extend-exclude</code> in the root <a href="https://github.com/lmodel/mellea/blob/main/pyproject.toml"><code>pyproject.toml</code></a> <code>[tool.ruff]</code> block. In-place fixes are pointless because <code>just gen-project</code> regenerates and clobbers them — upstream linkml templates are the source of the style noise.</li>
+<li>Generator output under <a href="https://github.com/lmodel/mellea/blob/main/linkml/project/"><code>linkml/project/</code></a> (gen-sqla, gen-pandera, gen-namespaces, …) is excluded from ruff via <code>force-exclude</code> + <code>extend-exclude</code> in the root <a href="https://github.com/lmodel/mellea/blob/main/pyproject.toml"><code>pyproject.toml</code></a> <code>[tool.ruff]</code> block. In-place fixes are pointless because <code>just gen-project</code> regenerates and clobbers them - upstream linkml templates are the source of the style noise.</li>
 </ul>
 
 
