@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Wrapper for linkml gen-pandera that patches two upstream bugs.
+"""Wrapper for linkml gen-pandera that patches two upstream bugs.
 
 Bug A — No --mergeimports support (panderagen.py):
   gen-pandera does not expose --mergeimports; its DataframeGenerator base class

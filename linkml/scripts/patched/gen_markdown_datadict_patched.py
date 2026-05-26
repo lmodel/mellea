@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Wrapper for linkml gen-markdown-datadict that patches one upstream performance bug.
+"""Wrapper for linkml gen-markdown-datadict that patches one upstream performance bug.
 
 Bug  - ERDiagramGenerator re-instantiated for every class (markdowndatadictgen.py):
   MarkdownDataDictGen._generate_class_diagram() creates a new ERDiagramGenerator
@@ -32,7 +31,9 @@ from linkml_runtime.linkml_model import ClassDefinition
 class PatchedMarkdownDataDictGen(MarkdownDataDictGen):
     """MarkdownDataDictGen with ERDiagramGenerator caching to avoid O(n) schema loads."""
 
-    def _generate_class_diagram(self, cls: ClassDefinition, relationships: dict) -> list:
+    def _generate_class_diagram(
+        self, cls: ClassDefinition, relationships: dict
+    ) -> list:
         """Generate per-class ERD, reusing a single cached ERDiagramGenerator."""
         items = []
         erd_classes = relationships["erd_classes"]
@@ -46,9 +47,13 @@ class PatchedMarkdownDataDictGen(MarkdownDataDictGen):
                     self.schema_location, exclude_attributes=True, structural=False
                 )
             erd_classes.append(cls.name)
-            diagram = self._erd_gen.serialize_classes(erd_classes, follow_references=False, max_hops=0)
+            diagram = self._erd_gen.serialize_classes(
+                erd_classes, follow_references=False, max_hops=0
+            )
             diagram_name = f"class_{cls.name.lower()}_erd"
-            items.append(self._diagram_renderer.render(diagram, diagram_name=diagram_name))
+            items.append(
+                self._diagram_renderer.render(diagram, diagram_name=diagram_name)
+            )
         elif children or cls.is_a:
             items.append(self.header(4, "Local class diagram"))
             diagram_name = f"class_{cls.name.lower()}_local"
@@ -68,6 +73,8 @@ if __name__ == "__main__":
     # evaluated against the original class, but PatchedMarkdownDataDictGen inherits
     # all the same dataclass fields so the options remain compatible.
     import linkml.generators.markdowndatadictgen as _mddict_module
+
     _mddict_module.MarkdownDataDictGen = PatchedMarkdownDataDictGen
     from linkml.generators.markdowndatadictgen import cli
+
     cli()

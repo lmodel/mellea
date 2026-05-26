@@ -1039,8 +1039,8 @@ CREATE TABLE "ApiFieldSpec_coverage_scope" (
 	PRIMARY KEY ("ApiFieldSpec_id", coverage_scope),
 	FOREIGN KEY("ApiFieldSpec_id") REFERENCES "ApiFieldSpec" (id)
 );
-CREATE INDEX "ix_ApiFieldSpec_coverage_scope_coverage_scope" ON "ApiFieldSpec_coverage_scope" (coverage_scope);
 CREATE INDEX "ix_ApiFieldSpec_coverage_scope_ApiFieldSpec_id" ON "ApiFieldSpec_coverage_scope" ("ApiFieldSpec_id");
+CREATE INDEX "ix_ApiFieldSpec_coverage_scope_coverage_scope" ON "ApiFieldSpec_coverage_scope" (coverage_scope);
 
 CREATE TABLE "ApiFieldSpec_tags" (
 	"ApiFieldSpec_id" TEXT,
@@ -1075,8 +1075,8 @@ CREATE TABLE "ModelIdentifierSpec_tags" (
 	PRIMARY KEY ("ModelIdentifierSpec_id", tags),
 	FOREIGN KEY("ModelIdentifierSpec_id") REFERENCES "ModelIdentifierSpec" (id)
 );
-CREATE INDEX "ix_ModelIdentifierSpec_tags_ModelIdentifierSpec_id" ON "ModelIdentifierSpec_tags" ("ModelIdentifierSpec_id");
 CREATE INDEX "ix_ModelIdentifierSpec_tags_tags" ON "ModelIdentifierSpec_tags" (tags);
+CREATE INDEX "ix_ModelIdentifierSpec_tags_ModelIdentifierSpec_id" ON "ModelIdentifierSpec_tags" ("ModelIdentifierSpec_id");
 
 CREATE TABLE "MethodSpec_coverage_scope" (
 	"MethodSpec_id" TEXT,
@@ -1093,5 +1093,5 @@ CREATE TABLE "MethodSpec_tags" (
 	PRIMARY KEY ("MethodSpec_id", tags),
 	FOREIGN KEY("MethodSpec_id") REFERENCES "MethodSpec" (id)
 );
-CREATE INDEX "ix_MethodSpec_tags_MethodSpec_id" ON "MethodSpec_tags" ("MethodSpec_id");
 CREATE INDEX "ix_MethodSpec_tags_tags" ON "MethodSpec_tags" (tags);
+CREATE INDEX "ix_MethodSpec_tags_MethodSpec_id" ON "MethodSpec_tags" ("MethodSpec_id");

@@ -1,6 +1,7 @@
 @prefix attack: <https://w3id.org/lmodel/attack/> .
 @prefix common_domain_model: <https://w3id.org/lmodel/common-domain-model/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix gist_linkml: <https://w3id.org/lmodel/gist/> .
 @prefix iso27001: <https://w3id.org/lmodel/iso27001/> .
 @prefix linkml: <https://w3id.org/linkml/> .
 @prefix mcp: <https://w3id.org/lmodel/mcp/> .
@@ -46,45 +47,46 @@ mellea:uses_component_type a owl:ObjectProperty ;
 mellea:CliCommandSpec a owl:Class ;
     rdfs:label "CliCommandSpec" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom mellea:ApiModelSpec ;
-            owl:onProperty mellea:input_model ],
-        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty mellea:command_purpose ],
         [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:input_model ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:command_group ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty mellea:command_group ],
+            owl:onProperty mellea:command_purpose ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:command_path ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:output_model ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:ApiModelSpec ;
+            owl:onProperty mellea:input_model ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:command_path ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty mellea:command_group ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
+            owl:maxCardinality 1 ;
             owl:onProperty mellea:command_path ],
         [ a owl:Restriction ;
             owl:allValuesFrom mellea:ApiModelSpec ;
             owl:onProperty mellea:output_model ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty mellea:output_model ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:input_model ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty mellea:command_purpose ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty mellea:command_path ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty mellea:command_group ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty mellea:command_purpose ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:command_path ],
         mellea:ModelElement ;
+    skos:closeMatch gist_linkml:TaskTemplate ;
     skos:definition "Specification of a CLI command exposed under `m`." ;
     skos:inScheme <https://w3id.org/lmodel/mellea> ;
     skos:relatedMatch spdx:Tool,
@@ -97,24 +99,25 @@ mellea:IntrinsicAdapterSpec a owl:Class ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty mellea:repo_id ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom mellea:AdapterTypeEnum ;
             owl:onProperty mellea:adapter_type ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty mellea:repo_id ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty mellea:repo_id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mellea:AdapterTypeEnum ;
             owl:onProperty mellea:adapter_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:repo_id ],
         mellea:NamedElement ;
     skos:closeMatch nexus:Adapter,
         nexus:LLMIntrinsic,
         spdx:AIPackage ;
     skos:definition "Specification of an intrinsic adapter (LoRA / aLoRA)." ;
     skos:inScheme <https://w3id.org/lmodel/mellea> ;
-    skos:relatedMatch spdx:Relationship .
+    skos:relatedMatch spdx:Relationship,
+        gist_linkml:Component .
 
 mellea:PluginSpec a owl:Class ;
     rdfs:label "PluginSpec" ;
@@ -123,80 +126,82 @@ mellea:PluginSpec a owl:Class ;
             owl:onProperty mellea:plugin_mode ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty mellea:plugin_priority ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:plugin_mode ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:payload_model ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:plugin_mode ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:HookTypeEnum ;
+            owl:onProperty mellea:hook_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:HookPayloadSpec ;
+            owl:onProperty mellea:payload_model ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty mellea:hook_type ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:integer ;
             owl:onProperty mellea:plugin_priority ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty mellea:plugin_mode ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty mellea:plugin_priority ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mellea:HookTypeEnum ;
-            owl:onProperty mellea:hook_type ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty mellea:plugin_priority ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:plugin_mode ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mellea:HookPayloadSpec ;
-            owl:onProperty mellea:payload_model ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:payload_model ],
         mellea:ModelElement ;
     skos:closeMatch spdx:Extension ;
     skos:definition "Specification of a Mellea plugin and the hooks it registers." ;
     skos:inScheme <https://w3id.org/lmodel/mellea> ;
     skos:relatedMatch nexus:AIComponent,
         attack:Analytic,
+        gist_linkml:Component,
         iso27001:OperationalProcedure,
         mcp:ExtensionAppCapability .
 
 mellea:RepositoryCatalog a owl:Class ;
     rdfs:label "RepositoryCatalog" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom mellea:ModelElement ;
+            owl:onProperty mellea:declares_element ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:repository_root ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:declares_element ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:analyzed_on ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:includes_path ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:excludes_path ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:repository_root ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:includes_path ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:repository_root ],
+        [ a owl:Restriction ;
             owl:allValuesFrom xsd:date ;
             owl:onProperty mellea:analyzed_on ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty mellea:repository_root ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:declares_element ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty mellea:includes_path ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty mellea:excludes_path ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty mellea:includes_path ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty mellea:analyzed_on ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty mellea:repository_root ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty mellea:analyzed_on ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mellea:ModelElement ;
-            owl:onProperty mellea:declares_element ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty mellea:repository_root ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty mellea:excludes_path ],
         mellea:NamedElement ;
-    skos:closeMatch spdx:Sbom ;
+    skos:closeMatch spdx:Sbom,
+        gist_linkml:Collection ;
     skos:definition "Top-level catalog rooting the analysed repository snapshot." ;
     skos:inScheme <https://w3id.org/lmodel/mellea> ;
     skos:relatedMatch nexus:Container,
@@ -213,20 +218,21 @@ mellea:RequirementSpec a owl:Class ;
             owl:onProperty mellea:may_trigger_repair ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty mellea:validation_style ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty mellea:may_trigger_repair ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty mellea:validation_style ],
+            owl:onProperty mellea:may_trigger_repair ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty mellea:validation_style ],
         [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:validation_style ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty mellea:may_trigger_repair ],
+            owl:onProperty mellea:validation_style ],
         mellea:ModelElement ;
+    skos:closeMatch gist_linkml:Requirement ;
     skos:definition "Specification of a requirement validator." ;
     skos:inScheme <https://w3id.org/lmodel/mellea> ;
     skos:relatedMatch nexus:Requirement,
@@ -237,6 +243,12 @@ mellea:RequirementSpec a owl:Class ;
 mellea:SamplingStrategySpec a owl:Class ;
     rdfs:label "SamplingStrategySpec" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:integer ;
+            owl:onProperty mellea:loop_budget_hint ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:selection_policy ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty mellea:may_trigger_repair ],
         [ a owl:Restriction ;
@@ -246,70 +258,66 @@ mellea:SamplingStrategySpec a owl:Class ;
             owl:allValuesFrom xsd:boolean ;
             owl:onProperty mellea:may_trigger_repair ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty mellea:selection_policy ],
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:loop_budget_hint ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
+            owl:minCardinality 0 ;
             owl:onProperty mellea:selection_policy ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty mellea:may_trigger_repair ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:integer ;
-            owl:onProperty mellea:loop_budget_hint ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty mellea:selection_policy ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:loop_budget_hint ],
         mellea:ModelElement ;
     skos:closeMatch mcp:SamplingCapability ;
     skos:definition "Specification of a sampling-loop strategy." ;
     skos:inScheme <https://w3id.org/lmodel/mellea> ;
     skos:relatedMatch nexus:Action,
+        gist_linkml:Behavior,
         mcp:ModelPreferences .
 
 mellea:SessionSpec a owl:Class ;
     rdfs:label "SessionSpec" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom mellea:ContextSpec ;
-            owl:onProperty mellea:uses_context ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty mellea:uses_backend ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:uses_context ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty mellea:uses_context ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:uses_backend ],
         [ a owl:Restriction ;
             owl:allValuesFrom mellea:MethodSpec ;
             owl:onProperty mellea:exposed_method ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:exposed_method ],
-        [ a owl:Restriction ;
             owl:allValuesFrom mellea:BackendSpec ;
             owl:onProperty mellea:uses_backend ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:uses_backend ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:uses_backend ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:uses_context ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:ContextSpec ;
+            owl:onProperty mellea:uses_context ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:exposed_method ],
         mellea:ModelElement ;
     skos:definition "Specification of a Mellea session." ;
     skos:inScheme <https://w3id.org/lmodel/mellea> ;
     skos:relatedMatch nexus:AiTask,
+        gist_linkml:Task,
         iso27001:RiskAssessmentProcess,
         mcp:Task .
 
 mellea:TelemetryMetricSpec a owl:Class ;
     rdfs:label "TelemetryMetricSpec" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
+            owl:minCardinality 0 ;
             owl:onProperty mellea:metric_name ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty mellea:metric_name ],
         mellea:ModelElement ;
     skos:closeMatch nexus:MetricConfig,
@@ -319,6 +327,7 @@ mellea:TelemetryMetricSpec a owl:Class ;
     skos:relatedMatch nexus:AiEval,
         spdx:AIPackage,
         attack:DataSource,
+        gist_linkml:Magnitude,
         iso27001:MonitoringProgram .
 
 <https://w3id.org/lmodel/mellea/AdapterTypeEnum#ALORA> a owl:Class ;
@@ -450,31 +459,32 @@ mellea:TelemetryMetricSpec a owl:Class ;
 mellea:ComponentSpec a owl:Class ;
     rdfs:label "ComponentSpec" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:parsed_output_type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:input_modality ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:input_modality ],
+        [ a owl:Restriction ;
             owl:allValuesFrom mellea:ComponentCategoryEnum ;
             owl:onProperty mellea:component_category ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty mellea:parsed_output_type ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty mellea:input_modality ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty mellea:input_modality ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty mellea:parsed_output_type ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty mellea:component_category ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty mellea:parsed_output_type ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:parsed_output_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty mellea:component_category ],
         mellea:ModelElement ;
     skos:closeMatch nexus:AIComponent,
+        gist_linkml:Component,
         mcp:Tool ;
     skos:definition "Specification of a Mellea stdlib component type." ;
     skos:inScheme <https://w3id.org/lmodel/mellea> .
@@ -863,16 +873,16 @@ mellea:ApiFieldSpec a owl:Class ;
     rdfs:label "ApiFieldSpec" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty mellea:required_field ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty mellea:field_name ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty mellea:field_type ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:allows_null ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty mellea:required_field ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:field_type ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty mellea:field_type ],
@@ -880,24 +890,25 @@ mellea:ApiFieldSpec a owl:Class ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty mellea:field_name ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:field_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
             owl:onProperty mellea:required_field ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty mellea:field_name ],
+            owl:onProperty mellea:allows_null ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty mellea:allows_null ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:boolean ;
-            owl:onProperty mellea:required_field ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:boolean ;
             owl:onProperty mellea:allows_null ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty mellea:field_type ],
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:field_name ],
         mellea:NamedElement ;
+    skos:closeMatch gist_linkml:Component ;
     skos:definition "Specification of a single field in an API model." ;
     skos:inScheme <https://w3id.org/lmodel/mellea> ;
     skos:relatedMatch spdx:DictionaryEntry .
@@ -905,64 +916,65 @@ mellea:ApiFieldSpec a owl:Class ;
 mellea:BackendSpec a owl:Class ;
     rdfs:label "BackendSpec" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty mellea:backend_family ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:supports_tool_calls ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty mellea:supports_multimodal ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty mellea:model_options_key ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty mellea:default_formatter ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty mellea:model_identifier ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:boolean ;
-            owl:onProperty mellea:supports_multimodal ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:boolean ;
-            owl:onProperty mellea:supports_tool_calls ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:supports_multimodal ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mellea:FormatterSpec ;
-            owl:onProperty mellea:default_formatter ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:default_formatter ],
         [ a owl:Restriction ;
             owl:allValuesFrom mellea:BackendFamilyEnum ;
             owl:onProperty mellea:backend_family ],
         [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:supports_multimodal ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
+            owl:onProperty mellea:supports_multimodal ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty mellea:supports_multimodal ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:model_options_key ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:FormatterSpec ;
+            owl:onProperty mellea:default_formatter ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:supports_tool_calls ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:model_options_key ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:backend_family ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
+            owl:onProperty mellea:supports_tool_calls ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:supports_tool_calls ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:default_formatter ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:supports_streaming ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:supports_streaming ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:backend_family ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
             owl:onProperty mellea:supports_streaming ],
         [ a owl:Restriction ;
             owl:allValuesFrom mellea:ModelIdentifierSpec ;
             owl:onProperty mellea:model_identifier ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:supports_streaming ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty mellea:supports_tool_calls ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:backend_family ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:model_options_key ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:boolean ;
-            owl:onProperty mellea:supports_streaming ],
+            owl:onProperty mellea:default_formatter ],
         mellea:ModelElement ;
-    skos:closeMatch nexus:AiProvider ;
+    skos:closeMatch nexus:AiProvider,
+        gist_linkml:Specification ;
     skos:definition "Specification of a Mellea backend implementation." ;
     skos:inScheme <https://w3id.org/lmodel/mellea> ;
     skos:relatedMatch nexus:AiSystem,
@@ -971,33 +983,34 @@ mellea:BackendSpec a owl:Class ;
 mellea:ContextSpec a owl:Class ;
     rdfs:label "ContextSpec" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:boolean ;
+            owl:minCardinality 0 ;
             owl:onProperty mellea:stores_component_history ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty mellea:accepts_message_attachments ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 0 ;
             owl:onProperty mellea:context_linearity ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
             owl:onProperty mellea:stores_component_history ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty mellea:context_linearity ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:boolean ;
             owl:onProperty mellea:accepts_message_attachments ],
         [ a owl:Restriction ;
             owl:allValuesFrom mellea:ContextLinearityEnum ;
             owl:onProperty mellea:context_linearity ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:accepts_message_attachments ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty mellea:context_linearity ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
             owl:onProperty mellea:stores_component_history ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:boolean ;
+            owl:onProperty mellea:accepts_message_attachments ],
         mellea:ModelElement ;
+    skos:closeMatch gist_linkml:Specification ;
     skos:definition "Specification of a context implementation." ;
     skos:inScheme <https://w3id.org/lmodel/mellea> ;
     skos:relatedMatch nexus:AiLifecyclePhase .
@@ -1005,6 +1018,7 @@ mellea:ContextSpec a owl:Class ;
 mellea:FormatterSpec a owl:Class ;
     rdfs:label "FormatterSpec" ;
     rdfs:subClassOf mellea:ModelElement ;
+    skos:closeMatch gist_linkml:Specification ;
     skos:definition "Specification of an output formatter for a backend." ;
     skos:inScheme <https://w3id.org/lmodel/mellea> ;
     skos:relatedMatch nexus:Modality,
@@ -1016,16 +1030,16 @@ mellea:HookPayloadSpec a owl:Class ;
             owl:minCardinality 0 ;
             owl:onProperty mellea:lifecycle_role ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:hook_type ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty mellea:lifecycle_role ],
-        [ a owl:Restriction ;
             owl:allValuesFrom mellea:HookTypeEnum ;
             owl:onProperty mellea:hook_type ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty mellea:lifecycle_role ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:hook_type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty mellea:lifecycle_role ],
         mellea:ModelElement ;
     skos:definition "Specification of a hook payload model." ;
@@ -1033,99 +1047,102 @@ mellea:HookPayloadSpec a owl:Class ;
     skos:relatedMatch nexus:Fact,
         spdx:Annotation,
         attack:DataComponent,
+        gist_linkml:ContentExpression,
         iso27001:InformationSecurityEvent,
         mcp:MetaObject .
 
 mellea:MethodSpec a owl:Class ;
     rdfs:label "MethodSpec" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:method_signature ],
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:method_name ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty mellea:method_name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:method_signature ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:lifecycle_role ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:method_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:method_signature ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:method_signature ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty mellea:lifecycle_role ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty mellea:method_name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:method_name ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty mellea:method_signature ],
-        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty mellea:lifecycle_role ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty mellea:method_signature ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty mellea:lifecycle_role ],
         mellea:NamedElement ;
     skos:definition "Specification of a method exposed by a runtime class." ;
-    skos:inScheme <https://w3id.org/lmodel/mellea> .
+    skos:inScheme <https://w3id.org/lmodel/mellea> ;
+    skos:relatedMatch gist_linkml:Behavior .
 
 mellea:ModelIdentifierSpec a owl:Class ;
     rdfs:label "ModelIdentifierSpec" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty mellea:openai_name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty mellea:hf_model_name ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty mellea:bedrock_name ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty mellea:hf_model_name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty mellea:provider_name ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty mellea:hf_model_name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:bedrock_name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:ollama_name ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty mellea:provider_name ],
         [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:watsonx_name ],
+        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty mellea:ollama_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:bedrock_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:openai_name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:provider_name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:openai_name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:hf_model_name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:openai_name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:watsonx_name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:watsonx_name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:bedrock_name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:hf_model_name ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty mellea:bedrock_name ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty mellea:watsonx_name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:openai_name ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty mellea:ollama_name ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty mellea:watsonx_name ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty mellea:watsonx_name ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty mellea:openai_name ],
+            owl:onProperty mellea:ollama_name ],
         mellea:NamedElement ;
     skos:closeMatch nexus:AiModel,
         nexus:LargeLanguageModel,
-        spdx:AIPackage ;
+        spdx:AIPackage,
+        gist_linkml:ID ;
     skos:definition "Cross-provider identifier table for a single model." ;
     skos:inScheme <https://w3id.org/lmodel/mellea> ;
     skos:relatedMatch nexus:ModelInfo,
@@ -1135,28 +1152,29 @@ mellea:ModelIdentifierSpec a owl:Class ;
 mellea:PythonPackage a owl:Class ;
     rdfs:label "PythonPackage" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
+            owl:minCardinality 0 ;
             owl:onProperty mellea:package_name ],
         [ a owl:Restriction ;
-            owl:allValuesFrom mellea:PythonPackage ;
+            owl:minCardinality 0 ;
             owl:onProperty mellea:depends_on_package ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:package_name ],
         [ a owl:Restriction ;
             owl:allValuesFrom mellea:ModelElement ;
             owl:onProperty mellea:declares_element ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty mellea:package_name ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty mellea:package_name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty mellea:declares_element ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom mellea:PythonPackage ;
             owl:onProperty mellea:depends_on_package ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:package_name ],
         mellea:NamedElement ;
-    skos:closeMatch spdx:Package ;
+    skos:closeMatch spdx:Package,
+        gist_linkml:Composite ;
     skos:definition "A logical Python package (directory) inside the repository." ;
     skos:inScheme <https://w3id.org/lmodel/mellea> ;
     skos:narrowMatch nexus:Entity ;
@@ -1459,14 +1477,11 @@ mellea:hook_type a owl:ObjectProperty ;
 mellea:ApiModelSpec a owl:Class ;
     rdfs:label "ApiModelSpec" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:has_field ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty mellea:openai_object_type ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty mellea:request_or_response ],
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:openai_object_type ],
         [ a owl:Restriction ;
             owl:allValuesFrom mellea:RequestResponseEnum ;
             owl:onProperty mellea:request_or_response ],
@@ -1474,15 +1489,19 @@ mellea:ApiModelSpec a owl:Class ;
             owl:allValuesFrom mellea:ApiFieldSpec ;
             owl:onProperty mellea:has_field ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty mellea:openai_object_type ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty mellea:has_field ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:request_or_response ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty mellea:openai_object_type ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty mellea:request_or_response ],
         mellea:ModelElement ;
+    skos:closeMatch gist_linkml:Specification ;
     skos:definition "Specification of an HTTP API wire model." ;
     skos:inScheme <https://w3id.org/lmodel/mellea> ;
     skos:relatedMatch nexus:Input,
@@ -1525,82 +1544,83 @@ mellea:NamedElement a owl:Class ;
     rdfs:label "NamedElement" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty mellea:source_file ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty mellea:module_path ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:anyURI ;
-            owl:onProperty mellea:id ],
-        [ owl:unionOf ( mellea:ApiFieldSpec mellea:IntrinsicAdapterSpec mellea:MethodSpec mellea:ModelElement mellea:ModelIdentifierSpec mellea:PythonPackage mellea:RepositoryCatalog ) ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty mellea:name ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty mellea:package_kind ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty mellea:id ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty mellea:name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:tags ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty mellea:description ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:package_kind ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty mellea:tags ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty mellea:description ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mellea:ElementKindEnum ;
-            owl:onProperty mellea:element_kind ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty mellea:source_file ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty mellea:name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mellea:PackageKindEnum ;
-            owl:onProperty mellea:package_kind ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty mellea:element_kind ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:element_kind ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:module_path ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty mellea:module_path ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty mellea:coverage_scope ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty mellea:id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty mellea:source_file ],
         [ a owl:Restriction ;
             owl:allValuesFrom mellea:CoverageScopeEnum ;
             owl:onProperty mellea:coverage_scope ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty mellea:description ] ;
+            owl:onProperty mellea:source_file ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:coverage_scope ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:tags ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:anyURI ;
+            owl:onProperty mellea:id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty mellea:id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:source_file ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:element_kind ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:tags ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty mellea:module_path ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:module_path ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:package_kind ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:source_file ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:element_kind ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty mellea:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty mellea:module_path ],
+        [ owl:unionOf ( mellea:ApiFieldSpec mellea:IntrinsicAdapterSpec mellea:MethodSpec mellea:ModelElement mellea:ModelIdentifierSpec mellea:PythonPackage mellea:RepositoryCatalog ) ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:PackageKindEnum ;
+            owl:onProperty mellea:package_kind ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mellea:ElementKindEnum ;
+            owl:onProperty mellea:element_kind ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty mellea:name ] ;
     skos:closeMatch nexus:Entity,
         spdx:Element,
+        gist_linkml:GistThing,
         iso27001:NamedEntity ;
     skos:definition "Abstract base for any named, identifiable schema element." ;
     skos:inScheme <https://w3id.org/lmodel/mellea> ;
@@ -1687,6 +1707,7 @@ mellea:ModelElement a owl:Class ;
     rdfs:label "ModelElement" ;
     rdfs:subClassOf [ owl:unionOf ( mellea:ApiModelSpec mellea:BackendSpec mellea:CliCommandSpec mellea:ComponentSpec mellea:ContextSpec mellea:FormatterSpec mellea:HookPayloadSpec mellea:PluginSpec mellea:RequirementSpec mellea:SamplingStrategySpec mellea:SessionSpec mellea:TelemetryMetricSpec ) ],
         mellea:NamedElement ;
+    skos:broadMatch gist_linkml:Specification ;
     skos:definition "Abstract base for concrete architectural elements." ;
     skos:inScheme <https://w3id.org/lmodel/mellea> ;
     skos:relatedMatch spdx:Element,

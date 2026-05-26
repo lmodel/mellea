@@ -48,9 +48,8 @@ ID_TYPES = {
     "IntrinsicAdapterSpec": "str",
 }
 
- # metamodel_version: 1.11.0
-# version: 2026-05-26
-class NamedElement(pla.DataFrameModel, _LinkmlPanderaValidator):
+# metamodel_version: 1.11.0
+# version: 2026-05-26class NamedElement(pla.DataFrameModel, _LinkmlPanderaValidator):
     """
     Abstract base for any named, identifiable schema element.
     """

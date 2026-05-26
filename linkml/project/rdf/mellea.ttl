@@ -14,30 +14,36 @@
     pav:version "2026-05-26" ;
     rdfs:seeAlso "https://github.com/lmodel/mellea"^^xsd:anyURI,
         "https://lmodel.github.io/mellea"^^xsd:anyURI ;
-    sh:declare [ sh:namespace "https://w3id.org/lmodel/mcp/"^^xsd:anyURI ;
-            sh:prefix "mcp" ],
-        [ sh:namespace "https://spdx.org/rdf/3.0.1/terms/"^^xsd:anyURI ;
-            sh:prefix "spdx" ],
-        [ sh:namespace "https://w3id.org/lmodel/mellea/"^^xsd:anyURI ;
-            sh:prefix "mellea" ],
-        [ sh:namespace "https://w3id.org/lmodel/common-domain-model/"^^xsd:anyURI ;
+    sh:declare [ sh:namespace "https://w3id.org/lmodel/common-domain-model/"^^xsd:anyURI ;
             sh:prefix "common_domain_model" ],
-        [ sh:namespace "http://purl.org/dc/terms/"^^xsd:anyURI ;
-            sh:prefix "dcterms" ],
         [ sh:namespace "https://ibm.github.io/ai-atlas-nexus/ontology/"^^xsd:anyURI ;
             sh:prefix "nexus" ],
+        [ sh:namespace "https://w3id.org/lmodel/mellea/"^^xsd:anyURI ;
+            sh:prefix "mellea" ],
         [ sh:namespace "https://w3id.org/lmodel/attack/"^^xsd:anyURI ;
             sh:prefix "attack" ],
-        [ sh:namespace "http://schema.org/"^^xsd:anyURI ;
-            sh:prefix "schema" ],
+        [ sh:namespace "https://w3id.org/lmodel/gist/"^^xsd:anyURI ;
+            sh:prefix "gist_linkml" ],
+        [ sh:namespace "https://w3id.org/lmodel/mcp/"^^xsd:anyURI ;
+            sh:prefix "mcp" ],
+        [ sh:namespace "http://purl.org/dc/terms/"^^xsd:anyURI ;
+            sh:prefix "dcterms" ],
+        [ sh:namespace "https://w3id.org/linkml/"^^xsd:anyURI ;
+            sh:prefix "linkml" ],
+        [ sh:namespace "https://spdx.org/rdf/3.0.1/terms/"^^xsd:anyURI ;
+            sh:prefix "spdx" ],
         [ sh:namespace "https://w3id.org/lmodel/iso27001/"^^xsd:anyURI ;
             sh:prefix "iso27001" ],
-        [ sh:namespace "https://w3id.org/linkml/"^^xsd:anyURI ;
-            sh:prefix "linkml" ] ;
-    linkml:annotations [ skos:example "2026-05-26" ;
-            linkml:tag "generated_on"^^xsd:anyURI ],
+        [ sh:namespace "http://schema.org/"^^xsd:anyURI ;
+            sh:prefix "schema" ] ;
+    linkml:annotations [ skos:example "mellea+cli (linkml/ excluded)" ;
+            linkml:tag "analyzed_scope"^^xsd:anyURI ],
         [ skos:example "core-library-and-cli" ;
             linkml:tag "coverage_target"^^xsd:anyURI ],
+        [ skos:example "linkml/scripts/schema_to_linkml.py" ;
+            linkml:tag "generated_by"^^xsd:anyURI ],
+        [ skos:example "2026-05-26" ;
+            linkml:tag "generated_on"^^xsd:anyURI ],
         [ skos:example """cli: total=86 (CLASS=42 DATACLASS=5 ENUM=4 PYDANTIC_MODEL=20 TYPED_DICT=15)
 mellea/backends: total=28 (CLASS=22 DATACLASS=2 ENUM=1 MIXIN=1 PYDANTIC_MODEL=2)
 mellea/core: total=27 (CLASS=20 DATACLASS=5 ENUM=1 PROTOCOL=1)
@@ -47,11 +53,7 @@ mellea/plugins: total=32 (CLASS=28 DATACLASS=2 ENUM=2)
 mellea/stdlib: total=69 (CLASS=50 DATACLASS=10 ENUM=1 PROTOCOL=2 PYDANTIC_MODEL=4 TYPED_DICT=2)
 mellea/telemetry: total=11 (CLASS=11)
 enum_total: 11""" ;
-            linkml:tag "coverage_inventory"^^xsd:anyURI ],
-        [ skos:example "linkml/scripts/schema_to_linkml.py" ;
-            linkml:tag "generated_by"^^xsd:anyURI ],
-        [ skos:example "mellea+cli (linkml/ excluded)" ;
-            linkml:tag "analyzed_scope"^^xsd:anyURI ] ;
+            linkml:tag "coverage_inventory"^^xsd:anyURI ] ;
     linkml:classes <https://w3id.org/lmodel/mellea/ApiFieldSpec>,
         <https://w3id.org/lmodel/mellea/ApiModelSpec>,
         <https://w3id.org/lmodel/mellea/BackendSpec>,
@@ -85,7 +87,7 @@ enum_total: 11""" ;
         <https://w3id.org/lmodel/mellea/PackageKindEnum>,
         <https://w3id.org/lmodel/mellea/PluginModeEnum>,
         <https://w3id.org/lmodel/mellea/RequestResponseEnum> ;
-    linkml:generation_date "2026-05-26T15:01:35"^^xsd:dateTime ;
+    linkml:generation_date "2026-05-26T21:03:35"^^xsd:dateTime ;
     linkml:id "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
     linkml:imports "linkml:types"^^xsd:anyURI ;
     linkml:metamodel_version "1.11.0" ;
@@ -155,8 +157,8 @@ enum_total: 11""" ;
         <https://w3id.org/lmodel/mellea/validation_style>,
         <https://w3id.org/lmodel/mellea/watsonx_name> ;
     linkml:source_file "mellea.yaml" ;
-    linkml:source_file_date "2026-05-26T14:24:23"^^xsd:dateTime ;
-    linkml:source_file_size 25242 ;
+    linkml:source_file_date "2026-05-26T21:03:09"^^xsd:dateTime ;
+    linkml:source_file_size 26172 ;
     linkml:subsets <https://w3id.org/lmodel/mellea/core_runtime>,
         <https://w3id.org/lmodel/mellea/interface_surface>,
         <https://w3id.org/lmodel/mellea/observability> ;
@@ -630,6 +632,7 @@ enum_total: 11""" ;
 
 <https://w3id.org/lmodel/mellea/FormatterSpec> a linkml:ClassDefinition ;
     OIO:inSubset <https://w3id.org/lmodel/mellea/core_runtime> ;
+    skos:closeMatch "gist_linkml:Specification"^^xsd:anyURI ;
     skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
     skos:relatedMatch "mcp:ContentBlock"^^xsd:anyURI,
         "nexus:Modality"^^xsd:anyURI ;
@@ -1235,6 +1238,7 @@ enum_total: 11""" ;
         "nexus:MetricConfig"^^xsd:anyURI ;
     skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
     skos:relatedMatch "attack:DataSource"^^xsd:anyURI,
+        "gist_linkml:Magnitude"^^xsd:anyURI,
         "iso27001:MonitoringProgram"^^xsd:anyURI,
         "nexus:AiEval"^^xsd:anyURI,
         "spdx:AIPackage"^^xsd:anyURI ;
@@ -1310,6 +1314,7 @@ enum_total: 11""" ;
 
 <https://w3id.org/lmodel/mellea/RequirementSpec> a linkml:ClassDefinition ;
     OIO:inSubset <https://w3id.org/lmodel/mellea/core_runtime> ;
+    skos:closeMatch "gist_linkml:Requirement"^^xsd:anyURI ;
     skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
     skos:relatedMatch "iso27001:InformationSecurityObjective"^^xsd:anyURI,
         "iso27001:SecurityControl"^^xsd:anyURI,
@@ -1341,6 +1346,7 @@ enum_total: 11""" ;
     OIO:inSubset <https://w3id.org/lmodel/mellea/observability> ;
     skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
     skos:relatedMatch "attack:DataComponent"^^xsd:anyURI,
+        "gist_linkml:ContentExpression"^^xsd:anyURI,
         "iso27001:InformationSecurityEvent"^^xsd:anyURI,
         "mcp:MetaObject"^^xsd:anyURI,
         "nexus:Fact"^^xsd:anyURI,
@@ -1368,7 +1374,8 @@ enum_total: 11""" ;
         "nexus:LLMIntrinsic"^^xsd:anyURI,
         "spdx:AIPackage"^^xsd:anyURI ;
     skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
-    skos:relatedMatch "spdx:Relationship"^^xsd:anyURI ;
+    skos:relatedMatch "gist_linkml:Component"^^xsd:anyURI,
+        "spdx:Relationship"^^xsd:anyURI ;
     linkml:class_uri "https://w3id.org/lmodel/mellea/IntrinsicAdapterSpec"^^xsd:anyURI ;
     linkml:definition_uri "https://w3id.org/lmodel/mellea/IntrinsicAdapterSpec"^^xsd:anyURI ;
     linkml:description "Specification of an intrinsic adapter (LoRA / aLoRA)." ;
@@ -1398,7 +1405,8 @@ enum_total: 11""" ;
     OIO:inSubset <https://w3id.org/lmodel/mellea/core_runtime> ;
     skos:closeMatch "mcp:SamplingCapability"^^xsd:anyURI ;
     skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
-    skos:relatedMatch "mcp:ModelPreferences"^^xsd:anyURI,
+    skos:relatedMatch "gist_linkml:Behavior"^^xsd:anyURI,
+        "mcp:ModelPreferences"^^xsd:anyURI,
         "nexus:Action"^^xsd:anyURI ;
     linkml:class_uri "https://w3id.org/lmodel/mellea/SamplingStrategySpec"^^xsd:anyURI ;
     linkml:definition_uri "https://w3id.org/lmodel/mellea/SamplingStrategySpec"^^xsd:anyURI ;
@@ -1421,7 +1429,8 @@ enum_total: 11""" ;
 <https://w3id.org/lmodel/mellea/SessionSpec> a linkml:ClassDefinition ;
     OIO:inSubset <https://w3id.org/lmodel/mellea/core_runtime> ;
     skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
-    skos:relatedMatch "iso27001:RiskAssessmentProcess"^^xsd:anyURI,
+    skos:relatedMatch "gist_linkml:Task"^^xsd:anyURI,
+        "iso27001:RiskAssessmentProcess"^^xsd:anyURI,
         "mcp:Task"^^xsd:anyURI,
         "nexus:AiTask"^^xsd:anyURI ;
     linkml:class_uri "https://w3id.org/lmodel/mellea/SessionSpec"^^xsd:anyURI ;
@@ -1444,7 +1453,8 @@ enum_total: 11""" ;
 
 <https://w3id.org/lmodel/mellea/ComponentSpec> a linkml:ClassDefinition ;
     OIO:inSubset <https://w3id.org/lmodel/mellea/core_runtime> ;
-    skos:closeMatch "mcp:Tool"^^xsd:anyURI,
+    skos:closeMatch "gist_linkml:Component"^^xsd:anyURI,
+        "mcp:Tool"^^xsd:anyURI,
         "nexus:AIComponent"^^xsd:anyURI ;
     skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
     linkml:class_uri "https://w3id.org/lmodel/mellea/ComponentSpec"^^xsd:anyURI ;
@@ -1467,6 +1477,7 @@ enum_total: 11""" ;
 
 <https://w3id.org/lmodel/mellea/ContextSpec> a linkml:ClassDefinition ;
     OIO:inSubset <https://w3id.org/lmodel/mellea/core_runtime> ;
+    skos:closeMatch "gist_linkml:Specification"^^xsd:anyURI ;
     skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
     skos:relatedMatch "nexus:AiLifecyclePhase"^^xsd:anyURI ;
     linkml:class_uri "https://w3id.org/lmodel/mellea/ContextSpec"^^xsd:anyURI ;
@@ -1490,6 +1501,7 @@ enum_total: 11""" ;
 <https://w3id.org/lmodel/mellea/MethodSpec> a linkml:ClassDefinition ;
     OIO:inSubset <https://w3id.org/lmodel/mellea/core_runtime> ;
     skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
+    skos:relatedMatch "gist_linkml:Behavior"^^xsd:anyURI ;
     linkml:class_uri "https://w3id.org/lmodel/mellea/MethodSpec"^^xsd:anyURI ;
     linkml:definition_uri "https://w3id.org/lmodel/mellea/MethodSpec"^^xsd:anyURI ;
     linkml:description "Specification of a method exposed by a runtime class." ;
@@ -1513,6 +1525,7 @@ enum_total: 11""" ;
     skos:closeMatch "spdx:Extension"^^xsd:anyURI ;
     skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
     skos:relatedMatch "attack:Analytic"^^xsd:anyURI,
+        "gist_linkml:Component"^^xsd:anyURI,
         "iso27001:OperationalProcedure"^^xsd:anyURI,
         "mcp:ExtensionAppCapability"^^xsd:anyURI,
         "nexus:AIComponent"^^xsd:anyURI ;
@@ -1536,7 +1549,8 @@ enum_total: 11""" ;
         <https://w3id.org/lmodel/mellea/tags> .
 
 <https://w3id.org/lmodel/mellea/PythonPackage> a linkml:ClassDefinition ;
-    skos:closeMatch "spdx:Package"^^xsd:anyURI ;
+    skos:closeMatch "gist_linkml:Composite"^^xsd:anyURI,
+        "spdx:Package"^^xsd:anyURI ;
     skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
     skos:narrowMatch "nexus:Entity"^^xsd:anyURI ;
     skos:relatedMatch "common_domain_model:Position"^^xsd:anyURI ;
@@ -1565,6 +1579,7 @@ enum_total: 11""" ;
 
 <https://w3id.org/lmodel/mellea/ApiModelSpec> a linkml:ClassDefinition ;
     OIO:inSubset <https://w3id.org/lmodel/mellea/interface_surface> ;
+    skos:closeMatch "gist_linkml:Specification"^^xsd:anyURI ;
     skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
     skos:relatedMatch "mcp:JSONRPCRequest"^^xsd:anyURI,
         "mcp:JSONRPCResponse"^^xsd:anyURI,
@@ -1605,6 +1620,7 @@ enum_total: 11""" ;
 
 <https://w3id.org/lmodel/mellea/ApiFieldSpec> a linkml:ClassDefinition ;
     OIO:inSubset <https://w3id.org/lmodel/mellea/interface_surface> ;
+    skos:closeMatch "gist_linkml:Component"^^xsd:anyURI ;
     skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
     skos:relatedMatch "spdx:DictionaryEntry"^^xsd:anyURI ;
     linkml:class_uri "https://w3id.org/lmodel/mellea/ApiFieldSpec"^^xsd:anyURI ;
@@ -1628,7 +1644,8 @@ enum_total: 11""" ;
 
 <https://w3id.org/lmodel/mellea/RepositoryCatalog> a linkml:ClassDefinition ;
     OIO:inSubset <https://w3id.org/lmodel/mellea/interface_surface> ;
-    skos:closeMatch "spdx:Sbom"^^xsd:anyURI ;
+    skos:closeMatch "gist_linkml:Collection"^^xsd:anyURI,
+        "spdx:Sbom"^^xsd:anyURI ;
     skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
     skos:relatedMatch "attack:AttackBundle"^^xsd:anyURI,
         "common_domain_model:Portfolio"^^xsd:anyURI,
@@ -1659,6 +1676,7 @@ enum_total: 11""" ;
 
 <https://w3id.org/lmodel/mellea/CliCommandSpec> a linkml:ClassDefinition ;
     OIO:inSubset <https://w3id.org/lmodel/mellea/interface_surface> ;
+    skos:closeMatch "gist_linkml:TaskTemplate"^^xsd:anyURI ;
     skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
     skos:relatedMatch "attack:Tool"^^xsd:anyURI,
         "iso27001:OperationalProcedure"^^xsd:anyURI,
@@ -1684,6 +1702,7 @@ enum_total: 11""" ;
         <https://w3id.org/lmodel/mellea/tags> .
 
 <https://w3id.org/lmodel/mellea/ModelElement> a linkml:ClassDefinition ;
+    skos:broadMatch "gist_linkml:Specification"^^xsd:anyURI ;
     skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
     skos:relatedMatch "common_domain_model:ContractBase"^^xsd:anyURI,
         "spdx:Element"^^xsd:anyURI ;
@@ -1705,7 +1724,8 @@ enum_total: 11""" ;
 
 <https://w3id.org/lmodel/mellea/ModelIdentifierSpec> a linkml:ClassDefinition ;
     OIO:inSubset <https://w3id.org/lmodel/mellea/interface_surface> ;
-    skos:closeMatch "nexus:AiModel"^^xsd:anyURI,
+    skos:closeMatch "gist_linkml:ID"^^xsd:anyURI,
+        "nexus:AiModel"^^xsd:anyURI,
         "nexus:LargeLanguageModel"^^xsd:anyURI,
         "spdx:AIPackage"^^xsd:anyURI ;
     skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
@@ -1736,7 +1756,8 @@ enum_total: 11""" ;
 <https://w3id.org/lmodel/mellea/BackendSpec> a linkml:ClassDefinition ;
     OIO:inSubset <https://w3id.org/lmodel/mellea/core_runtime>,
         <https://w3id.org/lmodel/mellea/interface_surface> ;
-    skos:closeMatch "nexus:AiProvider"^^xsd:anyURI ;
+    skos:closeMatch "gist_linkml:Specification"^^xsd:anyURI,
+        "nexus:AiProvider"^^xsd:anyURI ;
     skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;
     skos:relatedMatch "mcp:Implementation"^^xsd:anyURI,
         "nexus:AiSystem"^^xsd:anyURI ;
@@ -1852,7 +1873,8 @@ enum_total: 11""" ;
     linkml:slot_uri "https://w3id.org/lmodel/mellea/tags"^^xsd:anyURI .
 
 <https://w3id.org/lmodel/mellea/NamedElement> a linkml:ClassDefinition ;
-    skos:closeMatch "iso27001:NamedEntity"^^xsd:anyURI,
+    skos:closeMatch "gist_linkml:GistThing"^^xsd:anyURI,
+        "iso27001:NamedEntity"^^xsd:anyURI,
         "nexus:Entity"^^xsd:anyURI,
         "spdx:Element"^^xsd:anyURI ;
     skos:inScheme "https://w3id.org/lmodel/mellea"^^xsd:anyURI ;

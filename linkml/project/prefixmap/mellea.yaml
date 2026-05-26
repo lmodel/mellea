@@ -2,6 +2,7 @@
    "attack": "https://w3id.org/lmodel/attack/",
    "common_domain_model": "https://w3id.org/lmodel/common-domain-model/",
    "dcterms": "http://purl.org/dc/terms/",
+   "gist_linkml": "https://w3id.org/lmodel/gist/",
    "iso27001": "https://w3id.org/lmodel/iso27001/",
    "linkml": "https://w3id.org/linkml/",
    "mcp": "https://w3id.org/lmodel/mcp/",

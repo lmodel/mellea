@@ -1,0 +1,37 @@
+# mapping_set_id: https://w3id.org/lmodel/mellea/mappings/mellea-to-gist
+# mapping_set_title: Mellea LinkML schema to gist (LinkML port) entity mappings
+# mapping_set_description: SSSOM mappings from mellea LinkML schema classes (https://w3id.org/lmodel/mellea/) to the gist 14.1.0 LinkML port (https://w3id.org/lmodel/gist/). The gist_linkml prefix points to the lmodel LinkML port of gist to avoid collision with the upstream Semantic Arts namespace (gist_upstream).
+# mapping_set_version: 2026-05-26
+# license: https://creativecommons.org/licenses/by/4.0/
+# mapping_provider: https://github.com/lmodel/mellea
+# mapping_tool: manual curation against mellea/schema/mellea.yaml and mappings/gist/gist_core.yaml (gist 14.1.0)
+# subject_source: https://w3id.org/lmodel/mellea/
+# subject_source_version: 2026-05-26
+# object_source: https://w3id.org/lmodel/gist/
+# object_source_version: 14.1.0
+# curie_map:
+#   mellea: https://w3id.org/lmodel/mellea/
+#   gist_linkml: https://w3id.org/lmodel/gist/
+#   skos: http://www.w3.org/2004/02/skos/core#
+#   semapv: https://w3id.org/semapv/vocab/
+subject_id	subject_label	predicate_id	object_id	object_label	mapping_justification	object_source	comment
+mellea:NamedElement	NamedElement	skos:closeMatch	gist_linkml:GistThing	GistThing	semapv:LLMBasedMatching	https://w3id.org/lmodel/gist/	Both serve as the abstract top-of-hierarchy class with stable identity.
+mellea:RepositoryCatalog	RepositoryCatalog	skos:closeMatch	gist_linkml:Collection	Collection	semapv:LLMBasedMatching	https://w3id.org/lmodel/gist/	RepositoryCatalog is a tree-root grouping of declared model elements; aligns with gist:Collection (a grouping of items). Existing close_mappings already include spdx:Sbom.
+mellea:PythonPackage	PythonPackage	skos:closeMatch	gist_linkml:Composite	Composite	semapv:LLMBasedMatching	https://w3id.org/lmodel/gist/	A PythonPackage is a logical container that declares constituent ModelElements; aligns with gist:Composite (something composed of parts).
+mellea:ModelElement	ModelElement	skos:broadMatch	gist_linkml:Specification	Specification	semapv:LLMBasedMatching	https://w3id.org/lmodel/gist/	Abstract base for all *Spec classes; broader than gist:Specification because it also covers non-specification element kinds.
+mellea:BackendSpec	BackendSpec	skos:closeMatch	gist_linkml:Specification	Specification	semapv:LLMBasedMatching	https://w3id.org/lmodel/gist/	BackendSpec specifies a backend implementation; structurally a Specification.
+mellea:FormatterSpec	FormatterSpec	skos:closeMatch	gist_linkml:Specification	Specification	semapv:LLMBasedMatching	https://w3id.org/lmodel/gist/	FormatterSpec specifies an output formatter; structurally a Specification.
+mellea:ContextSpec	ContextSpec	skos:closeMatch	gist_linkml:Specification	Specification	semapv:LLMBasedMatching	https://w3id.org/lmodel/gist/	ContextSpec specifies a context implementation; structurally a Specification.
+mellea:SessionSpec	SessionSpec	skos:relatedMatch	gist_linkml:Task	Task	semapv:LLMBasedMatching	https://w3id.org/lmodel/gist/	A Mellea session is a unit of work executed by a backend; related to gist:Task. Existing related_mappings already include mcp:Task and iso27001:RiskAssessmentProcess.
+mellea:ComponentSpec	ComponentSpec	skos:closeMatch	gist_linkml:Component	Component	semapv:LLMBasedMatching	https://w3id.org/lmodel/gist/	Lexical and conceptual alignment: a stdlib Component is a part that participates in a session/composite.
+mellea:RequirementSpec	RequirementSpec	skos:closeMatch	gist_linkml:Requirement	Requirement	semapv:LLMBasedMatching	https://w3id.org/lmodel/gist/	Direct lexical and conceptual alignment of the requirement notion.
+mellea:SamplingStrategySpec	SamplingStrategySpec	skos:relatedMatch	gist_linkml:Behavior	Behavior	semapv:LLMBasedMatching	https://w3id.org/lmodel/gist/	A sampling strategy expresses runtime behavior; related to gist:Behavior.
+mellea:PluginSpec	PluginSpec	skos:relatedMatch	gist_linkml:Component	Component	semapv:LLMBasedMatching	https://w3id.org/lmodel/gist/	A plugin is a pluggable Component registered against hook lifecycle stages; relation rather than equivalence.
+mellea:HookPayloadSpec	HookPayloadSpec	skos:relatedMatch	gist_linkml:ContentExpression	ContentExpression	semapv:LLMBasedMatching	https://w3id.org/lmodel/gist/	A hook payload model is a structured content expression carried through lifecycle events.
+mellea:TelemetryMetricSpec	TelemetryMetricSpec	skos:relatedMatch	gist_linkml:Magnitude	Magnitude	semapv:LLMBasedMatching	https://w3id.org/lmodel/gist/	A telemetry metric describes a measurable magnitude; mellea-side close_mappings to nexus:MetricConfig and iso27001:MonitoringItem already exist.
+mellea:CliCommandSpec	CliCommandSpec	skos:closeMatch	gist_linkml:TaskTemplate	TaskTemplate	semapv:LLMBasedMatching	https://w3id.org/lmodel/gist/	A CLI command specification acts as a template for an invocation task; gist:TaskTemplate is the closer specialization of Specification.
+mellea:ApiModelSpec	ApiModelSpec	skos:closeMatch	gist_linkml:Specification	Specification	semapv:LLMBasedMatching	https://w3id.org/lmodel/gist/	ApiModelSpec defines an HTTP API wire model; structurally a Specification with fields.
+mellea:ApiFieldSpec	ApiFieldSpec	skos:closeMatch	gist_linkml:Component	Component	semapv:LLMBasedMatching	https://w3id.org/lmodel/gist/	An API field is a constituent part of an ApiModelSpec; aligns with gist:Component.
+mellea:MethodSpec	MethodSpec	skos:relatedMatch	gist_linkml:Behavior	Behavior	semapv:LLMBasedMatching	https://w3id.org/lmodel/gist/	A method describes invocable runtime behavior of a class.
+mellea:ModelIdentifierSpec	ModelIdentifierSpec	skos:closeMatch	gist_linkml:ID	ID	semapv:LLMBasedMatching	https://w3id.org/lmodel/gist/	Cross-provider identifier table for a model; aligns with gist:ID (identifier concept).
+mellea:IntrinsicAdapterSpec	IntrinsicAdapterSpec	skos:relatedMatch	gist_linkml:Component	Component	semapv:LLMBasedMatching	https://w3id.org/lmodel/gist/	A LoRA/aLoRA adapter is a pluggable component attached to a base model.

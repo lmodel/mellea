@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Wrapper for linkml gen-rdf that strips unresolvable JSON-LD @context refs.
+"""Wrapper for linkml gen-rdf that strips unresolvable JSON-LD @context refs.
 
 CDM's schema is split across ~35 modules.  gen-jsonld embeds a relative context
 file reference per module (./cdm_base.context.jsonld, etc.) in the generated
@@ -27,14 +26,14 @@ from copy import deepcopy
 from dataclasses import dataclass
 
 import click
-from rdflib import Graph
-
-from linkml import LOCAL_METAMODEL_LDCONTEXT_FILE
 from linkml._version import __version__
 from linkml.generators.jsonldgen import JSONLDGenerator
 from linkml.generators.rdfgen import RDFGenerator
 from linkml.utils.generator import shared_arguments
 from linkml_runtime.linkml_model import SchemaDefinition
+from rdflib import Graph
+
+from linkml import LOCAL_METAMODEL_LDCONTEXT_FILE
 
 
 def _strip_unresolvable_context_refs(jsonld_str: str) -> str:
@@ -69,7 +68,10 @@ def _strip_unresolvable_context_refs(jsonld_str: str) -> str:
 class PatchedRDFGenerator(RDFGenerator):
     """RDFGenerator subclass that patches the JSON-LD before rdflib parsing."""
 
-    def end_schema(self, output: str | None = None, context: str = None, **_) -> str:
+    def end_schema(
+        self, output: str | None = None, context: str | None = None, **_
+    ) -> str:
+        """Emit the schema as RDF after patching the intermediate JSON-LD."""
         gen = JSONLDGenerator(
             self.original_schema,
             format=JSONLDGenerator.valid_formats[0],

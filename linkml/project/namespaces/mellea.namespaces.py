@@ -1,5 +1,5 @@
 # Auto generated from mellea.yaml by namespacegen.py version: 0.0.1
-# Generation date: 2026-05-26T15:01:26
+# Generation date: 2026-05-26T21:03:27
 # Schema: mellea
 #
 # id: https://w3id.org/lmodel/mellea
@@ -32,6 +32,7 @@ class BiolinkNameSpace:
         CurieNamespace('attack', 'https://w3id.org/lmodel/attack/'),
         CurieNamespace('common_domain_model', 'https://w3id.org/lmodel/common-domain-model/'),
         CurieNamespace('dcterms', 'http://purl.org/dc/terms/'),
+        CurieNamespace('gist_linkml', 'https://w3id.org/lmodel/gist/'),
         CurieNamespace('iso27001', 'https://w3id.org/lmodel/iso27001/'),
         CurieNamespace('linkml', 'https://w3id.org/linkml/'),
         CurieNamespace('mcp', 'https://w3id.org/lmodel/mcp/'),

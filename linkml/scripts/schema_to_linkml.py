@@ -42,7 +42,6 @@ from typing import Any
 
 import yaml
 
-
 # ---------------------------------------------------------------------------
 # Configuration (todo: consider https://linkml.io/valuesets/ integration)
 # ---------------------------------------------------------------------------
@@ -79,7 +78,7 @@ BACKEND_MODULE_TO_FAMILY: dict[str, str] = {
 
 # Enums that cannot be source-derived 1:1 (they are descriptive metamodel
 # enums).  Listed here to keep the schema self-contained.
-STATIC_ENUMS: "OrderedDict[str, dict]" = OrderedDict(
+STATIC_ENUMS: OrderedDict[str, dict] = OrderedDict(
     [
         (
             "PackageKindEnum",
@@ -178,9 +177,7 @@ STATIC_ENUMS: "OrderedDict[str, dict]" = OrderedDict(
                         ("RESPONSE", {"description": "Outbound response payload."}),
                         (
                             "BOTH",
-                            {
-                                "description": "Model used in both directions (rare)."
-                            },
+                            {"description": "Model used in both directions (rare)."},
                         ),
                     ]
                 ),
@@ -205,7 +202,14 @@ def upper_snake(name: str) -> str:
 # ---------------------------------------------------------------------------
 
 
-_ENUM_BASES = {"Enum", "StrEnum", "IntEnum", "enum.Enum", "enum.StrEnum", "enum.IntEnum"}
+_ENUM_BASES = {
+    "Enum",
+    "StrEnum",
+    "IntEnum",
+    "enum.Enum",
+    "enum.StrEnum",
+    "enum.IntEnum",
+}
 
 
 def _base_name(b: ast.expr) -> str:
@@ -254,8 +258,10 @@ def _enum_members(node: ast.ClassDef) -> list[tuple[str, str | None]]:
     for stmt in node.body:
         target = None
         value: ast.expr | None = None
-        if isinstance(stmt, ast.Assign) and len(stmt.targets) == 1 and isinstance(
-            stmt.targets[0], ast.Name
+        if (
+            isinstance(stmt, ast.Assign)
+            and len(stmt.targets) == 1
+            and isinstance(stmt.targets[0], ast.Name)
         ):
             target = stmt.targets[0].id
             value = stmt.value
@@ -325,10 +331,10 @@ def collect_inventory(repo_root: Path) -> dict:
     }
 
 
-def discover_backend_families(repo_root: Path) -> "OrderedDict[str, dict]":
+def discover_backend_families(repo_root: Path) -> OrderedDict[str, dict]:
     """Map filenames under ``mellea/backends/`` to BackendFamilyEnum members."""
     backends_dir = repo_root / "mellea" / "backends"
-    perm: "OrderedDict[str, dict]" = OrderedDict()
+    perm: OrderedDict[str, dict] = OrderedDict()
     if not backends_dir.is_dir():
         return perm
     for path in sorted(backends_dir.glob("*.py")):
@@ -344,6 +350,7 @@ def discover_backend_families(repo_root: Path) -> "OrderedDict[str, dict]":
 
 
 def find_enum(inv: dict, source_file: str, name: str) -> dict | None:
+    """Look up an enum's AST record in the inventory by source file and class name."""
     return inv["enums"].get(f"{source_file}::{name}")
 
 
@@ -355,7 +362,7 @@ def build_enum_from_source(
     Falls back to ``fallback_values`` when the source enum cannot be found
     (e.g. file renamed) so the schema remains generatable.
     """
-    perm: "OrderedDict[str, dict]" = OrderedDict()
+    perm: OrderedDict[str, dict] = OrderedDict()
     if enum_info and enum_info["members"]:
         for member, str_val in enum_info["members"]:
             body: dict[str, Any] = {"description": member.replace("_", " ").lower()}
@@ -378,9 +385,10 @@ def build_enum_from_source(
 # ---------------------------------------------------------------------------
 
 
-def build_header(repo_root: Path) -> "OrderedDict[str, Any]":
+def build_header(repo_root: Path) -> OrderedDict[str, Any]:
+    """Build the schema header block (id, name, description, prefixes, annotations)."""
     today = _dt.date.today().isoformat()
-    head: "OrderedDict[str, Any]" = OrderedDict()
+    head: OrderedDict[str, Any] = OrderedDict()
     head["id"] = "https://w3id.org/lmodel/mellea"
     head["name"] = "mellea"
     head["title"] = "mellea"
@@ -407,7 +415,7 @@ def build_header(repo_root: Path) -> "OrderedDict[str, Any]":
     return head
 
 
-PREFIXES: "OrderedDict[str, str]" = OrderedDict(
+PREFIXES: OrderedDict[str, str] = OrderedDict(
     [
         ("mellea", "https://w3id.org/lmodel/mellea/"),
         ("linkml", "https://w3id.org/linkml/"),
@@ -418,7 +426,7 @@ PREFIXES: "OrderedDict[str, str]" = OrderedDict(
 
 IMPORTS: list[str] = ["linkml:types"]
 
-TYPES: "OrderedDict[str, dict]" = OrderedDict(
+TYPES: OrderedDict[str, dict] = OrderedDict(
     [
         (
             "PythonDottedPath",
@@ -441,7 +449,7 @@ TYPES: "OrderedDict[str, dict]" = OrderedDict(
     ]
 )
 
-SUBSETS: "OrderedDict[str, dict]" = OrderedDict(
+SUBSETS: OrderedDict[str, dict] = OrderedDict(
     [
         (
             "core_runtime",
@@ -459,9 +467,9 @@ SUBSETS: "OrderedDict[str, dict]" = OrderedDict(
 )
 
 
-def build_slots() -> "OrderedDict[str, dict]":
+def build_slots() -> OrderedDict[str, dict]:
     """Schema-level slot definitions.  Order is significant for diff stability."""
-    slots: "OrderedDict[str, dict]" = OrderedDict()
+    slots: OrderedDict[str, dict] = OrderedDict()
 
     def _add(name: str, **kwargs: Any) -> None:
         slots[name] = OrderedDict(kwargs)
@@ -530,10 +538,7 @@ def build_slots() -> "OrderedDict[str, dict]":
         inlined_as_list=True,
     )
     _add(
-        "declares_element",
-        range="ModelElement",
-        multivalued=True,
-        inlined_as_list=True,
+        "declares_element", range="ModelElement", multivalued=True, inlined_as_list=True
     )
 
     # Backends
@@ -577,10 +582,7 @@ def build_slots() -> "OrderedDict[str, dict]":
     _add("plugin_mode", range="PluginModeEnum")
     _add("hook_type", range="HookTypeEnum", multivalued=True)
     _add(
-        "payload_model",
-        range="HookPayloadSpec",
-        multivalued=True,
-        inlined_as_list=True,
+        "payload_model", range="HookPayloadSpec", multivalued=True, inlined_as_list=True
     )
     _add("plugin_priority", range="integer")
     _add("metric_name", range="string", multivalued=True)
@@ -615,11 +617,13 @@ def build_slots() -> "OrderedDict[str, dict]":
     # Patch in a friendly description on every recommended slot so linkml-lint
     # is happy with the schema's metadata completeness.
     for slot_name, body in slots.items():
-        body.setdefault("description", f"Slot describing the {slot_name.replace('_', ' ')}.")
+        body.setdefault(
+            "description", f"Slot describing the {slot_name.replace('_', ' ')}."
+        )
     return slots
 
 
-def build_classes() -> "OrderedDict[str, dict]":
+def build_classes() -> OrderedDict[str, dict]:
     """Structural classes that pin the schema's architectural shape."""
 
     def _cls(
@@ -856,9 +860,9 @@ def _inventory_annotations(inv: dict) -> str:
     return "\n".join(lines)
 
 
-def build_enums(repo_root: Path, inv: dict) -> "OrderedDict[str, dict]":
+def build_enums(repo_root: Path, inv: dict) -> OrderedDict[str, dict]:
     """Assemble the full ``enums:`` block (static + source-derived)."""
-    enums: "OrderedDict[str, dict]" = OrderedDict()
+    enums: OrderedDict[str, dict] = OrderedDict()
     enums.update(STATIC_ENUMS)
 
     enums["BackendFamilyEnum"] = {
@@ -906,9 +910,7 @@ def build_enums(repo_root: Path, inv: dict) -> "OrderedDict[str, dict]":
         ],
     )
 
-    adapter_type = find_enum(
-        inv, "mellea/backends/adapters/catalog.py", "AdapterType"
-    )
+    adapter_type = find_enum(inv, "mellea/backends/adapters/catalog.py", "AdapterType")
     enums["AdapterTypeEnum"] = build_enum_from_source(
         adapter_type,
         description="Adapter implementation type (derived from AdapterType).",
@@ -918,7 +920,8 @@ def build_enums(repo_root: Path, inv: dict) -> "OrderedDict[str, dict]":
     return enums
 
 
-def build_schema(repo_root: Path) -> "OrderedDict[str, Any]":
+def build_schema(repo_root: Path) -> OrderedDict[str, Any]:
+    """Assemble the complete LinkML schema dict from header, enums, slots, classes."""
     inv = collect_inventory(repo_root)
     schema = build_header(repo_root)
     schema["annotations"]["coverage_inventory"] = _inventory_annotations(inv)
@@ -943,14 +946,13 @@ def _yaml_dump(obj: Any) -> str:
     """Deterministic YAML dump preserving insertion order."""
 
     class _Dumper(yaml.SafeDumper):
-        def increase_indent(self, flow=False, indentless=False):  # noqa: D401
-            # Force block sequences to indent under their parent key.
+        # Indent block sequences under mapping keys (e.g. `see_also:` items
+        # render as `  - foo` rather than `- foo`).
+        def increase_indent(self, flow=False, indentless=False):
             return super().increase_indent(flow=flow, indentless=False)
 
     def _represent_ordered(dumper: yaml.SafeDumper, data: OrderedDict) -> Any:
-        return dumper.represent_mapping(
-            "tag:yaml.org,2002:map", list(data.items())
-        )
+        return dumper.represent_mapping("tag:yaml.org,2002:map", list(data.items()))
 
     _Dumper.add_representer(OrderedDict, _represent_ordered)
     _Dumper.add_representer(
@@ -960,7 +962,7 @@ def _yaml_dump(obj: Any) -> str:
         ),
     )
 
-    return yaml.dump(
+    yaml_str = yaml.dump(
         obj,
         Dumper=_Dumper,
         sort_keys=False,
@@ -969,9 +971,55 @@ def _yaml_dump(obj: Any) -> str:
         allow_unicode=True,
         indent=2,
     )
+    # Canonical lmodel style:
+    #   * Blank lines separate block-valued top-level keys from neighbouring
+    #     keys; consecutive scalar top-level keys stay tight.
+    #   * Inside `enums:`, `classes:`, `slots:` each child entry is preceded
+    #     by a blank line (except the first one in the block) for readability.
+    # A "block" is a top-level key whose value spans multiple lines (key line
+    # ends with a bare ':'). Wrapped scalars (e.g. long `description:`) are
+    # not blocks — they don't end with bare ':'.
+    item_separated_blocks = {"enums", "classes", "slots"}
+    lines = yaml_str.splitlines()
+    out_lines: list[str] = []
+    in_block = False
+    current_block: str | None = None
+    first_child_seen = False
+    for line in lines:
+        is_top_key = (
+            bool(line) and (line[0].isalpha() or line[0] == "_") and ":" in line
+        )
+        is_block_open = line.endswith(":")
+        is_child_entry = (
+            len(line) >= 3
+            and line[:2] == "  "
+            and not line[2].isspace()
+            and (line[2].isalpha() or line[2] == "_")
+            and ":" in line
+        )
+        if is_top_key:
+            need_blank = is_block_open or in_block
+            if need_blank and out_lines and out_lines[-1] != "":
+                out_lines.append("")
+            in_block = is_block_open
+            if is_block_open:
+                key_name = line[:-1].strip()
+                current_block = key_name if key_name in item_separated_blocks else None
+                first_child_seen = False
+            else:
+                current_block = None
+        elif is_child_entry and current_block:
+            if first_child_seen:
+                if out_lines and out_lines[-1] != "":
+                    out_lines.append("")
+            else:
+                first_child_seen = True
+        out_lines.append(line)
+    return "\n".join(out_lines) + "\n"
 
 
 def render(schema: dict) -> str:
+    """Render the schema dict to the final YAML text with auto-generated header."""
     body = _yaml_dump(schema)
     header = (
         "# Auto-generated by linkml/scripts/schema_to_linkml.py.\n"
@@ -996,20 +1044,16 @@ def _parse_args(argv: list[str]) -> argparse.Namespace:
         help="Path to the Mellea repository root (default: auto-detect).",
     )
     p.add_argument(
-        "--out-file",
-        type=Path,
-        default=OUT_FILE_DEFAULT,
-        help="Destination YAML path.",
+        "--out-file", type=Path, default=OUT_FILE_DEFAULT, help="Destination YAML path."
     )
     p.add_argument(
-        "--stdout",
-        action="store_true",
-        help="Write to stdout instead of --out-file.",
+        "--stdout", action="store_true", help="Write to stdout instead of --out-file."
     )
     return p.parse_args(argv)
 
 
 def main(argv: list[str] | None = None) -> int:
+    """CLI entry point: regenerate the Mellea LinkML schema YAML."""
     args = _parse_args(list(sys.argv[1:] if argv is None else argv))
     schema = build_schema(args.repo_root.resolve())
     text = render(schema)
